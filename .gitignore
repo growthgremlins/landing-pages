@@ -1,0 +1,17 @@
+# --- OS / editor junk ---
+.DS_Store
+._*
+.!*
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# --- Archives (not site content) ---
+*.zip
+
+# --- Local Claude Code config (machine-specific) ---
+.claude/
+
+# --- Non-live clients (excluded from deploy) ---
+landing-pages-PERCISION/
+landing-pages-ECHELON/
