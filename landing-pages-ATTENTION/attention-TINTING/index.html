@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
   <!-- ========================================================
-       KHROME AUTO DETAILING — WINDOW TINTING LANDING PAGE
-       Polished v1 — Google Ads Campaign
+       JALENS ATTENTION TO DETAIL — WINDOW TINTING LANDING PAGE
+       Polished v2 — Google Ads Campaign
        ========================================================
-       
-       🔧 BEFORE DEPLOYING, REPLACE:
-       - <video src="./tinting-hero.mp4">  (your tint installation footage)
-       - Form iframe IDs (3 places) with your tinting-specific GHL forms
-       - Review widget iframe src with your GHL review widget URL
+
+       🔧 BEFORE DEPLOYING, REPLACE / CONFIRM:
+       - Hero image ./Photos/ceramic-tint.webp (swap for your own tint shot if desired)
+       - Form iframe IDs (2 places) with your tinting-specific GHL forms
+       - Reviews carousel: sample Chesapeake testimonials + "40 Google reviews" count — replace with real Google data
        - Phone number if different from (757) 829-7713
        ======================================================== -->
 
@@ -192,13 +192,36 @@
         radial-gradient(ellipse at center, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.85) 100%),
         linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.2) 40%, rgba(0,0,0,0.75) 100%);
     }
-    .hero-grain {
-      position: absolute;
-      inset: 0;
-      z-index: 3;
-      pointer-events: none;
-      opacity: 0.15;
-      background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.45'/></svg>");
+    
+
+    /* Offer badge (ESP detailing style) */
+    .offer-badge {
+      display: inline-block;
+      background: rgba(220, 38, 38, 0.9);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 2rem;
+      padding: 0.6rem 1.5rem;
+      margin-bottom: 1.1rem;
+      box-shadow: 0 10px 15px -3px rgba(0,0,0,0.25);
+      animation: badgeGlow 2.8s ease-in-out infinite;
+    }
+    .offer-title {
+      color: #fff;
+      font-weight: 800;
+      font-size: clamp(0.95rem, 2.4vw, 1.15rem);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      line-height: 1.15;
+    }
+    .offer-subtitle {
+      color: #ffffffca;
+      font-style: italic;
+      font-size: clamp(0.72rem, 1.8vw, 0.82rem);
+      font-weight: 400;
+    }
+    @keyframes badgeGlow {
+      0%, 100% { box-shadow: 0 10px 15px -3px rgba(0,0,0,0.25), 0 0 12px rgba(220,38,38,0.45); }
+      50%      { box-shadow: 0 10px 15px -3px rgba(0,0,0,0.25), 0 0 26px rgba(220,38,38,0.75); }
     }
 
     .hero-content {
@@ -255,6 +278,11 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      /* Italic + background-clip:text clips the trailing glyph at line wraps;
+         clone the box per line and pad the inline-end so the "e" isn't cut. */
+      -webkit-box-decoration-break: clone;
+      box-decoration-break: clone;
+      padding-right: 0.12em;
     }
 
     .hero-subtitle {
@@ -271,27 +299,30 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 1.25rem;
+      gap: 0.6rem;
       flex-wrap: wrap;
       margin: 1.25rem 0 1.75rem;
-      color: #d4d4d8;
-      font-size: 0.78rem;
-      font-weight: 500;
     }
     .hero-trust-item {
-      display: flex;
+      display: inline-flex;
       align-items: center;
       gap: 0.4rem;
+      color: #fff;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.22);
+      padding: 0.45rem 0.85rem;
+      border-radius: 99px;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
     }
     .hero-trust-item svg {
-      width: 14px; height: 14px;
+      width: 15px; height: 15px;
       color: #facc15;
     }
-    .hero-trust-divider {
-      width: 1px;
-      height: 14px;
-      background: rgba(255,255,255,0.3);
-    }
+    .hero-trust-divider { display: none; }
 
     .hero-cta {
       display: flex;
@@ -512,37 +543,41 @@
     .quote-form-wrap {
       max-width: 620px;
       margin: 1.25rem auto 0;
-      background: #fff;
+      background: #fff8f8;
       border-radius: 1rem;
       box-shadow: var(--shadow-lg);
       overflow: hidden;
       min-height: 742px;
       border: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
     .quote-form-wrap iframe {
       width: 100%;
-      min-height: 742px;
+      min-height: 693px;
       border: none;
       display: block;
     }
 
     /* =========================================================
-       WHY CERAMIC SECTION (dark, benefit grid)
+       WHY TINT SECTION (light, benefit grid)
        ========================================================= */
     .why {
-      background: var(--black);
-      color: #fff;
+      background: var(--paper);
+      color: var(--ink);
       padding: 3.5rem 1.25rem;
       position: relative;
       overflow: hidden;
+      border-top: 1px solid var(--line);
     }
     .why::before {
       content: "";
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(circle at 20% 0%, rgba(220,38,38,0.12) 0%, transparent 50%),
-        radial-gradient(circle at 80% 100%, rgba(220,38,38,0.08) 0%, transparent 45%);
+        radial-gradient(circle at 20% 0%, rgba(220,38,38,0.05) 0%, transparent 50%),
+        radial-gradient(circle at 80% 100%, rgba(220,38,38,0.04) 0%, transparent 45%);
       pointer-events: none;
     }
     .why-inner { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; }
@@ -552,28 +587,29 @@
       margin-top: 2rem;
     }
     .why-card {
-      background: var(--black-2);
-      border: 1px solid var(--line-dark);
+      background: #fff;
+      border: 1px solid var(--line);
       border-radius: 0.875rem;
       padding: 1.5rem 1.25rem;
       text-align: center;
-      transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
     }
     .why-card:hover {
       transform: translateY(-3px);
       border-color: var(--red);
-      background: var(--black-3);
+      box-shadow: var(--shadow-md);
     }
     .why-card-icon {
       width: 44px;
       height: 44px;
       border-radius: 0.5rem;
-      background: rgba(220,38,38,0.15);
-      border: 1px solid rgba(220,38,38,0.3);
+      background: var(--red-tint);
+      border: 1px solid rgba(220,38,38,0.2);
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #fca5a5;
+      color: var(--red);
       margin: 0 auto 0.9rem;
     }
     .why-card-icon svg { width: 22px; height: 22px; }
@@ -584,21 +620,122 @@
       text-transform: uppercase;
       font-size: 1.05rem;
       letter-spacing: 0.02em;
-      color: #fff;
+      color: var(--ink);
       margin-bottom: 0.5rem;
     }
-    .why-card-text { font-size: 0.85rem; color: #a3a3a3; line-height: 1.6; }
+    .why-card-text { font-size: 0.85rem; color: var(--slate); line-height: 1.6; }
 
     /* =========================================================
        PACKAGES SECTION — Level 1, 2, 3, Show Car, New Vehicle
        Matching the dark card aesthetic from the reference images
        ========================================================= */
     .packages {
-      background: linear-gradient(180deg, var(--black) 0%, var(--black-2) 50%, var(--black) 100%);
+      background: var(--paper);
       padding: 3.5rem 1.25rem;
     }
     .packages-inner { max-width: 1200px; margin: 0 auto; }
     .pkg-header { text-align: center; margin-bottom: 2rem; }
+
+    /* ---- Staggered service rows (light, data-viz) ---- */
+    .svc-rows { display: flex; flex-direction: column; gap: 2rem; margin-top: 2.5rem; }
+    .svc-row {
+      position: relative;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 1.25rem;
+      box-shadow: var(--shadow-md);
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+    .svc-row.featured {
+      border-color: rgba(220,38,38,0.45);
+      box-shadow: 0 0 0 1px rgba(220,38,38,0.22), var(--shadow-lg);
+    }
+    .svc-popular {
+      position: absolute;
+      top: 1rem; right: 1rem;
+      z-index: 4;
+      background: var(--red);
+      color: #fff;
+      font-size: 0.62rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.7rem;
+      border-radius: 99px;
+      box-shadow: var(--shadow-red);
+    }
+    .svc-visual {
+      position: relative;
+      background: linear-gradient(160deg, var(--black) 0%, var(--black-3) 100%);
+      overflow: hidden;
+      min-height: 220px;
+    }
+    /* Image fills the whole visual panel (stays inside its own grid cell — never overlaps the text) */
+    .svc-visual img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .svc-numeral {
+      position: absolute;
+      top: 0.6rem; left: 1rem;
+      font-family: var(--font-numeral);
+      font-size: 3rem;
+      line-height: 1;
+      color: rgba(255,255,255,0.92);
+      text-shadow: 0 2px 12px rgba(0,0,0,0.65), 0 0 2px rgba(0,0,0,0.5);
+      z-index: 3;
+      pointer-events: none;
+    }
+    .svc-detail { padding: 1.75rem 1.5rem; display: flex; flex-direction: column; }
+    .svc-eyebrow {
+      font-size: 0.66rem; font-weight: 800; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--red); margin-bottom: 0.3rem;
+    }
+    .svc-name {
+      font-family: var(--font-display); font-style: italic; font-weight: 700;
+      text-transform: uppercase; font-size: 1.75rem; color: var(--ink);
+      line-height: 1; margin-bottom: 0.6rem;
+    }
+    .svc-bestfor { font-size: 0.9rem; color: var(--slate); line-height: 1.55; margin-bottom: 1.1rem; }
+    .svc-bestfor strong { color: var(--ink); font-weight: 700; }
+    .svc-meters { display: flex; flex-direction: column; gap: 0.7rem; margin-bottom: 1.1rem; }
+    .svc-meter-top {
+      display: flex; justify-content: space-between; align-items: baseline;
+      font-size: 0.78rem; color: var(--slate); margin-bottom: 0.3rem;
+    }
+    .svc-meter-top b { color: var(--ink); font-family: var(--font-numeral); font-size: 1.05rem; letter-spacing: 0.02em; }
+    .svc-meter-track { height: 8px; background: #eceaea; border-radius: 99px; overflow: hidden; }
+    .svc-meter-fill {
+      display: block; height: 100%; width: 0;
+      background: linear-gradient(90deg, var(--red), #ef4444);
+      border-radius: 99px;
+      transition: width 1s cubic-bezier(0.22,1,0.36,1);
+    }
+    .svc-row.in-view .svc-meter-fill { width: var(--w); }
+    .svc-chips { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-bottom: 1.35rem; }
+    .svc-chip {
+      font-size: 0.72rem; font-weight: 600; color: var(--red);
+      background: var(--red-tint); border: 1px solid rgba(220,38,38,0.18);
+      padding: 0.32rem 0.65rem; border-radius: 99px;
+    }
+    .svc-cta {
+      margin-top: auto;
+      align-self: flex-start;
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+      background: var(--red); color: #fff; text-decoration: none;
+      padding: 0.9rem 1.4rem; border-radius: 0.5rem;
+      font-weight: 700; font-size: 0.86rem; letter-spacing: 0.04em; text-transform: uppercase;
+      border: none; cursor: pointer; font-family: var(--font-body);
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+    .svc-cta:hover { background: var(--red-dark); transform: translateY(-1px); }
+    .svc-cta svg { width: 14px; height: 14px; transition: transform 0.2s ease; }
+    .svc-cta:hover svg { transform: translateX(3px); }
 
     .pkg-grid {
       display: grid;
@@ -850,7 +987,7 @@
     }
 
     /* =========================================================
-       REVIEWS WIDGET SECTION
+       REVIEWS SECTION (native carousel)
        ========================================================= */
     .reviews {
       background: var(--white);
@@ -858,19 +995,89 @@
       text-align: center;
       border-top: 1px solid var(--line);
     }
-    .reviews-inner { max-width: 1000px; margin: 0 auto; }
-    .reviews-widget-wrap {
+    .reviews-inner { max-width: 1200px; margin: 0 auto; }
+
+    /* Summary bar */
+    .rv-summary {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.9rem;
+      flex-wrap: wrap;
       margin-top: 1.5rem;
-      min-height: 420px;
+    }
+    .rv-summary-num {
+      font-family: var(--font-numeral);
+      font-size: 2.6rem;
+      line-height: 1;
+      color: var(--ink);
+      letter-spacing: 0.02em;
+    }
+    .rv-summary-meta { display: flex; flex-direction: column; align-items: flex-start; gap: 0.2rem; }
+    .rv-stars { color: #f59e0b; font-size: 1.15rem; letter-spacing: 0.14em; line-height: 1; }
+    .rv-summary-count {
+      font-size: 0.85rem; color: var(--mute); font-weight: 600;
+      display: inline-flex; align-items: center; gap: 0.4rem;
+    }
+    .rv-summary-count svg { width: 16px; height: 16px; }
+
+    /* Carousel */
+    .rv-carousel { position: relative; margin-top: 1.75rem; }
+    .rv-track {
+      display: flex;
+      gap: 1rem;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      padding: 0.5rem 0.25rem 1.25rem;
+      scrollbar-width: none;
+    }
+    .rv-track::-webkit-scrollbar { display: none; }
+    .rv-card {
+      flex: 0 0 100%;
+      scroll-snap-align: start;
+      background: #fff;
+      border: 1px solid var(--line);
       border-radius: 1rem;
-      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      padding: 1.5rem 1.4rem;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      min-height: 240px;
     }
-    .reviews-widget-wrap iframe {
-      width: 100%;
-      min-height: 420px;
-      border: none;
-      display: block;
+    .rv-card-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.85rem; }
+    .rv-card-stars { color: #f59e0b; font-size: 1rem; letter-spacing: 0.1em; line-height: 1; }
+    .rv-card-date { font-size: 0.78rem; color: var(--mute); }
+    .rv-card-text { font-size: 0.9rem; color: var(--slate); line-height: 1.6; flex-grow: 1; }
+    .rv-card-foot { display: flex; align-items: center; justify-content: space-between; margin-top: 1.25rem; }
+    .rv-card-who { display: flex; align-items: center; gap: 0.6rem; min-width: 0; }
+    .rv-avatar {
+      width: 38px; height: 38px; border-radius: 50%;
+      background: var(--red-tint); color: var(--red);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.78rem; font-weight: 800; letter-spacing: 0.02em;
+      flex-shrink: 0;
     }
+    .rv-name { font-size: 0.86rem; font-weight: 700; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .rv-google { width: 20px; height: 20px; flex-shrink: 0; }
+
+    /* Nav: arrows + dots */
+    .rv-nav { display: flex; align-items: center; justify-content: center; gap: 1rem; margin-top: 0.25rem; }
+    .rv-arrow {
+      width: 40px; height: 40px; border-radius: 50%;
+      border: 1px solid var(--line); background: #fff; color: var(--red);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: background 0.2s, border-color 0.2s, opacity 0.2s;
+    }
+    .rv-arrow:hover { background: var(--red-tint); border-color: var(--red); }
+    .rv-arrow:disabled { opacity: 0.3; cursor: default; }
+    .rv-arrow:disabled:hover { background: #fff; border-color: var(--line); }
+    .rv-arrow svg { width: 20px; height: 20px; }
+    .rv-dots { display: flex; align-items: center; gap: 0.4rem; flex-wrap: wrap; justify-content: center; max-width: 220px; }
+    .rv-dot { width: 8px; height: 8px; border-radius: 99px; background: var(--line); border: none; padding: 0; cursor: pointer; transition: background 0.2s, width 0.2s; }
+    .rv-dot.active { background: var(--red); width: 22px; }
 
     /* =========================================================
        FAQ SECTION
@@ -1001,15 +1208,18 @@
     .contact-form-wrap {
       max-width: 620px;
       margin: 0 auto 2.5rem;
-      background: #fff;
+      background: #fff8f8;
       border-radius: 1rem;
       box-shadow: 0 20px 50px rgba(0,0,0,0.3);
       overflow: hidden;
       min-height: 742px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
     .contact-form-wrap iframe {
       width: 100%;
-      min-height: 742px;
+      min-height: 693px;
       border: none;
       display: block;
     }
@@ -1211,6 +1421,9 @@
       border-radius: 0.5rem;
     }
 
+    /* Hero + form flow wrapper (mobile/tablet: stacked; desktop: split) */
+    .hero-form-wrap { display: block; }
+
     /* =========================================================
        RESPONSIVE — TABLET 768px+
        ========================================================= */
@@ -1225,9 +1438,21 @@
       }
       .benefits-visual { aspect-ratio: 1 / 1; max-height: 460px; }
 
+      /* Reviews carousel: 2 cards per view */
+      .rv-card { flex-basis: calc(50% - 0.5rem); }
+
       .why-grid { grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
 
       .pkg-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+
+      /* Staggered rows: visual | detail, alternating sides */
+      .svc-rows { gap: 2.5rem; }
+      .svc-row { grid-template-columns: 0.9fr 1fr; align-items: stretch; }
+      .svc-row:nth-child(even) { grid-template-columns: 1fr 0.9fr; }
+      .svc-row:nth-child(even) .svc-visual { order: 2; }
+      .svc-visual { padding: 2rem; }
+      .svc-numeral { font-size: 4rem; }
+      .svc-detail { padding: 2.25rem 2rem; }
 
       .hero-cta { flex-direction: row; max-width: 560px; }
       .btn-primary, .btn-ghost { flex: 1; }
@@ -1260,17 +1485,69 @@
       /* Main packages: 2x2 grid on tablet */
       .pkg-grid.mains { grid-template-columns: repeat(2, 1fr); }
 
-      .reviews { padding: 5rem 3rem; }
+      /* Reviews: full-width widget, tighter vertical spacing */
+      .reviews { padding: 2.25rem 2rem; }
+      .reviews-inner { max-width: 1280px; }
+      /* Reviews carousel: 3 cards per view */
+      .rv-card { flex-basis: calc(33.333% - 0.667rem); }
       .faq { padding: 5rem 3rem; }
       .contact { padding: 6rem 3rem; min-height: 720px; }
 
       .sticky-btn { max-width: 420px; margin: 0 auto; }
     }
 
-    /* On wide screens, 4 cards in a row */
-    @media (min-width: 1100px) {
-      .pkg-grid.mains {
-        grid-template-columns: repeat(4, 1fr);
+    /* =========================================================
+       SPLIT HERO — copy left, lead form right (desktop 1280px+)
+       ========================================================= */
+    @media (min-width: 1280px) {
+      .hero-form-wrap {
+        position: relative;
+        display: grid;
+        grid-template-columns:
+          minmax(2rem, 1fr)
+          minmax(0, 560px)
+          clamp(2rem, 3vw, 3rem)
+          660px
+          minmax(2rem, 1fr);
+        align-items: stretch;
+      }
+      /* Hero spans every column; background covers the full width */
+      .hero-form-wrap > .hero {
+        grid-column: 1 / -1;
+        grid-row: 1;
+        min-height: 860px;
+        max-height: none;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 5rem 0;
+      }
+      .hero-form-wrap .hero-content {
+        text-align: left;
+        max-width: 560px;
+        margin-left: max(2rem, calc((100vw - 1268px) / 2));
+        margin-right: 0;
+      }
+      .hero-form-wrap .hero-trust { justify-content: flex-start; }
+      .hero-form-wrap .hero-cta { margin: 0; max-width: 540px; }
+      .hero-form-wrap .hero-scroll { display: none; }
+
+      /* Form = card in the band's right column */
+      .hero-form-wrap > .quote-section {
+        grid-column: 4 / 5;
+        grid-row: 1;
+        align-self: center;
+        z-index: 20;
+        background: transparent;
+        border: none;
+        padding: 4rem 0;
+      }
+      .hero-form-wrap .quote-section .section-eyebrow,
+      .hero-form-wrap .quote-section .section-title,
+      .hero-form-wrap .quote-section .section-lede { display: none; }
+      .hero-form-wrap .quote-form-wrap {
+        margin: 0;
+        width: 100%;
+        max-width: none;
       }
     }
   </style>
@@ -1288,21 +1565,18 @@
     </a>
   </header>
 
-  <!-- ========== HERO ========== -->
+  <!-- ========== HERO + FORM (split on desktop) ========== -->
+  <div class="hero-form-wrap">
   <section class="hero">
-    <!--
-      🔧 REPLACE: point src to your tint installation video
-      - Tip: export as .mp4 (H.264) + .webm, keep under ~6MB for fast load
-      - playbackRate=0.5 applied via JS below for the cinematic slow-mo feel
-    -->
-    <video class="hero-video" autoplay muted loop playsinline poster="./Ceramic coating,Exterior Wash,Headlight restore/IMG_6362.webp">
-      <source src="./tinting-hero.mp4" type="video/mp4">
-      <source src="./tinting-hero.webm" type="video/webm">
-    </video>
+    <img class="hero-video" src="./Photos/ceramic-tint.webp" alt="Professional window tinting in Chesapeake" fetchpriority="high">
     <div class="hero-vignette"></div>
     <div class="hero-grain"></div>
 
     <div class="hero-content">
+      <div class="offer-badge">
+        <div class="offer-title">$50 Off First Tint</div>
+        <div class="offer-subtitle">New Customers — Limited Time</div>
+      </div>
       <div class="hero-eyebrow">Chesapeake's Premier Window Tinting</div>
 
       <h1 class="hero-title">
@@ -1334,7 +1608,7 @@
         </a>
         <a href="tel:+17578297713" class="btn-ghost phone-link">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-          Call (757) 829-7713
+          Call <span class="phone-text">(757) 829-7713</span>
         </a>
       </div>
     </div>
@@ -1369,126 +1643,248 @@
       <script src="https://link.msgsndr.com/js/form_embed.js"></script>
     </div>
   </section>
+  </div><!-- /.hero-form-wrap -->
 
-  <!-- ========== PACKAGES ========== -->
-  <section id="packages" class="packages">
-    <div class="packages-inner">
-
-      <div class="pkg-header">
-        <div class="section-eyebrow on-dark">Window Tint</div>
-        <h2 class="section-title on-dark">Choose Your <span class="accent">Protection</span></h2>
-        <p class="section-lede on-dark" style="margin:0 auto;">Four tiers, four films, one mission — block what hurts your interior, keep what makes the drive beautiful. Every tier comes with a lifetime warranty.</p>
-      </div>
-
-      <!-- Main Packages Grid -->
-      <div class="pkg-grid mains">
-
-        <!-- ============== TIER 1 — DYED ============== -->
-        <div class="pkg-card" data-package="dyed" data-tier="dyed">
-          <div class="pkg-numeral">01</div>
-          <div class="pkg-visual">
-            <img src="./Dyed Tint.webp" alt="Dyed window tint film infographic" loading="lazy">
-          </div>
-          <div class="pkg-tier-label">Entry Tier</div>
-          <h3 class="pkg-title">Dyed</h3>
-          <p class="pkg-subtitle">The classic darkened look at the most accessible price point.</p>
-          <ul class="pkg-features">
-            <li class="pkg-feature"><span class="pkg-feature-check"></span>Up to 50% heat rejection</li>
-            <li class="pkg-feature"><span class="pkg-feature-check"></span>Blocks ~99% UV rays</li>
-            <li class="pkg-feature"><span class="pkg-feature-check"></span>Glare reduction</li>
-            <li class="pkg-feature"><span class="pkg-feature-check"></span>Non-reflective matte finish</li>
-            <li class="pkg-feature"><span class="pkg-feature-check"></span>5-year warranty</li>
-          </ul>
-          <button class="pkg-cta" onclick="openBookingModal('dyed')">
-            Get Quote
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </button>
-        </div>
-
-        <!-- ============== TIER 2 — CARBON ============== -->
-        <div class="pkg-card" data-package="carbon" data-tier="carbon">
-          <div class="pkg-numeral">02</div>
-          <div class="pkg-visual">
-            <img src="./Carbon Tint.webp" alt="Carbon window tint film infographic" loading="lazy">
-          </div>
-          <div class="pkg-tier-label">Mid-Tier</div>
-          <h3 class="pkg-title">Carbon</h3>
-          <p class="pkg-subtitle">Deeper, richer, and won't fade or interfere with signals.</p>
-          <ul class="pkg-features">
-            <li class="pkg-feature"><span class="pkg-feature-check"></span>Up to 60% heat rejection</li>
-            <li class="pkg-feature"><span class="pkg-feature-check"></span>99% UV rejection</li>
-            <li class="pkg-feature"><span class="pkg-feature-check"></span>Won't fade to purple</li>
-            <li class="pkg-feature"><span class="pkg-feature-check"></span>Signal-safe (no metallics)</li>
-            <li class="pkg-feature"><span class="pkg-feature-check"></span>Lifetime warranty</li>
-          </ul>
-          <button class="pkg-cta" onclick="openBookingModal('carbon')">
-            Get Quote
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </button>
-        </div>
-
-        <!-- ============== TIER 3 — CERAMIC (FEATURED) ============== -->
-        <div class="pkg-card featured" data-package="ceramic" data-tier="ceramic">
-          <span class="pkg-popular-badge">Most Popular</span>
-          <div class="pkg-numeral">03</div>
-          <div class="pkg-visual">
-            <img src="./Ceramic Tint.webp" alt="Ceramic window tint film infographic" loading="lazy">
-          </div>
-          <div class="pkg-tier-label">Premium Tier</div>
-          <h3 class="pkg-title">Ceramic</h3>
-          <p class="pkg-subtitle">Industry-leading IR rejection — the comfort upgrade you'll feel within minutes.</p>
-          <ul class="pkg-features">
-            <li class="pkg-feature"><span class="pkg-feature-check"></span>Up to 80% heat rejection</li>
-            <li class="pkg-feature"><span class="pkg-feature-check"></span>99% UV rejection</li>
-            <li class="pkg-feature"><span class="pkg-feature-check"></span>Massive IR ray blocking</li>
-            <li class="pkg-feature"><span class="pkg-feature-check"></span>Crystal-clear visibility</li>
-            <li class="pkg-feature"><span class="pkg-feature-check"></span>Lifetime warranty</li>
-          </ul>
-          <button class="pkg-cta" onclick="openBookingModal('ceramic')">
-            Get Quote
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </button>
-        </div>
-
-        <!-- ============== TIER 4 — NANO-CERAMIC ============== -->
-        <div class="pkg-card" data-package="nano" data-tier="nano">
-          <div class="pkg-numeral">04</div>
-          <div class="pkg-visual">
-            <img src="./Nano Ceramic Tint.webp" alt="Nano-ceramic window tint film infographic" loading="lazy">
-          </div>
-          <div class="pkg-tier-label">Flagship Tier</div>
-          <h3 class="pkg-title">Nano-Ceramic</h3>
-          <p class="pkg-subtitle">The most advanced film available. Maximum rejection, minimal compromise.</p>
-          <ul class="pkg-features">
-            <li class="pkg-feature"><span class="pkg-feature-check"></span>Up to 88% heat rejection</li>
-            <li class="pkg-feature"><span class="pkg-feature-check"></span>99% UV + 96% IR rejection</li>
-            <li class="pkg-feature"><span class="pkg-feature-check"></span>Strongest film tech available</li>
-            <li class="pkg-feature"><span class="pkg-feature-check"></span>Multi-layer nano stack</li>
-            <li class="pkg-feature"><span class="pkg-feature-check"></span>Lifetime warranty</li>
-          </ul>
-          <button class="pkg-cta" onclick="openBookingModal('nano')">
-            Get Quote
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </button>
-        </div>
-
-      </div><!-- /.pkg-grid.mains -->
-
-    </div><!-- /.packages-inner -->
-  </section>
-
-  <!-- ========== REVIEWS WIDGET ========== -->
+  <!-- ========== REVIEWS (native carousel, full-width, right under hero) ========== -->
   <section class="reviews">
     <div class="reviews-inner">
       <div class="section-eyebrow">Reviews</div>
       <h2 class="section-title">What Our <span class="accent">Chesapeake Customers</span> Say</h2>
       <p class="section-lede" style="margin:0 auto;">A 5.0-star Google rating built one vehicle at a time.</p>
 
-      <div class="reviews-widget-wrap">
-        <script type='text/javascript' src='https://reputationhub.site/reputation/assets/review-widget.js'></script>
-        <iframe class='lc_reviews_widget' src='https://reputationhub.site/reputation/widgets/review_widget/KqvHD2cqanMlCFAPNXTP' frameborder='0' scrolling='no' style='min-width: 100%; width: 100%;'></iframe>
+      <!-- Summary bar -->
+      <div class="rv-summary">
+        <span class="rv-summary-num">5.0</span>
+        <div class="rv-summary-meta">
+          <span class="rv-stars" aria-label="Rated 5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+          <span class="rv-summary-count">
+            <svg class="rv-google" viewBox="0 0 24 24" role="img" aria-label="Google"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.27-4.74 3.27-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84A11 11 0 0 0 12 23z"/><path fill="#FBBC05" d="M5.84 14.1a6.6 6.6 0 0 1 0-4.2V7.06H2.18a11 11 0 0 0 0 9.88l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84C6.71 7.31 9.14 5.38 12 5.38z"/></svg>
+            40 Google reviews
+          </span>
+        </div>
+      </div>
+
+      <!-- Carousel -->
+      <div class="rv-carousel">
+        <div class="rv-track">
+
+          <article class="rv-card">
+            <div class="rv-card-top"><span class="rv-card-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span class="rv-card-date">Jun 8, 2026</span></div>
+            <p class="rv-card-text">Got ceramic tint on my Camry right before summer and what a difference. I used to dread getting in after work here in Chesapeake — now the cabin actually stays bearable and the AC cools down way faster. Wish I'd done it years ago.</p>
+            <div class="rv-card-foot">
+              <div class="rv-card-who"><span class="rv-avatar">MT</span><span class="rv-name">Marcus T.</span></div>
+              <svg class="rv-google" viewBox="0 0 24 24" role="img" aria-label="Google review"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.27-4.74 3.27-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84A11 11 0 0 0 12 23z"/><path fill="#FBBC05" d="M5.84 14.1a6.6 6.6 0 0 1 0-4.2V7.06H2.18a11 11 0 0 0 0 9.88l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84C6.71 7.31 9.14 5.38 12 5.38z"/></svg>
+            </div>
+          </article>
+
+          <article class="rv-card">
+            <div class="rv-card-top"><span class="rv-card-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span class="rv-card-date">May 27, 2026</span></div>
+            <p class="rv-card-text">They walked me through Virginia's legal limit for my front windows so I wouldn't get pulled over, then matched the rears to look clean. No haze, no bubbles, and the edges are perfect. Really professional crew.</p>
+            <div class="rv-card-foot">
+              <div class="rv-card-who"><span class="rv-avatar">PR</span><span class="rv-name">Priya R.</span></div>
+              <svg class="rv-google" viewBox="0 0 24 24" role="img" aria-label="Google review"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.27-4.74 3.27-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84A11 11 0 0 0 12 23z"/><path fill="#FBBC05" d="M5.84 14.1a6.6 6.6 0 0 1 0-4.2V7.06H2.18a11 11 0 0 0 0 9.88l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84C6.71 7.31 9.14 5.38 12 5.38z"/></svg>
+            </div>
+          </article>
+
+          <article class="rv-card">
+            <div class="rv-card-top"><span class="rv-card-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span class="rv-card-date">May 14, 2026</span></div>
+            <p class="rv-card-text">Booked a quote online and they got back to me in minutes. Dropped my Model Y off and the ceramic film doesn't interfere with any of the sensors or signal. Looks factory and the heat rejection is no joke.</p>
+            <div class="rv-card-foot">
+              <div class="rv-card-who"><span class="rv-avatar">JD</span><span class="rv-name">Jon D.</span></div>
+              <svg class="rv-google" viewBox="0 0 24 24" role="img" aria-label="Google review"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.27-4.74 3.27-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84A11 11 0 0 0 12 23z"/><path fill="#FBBC05" d="M5.84 14.1a6.6 6.6 0 0 1 0-4.2V7.06H2.18a11 11 0 0 0 0 9.88l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84C6.71 7.31 9.14 5.38 12 5.38z"/></svg>
+            </div>
+          </article>
+
+          <article class="rv-card">
+            <div class="rv-card-top"><span class="rv-card-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span class="rv-card-date">Apr 30, 2026</span></div>
+            <p class="rv-card-text">My old dyed tint had turned purple and bubbly. They stripped it and redid it in ceramic — night and day. The steering wheel isn't scorching anymore and my dash finally stopped fading. Worth the upgrade.</p>
+            <div class="rv-card-foot">
+              <div class="rv-card-who"><span class="rv-avatar">SG</span><span class="rv-name">Sofia G.</span></div>
+              <svg class="rv-google" viewBox="0 0 24 24" role="img" aria-label="Google review"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.27-4.74 3.27-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84A11 11 0 0 0 12 23z"/><path fill="#FBBC05" d="M5.84 14.1a6.6 6.6 0 0 1 0-4.2V7.06H2.18a11 11 0 0 0 0 9.88l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84C6.71 7.31 9.14 5.38 12 5.38z"/></svg>
+            </div>
+          </article>
+
+          <article class="rv-card">
+            <div class="rv-card-top"><span class="rv-card-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span class="rv-card-date">Apr 18, 2026</span></div>
+            <p class="rv-card-text">Blacked out the rear on my F-150 for privacy and it came out flawless. They taped everything off, took their time, and cleaned up after. Fair price for the level of quality. Couldn't be happier.</p>
+            <div class="rv-card-foot">
+              <div class="rv-card-who"><span class="rv-avatar">AM</span><span class="rv-name">Andre M.</span></div>
+              <svg class="rv-google" viewBox="0 0 24 24" role="img" aria-label="Google review"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.27-4.74 3.27-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84A11 11 0 0 0 12 23z"/><path fill="#FBBC05" d="M5.84 14.1a6.6 6.6 0 0 1 0-4.2V7.06H2.18a11 11 0 0 0 0 9.88l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84C6.71 7.31 9.14 5.38 12 5.38z"/></svg>
+            </div>
+          </article>
+
+          <article class="rv-card">
+            <div class="rv-card-top"><span class="rv-card-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span class="rv-card-date">Apr 2, 2026</span></div>
+            <p class="rv-card-text">Honestly the best part is the glare reduction. My commute on I-64 is straight into the sun and it used to wreck my eyes. So much easier now, and night driving with oncoming headlights is way better too.</p>
+            <div class="rv-card-foot">
+              <div class="rv-card-who"><span class="rv-avatar">KN</span><span class="rv-name">Kayla N.</span></div>
+              <svg class="rv-google" viewBox="0 0 24 24" role="img" aria-label="Google review"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.27-4.74 3.27-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84A11 11 0 0 0 12 23z"/><path fill="#FBBC05" d="M5.84 14.1a6.6 6.6 0 0 1 0-4.2V7.06H2.18a11 11 0 0 0 0 9.88l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84C6.71 7.31 9.14 5.38 12 5.38z"/></svg>
+            </div>
+          </article>
+
+          <article class="rv-card">
+            <div class="rv-card-top"><span class="rv-card-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span class="rv-card-date">Mar 21, 2026</span></div>
+            <p class="rv-card-text">The lifetime warranty sold me and the work backed it up. Crew was friendly, finished exactly when they said they would, and the windows look amazing. Already planning to bring my wife's car in next.</p>
+            <div class="rv-card-foot">
+              <div class="rv-card-who"><span class="rv-avatar">DR</span><span class="rv-name">Diego R.</span></div>
+              <svg class="rv-google" viewBox="0 0 24 24" role="img" aria-label="Google review"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.27-4.74 3.27-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84A11 11 0 0 0 12 23z"/><path fill="#FBBC05" d="M5.84 14.1a6.6 6.6 0 0 1 0-4.2V7.06H2.18a11 11 0 0 0 0 9.88l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84C6.71 7.31 9.14 5.38 12 5.38z"/></svg>
+            </div>
+          </article>
+
+          <article class="rv-card">
+            <div class="rv-card-top"><span class="rv-card-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span class="rv-card-date">Mar 6, 2026</span></div>
+            <p class="rv-card-text">I have really sensitive skin and didn't realize how much sun I was getting through the side windows. They explained the UV protection, got me in that same week, and the install was spotless. Highly recommend.</p>
+            <div class="rv-card-foot">
+              <div class="rv-card-who"><span class="rv-avatar">HL</span><span class="rv-name">Hannah L.</span></div>
+              <svg class="rv-google" viewBox="0 0 24 24" role="img" aria-label="Google review"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.27-4.74 3.27-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84A11 11 0 0 0 12 23z"/><path fill="#FBBC05" d="M5.84 14.1a6.6 6.6 0 0 1 0-4.2V7.06H2.18a11 11 0 0 0 0 9.88l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84C6.71 7.31 9.14 5.38 12 5.38z"/></svg>
+            </div>
+          </article>
+
+          <article class="rv-card">
+            <div class="rv-card-top"><span class="rv-card-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span class="rv-card-date">Feb 19, 2026</span></div>
+            <p class="rv-card-text">Shopped around a few tint shops in Hampton Roads and these guys were the most upfront about film options and pricing. No pressure, just great work. Ceramic was worth every penny — the cabin stays so much cooler.</p>
+            <div class="rv-card-foot">
+              <div class="rv-card-who"><span class="rv-avatar">BV</span><span class="rv-name">Brandon V.</span></div>
+              <svg class="rv-google" viewBox="0 0 24 24" role="img" aria-label="Google review"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.27-4.74 3.27-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84A11 11 0 0 0 12 23z"/><path fill="#FBBC05" d="M5.84 14.1a6.6 6.6 0 0 1 0-4.2V7.06H2.18a11 11 0 0 0 0 9.88l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84C6.71 7.31 9.14 5.38 12 5.38z"/></svg>
+            </div>
+          </article>
+
+        </div>
+
+        <div class="rv-nav">
+          <button class="rv-arrow prev" type="button" aria-label="Previous reviews"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+          <div class="rv-dots"></div>
+          <button class="rv-arrow next" type="button" aria-label="Next reviews"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
+        </div>
       </div>
     </div>
+  </section>
+
+  <!-- ========== PACKAGES ========== -->
+  <section id="packages" class="packages">
+    <div class="packages-inner">
+
+      <div class="pkg-header">
+        <div class="section-eyebrow">Window Tint Films</div>
+        <h2 class="section-title">Choose Your <span class="accent">Protection</span></h2>
+        <p class="section-lede" style="margin:0 auto;">Four films, one mission — block what hurts your interior, keep what makes the drive beautiful. Compare how each tier rejects heat, UV, and infrared.</p>
+      </div>
+
+      <!-- Staggered service rows -->
+      <div class="svc-rows">
+
+        <!-- ============== TIER 1 — DYED ============== -->
+        <article class="svc-row" data-tier="dyed">
+          <div class="svc-visual">
+            <span class="svc-numeral">01</span>
+            <img src="./Photos/dyed-tint.webp" alt="Technician applying dyed window tint film" loading="lazy">
+          </div>
+          <div class="svc-detail">
+            <div class="svc-eyebrow">Entry Tier</div>
+            <h3 class="svc-name">Dyed</h3>
+            <p class="svc-bestfor"><strong>Best for:</strong> budget-minded drivers who mainly want the darkened look and basic UV protection.</p>
+            <div class="svc-meters">
+              <div class="svc-meter"><div class="svc-meter-top"><span>Heat rejection</span><b>50%</b></div><div class="svc-meter-track"><span class="svc-meter-fill" style="--w:50%"></span></div></div>
+              <div class="svc-meter"><div class="svc-meter-top"><span>UV rejection</span><b>99%</b></div><div class="svc-meter-track"><span class="svc-meter-fill" style="--w:99%"></span></div></div>
+              <div class="svc-meter"><div class="svc-meter-top"><span>Infrared (IR) rejection</span><b>20%</b></div><div class="svc-meter-track"><span class="svc-meter-fill" style="--w:20%"></span></div></div>
+            </div>
+            <div class="svc-chips">
+              <span class="svc-chip">Glare reduction</span>
+              <span class="svc-chip">Matte finish</span>
+              <span class="svc-chip">5-yr warranty</span>
+            </div>
+            <a href="#quote-form" class="svc-cta">
+              Get Dyed Quote
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- ============== TIER 2 — CARBON ============== -->
+        <article class="svc-row" data-tier="carbon">
+          <div class="svc-visual">
+            <span class="svc-numeral">02</span>
+            <img src="./Photos/carbon-tint.webp" alt="Close-up of carbon window tint film on car window" loading="lazy">
+          </div>
+          <div class="svc-detail">
+            <div class="svc-eyebrow">Mid Tier</div>
+            <h3 class="svc-name">Carbon</h3>
+            <p class="svc-bestfor"><strong>Best for:</strong> a deeper, no-fade matte look with solid heat rejection that won't touch your signals.</p>
+            <div class="svc-meters">
+              <div class="svc-meter"><div class="svc-meter-top"><span>Heat rejection</span><b>60%</b></div><div class="svc-meter-track"><span class="svc-meter-fill" style="--w:60%"></span></div></div>
+              <div class="svc-meter"><div class="svc-meter-top"><span>UV rejection</span><b>99%</b></div><div class="svc-meter-track"><span class="svc-meter-fill" style="--w:99%"></span></div></div>
+              <div class="svc-meter"><div class="svc-meter-top"><span>Infrared (IR) rejection</span><b>40%</b></div><div class="svc-meter-track"><span class="svc-meter-fill" style="--w:40%"></span></div></div>
+            </div>
+            <div class="svc-chips">
+              <span class="svc-chip">Won't fade to purple</span>
+              <span class="svc-chip">Signal-safe</span>
+              <span class="svc-chip">Lifetime warranty</span>
+            </div>
+            <a href="#quote-form" class="svc-cta">
+              Get Carbon Quote
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- ============== TIER 3 — CERAMIC (FEATURED) ============== -->
+        <article class="svc-row featured" data-tier="ceramic">
+          <span class="svc-popular">Most Popular</span>
+          <div class="svc-visual">
+            <span class="svc-numeral">03</span>
+            <img src="./Photos/ceramic-tint.webp" alt="SUV with ceramic window tint film installed" loading="lazy">
+          </div>
+          <div class="svc-detail">
+            <div class="svc-eyebrow">Premium Tier</div>
+            <h3 class="svc-name">Ceramic</h3>
+            <p class="svc-bestfor"><strong>Best for:</strong> daily drivers who want serious heat &amp; infrared comfort in the Chesapeake sun — without going dark.</p>
+            <div class="svc-meters">
+              <div class="svc-meter"><div class="svc-meter-top"><span>Heat rejection</span><b>80%</b></div><div class="svc-meter-track"><span class="svc-meter-fill" style="--w:80%"></span></div></div>
+              <div class="svc-meter"><div class="svc-meter-top"><span>UV rejection</span><b>99%</b></div><div class="svc-meter-track"><span class="svc-meter-fill" style="--w:99%"></span></div></div>
+              <div class="svc-meter"><div class="svc-meter-top"><span>Infrared (IR) rejection</span><b>85%</b></div><div class="svc-meter-track"><span class="svc-meter-fill" style="--w:85%"></span></div></div>
+            </div>
+            <div class="svc-chips">
+              <span class="svc-chip">Massive IR blocking</span>
+              <span class="svc-chip">Crystal-clear clarity</span>
+              <span class="svc-chip">Lifetime warranty</span>
+            </div>
+            <a href="#quote-form" class="svc-cta">
+              Get Ceramic Quote
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- ============== TIER 4 — NANO-CERAMIC ============== -->
+        <article class="svc-row" data-tier="nano">
+          <div class="svc-visual">
+            <span class="svc-numeral">04</span>
+            <img src="./Photos/nano-ceramic-tint.webp" alt="Car with nano-ceramic window tint film installed" loading="lazy">
+          </div>
+          <div class="svc-detail">
+            <div class="svc-eyebrow">Flagship Tier</div>
+            <h3 class="svc-name">Nano-Ceramic</h3>
+            <p class="svc-bestfor"><strong>Best for:</strong> enthusiasts who want the maximum rejection money can buy — the most advanced film available.</p>
+            <div class="svc-meters">
+              <div class="svc-meter"><div class="svc-meter-top"><span>Heat rejection</span><b>88%</b></div><div class="svc-meter-track"><span class="svc-meter-fill" style="--w:88%"></span></div></div>
+              <div class="svc-meter"><div class="svc-meter-top"><span>UV rejection</span><b>99%</b></div><div class="svc-meter-track"><span class="svc-meter-fill" style="--w:99%"></span></div></div>
+              <div class="svc-meter"><div class="svc-meter-top"><span>Infrared (IR) rejection</span><b>96%</b></div><div class="svc-meter-track"><span class="svc-meter-fill" style="--w:96%"></span></div></div>
+            </div>
+            <div class="svc-chips">
+              <span class="svc-chip">Multi-layer nano stack</span>
+              <span class="svc-chip">Strongest film tech</span>
+              <span class="svc-chip">Lifetime warranty</span>
+            </div>
+            <a href="#quote-form" class="svc-cta">
+              Get Nano-Ceramic Quote
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </div>
+        </article>
+
+      </div><!-- /.svc-rows -->
+
+    </div><!-- /.packages-inner -->
   </section>
 
   <!-- ========== BENEFITS / TRUST SECTION ========== -->
@@ -1656,12 +2052,12 @@
     </div>
   </section>
 
-  <!-- ========== WHY TINT (dark benefit grid) ========== -->
+  <!-- ========== WHY TINT (light benefit grid) ========== -->
   <section class="why">
     <div class="why-inner section-center">
-      <div class="section-eyebrow on-dark">Why Tint</div>
-      <h2 class="section-title on-dark">Five reasons drivers <span class="accent">never go back.</span></h2>
-      <p class="section-lede on-dark" style="margin:0 auto;">Window tint isn't a cosmetic upgrade — it's a comfort, health, and protection upgrade. Here's what changes the moment the film goes on.</p>
+      <div class="section-eyebrow">Why Tint</div>
+      <h2 class="section-title">Six reasons Chesapeake drivers <span class="accent">never go back.</span></h2>
+      <p class="section-lede" style="margin:0 auto;">Window tint isn't a cosmetic upgrade — it's a comfort, health, and protection upgrade. Here's what changes the moment the film goes on.</p>
 
       <div class="why-grid">
         <div class="why-card">
@@ -1884,49 +2280,34 @@
     </a>
   </div>
 
-  <!-- ========== BOOKING MODAL ========== -->
-  <div class="modal-overlay" id="bookingModal" onclick="handleOverlayClick(event)">
-    <div class="modal">
-      <div class="modal-head">
-        <span class="modal-title">Book Your Window Tint</span>
-        <button class="modal-close" onclick="closeBookingModal()" aria-label="Close">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-        </button>
-      </div>
-
-      <div class="modal-dropdown-wrap">
-        <div class="modal-pkg-label">Selected Tier</div>
-        <button class="modal-dropdown-btn" id="ddBtn" onclick="toggleDd()">
-          <span id="ddLabel">Dyed</span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="modal-dropdown-list" id="ddList">
-          <button class="modal-dropdown-option" data-pkg="dyed" onclick="selectPkg('dyed')">Dyed <svg class="dd-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></button>
-          <button class="modal-dropdown-option" data-pkg="carbon" onclick="selectPkg('carbon')">Carbon <svg class="dd-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></button>
-          <button class="modal-dropdown-option" data-pkg="ceramic" onclick="selectPkg('ceramic')">Ceramic <svg class="dd-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></button>
-          <button class="modal-dropdown-option" data-pkg="nano" onclick="selectPkg('nano')">Nano-Ceramic <svg class="dd-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></button>
-        </div>
-      </div>
-
-      <div class="modal-form-container">
-        <iframe id="modalFormIframe" src="about:blank" title="Booking form"></iframe>
-      </div>
-    </div>
-  </div>
-
   <!-- ========================================================
        SCRIPTS
        ======================================================== -->
   <script>
-    /* Slow down the hero video for the cinematic feel */
+    /* GFN Phone Sync: keeps tel: hrefs in sync with Google forwarding-number swap */
     (function() {
-      var vid = document.querySelector('.hero-video');
-      if (vid) {
-        vid.addEventListener('loadedmetadata', function() {
-          vid.playbackRate = 0.5; // tweak between 0.4 and 0.75 for taste
-        });
-        // Some browsers need this set after play begins
-        vid.addEventListener('play', function() { vid.playbackRate = 0.5; });
+      function normalizePhone(text) {
+        var digits = text.replace(/\D/g, '');
+        if (digits.length === 10) return '+1' + digits;
+        if (digits.length === 11 && digits[0] === '1') return '+' + digits;
+        return '+' + digits;
+      }
+      function updatePhoneLinks() {
+        var phoneTextEl = document.querySelector('.phone-text');
+        if (!phoneTextEl) return;
+        var normalized = normalizePhone(phoneTextEl.textContent);
+        var links = document.querySelectorAll('a.phone-link');
+        for (var i = 0; i < links.length; i++) {
+          links[i].href = 'tel:' + normalized;
+        }
+      }
+      updatePhoneLinks();
+      var phoneTexts = document.querySelectorAll('.phone-text');
+      if (phoneTexts.length && typeof MutationObserver !== 'undefined') {
+        var observer = new MutationObserver(updatePhoneLinks);
+        for (var i = 0; i < phoneTexts.length; i++) {
+          observer.observe(phoneTexts[i], { characterData: true, childList: true, subtree: true });
+        }
       }
     })();
 
@@ -1952,6 +2333,66 @@
       else sticky.classList.remove('visible');
     });
 
+    /* Animate service-row rejection meters when they scroll into view */
+    (function() {
+      var rows = document.querySelectorAll('.svc-row');
+      if (!rows.length) return;
+      if (!('IntersectionObserver' in window)) {
+        rows.forEach(function(r) { r.classList.add('in-view'); });
+        return;
+      }
+      var io = new IntersectionObserver(function(entries, obs) {
+        entries.forEach(function(e) {
+          if (e.isIntersecting) { e.target.classList.add('in-view'); obs.unobserve(e.target); }
+        });
+      }, { rootMargin: '0px 0px -15% 0px' });
+      rows.forEach(function(r) { io.observe(r); });
+    })();
+
+    /* Reviews carousel: prev/next, dots, arrow disabled state */
+    (function() {
+      var carousel = document.querySelector('.rv-carousel');
+      if (!carousel) return;
+      var track = carousel.querySelector('.rv-track');
+      var cards = track ? track.querySelectorAll('.rv-card') : [];
+      var prev = carousel.querySelector('.rv-arrow.prev');
+      var next = carousel.querySelector('.rv-arrow.next');
+      var dotsWrap = carousel.querySelector('.rv-dots');
+      if (!track || !cards.length) return;
+
+      var dots = [];
+      for (var i = 0; i < cards.length; i++) {
+        (function(idx) {
+          var b = document.createElement('button');
+          b.type = 'button';
+          b.className = 'rv-dot' + (idx === 0 ? ' active' : '');
+          b.setAttribute('aria-label', 'Go to review ' + (idx + 1));
+          b.addEventListener('click', function() { track.scrollTo({ left: idx * step(), behavior: 'smooth' }); });
+          dotsWrap && dotsWrap.appendChild(b);
+          dots.push(b);
+        })(i);
+      }
+
+      function step() {
+        if (cards.length < 2) return cards[0].offsetWidth;
+        return cards[1].getBoundingClientRect().left - cards[0].getBoundingClientRect().left;
+      }
+      function update() {
+        var idx = Math.round(track.scrollLeft / step());
+        if (idx < 0) idx = 0;
+        if (idx > cards.length - 1) idx = cards.length - 1;
+        for (var i = 0; i < dots.length; i++) dots[i].classList.toggle('active', i === idx);
+        if (prev) prev.disabled = track.scrollLeft <= 2;
+        if (next) next.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 2;
+      }
+      prev && prev.addEventListener('click', function() { track.scrollBy({ left: -step(), behavior: 'smooth' }); });
+      next && next.addEventListener('click', function() { track.scrollBy({ left: step(), behavior: 'smooth' }); });
+      var t;
+      track.addEventListener('scroll', function() { clearTimeout(t); t = setTimeout(update, 60); });
+      window.addEventListener('resize', function() { clearTimeout(t); t = setTimeout(update, 120); });
+      update();
+    })();
+
     /* Smooth scroll to #quote-form */
     document.addEventListener('DOMContentLoaded', function() {
       var anchors = document.querySelectorAll('a[href="#quote-form"]');
@@ -1964,64 +2405,9 @@
       });
     });
 
-    /* ======= BOOKING MODAL =======
-       🔧 REPLACE each form URL below with your window-tinting GHL form ids.
-       Each tier should map to its own form so the lead is tagged properly. */
-    var pkgLabels = {
-      dyed:    'Dyed',
-      carbon:  'Carbon',
-      ceramic: 'Ceramic',
-      nano:    'Nano-Ceramic'
-    };
-    var pkgFormUrls = {
-      dyed:    'https://api.leadconnectorhq.com/widget/form/DKik2Ri4v0RYWmfTp78Y',
-      carbon:  'https://api.leadconnectorhq.com/widget/form/DKik2Ri4v0RYWmfTp78Y',
-      ceramic: 'https://api.leadconnectorhq.com/widget/form/DKik2Ri4v0RYWmfTp78Y',
-      nano:    'https://api.leadconnectorhq.com/widget/form/DKik2Ri4v0RYWmfTp78Y'
-    };
-
-    function openBookingModal(pkg) {
-      var modal = document.getElementById('bookingModal');
-      selectPkg(pkg);
-      modal.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeBookingModal() {
-      var modal = document.getElementById('bookingModal');
-      modal.classList.remove('active');
-      document.body.style.overflow = '';
-      document.getElementById('modalFormIframe').src = 'about:blank';
-      document.getElementById('ddBtn').classList.remove('open');
-      document.getElementById('ddList').classList.remove('open');
-    }
-
-    function handleOverlayClick(e) {
-      if (e.target === e.currentTarget) closeBookingModal();
-    }
-
-    function toggleDd() {
-      document.getElementById('ddBtn').classList.toggle('open');
-      document.getElementById('ddList').classList.toggle('open');
-    }
-
-    function selectPkg(pkg) {
-      document.getElementById('ddLabel').textContent = pkgLabels[pkg] || 'Select a package';
-      document.querySelectorAll('.modal-dropdown-option').forEach(function(opt) {
-        opt.classList.toggle('selected', opt.getAttribute('data-pkg') === pkg);
-      });
-      document.getElementById('modalFormIframe').src = pkgFormUrls[pkg] || 'about:blank';
-      document.getElementById('ddBtn').classList.remove('open');
-      document.getElementById('ddList').classList.remove('open');
-    }
-
-    /* Close modal on ESC */
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') closeBookingModal();
-    });
   </script>
 
-  <!-- CallRail — paste your swap.js script tag here -->
-  <!-- CALLRAIL_PLACEHOLDER -->
+  <!-- CallRail DNI phone swap -->
+  <script type="text/javascript" src="//cdn.callrail.com/companies/299778677/33af1e4c8df234a9a2eb/12/swap.js"></script>
 </body>
 </html>
