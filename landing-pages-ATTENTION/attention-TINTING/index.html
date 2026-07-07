@@ -13,15 +13,35 @@
        - Phone number if different from (757) 829-7713
        ======================================================== -->
 
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
+  <title>Window Tinting in Chesapeake VA — Jalens Attention To Detail</title>
+  <meta name="description" content="Premium automotive window tinting in Chesapeake, VA. Dyed, carbon, ceramic, and nano-ceramic options. Heat rejection, UV protection, lifetime warranty. Serving Hampton Roads.">
+
   <!--favicon-->
   <link rel="icon" type="image/webp" sizes="128x128" href="./Ceramic coating,Exterior Wash,Headlight restore/favicon.webp">
   <link rel="shortcut icon" type="image/webp" href="./Ceramic coating,Exterior Wash,Headlight restore/favicon.webp">
   <link rel="apple-touch-icon" href="./Ceramic coating,Exterior Wash,Headlight restore/favicon.webp">
 
   <!-- ============================================================
+       PERFORMANCE — warm critical origins + preload the LCP hero
+       ============================================================ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://api.leadconnectorhq.com">
+  <link rel="preconnect" href="https://link.msgsndr.com">
+  <link rel="dns-prefetch" href="https://cdn.callrail.com">
+
+  <!-- LCP hero image: fetch immediately, in parallel with the stylesheet -->
+  <link rel="preload" as="image" href="./Photos/ceramic-tint.webp" type="image/webp" fetchpriority="high">
+
+  <!-- Google Fonts (Oswald / DM Sans / Bebas Neue) — non-render-blocking -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&family=Bebas+Neue&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&family=Bebas+Neue&display=swap"></noscript>
+
+  <!-- ============================================================
        TRACKING — REPLACE WITH YOUR IDs BEFORE DEPLOYING
        ============================================================ -->
-
   <!-- Google Ads Conversion Tracking — paste your gtag snippet here -->
   <!-- GOOGLE_ADS_TRACKING_PLACEHOLDER -->
 
@@ -30,16 +50,6 @@
 
   <!-- Microsoft Clarity — paste your Clarity snippet here -->
   <!-- CLARITY_TRACKING_PLACEHOLDER -->
-
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
-  <title>Window Tinting in Chesapeake VA — Jalens Attention To Detail</title>
-  <meta name="description" content="Premium automotive window tinting in Chesapeake, VA. Dyed, carbon, ceramic, and nano-ceramic options. Heat rejection, UV protection, lifetime warranty. Serving Hampton Roads.">
-
-  <!-- Google Fonts: Oswald (display italic) + DM Sans (body) + Bebas Neue (numerals) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
 
   <style>
     /* =========================================================
@@ -1640,7 +1650,6 @@
         data-form-id="WmpMmuWv4zom4Cnw6SL8"
         title="Google Ad Form(TINT)"
       ></iframe>
-      <script src="https://link.msgsndr.com/js/form_embed.js"></script>
     </div>
   </section>
   </div><!-- /.hero-form-wrap -->
@@ -2223,7 +2232,7 @@
 
   <!-- ========== CONTACT ========== -->
   <section class="contact">
-    <img src="./DSC09715.jpg" alt="" class="contact-bg" loading="lazy">
+    <img src="./DSC09715.webp" alt="" class="contact-bg" loading="lazy">
     <div class="contact-overlay"></div>
 
     <div class="contact-inner">
@@ -2249,7 +2258,6 @@
           data-form-id="WmpMmuWv4zom4Cnw6SL8"
           title="Google Ad Form(TINT)"
         ></iframe>
-        <script src="https://link.msgsndr.com/js/form_embed.js"></script>
       </div>
 
       <div class="contact-info-cards">
@@ -2407,7 +2415,10 @@
 
   </script>
 
-  <!-- CallRail DNI phone swap -->
-  <script type="text/javascript" src="//cdn.callrail.com/companies/299778677/33af1e4c8df234a9a2eb/12/swap.js"></script>
+  <!-- CallRail DNI phone swap (async — must not block render) -->
+  <script async src="//cdn.callrail.com/companies/299778677/33af1e4c8df234a9a2eb/12/swap.js"></script>
+
+  <!-- GHL form embed — loaded once, deferred (hydrates both form iframes) -->
+  <script src="https://link.msgsndr.com/js/form_embed.js" defer></script>
 </body>
 </html>

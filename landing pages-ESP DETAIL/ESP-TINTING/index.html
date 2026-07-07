@@ -14,15 +14,36 @@
        - Phone number if different from (949) 821-0314
        ======================================================== -->
 
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
+  <title>Window Tinting in Anaheim &amp; Orange County — ESP Detailing</title>
+  <meta name="description" content="Premium automotive window tinting in Anaheim & Orange County, CA. Dyed, carbon, ceramic, and nano-ceramic options. Heat rejection, UV protection, lifetime warranty. Serving all of Orange County.">
+
   <!--favicon-->
   <link rel="icon" type="image/png" sizes="128x128" href="./Photos/esp-logo.png">
   <link rel="shortcut icon" type="image/png" href="./Photos/esp-logo.png">
   <link rel="apple-touch-icon" href="./Photos/esp-logo.png">
 
   <!-- ============================================================
-       TRACKING
+       PERFORMANCE — warm critical origins + preload the LCP hero
        ============================================================ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://api.leadconnectorhq.com">
+  <link rel="preconnect" href="https://link.msgsndr.com">
+  <link rel="dns-prefetch" href="https://cdn.callrail.com">
+  <link rel="dns-prefetch" href="https://www.googletagmanager.com">
 
+  <!-- LCP hero image: fetch immediately, in parallel with the stylesheet -->
+  <link rel="preload" as="image" href="./Photos/hero-one-detail.webp" type="image/webp" fetchpriority="high">
+
+  <!-- Google Fonts (Oswald / DM Sans / Bebas Neue) — non-render-blocking -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&family=Bebas+Neue&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&family=Bebas+Neue&display=swap"></noscript>
+
+  <!-- ============================================================
+       TRACKING — async so nothing blocks first paint
+       ============================================================ -->
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18007060175"></script>
   <script>
@@ -35,8 +56,8 @@
   <!-- Google Analytics GA4 — paste your G- snippet here -->
   <!-- GA4_TRACKING_PLACEHOLDER -->
 
-  <!-- CallRail -->
-  <script type="text/javascript" src="//cdn.callrail.com/companies/377276666/87cac8f3b0c15a440d1e/12/swap.js"></script>
+  <!-- CallRail (async — phone-swap must not block render) -->
+  <script async src="//cdn.callrail.com/companies/377276666/87cac8f3b0c15a440d1e/12/swap.js"></script>
 
   <!-- Microsoft Clarity — REPLACE WITH ESP'S CLARITY ID, then uncomment -->
   <!--
@@ -48,16 +69,8 @@
     })(window, document, "clarity", "script", "YOUR_CLARITY_ID");
   </script>
   -->
-
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
-  <title>Window Tinting in Anaheim &amp; Orange County — ESP Detailing</title>
-  <meta name="description" content="Premium automotive window tinting in Anaheim & Orange County, CA. Dyed, carbon, ceramic, and nano-ceramic options. Heat rejection, UV protection, lifetime warranty. Serving all of Orange County.">
-
-  <!-- Google Fonts: Oswald (display italic) + DM Sans (body) + Bebas Neue (numerals) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <!-- Microsoft Clarity end -->
+  <!-- charset/viewport moved to top of <head> for performance -->
 
   <style>
     /* =========================================================
@@ -1660,7 +1673,6 @@
         data-form-id="hiLoTtMeJ9MF06zOFsiq"
         title="Google Ad Form(TINT)"
       ></iframe>
-      <script src="https://link.msgsndr.com/js/form_embed.js"></script>
     </div>
   </section>
   </div><!-- /.hero-form-wrap -->
@@ -2243,7 +2255,7 @@
 
   <!-- ========== CONTACT ========== -->
   <section class="contact">
-    <img src="./DSC09715.jpg" alt="" class="contact-bg" loading="lazy">
+    <img src="./DSC09715.webp" alt="" class="contact-bg" loading="lazy">
     <div class="contact-overlay"></div>
 
     <div class="contact-inner">
@@ -2269,7 +2281,6 @@
           data-form-id="hiLoTtMeJ9MF06zOFsiq"
           title="Google Ad Form(TINT)"
         ></iframe>
-        <script src="https://link.msgsndr.com/js/form_embed.js"></script>
       </div>
 
       <div class="contact-info-cards">
@@ -2429,5 +2440,8 @@
 
   <!-- CallRail — paste your swap.js script tag here -->
   <!-- CALLRAIL_PLACEHOLDER -->
+
+  <!-- GHL form embed — loaded once, deferred (hydrates both form iframes) -->
+  <script src="https://link.msgsndr.com/js/form_embed.js" defer></script>
 </body>
 </html>
