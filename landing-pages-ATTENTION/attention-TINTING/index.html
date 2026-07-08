@@ -747,6 +747,133 @@
     .svc-cta svg { width: 14px; height: 14px; transition: transform 0.2s ease; }
     .svc-cta:hover svg { transform: translateX(3px); }
 
+    /* =========================================================
+       TINT SERVICE CARDS — coverage-based (4 DRAFT STYLES)
+       Each card is a different treatment so we can pick one.
+       ========================================================= */
+    .tsvc-grid { display: flex; flex-direction: column; gap: 2rem; margin-top: 2.5rem; }
+
+    .tsvc {
+      position: relative;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 1.25rem;
+      box-shadow: var(--shadow-md);
+      overflow: hidden;
+    }
+    /* Entrance: cards are visible by default; in-view just plays the reveal
+       (so nothing hides if JS/observer never fires). */
+    .tsvc.in-view { animation: tsvcIn 0.7s cubic-bezier(0.22,1,0.36,1) both; }
+    @keyframes tsvcIn { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: none; } }
+    @media (prefers-reduced-motion: reduce) { .tsvc.in-view { animation: none; } }
+
+    /* Shared image panel */
+    .tsvc-visual {
+      position: relative;
+      background: linear-gradient(160deg, var(--black) 0%, var(--black-3) 100%);
+      overflow: hidden;
+      min-height: 240px;
+    }
+    .tsvc-visual img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .tsvc-numeral {
+      position: absolute; top: 0.5rem; left: 1rem;
+      font-family: var(--font-numeral); font-size: 3.25rem; line-height: 1;
+      color: rgba(255,255,255,0.92);
+      text-shadow: 0 2px 12px rgba(0,0,0,0.65), 0 0 2px rgba(0,0,0,0.5);
+      z-index: 3; pointer-events: none;
+    }
+
+    .tsvc-detail { padding: 1.75rem 1.5rem; display: flex; flex-direction: column; }
+    .tsvc-eyebrow { font-size: 0.66rem; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: var(--red); margin-bottom: 0.3rem; }
+    .tsvc-name { font-family: var(--font-display); font-style: italic; font-weight: 700; text-transform: uppercase; font-size: 1.85rem; color: var(--ink); line-height: 1; margin-bottom: 0.55rem; }
+    .tsvc-coverage { font-size: 0.9rem; color: var(--slate); line-height: 1.55; margin-bottom: 1.15rem; }
+    .tsvc-coverage strong { color: var(--ink); font-weight: 700; }
+
+    /* CTA (shared) */
+    .tsvc-cta {
+      margin-top: auto; align-self: flex-start;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--red); color: #fff; text-decoration: none;
+      padding: 0.9rem 1.4rem; border-radius: 0.5rem;
+      font-weight: 700; font-size: 0.86rem; letter-spacing: 0.04em; text-transform: uppercase;
+      border: none; cursor: pointer; font-family: var(--font-body);
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+    .tsvc-cta:hover { background: var(--red-dark); transform: translateY(-1px); }
+    .tsvc-cta svg { width: 14px; height: 14px; transition: transform 0.2s ease; }
+    .tsvc-cta:hover svg { transform: translateX(3px); }
+
+    /* ---------- STYLE A — Big-price spec (card 1) ---------- */
+    .tsvc-price-hero { display: flex; align-items: baseline; flex-wrap: wrap; gap: 0.45rem; margin-bottom: 1.2rem; }
+    .tsvc-price-hero .from { font-size: 0.68rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mute); }
+    .tsvc-price-hero .amt { font-family: var(--font-numeral); font-size: 3.4rem; line-height: 0.85; color: var(--ink); letter-spacing: 0.01em; }
+    .tsvc-price-hero .film { font-size: 0.8rem; font-weight: 700; color: var(--slate); }
+    .tsvc-films { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; margin-bottom: 1.3rem; }
+    .tsvc-film { border: 1px solid var(--line); border-radius: 0.7rem; padding: 0.8rem 0.85rem; background: var(--paper); }
+    .tsvc-film.is-ceramic { border-color: rgba(220,38,38,0.35); background: #fff6f6; }
+    .tsvc-film .ft { font-family: var(--font-display); font-style: italic; font-weight: 700; text-transform: uppercase; font-size: 0.98rem; color: var(--ink); margin-bottom: 0.28rem; }
+    .tsvc-film.is-ceramic .ft { color: var(--red); }
+    .tsvc-film .fb { font-size: 0.78rem; color: var(--slate); line-height: 1.45; }
+
+    /* ---------- Featured card (Front & Sides / Most Popular) ---------- */
+    .tsvc.is-featured { border-color: rgba(220,38,38,0.45); box-shadow: 0 0 0 1px rgba(220,38,38,0.22), var(--shadow-lg); }
+    .tsvc-badge {
+      position: absolute; top: 1rem; right: 1rem; z-index: 5;
+      background: var(--red); color: #fff;
+      font-size: 0.62rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.4rem 0.75rem; border-radius: 99px; box-shadow: var(--shadow-red);
+    }
+
+    /* ---------- Shade scale (cards 1–3) ---------- */
+    .tsvc-scale { margin-bottom: 1.3rem; }
+    .tsvc-scale .scale-lbl { display: block; font-size: 0.66rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mute); margin-bottom: 0.45rem; }
+    .tsvc-scale .bar { height: 12px; border-radius: 99px; background: linear-gradient(90deg, #0a0a0a, #2b2b2b 18%, #6b6b6b 55%, #cfcfcf 100%); border: 1px solid var(--line); }
+    .tsvc-scale .ticks { display: flex; justify-content: space-between; margin-top: 0.35rem; font-size: 0.68rem; font-weight: 700; color: var(--slate); }
+
+    /* ---------- STYLE D — Minimal luxe (card 4) ---------- */
+    .tsvc--d .tsvc-detail { padding: 2.4rem 2rem; justify-content: center; }
+    .tsvc--d .tsvc-visual { min-height: 300px; }
+    .tsvc-luxe-price { font-size: 0.9rem; color: var(--slate); margin: 0.3rem 0 1rem; }
+    .tsvc-luxe-price b { font-family: var(--font-numeral); font-size: 1.35rem; color: var(--ink); font-weight: 400; letter-spacing: 0.01em; }
+    .tsvc-luxe-line { font-size: 0.9rem; color: var(--slate); line-height: 1.65; margin-bottom: 1.5rem; padding-left: 0.95rem; border-left: 2px solid #a1a1aa; }
+    .tsvc--d .tsvc-cta { margin-top: 0; }
+
+    /* =========================================================
+       TINT — SUPPORTING INFO STRIP (shades / VA law / add-ons)
+       ========================================================= */
+    .tint-info { margin-top: 2.5rem; display: grid; gap: 1rem; }
+    .tint-info-card {
+      background: #fff; border: 1px solid var(--line); border-radius: 1rem;
+      padding: 1.4rem 1.35rem; box-shadow: var(--shadow-sm);
+    }
+    .tint-info-card h4 {
+      font-family: var(--font-display); font-style: italic; font-weight: 700;
+      text-transform: uppercase; font-size: 1.08rem; color: var(--ink);
+      margin-bottom: 1rem; letter-spacing: 0.01em;
+    }
+    .shade-scale .bar { height: 14px; border-radius: 99px; background: linear-gradient(90deg, #0a0a0a, #2b2b2b 15%, #6b6b6b 55%, #d4d4d4 100%); border: 1px solid var(--line); }
+    .shade-scale .marks { display: flex; justify-content: space-between; margin-top: 0.55rem; }
+    .shade-scale .mark { text-align: center; font-size: 0.64rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--mute); }
+    .shade-scale .mark b { display: block; font-family: var(--font-numeral); font-size: 1.2rem; color: var(--ink); font-weight: 400; margin-bottom: 0.1rem; letter-spacing: 0.02em; }
+    .legal-rows { list-style: none; padding: 0; margin: 0 0 0.9rem; display: flex; flex-direction: column; gap: 0.5rem; }
+    .legal-rows li { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; font-size: 0.85rem; color: var(--slate); border-bottom: 1px dashed var(--line); padding-bottom: 0.5rem; }
+    .legal-rows li b { color: var(--ink); font-weight: 700; white-space: nowrap; }
+    .legal-note { font-size: 0.76rem; color: var(--mute); line-height: 1.5; font-style: italic; }
+    .addon-rows { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.65rem; }
+    .addon-rows li { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; font-size: 0.86rem; color: var(--slate); }
+    .addon-rows li b { font-family: var(--font-numeral); font-size: 1.1rem; color: var(--ink); letter-spacing: 0.02em; white-space: nowrap; }
+
+    /* ---------- Tint service cards: desktop layout ---------- */
+    @media (min-width: 768px) {
+      .tsvc { display: grid; grid-template-columns: 0.85fr 1fr; align-items: stretch; }
+      .tsvc:nth-child(even) { grid-template-columns: 1fr 0.85fr; }
+      .tsvc:nth-child(even) .tsvc-visual { order: 2; }
+      .tsvc-visual { min-height: 340px; }
+      .tsvc-numeral { font-size: 4rem; }
+      .tsvc-detail { padding: 2.25rem 2.25rem; }
+      .tint-info { grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+    }
+
     .pkg-grid {
       display: grid;
       gap: 1.25rem;
@@ -1774,124 +1901,179 @@
     <div class="packages-inner">
 
       <div class="pkg-header">
-        <div class="section-eyebrow">Window Tint Films</div>
-        <h2 class="section-title">Choose Your <span class="accent">Protection</span></h2>
-        <p class="section-lede" style="margin:0 auto;">Four films, one mission — block what hurts your interior, keep what makes the drive beautiful. Compare how each tier rejects heat, UV, and infrared.</p>
+        <div class="section-eyebrow">Window Tint Services</div>
+        <h2 class="section-title">Pick Your <span class="accent">Coverage</span></h2>
+        <p class="section-lede" style="margin:0 auto;">Choose how much glass you want done — we'll dial in the shade and film with you. Every job comes in Carbon or Ceramic and is backed by a lifetime warranty.</p>
       </div>
 
-      <!-- Staggered service rows -->
-      <div class="svc-rows">
+      <!-- Coverage-based service cards — 4 DRAFT STYLES, pick one to standardize -->
+      <div class="tsvc-grid">
 
-        <!-- ============== TIER 1 — DYED ============== -->
-        <article class="svc-row" data-tier="dyed">
-          <div class="svc-visual">
-            <span class="svc-numeral">01</span>
-            <img src="./Photos/dyed-tint.webp" alt="Technician applying dyed window tint film" loading="lazy">
+        <!-- ============== CARD 1 — FRONT ONLY ============== -->
+        <article class="tsvc">
+          <div class="tsvc-visual">
+            <span class="tsvc-numeral">01</span>
+            <img src="./Photos/carbon-tint.webp" alt="Front two door windows tinted" loading="lazy">
           </div>
-          <div class="svc-detail">
-            <div class="svc-eyebrow">Entry Tier</div>
-            <h3 class="svc-name">Dyed</h3>
-            <p class="svc-bestfor"><strong>Best for:</strong> budget-minded drivers who mainly want the darkened look and basic UV protection.</p>
-            <div class="svc-meters">
-              <div class="svc-meter"><div class="svc-meter-top"><span>Heat rejection</span><b>50%</b></div><div class="svc-meter-track"><span class="svc-meter-fill" style="--w:50%"></span></div></div>
-              <div class="svc-meter"><div class="svc-meter-top"><span>UV rejection</span><b>99%</b></div><div class="svc-meter-track"><span class="svc-meter-fill" style="--w:99%"></span></div></div>
-              <div class="svc-meter"><div class="svc-meter-top"><span>Infrared (IR) rejection</span><b>20%</b></div><div class="svc-meter-track"><span class="svc-meter-fill" style="--w:20%"></span></div></div>
+          <div class="tsvc-detail">
+            <div class="tsvc-eyebrow">Entry · Front 2 Windows</div>
+            <h3 class="tsvc-name">Front Only</h3>
+            <p class="tsvc-coverage">Your two <strong>front door windows</strong> — the quick, clean way to kill glare and match factory-tinted rear glass.</p>
+            <div class="tsvc-price-hero">
+              <span class="from">Starting at</span>
+              <span class="amt">$249</span>
+              <span class="film">in Carbon</span>
             </div>
-            <div class="svc-chips">
-              <span class="svc-chip">Glare reduction</span>
-              <span class="svc-chip">Matte finish</span>
-              <span class="svc-chip">5-yr warranty</span>
+            <div class="tsvc-films">
+              <div class="tsvc-film">
+                <div class="ft">Carbon</div>
+                <div class="fb">Deep matte look, blocks 99% of UV, never fades to purple — and it won't touch your signal.</div>
+              </div>
+              <div class="tsvc-film is-ceramic">
+                <div class="ft">Ceramic</div>
+                <div class="fb">Rejects up to 85% of the sun's heat &amp; infrared and stays crystal-clear — offered on our Front &amp; Sides package and up.</div>
+              </div>
             </div>
-            <a href="#quote-form" class="svc-cta">
-              Get Dyed Quote
+            <div class="tsvc-scale">
+              <span class="scale-lbl">Shades available</span>
+              <div class="bar"></div>
+              <div class="ticks"><span>5% darkest</span><span>20%</span><span>35%</span><span>50% light</span></div>
+            </div>
+            <a href="#quote-form" class="tsvc-cta">
+              Get My Quote
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
             </a>
           </div>
         </article>
 
-        <!-- ============== TIER 2 — CARBON ============== -->
-        <article class="svc-row" data-tier="carbon">
-          <div class="svc-visual">
-            <span class="svc-numeral">02</span>
-            <img src="./Photos/carbon-tint.webp" alt="Close-up of carbon window tint film on car window" loading="lazy">
+        <!-- ============== CARD 2 — FRONT & SIDES (MOST POPULAR) ============== -->
+        <article class="tsvc is-featured">
+          <span class="tsvc-badge">★ Most Popular</span>
+          <div class="tsvc-visual">
+            <span class="tsvc-numeral">02</span>
+            <img src="./Photos/ceramic-tint.webp" alt="All side windows and rear glass tinted" loading="lazy">
           </div>
-          <div class="svc-detail">
-            <div class="svc-eyebrow">Mid Tier</div>
-            <h3 class="svc-name">Carbon</h3>
-            <p class="svc-bestfor"><strong>Best for:</strong> a deeper, no-fade matte look with solid heat rejection that won't touch your signals.</p>
-            <div class="svc-meters">
-              <div class="svc-meter"><div class="svc-meter-top"><span>Heat rejection</span><b>60%</b></div><div class="svc-meter-track"><span class="svc-meter-fill" style="--w:60%"></span></div></div>
-              <div class="svc-meter"><div class="svc-meter-top"><span>UV rejection</span><b>99%</b></div><div class="svc-meter-track"><span class="svc-meter-fill" style="--w:99%"></span></div></div>
-              <div class="svc-meter"><div class="svc-meter-top"><span>Infrared (IR) rejection</span><b>40%</b></div><div class="svc-meter-track"><span class="svc-meter-fill" style="--w:40%"></span></div></div>
+          <div class="tsvc-detail">
+            <div class="tsvc-eyebrow">The Complete Look · Special</div>
+            <h3 class="tsvc-name">Front &amp; Sides</h3>
+            <p class="tsvc-coverage">Every <strong>side window plus the rear glass</strong> — one uniform, finished look front to back. Our most-requested job.</p>
+            <div class="tsvc-price-hero">
+              <span class="from">Starting at</span>
+              <span class="amt">$449</span>
+              <span class="film">in Carbon</span>
             </div>
-            <div class="svc-chips">
-              <span class="svc-chip">Won't fade to purple</span>
-              <span class="svc-chip">Signal-safe</span>
-              <span class="svc-chip">Lifetime warranty</span>
+            <div class="tsvc-films">
+              <div class="tsvc-film">
+                <div class="ft">Carbon</div>
+                <div class="fb">Bold matte finish, blocks 99% of UV, never fades to purple — and it's completely signal-safe.</div>
+              </div>
+              <div class="tsvc-film is-ceramic">
+                <div class="ft">Ceramic</div>
+                <div class="fb">Rejects up to 85% of the sun's heat &amp; infrared — the coolest, clearest cabin in the Chesapeake sun.</div>
+              </div>
             </div>
-            <a href="#quote-form" class="svc-cta">
-              Get Carbon Quote
+            <div class="tsvc-scale">
+              <span class="scale-lbl">Shades available</span>
+              <div class="bar"></div>
+              <div class="ticks"><span>5% darkest</span><span>20%</span><span>35%</span><span>50% light</span></div>
+            </div>
+            <a href="#quote-form" class="tsvc-cta">
+              Claim This Special
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
             </a>
           </div>
         </article>
 
-        <!-- ============== TIER 3 — CERAMIC (FEATURED) ============== -->
-        <article class="svc-row featured" data-tier="ceramic">
-          <span class="svc-popular">Most Popular</span>
-          <div class="svc-visual">
-            <span class="svc-numeral">03</span>
-            <img src="./Photos/ceramic-tint.webp" alt="SUV with ceramic window tint film installed" loading="lazy">
+        <!-- ============== CARD 3 — ALL WINDOWS ============== -->
+        <article class="tsvc">
+          <div class="tsvc-visual">
+            <span class="tsvc-numeral">03</span>
+            <img src="./Photos/nano-ceramic-tint.webp" alt="All windows including windshield tinted" loading="lazy">
           </div>
-          <div class="svc-detail">
-            <div class="svc-eyebrow">Premium Tier</div>
-            <h3 class="svc-name">Ceramic</h3>
-            <p class="svc-bestfor"><strong>Best for:</strong> daily drivers who want serious heat &amp; infrared comfort in the Chesapeake sun — without going dark.</p>
-            <div class="svc-meters">
-              <div class="svc-meter"><div class="svc-meter-top"><span>Heat rejection</span><b>80%</b></div><div class="svc-meter-track"><span class="svc-meter-fill" style="--w:80%"></span></div></div>
-              <div class="svc-meter"><div class="svc-meter-top"><span>UV rejection</span><b>99%</b></div><div class="svc-meter-track"><span class="svc-meter-fill" style="--w:99%"></span></div></div>
-              <div class="svc-meter"><div class="svc-meter-top"><span>Infrared (IR) rejection</span><b>85%</b></div><div class="svc-meter-track"><span class="svc-meter-fill" style="--w:85%"></span></div></div>
+          <div class="tsvc-detail">
+            <div class="tsvc-eyebrow">Maximum Coverage</div>
+            <h3 class="tsvc-name">All Windows</h3>
+            <p class="tsvc-coverage">Sides, rear glass <strong>and the windshield</strong> — total heat and UV block, head to tail.</p>
+            <div class="tsvc-price-hero">
+              <span class="from">Starting at</span>
+              <span class="amt">$549</span>
+              <span class="film">in Carbon</span>
             </div>
-            <div class="svc-chips">
-              <span class="svc-chip">Massive IR blocking</span>
-              <span class="svc-chip">Crystal-clear clarity</span>
-              <span class="svc-chip">Lifetime warranty</span>
+            <div class="tsvc-films">
+              <div class="tsvc-film">
+                <div class="ft">Carbon</div>
+                <div class="fb">The darkest, cleanest look — blocks 99% of UV, signal-safe, and never fades.</div>
+              </div>
+              <div class="tsvc-film is-ceramic">
+                <div class="ft">Ceramic</div>
+                <div class="fb">Up to 85% heat &amp; infrared rejection with crystal clarity — the full-comfort build.</div>
+              </div>
             </div>
-            <a href="#quote-form" class="svc-cta">
-              Get Ceramic Quote
+            <div class="tsvc-scale">
+              <span class="scale-lbl">Shades available</span>
+              <div class="bar"></div>
+              <div class="ticks"><span>5% darkest</span><span>20%</span><span>35%</span><span>50% light</span></div>
+            </div>
+            <a href="#quote-form" class="tsvc-cta">
+              Get My Quote
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
             </a>
           </div>
         </article>
 
-        <!-- ============== TIER 4 — NANO-CERAMIC ============== -->
-        <article class="svc-row" data-tier="nano">
-          <div class="svc-visual">
-            <span class="svc-numeral">04</span>
-            <img src="./Photos/nano-ceramic-tint.webp" alt="Car with nano-ceramic window tint film installed" loading="lazy">
+        <!-- ============== CARD 4 — CUSTOM JOBS  (Style D: minimal luxe) ============== -->
+        <article class="tsvc tsvc--d">
+          <div class="tsvc-visual">
+            <span class="tsvc-numeral">04</span>
+            <img src="./Photos/dyed-tint.webp" alt="Custom window tint work" loading="lazy">
           </div>
-          <div class="svc-detail">
-            <div class="svc-eyebrow">Flagship Tier</div>
-            <h3 class="svc-name">Nano-Ceramic</h3>
-            <p class="svc-bestfor"><strong>Best for:</strong> enthusiasts who want the maximum rejection money can buy — the most advanced film available.</p>
-            <div class="svc-meters">
-              <div class="svc-meter"><div class="svc-meter-top"><span>Heat rejection</span><b>88%</b></div><div class="svc-meter-track"><span class="svc-meter-fill" style="--w:88%"></span></div></div>
-              <div class="svc-meter"><div class="svc-meter-top"><span>UV rejection</span><b>99%</b></div><div class="svc-meter-track"><span class="svc-meter-fill" style="--w:99%"></span></div></div>
-              <div class="svc-meter"><div class="svc-meter-top"><span>Infrared (IR) rejection</span><b>96%</b></div><div class="svc-meter-track"><span class="svc-meter-fill" style="--w:96%"></span></div></div>
-            </div>
-            <div class="svc-chips">
-              <span class="svc-chip">Multi-layer nano stack</span>
-              <span class="svc-chip">Strongest film tech</span>
-              <span class="svc-chip">Lifetime warranty</span>
-            </div>
-            <a href="#quote-form" class="svc-cta">
-              Get Nano-Ceramic Quote
+          <div class="tsvc-detail">
+            <div class="tsvc-eyebrow">By Appointment</div>
+            <h3 class="tsvc-name">Custom Jobs</h3>
+            <p class="tsvc-luxe-price">Tint removal from <b>$50</b> / window · custom quotes on everything else.</p>
+            <p class="tsvc-luxe-line">Windshield strips &amp; sun visors, old-film removal, commercial fleets, RVs, and one-off builds. Available in Carbon or Ceramic — tell us what you're picturing and we'll price it.</p>
+            <a href="#quote-form" class="tsvc-cta">
+              Get a Custom Quote
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
             </a>
           </div>
         </article>
 
-      </div><!-- /.svc-rows -->
+      </div><!-- /.tsvc-grid -->
+
+      <!-- ========== SUPPORTING INFO: shades / VA law / add-ons ========== -->
+      <div class="tint-info">
+        <div class="tint-info-card">
+          <h4>Choose Your Shade</h4>
+          <div class="shade-scale">
+            <div class="bar"></div>
+            <div class="marks">
+              <span class="mark"><b>5%</b>limo</span>
+              <span class="mark"><b>20%</b>dark</span>
+              <span class="mark"><b>35%</b>medium</span>
+              <span class="mark"><b>50%</b>lightest</span>
+            </div>
+          </div>
+          <p class="legal-note" style="margin-top:0.9rem;">Lower % = darker glass. Not sure which to pick? We'll match the look you want at the shop.</p>
+        </div>
+        <div class="tint-info-card">
+          <h4>Virginia Tint Law</h4>
+          <ul class="legal-rows">
+            <li><span>Windshield</span><b>Clear only</b></li>
+            <li><span>Front side windows</span><b>50%</b></li>
+            <li><span>Rear &amp; back glass</span><b>Any shade</b></li>
+          </ul>
+          <p class="legal-note">Most drivers find 50% too light up front. We're happy to install a darker, non-compliant shade on request — but you assume responsibility for any tickets.</p>
+        </div>
+        <div class="tint-info-card">
+          <h4>Add-Ons &amp; Extras</h4>
+          <ul class="addon-rows">
+            <li><span>Windshield — Carbon</span><b>+$100</b></li>
+            <li><span>Windshield — Ceramic</span><b>+$150</b></li>
+            <li><span>Old tint removal</span><b>$50 / window</b></li>
+          </ul>
+        </div>
+      </div>
 
     </div><!-- /.packages-inner -->
   </section>
@@ -2341,9 +2523,9 @@
       else sticky.classList.remove('visible');
     });
 
-    /* Animate service-row rejection meters when they scroll into view */
+    /* Reveal service cards as they scroll into view */
     (function() {
-      var rows = document.querySelectorAll('.svc-row');
+      var rows = document.querySelectorAll('.tsvc');
       if (!rows.length) return;
       if (!('IntersectionObserver' in window)) {
         rows.forEach(function(r) { r.classList.add('in-view'); });
