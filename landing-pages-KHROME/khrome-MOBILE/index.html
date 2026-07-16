@@ -1,40 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "vnpnkxoz69");
-  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Khrome Auto Detailing — Fresno's Best Mobile Car Detailing</title>
+  <meta name="description" content="Professional mobile car detailing in Fresno, CA. We come to you! Insured, 5-star rated, and satisfaction guaranteed. Serving Fresno, Clovis & surrounding areas.">
 
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17266438391"></script>
+  <link rel="icon" type="image/webp" sizes="128x96" href="./logo-128.webp">
+  <link rel="shortcut icon" type="image/webp" href="./logo-128.webp">
+  <link rel="apple-touch-icon" href="./logo-128.webp">
+
+  <!-- Analytics stubs: events queue immediately; the actual scripts (gtag, Meta pixel,
+       Clarity) are injected by the deferred loader at the end of <body> on first user
+       interaction (or 6s after load) so they never compete with the hero/LCP. -->
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'AW-17266438391');
+    !function(f){if(f.fbq)return;var n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};f._fbq||(f._fbq=n);n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];}(window);
+    fbq('init', '1457672995898350');
+    fbq('track', 'PageView');
+    window.clarity=window.clarity||function(){(window.clarity.q=window.clarity.q||[]).push(arguments)};
   </script>
 
-  <link rel="icon" type="image/webp" sizes="128x128" href="./favicon.webp">
-  <link rel="shortcut icon" type="image/webp" href="./favicon.webp">
-  <link rel="apple-touch-icon" href="./favicon.webp">
-
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
-  <title>Khrome Auto Detailing — Fresno's Best Mobile Car Detailing</title>
-  <meta name="description" content="Professional mobile car detailing in Fresno, CA. We come to you! Insured, 5-star rated, and satisfaction guaranteed. Serving Fresno, Clovis & surrounding areas.">
-
-  <!-- Perf: preconnect to third parties + preload LCP hero -->
-  <link rel="preconnect" href="https://api.leadconnectorhq.com" crossorigin>
-  <link rel="preconnect" href="https://link.msgsndr.com" crossorigin>
-  <link rel="preconnect" href="https://www.googletagmanager.com">
+  <!-- Perf: dns-prefetch third parties + preload LCP hero -->
+  <link rel="dns-prefetch" href="https://api.leadconnectorhq.com">
+  <link rel="dns-prefetch" href="https://link.msgsndr.com">
+  <link rel="dns-prefetch" href="https://www.googletagmanager.com">
   <link rel="dns-prefetch" href="https://www.clarity.ms">
   <link rel="dns-prefetch" href="https://cdn.callrail.com">
   <link rel="dns-prefetch" href="https://connect.facebook.net">
-  <link rel="preload" as="image" href="./hero section.webp" fetchpriority="high">
+  <link rel="preload" as="image" imagesrcset="./hero-768.webp 768w, ./hero-1080.webp 1080w" imagesizes="100vw" fetchpriority="high">
 
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -132,9 +129,11 @@
       max-width: 640px;
       padding: 0 0.5rem;
     }
+    /* Glow animates opacity on a pseudo-element (compositor-only, no repaints)
+       instead of animating box-shadow, which forced continuous main-thread rendering */
     @keyframes badgeGlow {
-      0%, 100% { box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 0 10px rgba(220,38,38,0.3); }
-      50%       { box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 0 22px rgba(220,38,38,0.6); }
+      0%, 100% { opacity: 0; }
+      50%       { opacity: 1; }
     }
     .offer-badge {
       background: rgba(220,38,38,0.9);
@@ -142,7 +141,18 @@
       padding: 0.75rem 1.75rem;
       margin-bottom: clamp(0.75rem, 2.5vh, 1.75rem);
       display: inline-block;
+      position: relative;
+      box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 0 10px rgba(220,38,38,0.3);
+    }
+    .offer-badge::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      box-shadow: 0 0 22px rgba(220,38,38,0.6);
+      opacity: 0;
       animation: badgeGlow 2.8s ease-in-out infinite;
+      pointer-events: none;
     }
     .offer-title { color: #ffffff; font-weight: 700; font-size: clamp(0.875rem, 2.2vh, 1.125rem); line-height: 1.2; }
     .offer-subtitle { color: #ffffffca; font-style: italic; font-size: clamp(0.75rem, 1.8vh, 0.875rem); font-weight: 400; }
@@ -435,6 +445,22 @@
     .quote-subtitle { font-size: 0.9rem; color: #4b5563; margin-bottom: 1rem; max-width: 500px; margin-left: auto; margin-right: auto; }
     .quote-form-container { max-width: 600px; margin: 0 auto; min-height: 580px; }
     .quote-form-container iframe { min-height: 800px; display: block; }
+    /* Lazy form placeholder spinner (sits behind the iframe, covered once form paints) */
+    .lazy-form { position: relative; }
+    .lazy-form::before {
+      content: '';
+      position: absolute;
+      top: 90px;
+      left: 50%;
+      width: 30px;
+      height: 30px;
+      margin-left: -15px;
+      border: 3px solid rgba(220,38,38,0.2);
+      border-top-color: #dc2626;
+      border-radius: 50%;
+      animation: formSpin 0.9s linear infinite;
+    }
+    @keyframes formSpin { to { transform: rotate(360deg); } }
     #contact-form iframe { min-height: 800px; display: block; }
 
     /* Tabbed Services Section */
@@ -674,30 +700,18 @@
       .reviews-section .rv-carousel { margin-top: 1.25rem; }
     }
   </style>
-  <script type="text/javascript" src="//cdn.callrail.com/companies/450895369/1fe09fec0402a19bb909/12/swap.js"></script>
-<!-- Meta Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1457672995898350');
-fbq('track', 'PageView');
-</script>
+  <!-- CallRail number swap: async so it never blocks render, but loads immediately
+       so swapped tracking numbers are in place before the first call tap -->
+  <script async type="text/javascript" src="https://cdn.callrail.com/companies/450895369/1fe09fec0402a19bb909/12/swap.js"></script>
 <noscript><img height="1" width="1" style="display:none"
 src="https://www.facebook.com/tr?id=1457672995898350&ev=PageView&noscript=1"
 /></noscript>
-<!-- End Meta Pixel Code -->
 </head>
 <body>
 
   <!-- Header -->
   <header class="header">
-    <img src="./favicon.webp" alt="Khrome Auto Detailing Logo" class="logo">
+    <img src="./logo-128.webp" alt="Khrome Auto Detailing Logo" class="logo" width="128" height="96">
     <a href="tel:+15595505130" class="call-btn phone-link">
       (559) 550-5130
       <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
@@ -708,7 +722,7 @@ src="https://www.facebook.com/tr?id=1457672995898350&ev=PageView&noscript=1"
 
   <!-- Hero Section -->
   <section class="hero">
-    <img src="./hero section.webp" alt="Khrome Auto Detailing mobile car detailing in Fresno" class="hero-bg" fetchpriority="high">
+    <img src="./hero-768.webp" srcset="./hero-768.webp 768w, ./hero-1080.webp 1080w" sizes="100vw" alt="Khrome Auto Detailing mobile car detailing in Fresno" class="hero-bg" fetchpriority="high" decoding="async" width="768" height="1024">
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <div class="offer-badge">
@@ -761,9 +775,9 @@ src="https://www.facebook.com/tr?id=1457672995898350&ev=PageView&noscript=1"
   <section id="quote-form" class="quote-section">
     <h2 class="section-title">GET A FREE QUOTE TODAY</h2>
     <p class="quote-subtitle">Fill out the form below and we'll get back to you with a personalized estimate — no obligation, no hassle.</p>
-    <div class="quote-form-container" style="min-height:700px;">
+    <div class="quote-form-container lazy-form" style="min-height:700px;">
       <iframe
-        src="https://api.leadconnectorhq.com/widget/form/r7KnrJDl4o9SuaecXt2l"
+        data-src="https://api.leadconnectorhq.com/widget/form/r7KnrJDl4o9SuaecXt2l"
         style="width:100%;height:100%;border:none;border-radius:8px"
         id="inline-r7KnrJDl4o9SuaecXt2l"
         data-layout="{'id':'INLINE'}"
@@ -779,7 +793,6 @@ src="https://www.facebook.com/tr?id=1457672995898350&ev=PageView&noscript=1"
         data-form-id="r7KnrJDl4o9SuaecXt2l"
         title="google ads landing page form"
       ></iframe>
-      <script defer src="https://link.msgsndr.com/js/form_embed.js"></script>
     </div>
   </section>
 
@@ -795,7 +808,7 @@ src="https://www.facebook.com/tr?id=1457672995898350&ev=PageView&noscript=1"
     <div class="pkg-grid">
       <!-- Essential Detail -->
       <div class="pkg-card" data-package="essential">
-        <img class="pkg-img" src="./Essential (1).webp" alt="Essential Detail package" loading="lazy" width="640" height="360">
+        <img class="pkg-img" src="./pkg-essential.webp" alt="Essential Detail package" loading="lazy" width="640" height="360">
         <div class="pkg-top">
           <span class="pkg-name">ESSENTIAL DETAIL</span>
           <div class="pkg-price"><span class="pkg-price-label">Starting at</span><span class="pkg-price-value">$199</span></div>
@@ -830,7 +843,7 @@ src="https://www.facebook.com/tr?id=1457672995898350&ev=PageView&noscript=1"
       <!-- Signature Detail (Featured) -->
       <div class="pkg-card featured" data-package="signature">
         <span class="pkg-badge">MOST POPULAR</span>
-        <img class="pkg-img" src="./Signiture.webp" alt="Signature Detail package" loading="lazy" width="640" height="360">
+        <img class="pkg-img" src="./pkg-signature.webp" alt="Signature Detail package" loading="lazy" width="640" height="360">
         <div class="pkg-top">
           <span class="pkg-name">SIGNATURE DETAIL</span>
           <div class="pkg-price"><span class="pkg-price-label">Starting at</span><span class="pkg-price-value">$329</span></div>
@@ -865,7 +878,7 @@ src="https://www.facebook.com/tr?id=1457672995898350&ev=PageView&noscript=1"
       </div>
       <!-- Elite Detail -->
       <div class="pkg-card" data-package="elite">
-        <img class="pkg-img" src="./Elite.webp" alt="Elite Detail package" loading="lazy" width="640" height="360">
+        <img class="pkg-img" src="./pkg-elite.webp" alt="Elite Detail package" loading="lazy" width="640" height="360">
         <div class="pkg-top">
           <span class="pkg-name">ELITE DETAIL</span>
           <div class="pkg-price"><span class="pkg-price-label">Starting at</span><span class="pkg-price-value">$649</span></div>
@@ -996,28 +1009,28 @@ src="https://www.facebook.com/tr?id=1457672995898350&ev=PageView&noscript=1"
     <div id="tab-exterior" class="tab-panel active">
       <div class="svc-list">
         <div class="svc-card">
-          <img class="svc-card-img" src="./Exterior Wash.webp" alt="Professional exterior car wash and decontamination" loading="lazy">
+          <img class="svc-card-img" src="./svc-exterior.webp" alt="Professional exterior car wash and decontamination" loading="lazy" width="640" height="360">
           <div class="svc-card-body">
             <div class="svc-card-title">Exterior Wash &amp; Decontamination</div>
             <p class="svc-card-desc">Multi-stage hand wash removes all dirt, grime, and bonded contaminants. Clay bar treatment ensures your paint is clean down to the surface&#8212;ready for protection or just looking its best.</p>
           </div>
         </div>
         <div class="svc-card">
-          <img class="svc-card-img" src="./pAINT cORRECTION.webp" alt="Paint correction and polishing service" loading="lazy">
+          <img class="svc-card-img" src="./svc-paint.webp" alt="Paint correction and polishing service" loading="lazy" width="640" height="360">
           <div class="svc-card-body">
             <div class="svc-card-title">Paint Correction &amp; Polishing</div>
             <p class="svc-card-desc">Machine polishing removes swirl marks, scratches, and oxidation to restore your paint&#8217;s original gloss. Brings back depth and clarity that washing alone can&#8217;t achieve.</p>
           </div>
         </div>
         <div class="svc-card">
-          <img class="svc-card-img" src="./Ceramic coating.webp" alt="Ceramic coating and paint protection" loading="lazy">
+          <img class="svc-card-img" src="./svc-ceramic.webp" alt="Ceramic coating and paint protection" loading="lazy" width="640" height="360">
           <div class="svc-card-body">
             <div class="svc-card-title">Ceramic Coating &amp; Protection</div>
             <p class="svc-card-desc">Nano-ceramic coating shields your paint from water, dirt, and UV damage &#8212; 6-month up to 10-year protection available. Hydrophobic protection makes maintenance effortless and keeps your car looking freshly detailed.</p>
           </div>
         </div>
         <div class="svc-card">
-          <img class="svc-card-img" src="./Headlight restore.webp" alt="Headlight restoration service" loading="lazy">
+          <img class="svc-card-img" src="./svc-headlight.webp" alt="Headlight restoration service" loading="lazy" width="640" height="360">
           <div class="svc-card-body">
             <div class="svc-card-title">Headlight Restoration</div>
             <p class="svc-card-desc">Restore cloudy, yellowed headlights to crystal clarity through sanding, polishing, and UV sealing. Safer night driving and a better-looking vehicle in one service.</p>
@@ -1030,28 +1043,28 @@ src="https://www.facebook.com/tr?id=1457672995898350&ev=PageView&noscript=1"
     <div id="tab-interior" class="tab-panel">
       <div class="svc-list">
         <div class="svc-card">
-          <img class="svc-card-img" src="./Interior Cleaning.webp" alt="Deep interior car cleaning and detailing" loading="lazy">
+          <img class="svc-card-img" src="./svc-interior.webp" alt="Deep interior car cleaning and detailing" loading="lazy" width="640" height="360">
           <div class="svc-card-body">
             <div class="svc-card-title">Deep Interior Cleaning &amp; Detailing</div>
             <p class="svc-card-desc">Complete interior refresh with vacuum, steam cleaning, and every surface detailed. Dashboard, console, cup holders, vents, windows, and door panels&#8212;all spotless.</p>
           </div>
         </div>
         <div class="svc-card">
-          <img class="svc-card-img" src="./Leather Care.webp" alt="Leather care and conditioning service" loading="lazy">
+          <img class="svc-card-img" src="./svc-leather.webp" alt="Leather care and conditioning service" loading="lazy" width="640" height="360">
           <div class="svc-card-body">
             <div class="svc-card-title">Leather Care &amp; Conditioning</div>
             <p class="svc-card-desc">Professional leather cleaning and conditioning restores moisture, prevents cracking, and enhances color. UV protection keeps your seats supple and rich-looking year after year.</p>
           </div>
         </div>
         <div class="svc-card">
-          <img class="svc-card-img" src="./Carpet Shampoo.webp" alt="Carpet and upholstery shampooing" loading="lazy">
+          <img class="svc-card-img" src="./svc-carpet.webp" alt="Carpet and upholstery shampooing" loading="lazy" width="640" height="360">
           <div class="svc-card-body">
             <div class="svc-card-title">Carpet &amp; Upholstery Shampooing</div>
             <p class="svc-card-desc">Hot water extraction lifts deep stains, odors, and allergens from carpets and seats. Pet stains, food spills, and ground-in dirt removed at the source.</p>
           </div>
         </div>
         <div class="svc-card">
-          <img class="svc-card-img" src="./sanitization.webp" alt="Odor removal and sanitization service" loading="lazy">
+          <img class="svc-card-img" src="./svc-sanitization.webp" alt="Odor removal and sanitization service" loading="lazy" width="640" height="360">
           <div class="svc-card-body">
             <div class="svc-card-title">Odor Removal &amp; Sanitization</div>
             <p class="svc-card-desc">Eliminate smoke, pet, mildew, and food odors with ozone treatment and professional sanitizers. Kills bacteria at the source and leaves your cabin smelling fresh.</p>
@@ -1212,14 +1225,14 @@ src="https://www.facebook.com/tr?id=1457672995898350&ev=PageView&noscript=1"
 
   <!-- Contact Section -->
   <section class="section contact-section">
-    <img src="./DSC09715.jpg" alt="Contact Khrome Auto Detailing" class="contact-bg" loading="lazy">
+    <img src="./contact-bg.webp" alt="Contact Khrome Auto Detailing" class="contact-bg" loading="lazy" width="960" height="640">
     <div class="contact-overlay"></div>
     <div class="contact-content">
       <h2 class="section-title">GET A QUOTE</h2>
       <p class="contact-subtitle">Book your mobile detailing appointment today and experience the Khrome Auto Detailing difference</p>
-      <div id="contact-form" style="margin-bottom:2rem;min-height:700px;">
+      <div id="contact-form" class="lazy-form" style="margin-bottom:2rem;min-height:700px;">
         <iframe
-          src="https://api.leadconnectorhq.com/widget/form/r7KnrJDl4o9SuaecXt2l"
+          data-src="https://api.leadconnectorhq.com/widget/form/r7KnrJDl4o9SuaecXt2l"
           style="width:100%;height:100%;border:none;border-radius:8px"
           id="inline-r7KnrJDl4o9SuaecXt2l-contact"
           data-layout="{'id':'INLINE'}"
@@ -1404,6 +1417,43 @@ src="https://www.facebook.com/tr?id=1457672995898350&ev=PageView&noscript=1"
       track.addEventListener('scroll', function() { clearTimeout(t); t = setTimeout(update, 60); });
       window.addEventListener('resize', function() { clearTimeout(t); t = setTimeout(update, 120); });
       update();
+    })();
+  </script>
+
+  <!-- Deferred loader: analytics + form embeds load on first user interaction
+       (touch/scroll/mouse/key) or 6s after window load — whichever comes first.
+       Keeps ~1.3MB of third-party requests out of the critical rendering path.
+       Conversion tracking is unaffected: Google Ads conversions fire on
+       thank-you.html, calls are tracked by CallRail (loaded async in head),
+       and gtag/fbq/clarity calls made before load are queued by the head stubs. -->
+  <script>
+    (function() {
+      var done = false;
+      function loadScript(src) {
+        var s = document.createElement('script');
+        s.src = src;
+        s.async = true;
+        document.head.appendChild(s);
+      }
+      function loadDeferred() {
+        if (done) return;
+        done = true;
+        // Form embeds (LeadConnector iframes + helper)
+        var frames = document.querySelectorAll('iframe[data-src]');
+        for (var i = 0; i < frames.length; i++) {
+          frames[i].src = frames[i].getAttribute('data-src');
+        }
+        loadScript('https://link.msgsndr.com/js/form_embed.js');
+        // Analytics
+        loadScript('https://www.googletagmanager.com/gtag/js?id=AW-17266438391');
+        loadScript('https://connect.facebook.net/en_US/fbevents.js');
+        loadScript('https://www.clarity.ms/tag/vnpnkxoz69');
+      }
+      var evts = ['pointerdown', 'touchstart', 'scroll', 'keydown', 'mousemove'];
+      for (var i = 0; i < evts.length; i++) {
+        window.addEventListener(evts[i], loadDeferred, { once: true, passive: true });
+      }
+      window.addEventListener('load', function() { setTimeout(loadDeferred, 6000); });
     })();
   </script>
 </body>
