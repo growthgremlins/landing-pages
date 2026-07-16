@@ -27,6 +27,15 @@
   <title>Khrome Auto Detailing — Fresno's Best Mobile Car Detailing</title>
   <meta name="description" content="Professional mobile car detailing in Fresno, CA. We come to you! Insured, 5-star rated, and satisfaction guaranteed. Serving Fresno, Clovis & surrounding areas.">
 
+  <!-- Perf: preconnect to third parties + preload LCP hero -->
+  <link rel="preconnect" href="https://api.leadconnectorhq.com" crossorigin>
+  <link rel="preconnect" href="https://link.msgsndr.com" crossorigin>
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+  <link rel="dns-prefetch" href="https://www.clarity.ms">
+  <link rel="dns-prefetch" href="https://cdn.callrail.com">
+  <link rel="dns-prefetch" href="https://connect.facebook.net">
+  <link rel="preload" as="image" href="./hero section.webp" fetchpriority="high">
+
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -40,6 +49,7 @@
       padding-bottom: 80px;
     }
     html { scroll-behavior: smooth; }
+    html { overflow-x: hidden; }
     img { max-width: 100%; display: block; }
 
     /* Top Banner */
@@ -329,6 +339,7 @@
     /* Contact Section */
     .contact-section {
       position: relative;
+      background: #1a1a1a;
       min-height: 600px;
       display: flex;
       align-items: center;
@@ -396,7 +407,7 @@
       #services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
       .service-card { margin-bottom: 0; }
       .service-img { height: 250px; }
-      .lc_reviews_widget { min-height: 400px; }
+
       .testimonials { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
       .sticky-button { max-width: 400px; margin: 0 auto; }
       body { padding-bottom: 0; }
@@ -423,6 +434,8 @@
     .quote-section .section-title { color: #111111; }
     .quote-subtitle { font-size: 0.9rem; color: #4b5563; margin-bottom: 1rem; max-width: 500px; margin-left: auto; margin-right: auto; }
     .quote-form-container { max-width: 600px; margin: 0 auto; min-height: 580px; }
+    .quote-form-container iframe { min-height: 800px; display: block; }
+    #contact-form iframe { min-height: 800px; display: block; }
 
     /* Tabbed Services Section */
     .svc-gradient-wrap { background: linear-gradient(180deg, white 0%, #fee2e2 15%, #fecaca 50%, #fee2e2 85%, white 100%); }
@@ -454,15 +467,20 @@
     .svc-cta-note { font-size: 0.8rem; color: #4b5563; margin-bottom: 0.875rem; }
 
     /* Detailing Packages */
-    .pkg-section { padding: 1.5rem 1rem; }
+    .pkg-section { padding: 5rem 1rem 1.5rem 1rem; }
+    .pkg-subtitle { text-align: center; font-size: 0.9rem; color: #4b5563; margin-top: -0.5rem; margin-bottom: 1.75rem; max-width: 580px; margin-left: auto; margin-right: auto; }
     .pkg-section .section-title { margin-bottom: 1.25rem; }
     .pkg-grid { display: flex; flex-direction: column; gap: 1rem; }
-    .pkg-card { border: 1.5px solid #e5e7eb; background: white; border-radius: 0.625rem; overflow: hidden; }
+    .pkg-card { position: relative; border: 1.5px solid #e5e7eb; background: white; border-radius: 0.625rem; overflow: hidden; }
     .pkg-card.featured { border-color: #dc2626; box-shadow: 0 0 0 2px #dc2626; }
-    .pkg-top { padding: 1rem 1.25rem 0.5rem 1.25rem; display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
-    .pkg-name { font-size: 1rem; font-weight: 900; color: #1f2937; letter-spacing: 0.04em; }
-    .pkg-badge { background: #dc2626; color: white; font-size: 0.65rem; font-weight: 700; padding: 0.2rem 0.5rem; border-radius: 99px; }
-    .pkg-duration { font-size: 0.75rem; color: #9ca3af; width: 100%; }
+    .pkg-img { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; }
+    .pkg-top { padding: 1rem 1.25rem 0.5rem 1.25rem; display: flex; flex-direction: column; align-items: flex-start; gap: 0.3rem; }
+    .pkg-name { font-size: 1.15rem; font-weight: 900; color: #1f2937; letter-spacing: 0.03em; }
+    .pkg-badge { position: absolute; top: 0.75rem; right: 0.75rem; z-index: 2; background: #dc2626; color: white; font-size: 0.65rem; font-weight: 800; letter-spacing: 0.05em; padding: 0.3rem 0.6rem; border-radius: 99px; box-shadow: 0 2px 6px rgba(0,0,0,0.25); }
+    .pkg-price { display: flex; align-items: baseline; gap: 0.4rem; }
+    .pkg-price-label { font-size: 0.72rem; color: #6b7280; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+    .pkg-price-value { font-size: 1.5rem; font-weight: 900; color: #dc2626; line-height: 1; }
+    .pkg-duration { font-size: 0.75rem; color: #9ca3af; font-weight: 600; }
     .pkg-body { padding: 0.25rem 1.25rem 1.25rem 1.25rem; }
     .pkg-includes { list-style: none; padding-left: 0; margin: 0; }
     .pkg-include-item { font-size: 0.78rem; color: #4b5563; line-height: 1.8; }
@@ -596,6 +614,65 @@
 
     /* Services subheadline */
     .svc-subtitle { text-align: center; font-size: 0.9rem; color: #4b5563; margin-top: -0.75rem; margin-bottom: 1.25rem; }
+    /* Static Reviews Carousel */
+    .reviews-section { text-align: center; }
+    .rv-summary { display: flex; align-items: center; justify-content: center; gap: 0.9rem; flex-wrap: wrap; margin: 1rem 0 0.5rem; }
+    .rv-summary-num { font-size: 2.6rem; font-weight: 900; line-height: 1; color: #1f2937; }
+    .rv-summary-meta { display: flex; flex-direction: column; align-items: flex-start; gap: 0.2rem; }
+    .rv-stars { color: #f59e0b; font-size: 1.15rem; letter-spacing: 0.14em; line-height: 1; }
+    .rv-summary-count { font-size: 0.85rem; color: #6b7280; font-weight: 600; display: inline-flex; align-items: center; gap: 0.4rem; }
+    .rv-summary-count svg { width: 16px; height: 16px; }
+    .rv-carousel { position: relative; margin-top: 1.5rem; }
+    .rv-track { display: flex; gap: 1rem; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; padding: 0.5rem 0.25rem 1.25rem; scrollbar-width: none; }
+    .rv-track::-webkit-scrollbar { display: none; }
+    .rv-card { flex: 0 0 100%; scroll-snap-align: start; background: #fff; border: 1px solid #e5e7eb; border-radius: 1rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06); padding: 1.5rem 1.4rem; text-align: left; display: flex; flex-direction: column; min-height: 240px; }
+    .rv-card-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.85rem; }
+    .rv-card-stars { color: #f59e0b; font-size: 1rem; letter-spacing: 0.1em; line-height: 1; }
+    .rv-card-date { font-size: 0.78rem; color: #6b7280; }
+    .rv-card-text { font-size: 0.9rem; color: #4b5563; line-height: 1.6; flex-grow: 1; }
+    .rv-card-foot { display: flex; align-items: center; justify-content: space-between; margin-top: 1.25rem; }
+    .rv-card-who { display: flex; align-items: center; gap: 0.6rem; min-width: 0; }
+    .rv-avatar { width: 38px; height: 38px; border-radius: 50%; background: #fee2e2; color: #dc2626; display: flex; align-items: center; justify-content: center; font-size: 0.78rem; font-weight: 800; flex-shrink: 0; }
+    .rv-name { font-size: 0.86rem; font-weight: 700; color: #1f2937; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .rv-google { width: 20px; height: 20px; flex-shrink: 0; }
+    .rv-nav { display: flex; align-items: center; justify-content: center; gap: 1rem; margin-top: 0.25rem; }
+    .rv-arrow { width: 40px; height: 40px; border-radius: 50%; border: 1px solid #e5e7eb; background: #fff; color: #dc2626; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.2s, border-color 0.2s, opacity 0.2s; }
+    .rv-arrow:hover { background: #fee2e2; border-color: #dc2626; }
+    .rv-arrow:disabled { opacity: 0.3; cursor: default; }
+    .rv-arrow:disabled:hover { background: #fff; border-color: #e5e7eb; }
+    .rv-arrow svg { width: 20px; height: 20px; }
+    .rv-dots { display: flex; align-items: center; gap: 0.4rem; flex-wrap: wrap; justify-content: center; max-width: 220px; }
+    .rv-dot { width: 8px; height: 8px; border-radius: 99px; background: #e5e7eb; border: none; padding: 0; cursor: pointer; transition: background 0.2s, width 0.2s; }
+    .rv-dot.active { background: #dc2626; width: 22px; }
+    .rv-write { display: inline-flex; align-items: center; gap: 0.45rem; margin-top: 1.25rem; background: transparent; color: #6b7280; font-weight: 600; font-size: 0.8rem; letter-spacing: 0.02em; padding: 0.5rem 1rem; border: 1px solid #e5e7eb; border-radius: 0.5rem; text-decoration: none; transition: color 0.2s, border-color 0.2s; }
+    .rv-write:hover { color: #dc2626; border-color: #dc2626; }
+    .rv-write svg { width: 16px; height: 16px; }
+    @media (min-width: 768px) { .rv-card { flex-basis: calc(50% - 0.5rem); } }
+    @media (min-width: 1024px) { .rv-card { flex-basis: calc(33.333% - 0.667rem); } }
+
+    /* Desktop: form inside hero + reviews above packages (tinting pattern) */
+    .hero-form-wrap { display: block; }
+    @media (min-width: 1280px) {
+      .hero-form-wrap { position: relative; display: grid; align-items: stretch; grid-template-columns: minmax(2rem,1fr) minmax(0,560px) clamp(2rem,3vw,3rem) 660px minmax(2rem,1fr); }
+      .hero-form-wrap > .hero { grid-column: 1 / -1; grid-row: 1; min-height: 820px; max-height: none; align-items: center; justify-content: flex-start; padding: 5rem 0; }
+      .hero-form-wrap .hero-bg { object-position: center; }
+      .hero-form-wrap .hero-content { text-align: left; max-width: 560px; margin-left: max(2rem, calc((100vw - 1268px)/2)); margin-right: 0; padding: 0; }
+      .hero-form-wrap .hero-rating { justify-content: flex-start; }
+      .hero-form-wrap .cta-buttons { margin-left: 0; margin-right: 0; max-width: 32rem; }
+      .hero-form-wrap .hero-tagline { align-self: flex-start; }
+      .hero-form-wrap > .quote-section { grid-column: 4 / 5; grid-row: 1; align-self: center; z-index: 20; background: transparent; padding: 2rem 0; }
+      .hero-form-wrap .quote-section .section-title, .hero-form-wrap .quote-section .quote-subtitle { display: none; }
+      .hero-form-wrap .quote-form-container { margin: 0; width: 100%; max-width: none; min-height: 0; }
+      .pkg-reviews-group { display: flex; flex-direction: column; }
+      .pkg-reviews-group > .reviews-section { order: 1; }
+      .pkg-reviews-group > .guarantee { order: 2; }
+      .pkg-reviews-group > .pkg-section { order: 3; }
+    }
+    /* Reviews: full-width band + shorter on desktop */
+    @media (min-width: 1024px) {
+      .reviews-section { max-width: none; margin-left: 0; margin-right: 0; padding: 2.25rem 2rem 2.5rem; }
+      .reviews-section .rv-carousel { margin-top: 1.25rem; }
+    }
   </style>
   <script type="text/javascript" src="//cdn.callrail.com/companies/450895369/1fe09fec0402a19bb909/12/swap.js"></script>
 <!-- Meta Pixel Code -->
@@ -626,6 +703,8 @@ src="https://www.facebook.com/tr?id=1457672995898350&ev=PageView&noscript=1"
       <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
     </a>
   </header>
+
+  <div class="hero-form-wrap">
 
   <!-- Hero Section -->
   <section class="hero">
@@ -703,6 +782,202 @@ src="https://www.facebook.com/tr?id=1457672995898350&ev=PageView&noscript=1"
       <script defer src="https://link.msgsndr.com/js/form_embed.js"></script>
     </div>
   </section>
+
+  </div><!-- /.hero-form-wrap -->
+
+  <div class="pkg-reviews-group">
+
+  <!-- Detailing Packages -->
+  <section class="pkg-section">
+    <div class="section-eyebrow"><span>CHOOSE YOUR DETAIL</span></div>
+    <h2 class="section-title">POPULAR DETAILING PACKAGES</h2>
+    <p class="pkg-subtitle">From a quick refresh to a full showroom-quality restoration &#8212; pick the package that fits your vehicle, done right at your door.</p>
+    <div class="pkg-grid">
+      <!-- Essential Detail -->
+      <div class="pkg-card" data-package="essential">
+        <img class="pkg-img" src="./Essential (1).webp" alt="Essential Detail package" loading="lazy" width="640" height="360">
+        <div class="pkg-top">
+          <span class="pkg-name">ESSENTIAL DETAIL</span>
+          <div class="pkg-price"><span class="pkg-price-label">Starting at</span><span class="pkg-price-value">$199</span></div>
+          <span class="pkg-duration">Est. 1.5&#8211;2.5 hrs</span>
+        </div>
+        <div class="pkg-body">
+          <ul class="pkg-includes">
+            <li class="pkg-include-item">Quick Refresh for Busy Owners</li>
+            <li class="pkg-include-item">Affordable Yet Thorough</li>
+            <li class="pkg-include-item">Preserves Vehicle Condition</li>
+            <li class="pkg-include-item">Hand Wash + Foam Bath</li>
+            <li class="pkg-include-item teaser">and more...</li>
+          </ul>
+          <a class="pkg-learn-more" onclick="togglePackageExpand(this)">Learn More</a>
+          <div class="pkg-expanded">
+            <div class="pkg-expanded-inner">
+              <p class="pkg-description">Our entry-level but powerful cleaning package &#8212; ideal for maintaining a fresh, sharp look between full details.</p>
+              <div class="pkg-includes-title">Includes:</div>
+              <ul class="pkg-includes">
+                <li class="pkg-include-item">Hand Wash + Foam Bath</li>
+                <li class="pkg-include-item">Wheels, Tires &amp; Door Jambs Cleaned</li>
+                <li class="pkg-include-item">Interior Vacuum &amp; Wipe Down</li>
+                <li class="pkg-include-item">Streak-Free Glass Cleaning</li>
+                <li class="pkg-include-item">Tire Shine Applied</li>
+              </ul>
+              <button class="pkg-book-btn" onclick="openBookingModal('essential')">REQUEST BOOKING</button>
+              <a class="pkg-show-less" onclick="togglePackageExpand(this)">Show Less</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Signature Detail (Featured) -->
+      <div class="pkg-card featured" data-package="signature">
+        <span class="pkg-badge">MOST POPULAR</span>
+        <img class="pkg-img" src="./Signiture.webp" alt="Signature Detail package" loading="lazy" width="640" height="360">
+        <div class="pkg-top">
+          <span class="pkg-name">SIGNATURE DETAIL</span>
+          <div class="pkg-price"><span class="pkg-price-label">Starting at</span><span class="pkg-price-value">$329</span></div>
+          <span class="pkg-duration">Est. 3&#8211;4 hrs</span>
+        </div>
+        <div class="pkg-body">
+          <ul class="pkg-includes">
+            <li class="pkg-include-item">Deeper Clean + Longer Protection</li>
+            <li class="pkg-include-item">Restores Gloss &amp; Interior Comfort</li>
+            <li class="pkg-include-item">Ideal Maintenance Package for Luxury &amp; Daily Vehicles</li>
+            <li class="pkg-include-item">Full Exterior Wash + Clay Bar</li>
+            <li class="pkg-include-item teaser">and more...</li>
+          </ul>
+          <a class="pkg-learn-more" onclick="togglePackageExpand(this)">Learn More</a>
+          <div class="pkg-expanded">
+            <div class="pkg-expanded-inner">
+              <p class="pkg-description">The perfect balance of exterior shine and interior refresh. For car owners who want their ride to look and feel upgraded inside and out.</p>
+              <div class="pkg-includes-title">Includes:</div>
+              <ul class="pkg-includes">
+                <li class="pkg-include-item">Full Exterior Wash + Clay Bar</li>
+                <li class="pkg-include-item">6-Month Ceramic Sealant Applied</li>
+                <li class="pkg-include-item">Wheels &amp; Tires Restored &amp; Dressed</li>
+                <li class="pkg-include-item">Full Interior Vacuum, Steam &amp; Wipe</li>
+                <li class="pkg-include-item">Leather + Upholstery Care</li>
+                <li class="pkg-include-item">Streak-Free Windows</li>
+              </ul>
+              <button class="pkg-book-btn" onclick="openBookingModal('signature')">REQUEST BOOKING</button>
+              <a class="pkg-show-less" onclick="togglePackageExpand(this)">Show Less</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Elite Detail -->
+      <div class="pkg-card" data-package="elite">
+        <img class="pkg-img" src="./Elite.webp" alt="Elite Detail package" loading="lazy" width="640" height="360">
+        <div class="pkg-top">
+          <span class="pkg-name">ELITE DETAIL</span>
+          <div class="pkg-price"><span class="pkg-price-label">Starting at</span><span class="pkg-price-value">$649</span></div>
+          <span class="pkg-duration">Est. 5&#8211;7 hrs</span>
+        </div>
+        <div class="pkg-body">
+          <ul class="pkg-includes">
+            <li class="pkg-include-item">Maximum Interior + Exterior Transformation</li>
+            <li class="pkg-include-item">One-Year Paint Protection Included</li>
+            <li class="pkg-include-item">Best Choice for Exotic + High-End Vehicles</li>
+            <li class="pkg-include-item">Restores Showroom Quality in One Visit</li>
+            <li class="pkg-include-item teaser">and more...</li>
+          </ul>
+          <a class="pkg-learn-more" onclick="togglePackageExpand(this)">Learn More</a>
+          <div class="pkg-expanded">
+            <div class="pkg-expanded-inner">
+              <p class="pkg-description">Our most comprehensive package, designed for luxury and exotic vehicles that demand perfection inside and out.</p>
+              <div class="pkg-includes-title">Includes:</div>
+              <ul class="pkg-includes">
+                <li class="pkg-include-item">Premium Exterior Wash</li>
+                <li class="pkg-include-item">Clay Decontamination</li>
+                <li class="pkg-include-item">Paint Enhancement Step</li>
+                <li class="pkg-include-item">6-Month Ceramic Sealant</li>
+                <li class="pkg-include-item">Wheels, Tires, &amp; Trim Restored</li>
+                <li class="pkg-include-item">Deep Interior Revival (Steam &amp; Shampoo)</li>
+                <li class="pkg-include-item">Glass Treatment</li>
+                <li class="pkg-include-item">Engine Bay Detailing</li>
+              </ul>
+              <button class="pkg-book-btn" onclick="openBookingModal('elite')">REQUEST BOOKING</button>
+              <a class="pkg-show-less" onclick="togglePackageExpand(this)">Show Less</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Guarantee -->
+  <section class="guarantee">
+    <h2 class="guarantee-title">100% SATISFACTION GUARANTEED</h2>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="section reviews-section">
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="rvg" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.27-4.74 3.27-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84A11 11 0 0 0 12 23z"/><path fill="#FBBC05" d="M5.84 14.1a6.6 6.6 0 0 1 0-4.2V7.06H2.18a11 11 0 0 0 0 9.88l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84C6.71 7.31 9.14 5.38 12 5.38z"/></symbol></svg>
+    <div class="section-eyebrow"><span>REVIEWS</span></div>
+    <h2 class="section-title">WHAT FRESNO CAR OWNERS SAY:</h2>
+    <div class="rv-summary">
+      <span class="rv-summary-num">5.0</span>
+      <div class="rv-summary-meta">
+        <span class="rv-stars" aria-label="Rated 5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <span class="rv-summary-count"><svg class="rv-google" role="img" aria-label="Google"><use href="#rvg"/></svg>100+ Google reviews</span>
+      </div>
+    </div>
+    <div class="rv-carousel">
+      <div class="rv-track">
+        <article class="rv-card">
+          <div class="rv-card-top"><span class="rv-card-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span class="rv-card-date">May 2026</span></div>
+          <p class="rv-card-text">Very professional people. Was able to get an appointment fast. They worked around my schedule and were super understanding when I had to reschedule the time. My car interior looks new and feels very clean. Will definitely use them in the future!</p>
+          <div class="rv-card-foot"><div class="rv-card-who"><span class="rv-avatar">KB</span><span class="rv-name">Kathrine B.</span></div><svg class="rv-google" role="img" aria-label="Google review"><use href="#rvg"/></svg></div>
+        </article>
+        <article class="rv-card">
+          <div class="rv-card-top"><span class="rv-card-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span class="rv-card-date">Apr 2026</span></div>
+          <p class="rv-card-text">These guys were great! On time, professional, and did an excellent job. Car looks brand new. Will definitely be going to them for all my future detailing needs. Thanks so much!</p>
+          <div class="rv-card-foot"><div class="rv-card-who"><span class="rv-avatar">SW</span><span class="rv-name">Sarah W.</span></div><svg class="rv-google" role="img" aria-label="Google review"><use href="#rvg"/></svg></div>
+        </article>
+        <article class="rv-card">
+          <div class="rv-card-top"><span class="rv-card-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span class="rv-card-date">Apr 2026</span></div>
+          <p class="rv-card-text">Duvan and his team did a great job! I have a 2002 Honda Accord that needed a lot of TLC. Considering the age of the car, very happy with the outcome. Definitely recommend! We'll be using them again when needed.</p>
+          <div class="rv-card-foot"><div class="rv-card-who"><span class="rv-avatar">JR</span><span class="rv-name">Janie R.</span></div><svg class="rv-google" role="img" aria-label="Google review"><use href="#rvg"/></svg></div>
+        </article>
+        <article class="rv-card">
+          <div class="rv-card-top"><span class="rv-card-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span class="rv-card-date">Mar 2026</span></div>
+          <p class="rv-card-text">Did an amazing job &#8212; came out to Fresno and got my interior detailed. They were mobile so they came to me!! Recommend 100%.</p>
+          <div class="rv-card-foot"><div class="rv-card-who"><span class="rv-avatar">SR</span><span class="rv-name">Sergio R.</span></div><svg class="rv-google" role="img" aria-label="Google review"><use href="#rvg"/></svg></div>
+        </article>
+        <article class="rv-card">
+          <div class="rv-card-top"><span class="rv-card-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span class="rv-card-date">Mar 2026</span></div>
+          <p class="rv-card-text">Absolutely recommend!!! The attention to detail was incredible. They detailed my Range Rover inside and out. The convenience of having them come to my home made it that much more worth it. I highly recommend.</p>
+          <div class="rv-card-foot"><div class="rv-card-who"><span class="rv-avatar">NM</span><span class="rv-name">Nellie M.</span></div><svg class="rv-google" role="img" aria-label="Google review"><use href="#rvg"/></svg></div>
+        </article>
+        <article class="rv-card">
+          <div class="rv-card-top"><span class="rv-card-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span class="rv-card-date">Mar 2026</span></div>
+          <p class="rv-card-text">Great service &amp; super friendly! I highly recommend Khrome Auto Detailing. They were nice enough to give me a vehicle deodorization kit for free because my car NEEDED it. My car feels and looks new!</p>
+          <div class="rv-card-foot"><div class="rv-card-who"><span class="rv-avatar">SN</span><span class="rv-name">Sou N.</span></div><svg class="rv-google" role="img" aria-label="Google review"><use href="#rvg"/></svg></div>
+        </article>
+        <article class="rv-card">
+          <div class="rv-card-top"><span class="rv-card-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span class="rv-card-date">Mar 2026</span></div>
+          <p class="rv-card-text">This is one of the best services I've ever received. They were honest and didn't charge me for anything I didn't need. Respectful and friendly. Their customer service is top-notch!</p>
+          <div class="rv-card-foot"><div class="rv-card-who"><span class="rv-avatar">JA</span><span class="rv-name">Janet A.</span></div><svg class="rv-google" role="img" aria-label="Google review"><use href="#rvg"/></svg></div>
+        </article>
+        <article class="rv-card">
+          <div class="rv-card-top"><span class="rv-card-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span class="rv-card-date">Feb 2026</span></div>
+          <p class="rv-card-text">The team did an excellent job &#8212; my car looks brand new! Everything from initial outreach to the actual detailing was super smooth and easy. I highly recommend Khrome to all and will definitely be calling them again next year.</p>
+          <div class="rv-card-foot"><div class="rv-card-who"><span class="rv-avatar">MK</span><span class="rv-name">Megan K.</span></div><svg class="rv-google" role="img" aria-label="Google review"><use href="#rvg"/></svg></div>
+        </article>
+        <article class="rv-card">
+          <div class="rv-card-top"><span class="rv-card-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span class="rv-card-date">Dec 2025</span></div>
+          <p class="rv-card-text">Highly recommend! Great experience with Khrome Auto Detailing &#8212; they did a killer job with the interior cleaning and clay bar treatment. The inside looked amazing, and the seats were spotless. They also cleaned both my motorcycles and made them look pristine. Awesome work and great attention to detail!</p>
+          <div class="rv-card-foot"><div class="rv-card-who"><span class="rv-avatar">EJ</span><span class="rv-name">Eros J.</span></div><svg class="rv-google" role="img" aria-label="Google review"><use href="#rvg"/></svg></div>
+        </article>
+      </div>
+      <div class="rv-nav">
+        <button class="rv-arrow prev" type="button" aria-label="Previous reviews"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+        <div class="rv-dots"></div>
+        <button class="rv-arrow next" type="button" aria-label="Next reviews"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
+      </div>
+    </div>
+    <a class="rv-write" href="https://www.google.com/search?hl=en-US&amp;gl=us&amp;q=Khrome+Detailing,+865+Macadamia+Ave,+Madera,+CA+93637&amp;ludocid=16137332141128085939&amp;lsig=AB86z5WE3WxTIKGoKFXBAUg1Iaqs#lrd=0x8eba2a4e854abdaf:0xdff35215466ef1b3,3" target="_blank" rel="noopener"><svg class="rv-google" role="img" aria-label="Google"><use href="#rvg"/></svg>Write a Review</a>
+  </section>
+
+  </div><!-- /.pkg-reviews-group -->
 
   <!-- Services + CTA Gradient Wrapper -->
   <div class="svc-gradient-wrap">
@@ -797,117 +1072,7 @@ src="https://www.facebook.com/tr?id=1457672995898350&ev=PageView&noscript=1"
 
   </div><!-- /.svc-gradient-wrap -->
 
-  <!-- Detailing Packages -->
-  <section class="pkg-section">
-    <div class="section-eyebrow"><span>CHOOSE YOUR DETAIL</span></div>
-    <h2 class="section-title">DETAILING PACKAGES</h2>
-    <div class="pkg-grid">
-      <!-- Essential Detail -->
-      <div class="pkg-card" data-package="essential">
-        <div class="pkg-top">
-          <span class="pkg-name">ESSENTIAL DETAIL</span>
-          <span class="pkg-duration">Est. 1.5&#8211;2.5 hrs</span>
-          <span class="pkg-starting-price" style="display:none">Starting at $149</span>
-        </div>
-        <div class="pkg-body">
-          <ul class="pkg-includes">
-            <li class="pkg-include-item">Quick Refresh for Busy Owners</li>
-            <li class="pkg-include-item">Affordable Yet Thorough</li>
-            <li class="pkg-include-item">Preserves Vehicle Condition</li>
-            <li class="pkg-include-item">Hand Wash + Foam Bath</li>
-            <li class="pkg-include-item teaser">and more...</li>
-          </ul>
-          <a class="pkg-learn-more" onclick="togglePackageExpand(this)">Learn More</a>
-          <div class="pkg-expanded">
-            <div class="pkg-expanded-inner">
-              <p class="pkg-description">Our entry-level but powerful cleaning package &#8212; ideal for maintaining a fresh, sharp look between full details.</p>
-              <div class="pkg-includes-title">Includes:</div>
-              <ul class="pkg-includes">
-                <li class="pkg-include-item">Hand Wash + Foam Bath</li>
-                <li class="pkg-include-item">Wheels, Tires &amp; Door Jambs Cleaned</li>
-                <li class="pkg-include-item">Interior Vacuum &amp; Wipe Down</li>
-                <li class="pkg-include-item">Streak-Free Glass Cleaning</li>
-                <li class="pkg-include-item">Tire Shine Applied</li>
-              </ul>
-              <button class="pkg-book-btn" onclick="openBookingModal('essential')">REQUEST BOOKING</button>
-              <a class="pkg-show-less" onclick="togglePackageExpand(this)">Show Less</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Signature Detail (Featured) -->
-      <div class="pkg-card featured" data-package="signature">
-        <div class="pkg-top">
-          <span class="pkg-name">SIGNATURE DETAIL</span>
-          <span class="pkg-badge">MOST POPULAR</span>
-          <span class="pkg-duration">Est. 3&#8211;4 hrs</span>
-          <span class="pkg-starting-price" style="display:none">Starting at $259</span>
-        </div>
-        <div class="pkg-body">
-          <ul class="pkg-includes">
-            <li class="pkg-include-item">Deeper Clean + Longer Protection</li>
-            <li class="pkg-include-item">Restores Gloss &amp; Interior Comfort</li>
-            <li class="pkg-include-item">Ideal Maintenance Package for Luxury &amp; Daily Vehicles</li>
-            <li class="pkg-include-item">Full Exterior Wash + Clay Bar</li>
-            <li class="pkg-include-item teaser">and more...</li>
-          </ul>
-          <a class="pkg-learn-more" onclick="togglePackageExpand(this)">Learn More</a>
-          <div class="pkg-expanded">
-            <div class="pkg-expanded-inner">
-              <p class="pkg-description">The perfect balance of exterior shine and interior refresh. For car owners who want their ride to look and feel upgraded inside and out.</p>
-              <div class="pkg-includes-title">Includes:</div>
-              <ul class="pkg-includes">
-                <li class="pkg-include-item">Full Exterior Wash + Clay Bar</li>
-                <li class="pkg-include-item">6-Month Ceramic Sealant Applied</li>
-                <li class="pkg-include-item">Wheels &amp; Tires Restored &amp; Dressed</li>
-                <li class="pkg-include-item">Full Interior Vacuum, Steam &amp; Wipe</li>
-                <li class="pkg-include-item">Leather + Upholstery Care</li>
-                <li class="pkg-include-item">Streak-Free Windows</li>
-              </ul>
-              <button class="pkg-book-btn" onclick="openBookingModal('signature')">REQUEST BOOKING</button>
-              <a class="pkg-show-less" onclick="togglePackageExpand(this)">Show Less</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Elite Detail -->
-      <div class="pkg-card" data-package="elite">
-        <div class="pkg-top">
-          <span class="pkg-name">ELITE DETAIL</span>
-          <span class="pkg-duration">Est. 5&#8211;7 hrs</span>
-          <span class="pkg-starting-price" style="display:none">Starting at $649</span>
-        </div>
-        <div class="pkg-body">
-          <ul class="pkg-includes">
-            <li class="pkg-include-item">Maximum Interior + Exterior Transformation</li>
-            <li class="pkg-include-item">One-Year Paint Protection Included</li>
-            <li class="pkg-include-item">Best Choice for Exotic + High-End Vehicles</li>
-            <li class="pkg-include-item">Restores Showroom Quality in One Visit</li>
-            <li class="pkg-include-item teaser">and more...</li>
-          </ul>
-          <a class="pkg-learn-more" onclick="togglePackageExpand(this)">Learn More</a>
-          <div class="pkg-expanded">
-            <div class="pkg-expanded-inner">
-              <p class="pkg-description">Our most comprehensive package, designed for luxury and exotic vehicles that demand perfection inside and out.</p>
-              <div class="pkg-includes-title">Includes:</div>
-              <ul class="pkg-includes">
-                <li class="pkg-include-item">Premium Exterior Wash</li>
-                <li class="pkg-include-item">Clay Decontamination</li>
-                <li class="pkg-include-item">Paint Enhancement Step</li>
-                <li class="pkg-include-item">6-Month Ceramic Sealant</li>
-                <li class="pkg-include-item">Wheels, Tires, &amp; Trim Restored</li>
-                <li class="pkg-include-item">Deep Interior Revival (Steam &amp; Shampoo)</li>
-                <li class="pkg-include-item">Glass Treatment</li>
-                <li class="pkg-include-item">Engine Bay Detailing</li>
-              </ul>
-              <button class="pkg-book-btn" onclick="openBookingModal('elite')">REQUEST BOOKING</button>
-              <a class="pkg-show-less" onclick="togglePackageExpand(this)">Show Less</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+
 
   <script>
     function switchTab(tab, btn) {
@@ -918,17 +1083,9 @@ src="https://www.facebook.com/tr?id=1457672995898350&ev=PageView&noscript=1"
     }
   </script>
 
-  <!-- Guarantee -->
-  <section class="guarantee">
-    <h2 class="guarantee-title">100% SATISFACTION GUARANTEED</h2>
-  </section>
 
-  <!-- Testimonials -->
-  <section class="section">
-    <h2 class="section-title">WHAT FRESNO<br>CAR OWNERS SAY:</h2>
-    <script async src='https://reputationhub.site/reputation/assets/review-widget.js'></script>
-    <iframe class='lc_reviews_widget' src='https://reputationhub.site/reputation/widgets/review_widget/wHWgaJAD9Np5aOOdgxV5?widgetId=699e2630f3e9c427a4a8ccaa' frameborder='0' scrolling='no' style='min-width: 100%; width: 100%;' loading='lazy'></iframe>
-  </section>
+
+
 
   <!-- FAQ Section -->
   <section class="faq-section">
@@ -1206,5 +1363,48 @@ src="https://www.facebook.com/tr?id=1457672995898350&ev=PageView&noscript=1"
 
 
 
+  <!-- Reviews carousel -->
+  <script>
+    (function() {
+      var carousel = document.querySelector('.rv-carousel');
+      if (!carousel) return;
+      var track = carousel.querySelector('.rv-track');
+      var cards = track ? track.querySelectorAll('.rv-card') : [];
+      var prev = carousel.querySelector('.rv-arrow.prev');
+      var next = carousel.querySelector('.rv-arrow.next');
+      var dotsWrap = carousel.querySelector('.rv-dots');
+      if (!track || !cards.length) return;
+      var dots = [];
+      for (var i = 0; i < cards.length; i++) {
+        (function(idx) {
+          var b = document.createElement('button');
+          b.type = 'button';
+          b.className = 'rv-dot' + (idx === 0 ? ' active' : '');
+          b.setAttribute('aria-label', 'Go to review ' + (idx + 1));
+          b.addEventListener('click', function() { track.scrollTo({ left: idx * step(), behavior: 'smooth' }); });
+          dotsWrap && dotsWrap.appendChild(b);
+          dots.push(b);
+        })(i);
+      }
+      function step() {
+        if (cards.length < 2) return cards[0].offsetWidth;
+        return cards[1].getBoundingClientRect().left - cards[0].getBoundingClientRect().left;
+      }
+      function update() {
+        var idx = Math.round(track.scrollLeft / step());
+        if (idx < 0) idx = 0;
+        if (idx > cards.length - 1) idx = cards.length - 1;
+        for (var i = 0; i < dots.length; i++) dots[i].classList.toggle('active', i === idx);
+        if (prev) prev.disabled = track.scrollLeft <= 2;
+        if (next) next.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 2;
+      }
+      prev && prev.addEventListener('click', function() { track.scrollBy({ left: -step(), behavior: 'smooth' }); });
+      next && next.addEventListener('click', function() { track.scrollBy({ left: step(), behavior: 'smooth' }); });
+      var t;
+      track.addEventListener('scroll', function() { clearTimeout(t); t = setTimeout(update, 60); });
+      window.addEventListener('resize', function() { clearTimeout(t); t = setTimeout(update, 120); });
+      update();
+    })();
+  </script>
 </body>
 </html>
