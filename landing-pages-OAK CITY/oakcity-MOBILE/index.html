@@ -24,7 +24,6 @@
   <link rel="dns-prefetch" href="https://www.googletagmanager.com">
   <link rel="dns-prefetch" href="https://api.leadconnectorhq.com">
   <link rel="dns-prefetch" href="https://link.msgsndr.com">
-  <link rel="dns-prefetch" href="https://widgets.leadconnectorhq.com">
   <link rel="dns-prefetch" href="https://cdn.callrail.com">
   <link rel="preload" as="image" imagesrcset="./hero-768.webp 768w, ./hero-1080.webp 1080w" imagesizes="100vw" fetchpriority="high">
 
@@ -707,8 +706,6 @@
     .legal-strip { background: #000000; color: #4b5563; font-size: 0.6875rem; letter-spacing: 0.02em; text-align: center; padding: 1rem; line-height: 1.8; }
     .legal-strip a { color: #6b7280; text-decoration: none; }
     .legal-strip a:hover { color: #9ca3af; }
-    /* Keep the LeadConnector chat bubble clear of the sticky call bar */
-    .lc_text-widget--btn, #lc_text-widget--btn { bottom: 92px !important; }
   </style>
 </head>
 <body>
@@ -1507,7 +1504,7 @@
     })();
   </script>
 
-  <!-- Deferred loader: the LeadConnector form embeds + chat widget (the page's
+  <!-- Deferred loader: the LeadConnector form embeds (the page's
        heaviest third-party payload) load on first user interaction
        (touch/scroll/mouse/key) or 6s after window load — whichever comes first,
        keeping them out of the critical rendering path. Call tracking is separate:
@@ -1532,15 +1529,6 @@
         loadScript('https://link.msgsndr.com/js/form_embed.js');
         // Google Ads tag (config already ran in the head stub)
         loadScript('https://www.googletagmanager.com/gtag/js?id=AW-17371978908');
-        // LeadConnector chat widget (data-* set BEFORE appendChild: loader.js reads
-        // its config off document.currentScript at execution time)
-        var cw = document.createElement('script');
-        cw.src = 'https://widgets.leadconnectorhq.com/loader.js';
-        cw.async = true;
-        cw.setAttribute('data-resources-url', 'https://widgets.leadconnectorhq.com/chat-widget/loader.js');
-        cw.setAttribute('data-widget-id', '6a57d0bec02522215aba5c85');
-        cw.setAttribute('data-source', 'WEB_USER');
-        document.head.appendChild(cw);
       }
       var evts = ['pointerdown', 'touchstart', 'scroll', 'keydown', 'mousemove'];
       for (var i = 0; i < evts.length; i++) {
