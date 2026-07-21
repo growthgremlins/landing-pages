@@ -134,8 +134,9 @@
     .offer-badge {
       background: rgba(220,38,38,0.9);
       border-radius: 2rem;
-      padding: 0.75rem 1.75rem;
+      padding: 0.75rem clamp(1rem, 4.5vw, 1.75rem);
       margin-bottom: clamp(0.75rem, 2.5vh, 1.75rem);
+      max-width: 100%;
       display: inline-block;
       position: relative;
       box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 0 10px rgba(220,38,38,0.3);
@@ -150,8 +151,11 @@
       animation: badgeGlow 2.8s ease-in-out infinite;
       pointer-events: none;
     }
-    .offer-title { color: #ffffff; font-weight: 700; font-size: clamp(0.875rem, 2.2vh, 1.125rem); line-height: 1.2; }
-    .offer-subtitle { color: #ffffffca; font-style: italic; font-size: clamp(0.75rem, 1.8vh, 0.875rem); font-weight: 400; }
+    /* Badge copy must never wrap. Unlike the rest of the hero (which clamps on vh
+       because the hero is height-constrained), these two key off viewport WIDTH —
+       wrapping is a width-overflow problem, so vh clamps can't prevent it. */
+    .offer-title { color: #ffffff; font-weight: 700; font-size: clamp(0.8rem, 3.7vw, 1.125rem); line-height: 1.2; white-space: nowrap; }
+    .offer-subtitle { color: #ffffffca; font-style: italic; font-size: clamp(0.75rem, 2.6vw, 0.875rem); font-weight: 400; white-space: nowrap; }
     .hero-title {
       color: #fff;
       text-shadow: 0 0 7px rgba(0,0,0,0.85), 0 0 14px rgba(0,0,0,0.55);
@@ -497,7 +501,6 @@
     .pkg-card.featured { border-color: #dc2626; box-shadow: 0 0 0 2px #dc2626; }
     .pkg-img { width: 100%; height: auto; aspect-ratio: 4/3; object-fit: cover; display: block; }
     .pkg-card[data-package="full"] .pkg-img { object-position: 100% center; }
-    .pkg-card[data-package="interior"] .pkg-img { object-position: 50% center; }
     .pkg-top { padding: 1rem 1.25rem 0.5rem 1.25rem; display: flex; flex-direction: column; align-items: flex-start; gap: 0.3rem; }
     .pkg-name { font-size: 1.15rem; font-weight: 900; color: #1f2937; letter-spacing: 0.03em; }
     .pkg-badge { position: absolute; top: 0.75rem; right: 0.75rem; z-index: 2; background: #dc2626; color: white; font-size: 0.65rem; font-weight: 800; letter-spacing: 0.05em; padding: 0.3rem 0.6rem; border-radius: 99px; box-shadow: 0 2px 6px rgba(0,0,0,0.25); }
@@ -729,8 +732,8 @@
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <div class="offer-badge">
-        <div class="offer-title">FULL DETAIL PACKAGE STARTING AT $239</div>
-        <div class="offer-subtitle">Mobile Detailing &middot; We Come To You, 7 Days a Week</div>
+        <div class="offer-title">FULL DETAIL STARTING AT $239</div>
+        <div class="offer-subtitle">We Come To You &middot; 7 Days a Week</div>
       </div>
       <h1 class="hero-title">
         Best Mobile Car Detailing in Raleigh, NC — We Come To You
