@@ -489,7 +489,7 @@
     .svc-cta-note { font-size: 0.8rem; color: #4b5563; margin-bottom: 0.875rem; }
 
     /* Detailing Packages */
-    .pkg-section { padding: 5rem 1rem 1.5rem 1rem; }
+    .pkg-section { padding: 2.5rem 1rem 1.5rem 1rem; }
     .pkg-subtitle { text-align: center; font-size: 0.9rem; color: #4b5563; margin-top: -0.5rem; margin-bottom: 1.75rem; max-width: 580px; margin-left: auto; margin-right: auto; }
     .pkg-section .section-title { margin-bottom: 1.25rem; }
     .pkg-grid { display: flex; flex-direction: column; gap: 1rem; }
@@ -672,7 +672,7 @@
     @media (min-width: 768px) { .rv-card { flex-basis: calc(50% - 0.5rem); } }
     @media (min-width: 1024px) { .rv-card { flex-basis: calc(33.333% - 0.667rem); } }
 
-    /* Desktop: form inside hero + reviews above packages (tinting pattern) */
+    /* Desktop: form inside hero, packages full-width below */
     .hero-form-wrap { display: block; }
     @media (min-width: 1280px) {
       .hero-form-wrap { position: relative; display: grid; align-items: stretch; grid-template-columns: minmax(2rem,1fr) minmax(0,560px) clamp(2rem,3vw,3rem) 660px minmax(2rem,1fr); }
@@ -685,10 +685,7 @@
       .hero-form-wrap > .quote-section { grid-column: 4 / 5; grid-row: 1; align-self: center; z-index: 20; background: transparent; padding: 2rem 0; }
       .hero-form-wrap .quote-section .section-title, .hero-form-wrap .quote-section .quote-subtitle { display: none; }
       .hero-form-wrap .quote-form-container { margin: 0; width: 100%; max-width: none; min-height: 0; }
-      .pkg-reviews-group { display: flex; flex-direction: column; }
-      .pkg-reviews-group > .reviews-section { order: 1; }
-      .pkg-reviews-group > .guarantee { order: 2; }
-      .pkg-reviews-group > .pkg-section { order: 3; }
+      .hero-form-wrap > .pkg-section { grid-column: 1 / -1; grid-row: 2; width: 100%; }
     }
     /* Reviews: full-width band + shorter on desktop */
     @media (min-width: 1024px) {
@@ -763,35 +760,6 @@
       </div>
     </div>
   </section>
-
-  <!-- Quote Form Section -->
-  <section id="quote-form" class="quote-section">
-    <h2 class="section-title">GET A FREE QUOTE TODAY</h2>
-    <p class="quote-subtitle">Fill out the form below and we'll get back to you with a personalized estimate — no obligation, no hassle.</p>
-    <div class="quote-form-container lazy-form" style="min-height:700px;">
-      <iframe
-        data-src="https://api.leadconnectorhq.com/widget/form/UhHl0igF6BB0On5IDSeb"
-        style="width:100%;height:100%;border:none;border-radius:8px"
-        id="inline-UhHl0igF6BB0On5IDSeb"
-        data-layout="{'id':'INLINE'}"
-        data-trigger-type="alwaysShow"
-        data-trigger-value=""
-        data-activation-type="alwaysActivated"
-        data-activation-value=""
-        data-deactivation-type="neverDeactivate"
-        data-deactivation-value=""
-        data-form-name="google ads landing page form"
-        data-height="717"
-        data-layout-iframe-id="inline-UhHl0igF6BB0On5IDSeb"
-        data-form-id="UhHl0igF6BB0On5IDSeb"
-        title="google ads landing page form"
-      ></iframe>
-    </div>
-  </section>
-
-  </div><!-- /.hero-form-wrap -->
-
-  <div class="pkg-reviews-group">
 
   <!-- Detailing Packages -->
   <section class="pkg-section">
@@ -945,6 +913,35 @@
       </div>
     </div>
   </section>
+
+  <!-- Quote Form Section -->
+  <section id="quote-form" class="quote-section">
+    <h2 class="section-title">GET A FREE QUOTE TODAY</h2>
+    <p class="quote-subtitle">Fill out the form below and we'll get back to you with a personalized estimate — no obligation, no hassle.</p>
+    <div class="quote-form-container lazy-form" style="min-height:700px;">
+      <iframe
+        data-src="https://api.leadconnectorhq.com/widget/form/UhHl0igF6BB0On5IDSeb"
+        style="width:100%;height:100%;border:none;border-radius:8px"
+        id="inline-UhHl0igF6BB0On5IDSeb"
+        data-layout="{'id':'INLINE'}"
+        data-trigger-type="alwaysShow"
+        data-trigger-value=""
+        data-activation-type="alwaysActivated"
+        data-activation-value=""
+        data-deactivation-type="neverDeactivate"
+        data-deactivation-value=""
+        data-form-name="google ads landing page form"
+        data-height="717"
+        data-layout-iframe-id="inline-UhHl0igF6BB0On5IDSeb"
+        data-form-id="UhHl0igF6BB0On5IDSeb"
+        title="google ads landing page form"
+      ></iframe>
+    </div>
+  </section>
+
+  </div><!-- /.hero-form-wrap -->
+
+  <div class="pkg-reviews-group">
 
   <!-- Guarantee -->
   <section class="guarantee">
