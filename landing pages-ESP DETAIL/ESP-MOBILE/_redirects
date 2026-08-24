@@ -1,1 +1,6 @@
-http://mobilecar.tintelligentdetailing.com/* https://mobilecar.tintelligentdetailing.com/:splat 301!
+# Canonical host: force https
+http://mobile.espautodetailing.com/*  https://mobile.espautodetailing.com/:splat  301!
+
+# The GHL forms redirect to https://mobile.espautodetailing.com/thank-you after submit.
+# Serve thank-you.html there so the Google Ads conversion snippet fires.
+/thank-you   /thank-you.html   200
