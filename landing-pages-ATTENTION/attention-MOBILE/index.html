@@ -1,40 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "woobhn6bum");
-  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
+  <title>Jalens Attention to Detail LLC — Chesapeake's Best Mobile Car Detailing</title>
+  <meta name="description" content="Professional mobile car detailing in Chesapeake, VA. We come to you! 5-star rated and satisfaction guaranteed. Serving Chesapeake, Hampton Roads & surrounding areas.">
 
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16828382025"></script>
+  <link rel="icon" type="image/webp" sizes="300x200" href="./attention-logo-v2.webp">
+  <link rel="shortcut icon" type="image/webp" href="./attention-logo-v2.webp">
+  <link rel="apple-touch-icon" href="./attention-logo-v2.webp">
+
+  <!-- Analytics stubs: events queue immediately; the actual scripts (gtag, Clarity) are
+       injected by the deferred loader at the end of <body> on first user interaction
+       (or 6s after load) so they never compete with the hero/LCP. One gtag.js serves
+       both the Google Ads and the GA4 config. -->
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'AW-16828382025');
-  </script>
-
-  <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-43KJY35SLF"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
     gtag('config', 'G-43KJY35SLF');
+    window.clarity=window.clarity||function(){(window.clarity.q=window.clarity.q||[]).push(arguments)};
   </script>
+  <!-- NO META PIXEL: this client has not supplied a Meta Pixel ID. If one is provided,
+       add the fbq stub here and the fbevents.js line to the deferred loader. -->
 
-  <link rel="icon" type="image/webp" sizes="128x128" href="./attention-logo-v2.webp">
-  <link rel="shortcut icon" type="image/webp" href="./attention-logo-v2.webp">
-  <link rel="apple-touch-icon" href="./attention-logo-v2.webp">
-
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
-  <title>Jalens Attention to Detail LLC — Chesapeake's Best Mobile Car Detailing</title>
-  <meta name="description" content="Professional mobile car detailing in Chesapeake, VA. We come to you! 5-star rated and satisfaction guaranteed. Serving Chesapeake, Hampton Roads & surrounding areas.">
+  <!-- Perf: dns-prefetch third parties + preload LCP hero -->
+  <link rel="dns-prefetch" href="https://api.leadconnectorhq.com">
+  <link rel="dns-prefetch" href="https://link.msgsndr.com">
+  <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+  <link rel="dns-prefetch" href="https://www.clarity.ms">
+  <link rel="dns-prefetch" href="https://cdn.callrail.com">
+  <link rel="preload" as="image" imagesrcset="./hero-768.webp 768w, ./hero-1080.webp 1080w" imagesizes="100vw" fetchpriority="high">
 
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -49,6 +46,7 @@
       padding-bottom: 80px;
     }
     html { scroll-behavior: smooth; }
+    html { overflow-x: hidden; }
     img { max-width: 100%; display: block; }
 
     /* Top Banner */
@@ -131,9 +129,11 @@
       max-width: 640px;
       padding: 0 0.5rem;
     }
+    /* Glow animates opacity on a pseudo-element (compositor-only, no repaints)
+       instead of animating box-shadow, which forced continuous main-thread rendering */
     @keyframes badgeGlow {
-      0%, 100% { box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 0 10px rgba(220,38,38,0.3); }
-      50%       { box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 0 22px rgba(220,38,38,0.6); }
+      0%, 100% { opacity: 0; }
+      50%       { opacity: 1; }
     }
     .offer-badge {
       background: rgba(220,38,38,0.9);
@@ -141,7 +141,18 @@
       padding: 0.75rem 1.75rem;
       margin-bottom: clamp(0.75rem, 2.5vh, 1.75rem);
       display: inline-block;
+      position: relative;
+      box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 0 10px rgba(220,38,38,0.3);
+    }
+    .offer-badge::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      box-shadow: 0 0 22px rgba(220,38,38,0.6);
+      opacity: 0;
       animation: badgeGlow 2.8s ease-in-out infinite;
+      pointer-events: none;
     }
     .offer-title { color: #ffffff; font-weight: 700; font-size: clamp(0.875rem, 2.2vh, 1.125rem); line-height: 1.2; }
     .offer-subtitle { color: #ffffffca; font-style: italic; font-size: clamp(0.75rem, 1.8vh, 0.875rem); font-weight: 400; }
@@ -338,6 +349,7 @@
     /* Contact Section */
     .contact-section {
       position: relative;
+      background: #1a1a1a;
       min-height: 600px;
       display: flex;
       align-items: center;
@@ -377,8 +389,11 @@
       .cta-primary, .cta-secondary { flex: 1; margin-bottom: 0; }
       .contact-content { max-width: 768px; margin-left: auto; margin-right: auto; }
       .contact-subtitle { font-size: 1.2rem; }
-      .contact-info-cards { flex-direction: row; gap: 1.5rem; max-width: 768px; }
-      .info-card { flex: 1; }
+      /* 4 info cards here (khrome has 3): wrap + allow shrink, else the long
+         email address forces horizontal overflow at exactly 768px */
+      .contact-info-cards { flex-direction: row; flex-wrap: wrap; gap: 1.5rem; max-width: 768px; }
+      .info-card { flex: 1 1 200px; min-width: 0; }
+      .info-text { overflow-wrap: anywhere; }
     }
 
     /* Desktop */
@@ -432,6 +447,24 @@
     .quote-section .section-title { color: #111111; }
     .quote-subtitle { font-size: 0.9rem; color: #4b5563; margin-bottom: 1rem; max-width: 500px; margin-left: auto; margin-right: auto; }
     .quote-form-container { max-width: 600px; margin: 0 auto; min-height: 580px; }
+    .quote-form-container iframe { min-height: 800px; display: block; }
+    /* Lazy form placeholder spinner (sits behind the iframe, covered once form paints) */
+    .lazy-form { position: relative; }
+    .lazy-form::before {
+      content: '';
+      position: absolute;
+      top: 90px;
+      left: 50%;
+      width: 30px;
+      height: 30px;
+      margin-left: -15px;
+      border: 3px solid rgba(220,38,38,0.2);
+      border-top-color: #dc2626;
+      border-radius: 50%;
+      animation: formSpin 0.9s linear infinite;
+    }
+    @keyframes formSpin { to { transform: rotate(360deg); } }
+    #contact-form iframe { min-height: 800px; display: block; }
 
     /* Tabbed Services Section */
     .svc-gradient-wrap { background: linear-gradient(180deg, white 0%, #fee2e2 15%, #fecaca 50%, #fee2e2 85%, white 100%); }
@@ -453,7 +486,7 @@
       transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
     }
     .svc-card:hover { transform: translateY(-4px); border-color: #dc2626; box-shadow: 0 8px 24px rgba(220,38,38,0.15); }
-    .svc-card-img { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; border-radius: 0.625rem; }
+    .svc-card-img { width: 100%; height: auto; aspect-ratio: 16/9; object-fit: cover; display: block; border-radius: 0.625rem; }
     .svc-card-body { padding: 1rem 0.5rem 0; text-align: center; }
     .svc-card-title { font-size: 0.95rem; font-weight: 900; color: #dc2626; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 0.5rem; }
     .svc-card-desc { font-size: 0.8rem; color: #4b5563; line-height: 1.6; }
@@ -463,15 +496,20 @@
     .svc-cta-note { font-size: 0.8rem; color: #4b5563; margin-bottom: 0.875rem; }
 
     /* Detailing Packages */
-    .pkg-section { padding: 1.5rem 1rem; }
+    .pkg-section { padding: 5rem 1rem 1.5rem 1rem; }
+    .pkg-subtitle { text-align: center; font-size: 0.9rem; color: #4b5563; margin-top: -0.5rem; margin-bottom: 1.75rem; max-width: 580px; margin-left: auto; margin-right: auto; }
     .pkg-section .section-title { margin-bottom: 1.25rem; }
     .pkg-grid { display: flex; flex-direction: column; gap: 1rem; }
-    .pkg-card { border: 1.5px solid #e5e7eb; background: white; border-radius: 0.625rem; overflow: hidden; }
+    .pkg-card { position: relative; border: 1.5px solid #e5e7eb; background: white; border-radius: 0.625rem; overflow: hidden; }
     .pkg-card.featured { border-color: #dc2626; box-shadow: 0 0 0 2px #dc2626; }
-    .pkg-top { padding: 1rem 1.25rem 0.5rem 1.25rem; display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
-    .pkg-name { font-size: 1rem; font-weight: 900; color: #1f2937; letter-spacing: 0.04em; }
-    .pkg-badge { background: #dc2626; color: white; font-size: 0.65rem; font-weight: 700; padding: 0.2rem 0.5rem; border-radius: 99px; }
-    .pkg-duration { font-size: 0.75rem; color: #9ca3af; width: 100%; }
+    .pkg-img { width: 100%; height: auto; aspect-ratio: 4/3; object-fit: cover; display: block; }
+    .pkg-top { padding: 1rem 1.25rem 0.5rem 1.25rem; display: flex; flex-direction: column; align-items: flex-start; gap: 0.3rem; }
+    .pkg-name { font-size: 1.15rem; font-weight: 900; color: #1f2937; letter-spacing: 0.03em; }
+    .pkg-badge { position: absolute; top: 0.75rem; right: 0.75rem; z-index: 2; background: #dc2626; color: white; font-size: 0.65rem; font-weight: 800; letter-spacing: 0.05em; padding: 0.3rem 0.6rem; border-radius: 99px; box-shadow: 0 2px 6px rgba(0,0,0,0.25); }
+    .pkg-price { display: flex; align-items: baseline; gap: 0.4rem; }
+    .pkg-price-label { font-size: 0.72rem; color: #6b7280; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+    .pkg-price-value { font-size: 1.5rem; font-weight: 900; color: #dc2626; line-height: 1; }
+    .pkg-duration { font-size: 0.75rem; color: #9ca3af; font-weight: 600; }
     .pkg-body { padding: 0.25rem 1.25rem 1.25rem 1.25rem; }
     .pkg-includes { list-style: none; padding-left: 0; margin: 0; }
     .pkg-include-item { font-size: 0.78rem; color: #4b5563; line-height: 1.8; }
@@ -605,8 +643,33 @@
 
     /* Services subheadline */
     .svc-subtitle { text-align: center; font-size: 0.9rem; color: #4b5563; margin-top: -0.75rem; margin-bottom: 1.25rem; }
+
+    /* Desktop: form inside hero + reviews above packages (tinting pattern) */
+    .hero-form-wrap { display: block; }
+    @media (min-width: 1280px) {
+      .hero-form-wrap { position: relative; display: grid; align-items: stretch; grid-template-columns: minmax(2rem,1fr) minmax(0,560px) clamp(2rem,3vw,3rem) 660px minmax(2rem,1fr); }
+      .hero-form-wrap > .hero { grid-column: 1 / -1; grid-row: 1; min-height: 820px; max-height: none; align-items: center; justify-content: flex-start; padding: 5rem 0; }
+      .hero-form-wrap .hero-bg { object-position: center; }
+      .hero-form-wrap .hero-content { text-align: left; max-width: 560px; margin-left: max(2rem, calc((100vw - 1268px)/2)); margin-right: 0; padding: 0; }
+      .hero-form-wrap .hero-rating { justify-content: flex-start; }
+      .hero-form-wrap .cta-buttons { margin-left: 0; margin-right: 0; max-width: 32rem; }
+      .hero-form-wrap .hero-tagline { align-self: flex-start; }
+      .hero-form-wrap > .quote-section { grid-column: 4 / 5; grid-row: 1; align-self: center; z-index: 20; background: transparent; padding: 2rem 0; }
+      .hero-form-wrap .quote-section .section-title, .hero-form-wrap .quote-section .quote-subtitle { display: none; }
+      .hero-form-wrap .quote-form-container { margin: 0; width: 100%; max-width: none; min-height: 0; }
+      .pkg-reviews-group { display: flex; flex-direction: column; }
+      .pkg-reviews-group > .reviews-section { order: 1; }
+      .pkg-reviews-group > .guarantee { order: 2; }
+      .pkg-reviews-group > .pkg-section { order: 3; }
+    }
+    /* Reviews: full-width band + shorter on desktop */
+    @media (min-width: 1024px) {
+      .reviews-section { max-width: none; margin-left: 0; margin-right: 0; padding: 2.25rem 2rem 2.5rem; }
+    }
   </style>
-  <script type="text/javascript" src="//cdn.callrail.com/companies/207413280/1c5675c02288a4ea2cd1/12/swap.js"></script>
+  <!-- CallRail number swap: async so it never blocks render, but loads immediately
+       so swapped tracking numbers are in place before the first call tap -->
+  <script async type="text/javascript" src="https://cdn.callrail.com/companies/207413280/1c5675c02288a4ea2cd1/12/swap.js"></script>
 </head>
 <body>
 
@@ -619,9 +682,11 @@
     </a>
   </header>
 
+  <div class="hero-form-wrap">
+
   <!-- Hero Section -->
   <section class="hero">
-    <img src="./Ceramic%20coating%2CExterior%20Wash%2CHeadlight%20restore/538310218_17876589576394093_1722118768668568475_n.webp" alt="Jalens Attention to Detail LLC mobile car detailing in Chesapeake VA" class="hero-bg" fetchpriority="high">
+    <img src="./hero-768.webp" srcset="./hero-768.webp 768w, ./hero-1080.webp 1080w" sizes="100vw" alt="Jalens Attention to Detail LLC mobile car detailing in Chesapeake VA" class="hero-bg" fetchpriority="high" decoding="async" width="768" height="1024">
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <div class="offer-badge">
@@ -674,9 +739,9 @@
   <section id="quote-form" class="quote-section">
     <h2 class="section-title">GET A FREE QUOTE TODAY</h2>
     <p class="quote-subtitle">Fill out the form below and we'll get back to you with a personalized estimate — no obligation, no hassle.</p>
-    <div class="quote-form-container" style="min-height:700px;">
+    <div class="quote-form-container lazy-form" style="min-height:700px;">
       <iframe
-        src="https://api.leadconnectorhq.com/widget/form/9cb3zklfie6ZcVrteDdB"
+        data-src="https://api.leadconnectorhq.com/widget/form/9cb3zklfie6ZcVrteDdB"
         style="width:100%;height:100%;border:none;border-radius:8px"
         id="inline-9cb3zklfie6ZcVrteDdB"
         data-layout="{'id':'INLINE'}"
@@ -692,9 +757,173 @@
         data-form-id="9cb3zklfie6ZcVrteDdB"
         title="(DETAILING) google ads landing page form"
       ></iframe>
-      <script defer src="https://link.msgsndr.com/js/form_embed.js"></script>
     </div>
   </section>
+
+  </div><!-- /.hero-form-wrap -->
+
+  <div class="pkg-reviews-group">
+
+  <!-- Detailing Packages -->
+  <section class="pkg-section">
+    <div class="section-eyebrow"><span>CHOOSE YOUR DETAIL</span></div>
+    <h2 class="section-title">POPULAR DETAILING PACKAGES</h2>
+    <p class="pkg-subtitle">From a quick refresh to a full showroom-quality restoration &#8212; pick the package that fits your vehicle, done right at your door.</p>
+    <div class="pkg-grid">
+
+      <!-- Standard Detail -->
+      <div class="pkg-card" data-package="standard">
+        <img class="pkg-img" src="./pkg-standard.webp" alt="Standard Detail package" loading="lazy" width="400" height="300">
+        <div class="pkg-top">
+          <span class="pkg-name">STANDARD DETAIL</span>
+          <div class="pkg-price"><span class="pkg-price-label">Starting at</span><span class="pkg-price-value">$190</span></div>
+          <span class="pkg-duration">Est. 2 hrs</span>
+        </div>
+        <div class="pkg-body">
+          <ul class="pkg-includes">
+            <li class="pkg-include-item">Perfect for Regular Maintenance</li>
+            <li class="pkg-include-item">Full Interior Wipe Down + Deep Vacuum</li>
+            <li class="pkg-include-item">Hand Wash + Spray Wax (2-Month Protection)</li>
+            <li class="pkg-include-item teaser">and more...</li>
+          </ul>
+          <a class="pkg-learn-more" onclick="togglePackageExpand(this)">Learn More</a>
+          <div class="pkg-expanded">
+            <div class="pkg-expanded-inner">
+              <p class="pkg-description">Designed to keep your vehicle clean, fresh, and protected. Perfect for regular maintenance, giving your car a professional refresh inside and out without needing a deep restoration.</p>
+              <div class="pkg-sub-heading">Interior</div>
+              <ul class="pkg-includes">
+                <li class="pkg-include-item">Full interior wipe down (dashboard, panels &amp; doors)</li>
+                <li class="pkg-include-item">Deep vacuum — seats, carpets &amp; trunk</li>
+                <li class="pkg-include-item">Air vents + door jambs cleaned</li>
+                <li class="pkg-include-item">Leather seat cleaning &amp; protection</li>
+                <li class="pkg-include-item">Interior windows &amp; floor mats cleaned</li>
+                <li class="pkg-include-item">Light air freshener</li>
+              </ul>
+              <div class="pkg-sub-heading">Exterior</div>
+              <ul class="pkg-includes">
+                <li class="pkg-include-item">Foam pre-rinse + safe hand wash</li>
+                <li class="pkg-include-item">Wheels &amp; tires deep cleaned + shine</li>
+                <li class="pkg-include-item">Exterior windows cleaned</li>
+                <li class="pkg-include-item">Spray wax protection (up to 2 months)</li>
+              </ul>
+              <button class="pkg-book-btn" onclick="openBookingModal('standard')">REQUEST BOOKING</button>
+              <a class="pkg-show-less" onclick="togglePackageExpand(this)">Show Less</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Premium Detail (Featured) -->
+      <div class="pkg-card featured" data-package="premium">
+        <span class="pkg-badge">MOST POPULAR</span>
+        <img class="pkg-img" src="./pkg-premium.webp" alt="Premium Detail package" loading="lazy" width="400" height="300">
+        <div class="pkg-top">
+          <span class="pkg-name">PREMIUM DETAIL</span>
+          <div class="pkg-price"><span class="pkg-price-label">Starting at</span><span class="pkg-price-value">$290</span></div>
+          <span class="pkg-duration">Est. 3 hrs</span>
+        </div>
+        <div class="pkg-body">
+          <ul class="pkg-includes">
+            <li class="pkg-include-item">Deep Clean + Steam Extraction</li>
+            <li class="pkg-include-item">Shampoo Seats, Carpets &amp; Mats</li>
+            <li class="pkg-include-item">Clay Bar + 6-Month Sealant Protection</li>
+            <li class="pkg-include-item teaser">and more...</li>
+          </ul>
+          <a class="pkg-learn-more" onclick="togglePackageExpand(this)">Learn More</a>
+          <div class="pkg-expanded">
+            <div class="pkg-expanded-inner">
+              <p class="pkg-description">A deep cleaning service designed to restore your vehicle to like-new condition. Goes beyond a basic detail by targeting embedded dirt, stains, and buildup using professional tools like steam cleaning and extraction.</p>
+              <div class="pkg-sub-heading">Interior (Deep Clean)</div>
+              <ul class="pkg-includes">
+                <li class="pkg-include-item">Full interior deep cleaning on all surfaces</li>
+                <li class="pkg-include-item">Deep vacuum — seats, carpets &amp; trunk</li>
+                <li class="pkg-include-item">Steam cleaning (sanitization &amp; decontamination)</li>
+                <li class="pkg-include-item">Seat &amp; carpet shampoo with hot water extraction</li>
+                <li class="pkg-include-item">Stain removal treatment</li>
+                <li class="pkg-include-item">Leather cleaning &amp; protection</li>
+                <li class="pkg-include-item">Crevice detailing + door jambs cleaned</li>
+                <li class="pkg-include-item">Interior windows &amp; trunk cleaned</li>
+                <li class="pkg-include-item">Premium air freshener</li>
+              </ul>
+              <div class="pkg-sub-heading">Exterior</div>
+              <ul class="pkg-includes">
+                <li class="pkg-include-item">Foam pre-rinse + safe hand wash</li>
+                <li class="pkg-include-item">Wheels &amp; tires deep cleaned + shine</li>
+                <li class="pkg-include-item">Clay bar + bug &amp; contamination removal</li>
+                <li class="pkg-include-item">Exterior windows cleaned</li>
+                <li class="pkg-include-item">Sealant protection (up to 6 months)</li>
+              </ul>
+              <button class="pkg-book-btn" onclick="openBookingModal('premium')">REQUEST BOOKING</button>
+              <a class="pkg-show-less" onclick="togglePackageExpand(this)">Show Less</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Elite Detail -->
+      <div class="pkg-card" data-package="elite">
+        <img class="pkg-img" src="./pkg-elite.webp" alt="Elite Detail package" loading="lazy" width="400" height="300">
+        <div class="pkg-top">
+          <span class="pkg-name">ELITE DETAIL</span>
+          <div class="pkg-price"><span class="pkg-price-label">Starting at</span><span class="pkg-price-value">$399</span></div>
+          <span class="pkg-duration">Est. 4&#8211;5 hrs</span>
+        </div>
+        <div class="pkg-body">
+          <ul class="pkg-includes">
+            <li class="pkg-include-item">Full Interior Restoration + Odor Removal</li>
+            <li class="pkg-include-item">Iron Remover + Paint Enhancement Finish</li>
+            <li class="pkg-include-item">Engine Bay + 12-Month Paint Sealant</li>
+            <li class="pkg-include-item teaser">and more...</li>
+          </ul>
+          <a class="pkg-learn-more" onclick="togglePackageExpand(this)">Learn More</a>
+          <div class="pkg-expanded">
+            <div class="pkg-expanded-inner">
+              <p class="pkg-description">Our most complete and advanced detailing package, designed to fully restore, protect, and elevate your vehicle to a near showroom condition. Combines deep interior restoration with full exterior decontamination and long-lasting paint protection.</p>
+              <div class="pkg-sub-heading">Interior (Full Restoration)</div>
+              <ul class="pkg-includes">
+                <li class="pkg-include-item">Full interior deep cleaning on all surfaces</li>
+                <li class="pkg-include-item">Deep vacuum — seats, carpets &amp; trunk</li>
+                <li class="pkg-include-item">Steam cleaning (sanitization &amp; decontamination)</li>
+                <li class="pkg-include-item">Seat &amp; carpet shampoo with hot water extraction</li>
+                <li class="pkg-include-item">Advanced stain removal + odor elimination</li>
+                <li class="pkg-include-item">Leather cleaning &amp; protection</li>
+                <li class="pkg-include-item">Crevice detailing + door jambs cleaned</li>
+                <li class="pkg-include-item">Interior windows &amp; trunk fully cleaned</li>
+                <li class="pkg-include-item">Premium air freshener</li>
+              </ul>
+              <div class="pkg-sub-heading">Exterior (Full Decontamination + Protection)</div>
+              <ul class="pkg-includes">
+                <li class="pkg-include-item">Foam pre-rinse + safe hand wash</li>
+                <li class="pkg-include-item">Wheels &amp; tires deep cleaned + shine</li>
+                <li class="pkg-include-item">Clay bar, iron remover &amp; full decontamination</li>
+                <li class="pkg-include-item">Exterior windows cleaned</li>
+                <li class="pkg-include-item">Paint enhancement + 12-month sealant protection</li>
+                <li class="pkg-include-item">Engine bay cleaning</li>
+              </ul>
+              <button class="pkg-book-btn" onclick="openBookingModal('elite')">REQUEST BOOKING</button>
+              <a class="pkg-show-less" onclick="togglePackageExpand(this)">Show Less</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Guarantee -->
+  <section class="guarantee">
+    <h2 class="guarantee-title">100% SATISFACTION GUARANTEED</h2>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="section reviews-section">
+    <div class="section-eyebrow"><span>REVIEWS</span></div>
+    <h2 class="section-title">WHAT CHESAPEAKE<br>CAR OWNERS SAY:</h2>
+    <script async src='https://reputationhub.site/reputation/assets/review-widget.js'></script>
+    <iframe class='lc_reviews_widget' src='https://reputationhub.site/reputation/widgets/review_widget/KqvHD2cqanMlCFAPNXTP' frameborder='0' scrolling='no' style='min-width: 100%; width: 100%;' loading='lazy'></iframe>
+  </section>
+
+  </div><!-- /.pkg-reviews-group -->
 
   <!-- Services + CTA Gradient Wrapper -->
   <div class="svc-gradient-wrap">
@@ -789,148 +1018,6 @@
 
   </div><!-- /.svc-gradient-wrap -->
 
-  <!-- Detailing Packages -->
-  <section class="pkg-section">
-    <div class="section-eyebrow"><span>CHOOSE YOUR DETAIL</span></div>
-    <h2 class="section-title">DETAILING PACKAGES</h2>
-    <div class="pkg-grid">
-
-      <!-- Standard Detail -->
-      <div class="pkg-card" data-package="standard">
-        <div class="pkg-top">
-          <span class="pkg-name">STANDARD DETAIL</span>
-          <span class="pkg-duration">Est. 2 hrs</span>
-          <span class="pkg-starting-price" style="display:none">Starting at $190</span>
-        </div>
-        <div class="pkg-body">
-          <ul class="pkg-includes">
-            <li class="pkg-include-item">Perfect for Regular Maintenance</li>
-            <li class="pkg-include-item">Full Interior Wipe Down + Deep Vacuum</li>
-            <li class="pkg-include-item">Hand Wash + Spray Wax (2-Month Protection)</li>
-            <li class="pkg-include-item teaser">and more...</li>
-          </ul>
-          <a class="pkg-learn-more" onclick="togglePackageExpand(this)">Learn More</a>
-          <div class="pkg-expanded">
-            <div class="pkg-expanded-inner">
-              <p class="pkg-description">Designed to keep your vehicle clean, fresh, and protected. Perfect for regular maintenance, giving your car a professional refresh inside and out without needing a deep restoration.</p>
-              <div class="pkg-sub-heading">Interior</div>
-              <ul class="pkg-includes">
-                <li class="pkg-include-item">Full interior wipe down (dashboard, panels &amp; doors)</li>
-                <li class="pkg-include-item">Deep vacuum — seats, carpets &amp; trunk</li>
-                <li class="pkg-include-item">Air vents + door jambs cleaned</li>
-                <li class="pkg-include-item">Leather seat cleaning &amp; protection</li>
-                <li class="pkg-include-item">Interior windows &amp; floor mats cleaned</li>
-                <li class="pkg-include-item">Light air freshener</li>
-              </ul>
-              <div class="pkg-sub-heading">Exterior</div>
-              <ul class="pkg-includes">
-                <li class="pkg-include-item">Foam pre-rinse + safe hand wash</li>
-                <li class="pkg-include-item">Wheels &amp; tires deep cleaned + shine</li>
-                <li class="pkg-include-item">Exterior windows cleaned</li>
-                <li class="pkg-include-item">Spray wax protection (up to 2 months)</li>
-              </ul>
-              <button class="pkg-book-btn" onclick="openBookingModal('standard')">REQUEST BOOKING</button>
-              <a class="pkg-show-less" onclick="togglePackageExpand(this)">Show Less</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Premium Detail (Featured) -->
-      <div class="pkg-card featured" data-package="premium">
-        <div class="pkg-top">
-          <span class="pkg-name">PREMIUM DETAIL</span>
-          <span class="pkg-badge">MOST POPULAR</span>
-          <span class="pkg-duration">Est. 3 hrs</span>
-          <span class="pkg-starting-price" style="display:none">Starting at $290</span>
-        </div>
-        <div class="pkg-body">
-          <ul class="pkg-includes">
-            <li class="pkg-include-item">Deep Clean + Steam Extraction</li>
-            <li class="pkg-include-item">Shampoo Seats, Carpets &amp; Mats</li>
-            <li class="pkg-include-item">Clay Bar + 6-Month Sealant Protection</li>
-            <li class="pkg-include-item teaser">and more...</li>
-          </ul>
-          <a class="pkg-learn-more" onclick="togglePackageExpand(this)">Learn More</a>
-          <div class="pkg-expanded">
-            <div class="pkg-expanded-inner">
-              <p class="pkg-description">A deep cleaning service designed to restore your vehicle to like-new condition. Goes beyond a basic detail by targeting embedded dirt, stains, and buildup using professional tools like steam cleaning and extraction.</p>
-              <div class="pkg-sub-heading">Interior (Deep Clean)</div>
-              <ul class="pkg-includes">
-                <li class="pkg-include-item">Full interior deep cleaning on all surfaces</li>
-                <li class="pkg-include-item">Deep vacuum — seats, carpets &amp; trunk</li>
-                <li class="pkg-include-item">Steam cleaning (sanitization &amp; decontamination)</li>
-                <li class="pkg-include-item">Seat &amp; carpet shampoo with hot water extraction</li>
-                <li class="pkg-include-item">Stain removal treatment</li>
-                <li class="pkg-include-item">Leather cleaning &amp; protection</li>
-                <li class="pkg-include-item">Crevice detailing + door jambs cleaned</li>
-                <li class="pkg-include-item">Interior windows &amp; trunk cleaned</li>
-                <li class="pkg-include-item">Premium air freshener</li>
-              </ul>
-              <div class="pkg-sub-heading">Exterior</div>
-              <ul class="pkg-includes">
-                <li class="pkg-include-item">Foam pre-rinse + safe hand wash</li>
-                <li class="pkg-include-item">Wheels &amp; tires deep cleaned + shine</li>
-                <li class="pkg-include-item">Clay bar + bug &amp; contamination removal</li>
-                <li class="pkg-include-item">Exterior windows cleaned</li>
-                <li class="pkg-include-item">Sealant protection (up to 6 months)</li>
-              </ul>
-              <button class="pkg-book-btn" onclick="openBookingModal('premium')">REQUEST BOOKING</button>
-              <a class="pkg-show-less" onclick="togglePackageExpand(this)">Show Less</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Elite Detail -->
-      <div class="pkg-card" data-package="elite">
-        <div class="pkg-top">
-          <span class="pkg-name">ELITE DETAIL</span>
-          <span class="pkg-duration">Est. 4&#8211;5 hrs</span>
-          <span class="pkg-starting-price" style="display:none">Starting at $399</span>
-        </div>
-        <div class="pkg-body">
-          <ul class="pkg-includes">
-            <li class="pkg-include-item">Full Interior Restoration + Odor Removal</li>
-            <li class="pkg-include-item">Iron Remover + Paint Enhancement Finish</li>
-            <li class="pkg-include-item">Engine Bay + 12-Month Paint Sealant</li>
-            <li class="pkg-include-item teaser">and more...</li>
-          </ul>
-          <a class="pkg-learn-more" onclick="togglePackageExpand(this)">Learn More</a>
-          <div class="pkg-expanded">
-            <div class="pkg-expanded-inner">
-              <p class="pkg-description">Our most complete and advanced detailing package, designed to fully restore, protect, and elevate your vehicle to a near showroom condition. Combines deep interior restoration with full exterior decontamination and long-lasting paint protection.</p>
-              <div class="pkg-sub-heading">Interior (Full Restoration)</div>
-              <ul class="pkg-includes">
-                <li class="pkg-include-item">Full interior deep cleaning on all surfaces</li>
-                <li class="pkg-include-item">Deep vacuum — seats, carpets &amp; trunk</li>
-                <li class="pkg-include-item">Steam cleaning (sanitization &amp; decontamination)</li>
-                <li class="pkg-include-item">Seat &amp; carpet shampoo with hot water extraction</li>
-                <li class="pkg-include-item">Advanced stain removal + odor elimination</li>
-                <li class="pkg-include-item">Leather cleaning &amp; protection</li>
-                <li class="pkg-include-item">Crevice detailing + door jambs cleaned</li>
-                <li class="pkg-include-item">Interior windows &amp; trunk fully cleaned</li>
-                <li class="pkg-include-item">Premium air freshener</li>
-              </ul>
-              <div class="pkg-sub-heading">Exterior (Full Decontamination + Protection)</div>
-              <ul class="pkg-includes">
-                <li class="pkg-include-item">Foam pre-rinse + safe hand wash</li>
-                <li class="pkg-include-item">Wheels &amp; tires deep cleaned + shine</li>
-                <li class="pkg-include-item">Clay bar, iron remover &amp; full decontamination</li>
-                <li class="pkg-include-item">Exterior windows cleaned</li>
-                <li class="pkg-include-item">Paint enhancement + 12-month sealant protection</li>
-                <li class="pkg-include-item">Engine bay cleaning</li>
-              </ul>
-              <button class="pkg-book-btn" onclick="openBookingModal('elite')">REQUEST BOOKING</button>
-              <a class="pkg-show-less" onclick="togglePackageExpand(this)">Show Less</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
   <script>
     function switchTab(tab, btn) {
       document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
@@ -939,18 +1026,6 @@
       btn.classList.add('active');
     }
   </script>
-
-  <!-- Guarantee -->
-  <section class="guarantee">
-    <h2 class="guarantee-title">100% SATISFACTION GUARANTEED</h2>
-  </section>
-
-  <!-- Testimonials -->
-  <section class="section">
-    <h2 class="section-title">WHAT CHESAPEAKE<br>CAR OWNERS SAY:</h2>
-    <script async src='https://reputationhub.site/reputation/assets/review-widget.js'></script>
-    <iframe class='lc_reviews_widget' src='https://reputationhub.site/reputation/widgets/review_widget/KqvHD2cqanMlCFAPNXTP' frameborder='0' scrolling='no' style='min-width: 100%; width: 100%;' loading='lazy'></iframe>
-  </section>
 
   <!-- FAQ Section -->
   <section class="faq-section">
@@ -1058,14 +1133,14 @@
 
   <!-- Contact Section -->
   <section class="section contact-section">
-    <img src="./Ceramic%20coating%2CExterior%20Wash%2CHeadlight%20restore/538310218_17876589576394093_1722118768668568475_n.webp" alt="Jalens Attention to Detail LLC Chesapeake VA" class="contact-bg" loading="lazy">
+    <img src="./hero-1080.webp" alt="Jalens Attention to Detail LLC Chesapeake VA" class="contact-bg" loading="lazy" width="1080" height="1440">
     <div class="contact-overlay"></div>
     <div class="contact-content">
       <h2 class="section-title">GET A QUOTE</h2>
       <p class="contact-subtitle">Book your mobile detailing appointment today and experience the Jalens Attention to Detail difference</p>
-      <div id="contact-form" style="margin-bottom:2rem;min-height:700px;">
+      <div id="contact-form" class="lazy-form" style="margin-bottom:2rem;min-height:700px;">
         <iframe
-          src="https://api.leadconnectorhq.com/widget/form/9cb3zklfie6ZcVrteDdB"
+          data-src="https://api.leadconnectorhq.com/widget/form/9cb3zklfie6ZcVrteDdB"
           style="width:100%;height:100%;border:none;border-radius:8px"
           id="inline-9cb3zklfie6ZcVrteDdB-contact"
           data-layout="{'id':'INLINE'}"
@@ -1217,5 +1292,40 @@
 
 
 
+  <!-- Deferred loader: analytics + form embeds load on first user interaction
+       (touch/scroll/mouse/key) or 6s after window load — whichever comes first.
+       Keeps ~1.3MB of third-party requests out of the critical rendering path.
+       Conversion tracking is unaffected: Google Ads conversions fire on
+       thank-you.html, calls are tracked by CallRail (loaded async in head),
+       and gtag/clarity calls made before load are queued by the head stubs. -->
+  <script>
+    (function() {
+      var done = false;
+      function loadScript(src) {
+        var s = document.createElement('script');
+        s.src = src;
+        s.async = true;
+        document.head.appendChild(s);
+      }
+      function loadDeferred() {
+        if (done) return;
+        done = true;
+        // Form embeds (LeadConnector iframes + helper)
+        var frames = document.querySelectorAll('iframe[data-src]');
+        for (var i = 0; i < frames.length; i++) {
+          frames[i].src = frames[i].getAttribute('data-src');
+        }
+        loadScript('https://link.msgsndr.com/js/form_embed.js');
+        // Analytics — one gtag.js covers both AW- and G- configs set in the head stub
+        loadScript('https://www.googletagmanager.com/gtag/js?id=AW-16828382025');
+        loadScript('https://www.clarity.ms/tag/woobhn6bum');
+      }
+      var evts = ['pointerdown', 'touchstart', 'scroll', 'keydown', 'mousemove'];
+      for (var i = 0; i < evts.length; i++) {
+        window.addEventListener(evts[i], loadDeferred, { once: true, passive: true });
+      }
+      window.addEventListener('load', function() { setTimeout(loadDeferred, 6000); });
+    })();
+  </script>
 </body>
 </html>
