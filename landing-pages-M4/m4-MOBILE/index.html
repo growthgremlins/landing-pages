@@ -134,7 +134,7 @@
     .offer-badge {
       background: rgba(220,38,38,0.9);
       border-radius: 2rem;
-      padding: 0.75rem 1.75rem;
+      padding: 0.75rem 1.25rem;
       margin-bottom: clamp(0.75rem, 2.5vh, 1.75rem);
       display: inline-block;
       position: relative;
@@ -150,8 +150,9 @@
       animation: badgeGlow 2.8s ease-in-out infinite;
       pointer-events: none;
     }
-    .offer-title { color: #ffffff; font-weight: 700; font-size: clamp(0.875rem, 2.2vh, 1.125rem); line-height: 1.2; }
-    .offer-subtitle { color: #ffffffca; font-style: italic; font-size: clamp(0.75rem, 1.8vh, 0.875rem); font-weight: 400; }
+    /* vw-based so each line fits a narrow phone without wrapping (badge stays 2 lines total) */
+    .offer-title { color: #ffffff; font-weight: 700; font-size: clamp(0.66rem, 3.4vw, 1.125rem); line-height: 1.2; }
+    .offer-subtitle { color: #ffffffca; font-style: italic; font-size: clamp(0.58rem, 2.9vw, 0.875rem); font-weight: 400; }
     .hero-title {
       color: #fff;
       text-shadow: 0 0 7px rgba(0,0,0,0.85), 0 0 14px rgba(0,0,0,0.55);
