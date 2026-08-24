@@ -900,10 +900,6 @@
         height: 250px;
       }
 
-      .lc_reviews_widget {
-        min-height: 400px;
-      }
-
       .testimonials {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
@@ -1841,6 +1837,49 @@
       .pkg-reviews-group > .guarantee { order: 2; }
       .pkg-reviews-group > .pkg-section { order: 3; }
     }
+
+    /* ===================================
+       IN-HOUSE GOOGLE REVIEW CAROUSEL
+       (ported verbatim from khrome-MOBILE; only the accent is recoloured
+        #dc2626 -> #4400ba and #fee2e2 -> #ede9fe. Star gold #f59e0b is
+        deliberately NOT brand-coloured.)
+       =================================== */
+    .reviews-section { text-align: center; }
+    .rv-summary { display: flex; align-items: center; justify-content: center; gap: 0.9rem; flex-wrap: wrap; margin: 1rem 0 0.5rem; }
+    .rv-summary-num { font-size: 2.6rem; font-weight: 900; line-height: 1; color: #1f2937; }
+    .rv-summary-meta { display: flex; flex-direction: column; align-items: flex-start; gap: 0.2rem; }
+    .rv-stars { color: #f59e0b; font-size: 1.15rem; letter-spacing: 0.14em; line-height: 1; }
+    .rv-summary-count { font-size: 0.85rem; color: #6b7280; font-weight: 600; display: inline-flex; align-items: center; gap: 0.4rem; }
+    .rv-summary-count svg { width: 16px; height: 16px; }
+    .rv-carousel { position: relative; margin-top: 1.5rem; }
+    .rv-track { display: flex; gap: 1rem; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; padding: 0.5rem 0.25rem 1.25rem; scrollbar-width: none; }
+    .rv-track::-webkit-scrollbar { display: none; }
+    .rv-card { flex: 0 0 100%; scroll-snap-align: start; background: #fff; border: 1px solid #e5e7eb; border-radius: 1rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06); padding: 1.5rem 1.4rem; text-align: left; display: flex; flex-direction: column; min-height: 240px; }
+    .rv-card-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.85rem; }
+    .rv-card-stars { color: #f59e0b; font-size: 1rem; letter-spacing: 0.1em; line-height: 1; }
+    .rv-card-date { font-size: 0.78rem; color: #6b7280; }
+    .rv-card-text { font-size: 0.9rem; color: #4b5563; line-height: 1.6; flex-grow: 1; }
+    .rv-card-foot { display: flex; align-items: center; justify-content: space-between; margin-top: 1.25rem; }
+    .rv-card-who { display: flex; align-items: center; gap: 0.6rem; min-width: 0; }
+    .rv-avatar { width: 38px; height: 38px; border-radius: 50%; background: #ede9fe; color: #4400ba; display: flex; align-items: center; justify-content: center; font-size: 0.78rem; font-weight: 800; flex-shrink: 0; }
+    .rv-name { font-size: 0.86rem; font-weight: 700; color: #1f2937; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .rv-google { width: 20px; height: 20px; flex-shrink: 0; }
+    .rv-nav { display: flex; align-items: center; justify-content: center; gap: 1rem; margin-top: 0.25rem; }
+    .rv-arrow { width: 40px; height: 40px; border-radius: 50%; border: 1px solid #e5e7eb; background: #fff; color: #4400ba; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.2s, border-color 0.2s, opacity 0.2s; }
+    .rv-arrow:hover { background: #ede9fe; border-color: #4400ba; }
+    .rv-arrow:disabled { opacity: 0.3; cursor: default; }
+    .rv-arrow:disabled:hover { background: #fff; border-color: #e5e7eb; }
+    .rv-arrow svg { width: 20px; height: 20px; }
+    .rv-dots { display: flex; align-items: center; gap: 0.4rem; flex-wrap: wrap; justify-content: center; max-width: 220px; }
+    .rv-dot { width: 8px; height: 8px; border-radius: 99px; background: #e5e7eb; border: none; padding: 0; cursor: pointer; transition: background 0.2s, width 0.2s; }
+    .rv-dot.active { background: #4400ba; width: 22px; }
+    @media (min-width: 768px) { .rv-card { flex-basis: calc(50% - 0.5rem); } }
+    @media (min-width: 1024px) { .rv-card { flex-basis: calc(33.333% - 0.667rem); } }
+    /* Reviews: full-width band + shorter on desktop */
+    @media (min-width: 1024px) {
+      .reviews-section { max-width: none; margin-left: 0; margin-right: 0; padding: 2.25rem 2rem 2.5rem; }
+      .reviews-section .rv-carousel { margin-top: 1.25rem; }
+    }
   </style>
 </head>
 <body>
@@ -2075,10 +2114,73 @@
 
   <!-- Testimonials -->
   <section class="section reviews-section">
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="rvg" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.27-4.74 3.27-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84A11 11 0 0 0 12 23z"/><path fill="#FBBC05" d="M5.84 14.1a6.6 6.6 0 0 1 0-4.2V7.06H2.18a11 11 0 0 0 0 9.88l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84C6.71 7.31 9.14 5.38 12 5.38z"/></symbol></svg>
     <div class="section-eyebrow"><span>REVIEWS</span></div>
     <h2 class="section-title">WHAT ORANGE COUNTY<br>CUSTOMERS SAY:</h2>
-    <script async src='https://reputationhub.site/reputation/assets/review-widget.js'></script>
-    <iframe class='lc_reviews_widget' src='https://reputationhub.site/reputation/widgets/review_widget/zngtQ2ml8EN2SjOy00hP?widgetId=69b5f490128d7d7d3349d16c' frameborder='0' scrolling='no' style='min-width: 100%; width: 100%;' loading='lazy'></iframe>
+    <div class="rv-summary">
+      <span class="rv-summary-num">5.0</span>
+      <div class="rv-summary-meta">
+        <span class="rv-stars" aria-label="Rated 5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <span class="rv-summary-count"><svg class="rv-google" role="img" aria-label="Google"><use href="#rvg"/></svg>Google reviews</span>
+      </div>
+    </div>
+    <div class="rv-carousel">
+      <div class="rv-track">
+        <article class="rv-card">
+          <div class="rv-card-top"><span class="rv-card-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span class="rv-card-date">Jul 2026</span></div>
+          <p class="rv-card-text">I had a great experience with Euseph. He detailed my Mercedes Benz (exterior/interior) and left it like new, he revived/restored the dirty hardened alcantara both on the seats and the steering wheel like asked. Experience was quick and to the point. Definitely would recommend for a good fast detail.</p>
+          <div class="rv-card-foot"><div class="rv-card-who"><span class="rv-avatar">A</span><span class="rv-name">Adam</span></div><svg class="rv-google" role="img" aria-label="Google review"><use href="#rvg"/></svg></div>
+        </article>
+        <article class="rv-card">
+          <div class="rv-card-top"><span class="rv-card-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span class="rv-card-date">Apr 2026</span></div>
+          <p class="rv-card-text">Had ESP Detailing OC come out to me and honestly couldn&#8217;t be happier with how my C8 Corvette turned out. Car looks better than the day I picked it up from the dealership.</p>
+          <div class="rv-card-foot"><div class="rv-card-who"><span class="rv-avatar">DZ</span><span class="rv-name">David Z.</span></div><svg class="rv-google" role="img" aria-label="Google review"><use href="#rvg"/></svg></div>
+        </article>
+        <article class="rv-card">
+          <div class="rv-card-top"><span class="rv-card-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span class="rv-card-date">Apr 2026</span></div>
+          <p class="rv-card-text">I had such a great experience getting my car detailed. Euseph was very professional and took all of my concerns seriously from the start.</p>
+          <div class="rv-card-foot"><div class="rv-card-who"><span class="rv-avatar">AA</span><span class="rv-name">Ava A.</span></div><svg class="rv-google" role="img" aria-label="Google review"><use href="#rvg"/></svg></div>
+        </article>
+        <article class="rv-card">
+          <div class="rv-card-top"><span class="rv-card-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span class="rv-card-date">Apr 2026</span></div>
+          <p class="rv-card-text">I can&#8217;t say enough good things about this mobile detailing service. From start to finish, the experience was seamless, professional, and honestly exceeded my expectations.</p>
+          <div class="rv-card-foot"><div class="rv-card-who"><span class="rv-avatar">MB</span><span class="rv-name">Mariam B.</span></div><svg class="rv-google" role="img" aria-label="Google review"><use href="#rvg"/></svg></div>
+        </article>
+        <article class="rv-card">
+          <div class="rv-card-top"><span class="rv-card-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span class="rv-card-date">Mar 2026</span></div>
+          <p class="rv-card-text">Euseph was super nice, and on time. He did a really thorough job. Great price. Would definitely use them again!</p>
+          <div class="rv-card-foot"><div class="rv-card-who"><span class="rv-avatar">CL</span><span class="rv-name">Celia L.</span></div><svg class="rv-google" role="img" aria-label="Google review"><use href="#rvg"/></svg></div>
+        </article>
+        <article class="rv-card">
+          <div class="rv-card-top"><span class="rv-card-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span class="rv-card-date">Feb 2026</span></div>
+          <p class="rv-card-text">Usef did a great job bringing my car from lived in back to showroom ready. He did such a good job on the engine compartment that my oil change guy noticed and asked for my detailers number.</p>
+          <div class="rv-card-foot"><div class="rv-card-who"><span class="rv-avatar">JS</span><span class="rv-name">Joe S.</span></div><svg class="rv-google" role="img" aria-label="Google review"><use href="#rvg"/></svg></div>
+        </article>
+        <article class="rv-card">
+          <div class="rv-card-top"><span class="rv-card-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span class="rv-card-date">Feb 2026</span></div>
+          <p class="rv-card-text">Amazing and meticulous work! Euseph is professional, polite and hardworking.</p>
+          <div class="rv-card-foot"><div class="rv-card-who"><span class="rv-avatar">LH</span><span class="rv-name">Leila H.</span></div><svg class="rv-google" role="img" aria-label="Google review"><use href="#rvg"/></svg></div>
+        </article>
+        <article class="rv-card">
+          <div class="rv-card-top"><span class="rv-card-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span class="rv-card-date">Dec 2025</span></div>
+          <p class="rv-card-text">Absolutely beautiful work!!! My car hasn&#8217;t EVER looked this good. The dealership didn&#8217;t even do this good a job. Euseph was such a pleasure to do business with. He&#8217;s kind, efficient, hard-working, honest, thoughtful, &amp; meticulous.</p>
+          <div class="rv-card-foot"><div class="rv-card-who"><span class="rv-avatar">JK</span><span class="rv-name">J. L. K.</span></div><svg class="rv-google" role="img" aria-label="Google review"><use href="#rvg"/></svg></div>
+        </article>
+        <article class="rv-card">
+          <div class="rv-card-top"><span class="rv-card-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span class="rv-card-date">Oct 2025</span></div>
+          <p class="rv-card-text">Thank you Euseph for all your hard work! My car looks great and I couldn&#8217;t be happier. ESP does wonderful work. My car had years of wear and tear from my dog and a lot of traveling and he took care of it all. I am so grateful to have found this service. I will definitely be a repeat customer!</p>
+          <div class="rv-card-foot"><div class="rv-card-who"><span class="rv-avatar">KB</span><span class="rv-name">Kathryn B.</span></div><svg class="rv-google" role="img" aria-label="Google review"><use href="#rvg"/></svg></div>
+        </article>
+      </div>
+      <div class="rv-nav">
+        <button class="rv-arrow prev" type="button" aria-label="Previous reviews"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+        <div class="rv-dots"></div>
+        <button class="rv-arrow next" type="button" aria-label="Next reviews"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
+      </div>
+    </div>
+    <!-- NO "Write a Review" LINK: khrome's points at its own Google listing (ludocid).
+         ESP's Google listing URL has not been supplied, so the link is omitted rather
+         than guessed. Drop the khrome .rv-write markup back in once the URL is known. -->
   </section>
 
   </div><!-- /.pkg-reviews-group -->
@@ -2554,6 +2656,50 @@
     }
   });
 </script>
+
+  <!-- Reviews carousel -->
+  <script>
+    (function() {
+      var carousel = document.querySelector('.rv-carousel');
+      if (!carousel) return;
+      var track = carousel.querySelector('.rv-track');
+      var cards = track ? track.querySelectorAll('.rv-card') : [];
+      var prev = carousel.querySelector('.rv-arrow.prev');
+      var next = carousel.querySelector('.rv-arrow.next');
+      var dotsWrap = carousel.querySelector('.rv-dots');
+      if (!track || !cards.length) return;
+      var dots = [];
+      for (var i = 0; i < cards.length; i++) {
+        (function(idx) {
+          var b = document.createElement('button');
+          b.type = 'button';
+          b.className = 'rv-dot' + (idx === 0 ? ' active' : '');
+          b.setAttribute('aria-label', 'Go to review ' + (idx + 1));
+          b.addEventListener('click', function() { track.scrollTo({ left: idx * step(), behavior: 'smooth' }); });
+          dotsWrap && dotsWrap.appendChild(b);
+          dots.push(b);
+        })(i);
+      }
+      function step() {
+        if (cards.length < 2) return cards[0].offsetWidth;
+        return cards[1].getBoundingClientRect().left - cards[0].getBoundingClientRect().left;
+      }
+      function update() {
+        var idx = Math.round(track.scrollLeft / step());
+        if (idx < 0) idx = 0;
+        if (idx > cards.length - 1) idx = cards.length - 1;
+        for (var i = 0; i < dots.length; i++) dots[i].classList.toggle('active', i === idx);
+        if (prev) prev.disabled = track.scrollLeft <= 2;
+        if (next) next.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 2;
+      }
+      prev && prev.addEventListener('click', function() { track.scrollBy({ left: -step(), behavior: 'smooth' }); });
+      next && next.addEventListener('click', function() { track.scrollBy({ left: step(), behavior: 'smooth' }); });
+      var t;
+      track.addEventListener('scroll', function() { clearTimeout(t); t = setTimeout(update, 60); });
+      window.addEventListener('resize', function() { clearTimeout(t); t = setTimeout(update, 120); });
+      update();
+    })();
+  </script>
 
   <!-- Deferred loader: analytics + form embeds load on first user interaction
        (touch/scroll/mouse/key) or 6s after window load - whichever comes first.
