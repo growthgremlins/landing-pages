@@ -1008,18 +1008,33 @@
     .modal-form-container iframe { border: none; border-radius: 0; }
     /* ===== Offer page: expiry bar, vehicle pricing, includes, add-ons ===== */
     .offer-banner {
-      display: block;
+      display: flex;
+      flex-wrap: wrap;          /* a break can only fall between label and timer */
+      align-items: baseline;    /* two sizes sharing one baseline */
+      justify-content: center;
+      column-gap: 0.75rem;
+      row-gap: 0.15rem;
       width: 100%;
       background: #dc2626;
       color: #ffffff;
       text-align: center;
-      font-weight: 900;
-      font-size: 1.0625rem;
       line-height: 1.2;
-      letter-spacing: 0.06em;
       text-transform: uppercase;
       padding: 0.85rem 1rem;
       box-shadow: 0 2px 14px rgba(220, 38, 38, 0.5);
+    }
+    .offer-label {
+      white-space: nowrap;
+      font-size: 0.8125rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: rgba(255, 255, 255, 0.8);
+    }
+    .offer-timer {
+      white-space: nowrap;      /* the timer never splits mid-string */
+      font-size: 1.25rem;
+      font-weight: 900;
+      letter-spacing: 0.06em;
       /* Equal-width digits, or the centred countdown jitters every second. */
       font-variant-numeric: tabular-nums;
     }
@@ -1206,7 +1221,10 @@
     </button>
   </header>
 
-  <div class="offer-banner">Offer Expires In <span id="offerExpiry">6d 12h 00m 00s</span></div>
+  <div class="offer-banner">
+    <span class="offer-label">Offer Expires In</span>
+    <span id="offerExpiry" class="offer-timer">6d 12h 00m 00s</span>
+  </div>
 
   <!-- Hero Section -->
   <section class="hero">
