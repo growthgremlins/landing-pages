@@ -1223,8 +1223,6 @@
       .contact-content { padding: 1.25rem 1rem; }
       .contact-section .section-title { margin-bottom: 1rem; }
       .contact-subtitle { margin-bottom: 1.25rem; }
-      /* The iframe already carries ~48px of its own bottom slack, so a 3rem
-         margin on top of that read as a gap. */
       .contact-form-container { margin-bottom: 1rem; }
 
       .booking-modal-overlay { padding: 0.75rem; }
@@ -1758,30 +1756,6 @@
 <!-- GHL form embed helper: loaded once, covers both the inline and the modal iframe.
      It owns the iframe auto-resize and the post-submit top-window redirect. -->
 <script src="https://link.msgsndr.com/js/form_embed.js"></script>
-
-<!-- form_embed.js sizes the iframe with offsetHeight, which misses the 40px the GHL
-     form is inset from the top of its own document - leaving the form a few px short
-     and showing an inner scrollbar. Add that back whenever it writes a new height. -->
-<script>
-  (function () {
-    var PAD = 48; // the measured 40px inset, plus a little slack
-    function pad(f) {
-      var h = parseInt(f.style.height, 10);
-      if (!h || f.dataset.padded === String(h)) return; // ignore our own write
-      var n = h + PAD;
-      f.dataset.padded = String(n);
-      f.style.height = n + 'px';
-    }
-    var frames = document.querySelectorAll('iframe[data-form-id]');
-    for (var i = 0; i < frames.length; i++) {
-      (function (f) {
-        new MutationObserver(function () { pad(f); })
-          .observe(f, { attributes: true, attributeFilter: ['style'] });
-        pad(f);
-      })(frames[i]);
-    }
-  })();
-</script>
 
 <!-- Evergreen offer countdown: 6d 12h + random minutes, per visitor, not tied to a
      real date. The deadline is remembered so a refresh doesn't reset it; when it
