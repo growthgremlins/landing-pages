@@ -1214,6 +1214,24 @@
       cursor: pointer;
     }
 
+    /* Mobile only: tighten the chrome around the quote form so it isn't marooned
+       in padding. The form's own height comes from GHL inside the iframe and
+       can't be reached from here - this trims what surrounds it. Tablet and up
+       are untouched. */
+    @media (max-width: 767px) {
+      .contact-section { min-height: 0; }
+      .contact-content { padding: 1.25rem 1rem; }
+      .contact-section .section-title { margin-bottom: 1rem; }
+      .contact-subtitle { margin-bottom: 1.25rem; }
+      /* The iframe already carries ~48px of its own bottom slack, so a 3rem
+         margin on top of that read as a gap. */
+      .contact-form-container { margin-bottom: 1rem; }
+
+      .booking-modal-overlay { padding: 0.75rem; }
+      .booking-modal { padding: 1rem; }
+      .modal-header { margin-bottom: 0.875rem; }
+    }
+
   </style>
 
 <script type="text/javascript">
