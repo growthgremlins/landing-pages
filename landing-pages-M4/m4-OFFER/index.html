@@ -1020,6 +1020,8 @@
       text-transform: uppercase;
       padding: 0.85rem 1rem;
       box-shadow: 0 2px 14px rgba(220, 38, 38, 0.5);
+      /* Equal-width digits, or the centred countdown jitters every second. */
+      font-variant-numeric: tabular-nums;
     }
 
     .veh-grid {
@@ -1204,7 +1206,7 @@
     </button>
   </header>
 
-  <div class="offer-banner">Offer Expires <span id="offerExpiry">Month Day</span></div>
+  <div class="offer-banner">Offer Expires In <span id="offerExpiry">6d 12h 00m 00s</span></div>
 
   <!-- Hero Section -->
   <section class="hero">
@@ -1728,6 +1730,44 @@
         pad(f);
       })(frames[i]);
     }
+  })();
+</script>
+
+<!-- Evergreen offer countdown: 6d 12h + random minutes, per visitor, not tied to a
+     real date. The deadline is remembered so a refresh doesn't reset it; when it
+     runs out a fresh cycle starts. -->
+<script>
+  (function () {
+    var KEY = 'm4OfferDeadline';
+    var SPAN = (6 * 24 + 12) * 60;               // 6d 12h, in minutes
+    var el = document.getElementById('offerExpiry');
+    if (!el) return;
+
+    function fresh() {                            // random minutes + seconds so visitors differ
+      return Date.now() + (SPAN + Math.floor(Math.random() * 60)) * 60000
+                        + Math.floor(Math.random() * 60) * 1000;
+    }
+    function stored() {
+      try {
+        var v = parseInt(localStorage.getItem(KEY), 10);
+        return v > Date.now() ? v : null;         // also rejects NaN and past values
+      } catch (e) { return null; }                // storage blocked (private browsing)
+    }
+    function save(v) { try { localStorage.setItem(KEY, String(v)); } catch (e) {} }
+
+    var deadline = stored();
+    if (!deadline) { deadline = fresh(); save(deadline); }
+
+    function two(n) { return n < 10 ? '0' + n : '' + n; }
+    function tick() {
+      var left = deadline - Date.now();
+      if (left <= 0) { deadline = fresh(); save(deadline); left = deadline - Date.now(); }
+      var s = Math.floor(left / 1000);
+      el.textContent = Math.floor(s / 86400) + 'd ' + two(Math.floor(s / 3600) % 24) + 'h '
+                     + two(Math.floor(s / 60) % 60) + 'm ' + two(s % 60) + 's';
+    }
+    tick();
+    setInterval(tick, 1000);
   })();
 </script>
 
