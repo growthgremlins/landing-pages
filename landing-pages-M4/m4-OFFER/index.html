@@ -1008,20 +1008,30 @@
     .modal-form-container iframe { border: none; border-radius: 0; }
     /* ===== Offer page: expiry bar, vehicle pricing, includes, add-ons ===== */
     .offer-banner {
+      /* Mobile: always stacked, label over timer. */
       display: flex;
-      flex-wrap: wrap;          /* a break can only fall between label and timer */
-      align-items: baseline;    /* two sizes sharing one baseline */
+      flex-direction: column;
+      align-items: center;
       justify-content: center;
-      column-gap: 0.75rem;
       row-gap: 0.15rem;
       width: 100%;
-      background: #dc2626;
+      background: #b01e1e;
       color: #ffffff;
       text-align: center;
       line-height: 1.2;
       text-transform: uppercase;
       padding: 0.85rem 1rem;
-      box-shadow: 0 2px 14px rgba(220, 38, 38, 0.5);
+      box-shadow: 0 2px 14px rgba(176, 30, 30, 0.5);
+    }
+    @media (min-width: 768px) {
+      /* Room for one line: sit them side by side, still breaking only between
+         the two - never inside the timer. */
+      .offer-banner {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: baseline;   /* two sizes sharing one baseline */
+        column-gap: 0.75rem;
+      }
     }
     .offer-label {
       white-space: nowrap;
