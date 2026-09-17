@@ -1707,6 +1707,30 @@
      It owns the iframe auto-resize and the post-submit top-window redirect. -->
 <script src="https://link.msgsndr.com/js/form_embed.js"></script>
 
+<!-- form_embed.js sizes the iframe with offsetHeight, which misses the 40px the GHL
+     form is inset from the top of its own document - leaving the form a few px short
+     and showing an inner scrollbar. Add that back whenever it writes a new height. -->
+<script>
+  (function () {
+    var PAD = 48; // the measured 40px inset, plus a little slack
+    function pad(f) {
+      var h = parseInt(f.style.height, 10);
+      if (!h || f.dataset.padded === String(h)) return; // ignore our own write
+      var n = h + PAD;
+      f.dataset.padded = String(n);
+      f.style.height = n + 'px';
+    }
+    var frames = document.querySelectorAll('iframe[data-form-id]');
+    for (var i = 0; i < frames.length; i++) {
+      (function (f) {
+        new MutationObserver(function () { pad(f); })
+          .observe(f, { attributes: true, attributeFilter: ['style'] });
+        pad(f);
+      })(frames[i]);
+    }
+  })();
+</script>
+
 <script type="text/javascript" src="//cdn.callrail.com/companies/878192504/52d687a5e22c96e68dfe/12/swap.js"></script>
 </body>
 </html>
