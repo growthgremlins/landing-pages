@@ -499,7 +499,6 @@
     .contact-form-container {
       max-width: 600px;
       margin: 0 auto 3rem auto;
-      min-height: 500px;
       overflow-x: hidden;
     }
     .contact-info-cards {
@@ -976,84 +975,37 @@
       display: none;
       align-items: flex-start;
       justify-content: center;
-      padding: 1.5rem 1rem;
+      padding: 1rem;
+      /* The form is taller than a phone screen, so the overlay is what scrolls -
+         one outer scrollbar, never a cramped scroll box around the form. */
       overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
     }
     .booking-modal-overlay.active { display: flex; }
     .booking-modal {
       background: #ffffff;
-      border: 1px solid #e5e7eb;
+      border: none;
       border-radius: 1rem;
       width: 100%;
       max-width: 600px;
       margin: auto;
-      overflow-x: hidden;
-      padding: 1.5rem 1.25rem 2rem 1.25rem;
+      padding: 1.25rem;
     }
     .modal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem; }
     .modal-title { font-size: 1.125rem; font-weight: 900; color: #111827; }
     .modal-close { background: none; border: none; cursor: pointer; padding: 0.25rem; color: #6b7280; transition: color 0.2s; }
     .modal-close:hover { color: #111827; }
     .modal-close svg { width: 24px; height: 24px; }
-    .pkg-dropdown-wrap { position: relative; margin-bottom: 1.25rem; }
-    .pkg-dropdown-label { font-size: 0.78rem; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.5rem; }
-    .pkg-dropdown-btn {
-      width: 100%;
-      background: #f3f4f6;
-      border: 1.5px solid #e5e7eb;
-      border-radius: 0.5rem;
-      padding: 0.875rem 1rem;
-      font-size: 0.9rem;
-      font-weight: 700;
-      color: #111827;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-family: inherit;
-      transition: border-color 0.2s;
-    }
-    .pkg-dropdown-btn:hover, .pkg-dropdown-btn.open { border-color: #dc2626; }
-    .pkg-dropdown-btn svg { width: 18px; height: 18px; color: #6b7280; transition: transform 0.3s; }
-    .pkg-dropdown-btn.open svg { transform: rotate(180deg); }
-    .pkg-dropdown-list {
-      position: absolute;
-      top: calc(100% + 4px);
-      left: 0; right: 0;
-      background: #ffffff;
-      border: 1.5px solid #e5e7eb;
-      border-radius: 0.5rem;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
-      z-index: 10;
-      display: none;
-      overflow: hidden;
-    }
-    .pkg-dropdown-list.open { display: block; }
-    .pkg-dropdown-option {
-      padding: 0.875rem 1rem;
-      font-size: 0.875rem;
-      font-weight: 600;
-      color: #374151;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      transition: background 0.15s;
-      border: none;
-      background: none;
-      width: 100%;
-      font-family: inherit;
-      text-align: left;
-    }
-    .pkg-dropdown-option:hover { background: #f3f4f6; }
-    .pkg-dropdown-option.selected { color: #dc2626; background: rgba(220, 38, 38, 0.1); }
-    .pkg-dropdown-option .dd-check { display: none; color: #dc2626; width: 18px; height: 18px; }
-    .pkg-dropdown-option.selected .dd-check { display: block; }
-
     /* Keep embedded form iframes from causing a horizontal/side scrollbar */
     .free-quote-form-container iframe,
     .contact-form-container iframe,
     .modal-form-container iframe { display: block; width: 100%; max-width: 100%; border: none; }
+
+    /* The form is never clipped or given an inner scrollbar: form_embed.js measures
+       the real content height and writes it onto the iframe, so leave height alone.
+       The form runs ~1170px tall, well past a phone viewport - the overlay scrolls. */
+    .modal-form-container { width: 100%; }
+    .modal-form-container iframe { border: none; border-radius: 0; }
     /* ===== Offer page: expiry bar, vehicle pricing, includes, add-ons ===== */
     .offer-banner {
       display: block;
@@ -1222,6 +1174,15 @@
       .incl-item { font-size: 0.875rem; }
     }
 
+    /* CTAs converted from links to buttons: restore the anchor defaults a button
+       does not inherit. .call-btn keeps its own border, so it is excluded. */
+    .cta-primary, .sticky-button, .faq-cta-btn { border: none; }
+    .cta-primary, .sticky-button { width: 100%; }
+    .call-btn, .cta-primary, .sticky-button, .faq-cta-btn {
+      font-family: inherit;
+      cursor: pointer;
+    }
+
   </style>
 
 <script type="text/javascript">
@@ -1237,10 +1198,10 @@
   <!-- Header -->
   <header class="header">
     <img src="./m4-logo.webp" alt="M4 Detailing Logo" class="logo">
-    <a href="tel:+19413930118" class="call-btn phone-link">
-      CALL TO SCHEDULE
-      <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-    </a>
+    <button type="button" class="call-btn" onclick="openBookingModal()">
+      REQUEST BOOKING
+      <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><polyline points="9 16 11 18 15 14"/></svg>
+    </button>
   </header>
 
   <div class="offer-banner">Offer Expires <span id="offerExpiry">Month Day</span></div>
@@ -1256,17 +1217,17 @@
       <p class="hero-subtitle">One complete detail. One price, by vehicle size.</p>
 
       <div class="veh-grid">
-        <button type="button" class="veh-card" onclick="openBookingModal('sedan')">
+        <button type="button" class="veh-card" onclick="openBookingModal()">
           <span class="veh-name">SEDAN</span>
           <span class="veh-was">$249</span>
           <span class="veh-now">$199</span>
         </button>
-        <button type="button" class="veh-card" onclick="openBookingModal('suv')">
+        <button type="button" class="veh-card" onclick="openBookingModal()">
           <span class="veh-name">SUV</span>
           <span class="veh-was">$299</span>
           <span class="veh-now">$229</span>
         </button>
-        <button type="button" class="veh-card" onclick="openBookingModal('truck')">
+        <button type="button" class="veh-card" onclick="openBookingModal()">
           <span class="veh-name">LG SUV/TRUCK</span>
           <span class="veh-was">$349</span>
           <span class="veh-now">$289</span>
@@ -1299,7 +1260,7 @@
 
       <div class="scope-pill">Trunk + Main Cabin</div>
 
-      <button type="button" class="hero-book-btn" onclick="openBookingModal('sedan')">REQUEST BOOKING</button>
+      <button type="button" class="hero-book-btn" onclick="openBookingModal()">REQUEST BOOKING</button>
 
       <div class="cta-buttons">
         <div class="hero-rating">
@@ -1330,26 +1291,26 @@
       <div class="addon-card">
         <span class="addon-name">Clay + Seal</span>
         <span class="addon-sub">Paint decontamination &amp; seal</span>
-        <span class="addon-price">$49</span>
-        <button type="button" class="addon-btn" onclick="openBookingModal('sedan')">Add to booking</button>
+        <span class="addon-price">$39</span>
+        <button type="button" class="addon-btn" onclick="openBookingModal()">Add to booking</button>
       </div>
       <div class="addon-card">
         <span class="addon-name">Stain Removal</span>
         <span class="addon-sub">Shampoo extraction</span>
         <span class="addon-price">$79</span>
-        <button type="button" class="addon-btn" onclick="openBookingModal('sedan')">Add to booking</button>
+        <button type="button" class="addon-btn" onclick="openBookingModal()">Add to booking</button>
       </div>
       <div class="addon-card">
         <span class="addon-name">Pet Hair Removal</span>
         <span class="addon-sub">Full removal, seats &amp; carpets</span>
-        <span class="addon-price">$29</span>
-        <button type="button" class="addon-btn" onclick="openBookingModal('sedan')">Add to booking</button>
+        <span class="addon-price">$49</span>
+        <button type="button" class="addon-btn" onclick="openBookingModal()">Add to booking</button>
       </div>
       <div class="addon-card">
         <span class="addon-name">Odor Removal</span>
         <span class="addon-sub">Cabin deodorize &amp; sanitize</span>
         <span class="addon-price">$99</span>
-        <button type="button" class="addon-btn" onclick="openBookingModal('sedan')">Add to booking</button>
+        <button type="button" class="addon-btn" onclick="openBookingModal()">Add to booking</button>
       </div>
     </div>
   </section>
@@ -1434,11 +1395,11 @@
   </section>
 
   <div class="svc-cta-wrap">
-    <p class="svc-cta-note">Not sure what your car needs? Call us &#8212; we'll recommend the right service.</p>
-    <a href="tel:+19413930118" class="cta-primary phone-link">
-      <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-      CALL FOR A FREE QUOTE
-    </a>
+    <p class="svc-cta-note">Not sure what your car needs? Request a booking &#8212; we'll recommend the right service.</p>
+    <button type="button" class="cta-primary" onclick="openBookingModal()">
+      <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><polyline points="9 16 11 18 15 14"/></svg>
+      REQUEST BOOKING
+    </button>
   </div>
 
   </div><!-- /.svc-gradient-wrap -->
@@ -1554,11 +1515,11 @@
     </div>
     <div class="faq-bottom">
       <div class="faq-bottom-title">Still have a question?</div>
-      <div class="faq-bottom-sub">We answer every call. No bots, no forms &#8212; just a real answer in seconds.</div>
-      <a href="tel:+19413930118" class="faq-cta-btn phone-link">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-        CALL <span class="phone-text">(941) 393-0118</span>
-      </a>
+      <div class="faq-bottom-sub">Send us your details and a real person gets back to you &#8212; usually in under 2 minutes.</div>
+      <button type="button" class="faq-cta-btn" onclick="openBookingModal()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><polyline points="9 16 11 18 15 14"/></svg>
+        REQUEST BOOKING
+      </button>
     </div>
   </section>
 
@@ -1588,10 +1549,9 @@
       <p class="contact-subtitle">Book your car detailing appointment today and experience the M4 Detailing difference</p>
       <div id="contact-form" class="contact-form-container">
         <iframe
-          src="about:blank"
-          data-src="https://api.leadconnectorhq.com/widget/form/UhHl0igF6BB0On5IDSeb"
-          style="width:100%;height:100%;border:none;border-radius:10px"
-          id="inline-UhHl0igF6BB0On5IDSeb"
+          src="https://api.leadconnectorhq.com/widget/form/KqpIBeXsJiPmmNYJYQip"
+          style="width:100%;border:none;border-radius:10px"
+          id="inline-KqpIBeXsJiPmmNYJYQip"
           data-layout="{'id':'INLINE'}"
           data-trigger-type="alwaysShow"
           data-trigger-value=""
@@ -1599,11 +1559,11 @@
           data-activation-value=""
           data-deactivation-type="neverDeactivate"
           data-deactivation-value=""
-          data-form-name="google ads landing page form"
-          data-height="717"
-          data-layout-iframe-id="inline-UhHl0igF6BB0On5IDSeb"
-          data-form-id="UhHl0igF6BB0On5IDSeb"
-          title="google ads landing page form"
+          data-form-name="$199 Special Google Form"
+          data-height="695"
+          data-layout-iframe-id="inline-KqpIBeXsJiPmmNYJYQip"
+          data-form-id="KqpIBeXsJiPmmNYJYQip"
+          title="$199 Special Google Form"
         ></iframe>
       </div>
       <div class="contact-info-cards">
@@ -1629,10 +1589,10 @@
 
   <!-- Sticky CTA -->
   <div class="sticky-cta">
-    <a href="tel:+19413930118" class="sticky-button phone-link">
-      <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-      CALL <span class="phone-text">(941) 393-0118</span>
-    </a>
+    <button type="button" class="sticky-button" onclick="openBookingModal()">
+      <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><polyline points="9 16 11 18 15 14"/></svg>
+      REQUEST BOOKING
+    </button>
   </div>
 
   <script>
@@ -1642,27 +1602,6 @@
       else { stickyButton.classList.remove('visible'); }
     });
 
-    function loadContactForm() {
-      var iframe = document.querySelector('#contact-form iframe[data-src]');
-      if (iframe) {
-        iframe.src = iframe.getAttribute('data-src');
-        iframe.removeAttribute('data-src');
-        var script = document.createElement('script');
-        script.src = 'https://link.msgsndr.com/js/form_embed.js';
-        document.querySelector('#contact-form').appendChild(script);
-      }
-    }
-
-    document.addEventListener('DOMContentLoaded', function() {
-      if ('IntersectionObserver' in window) {
-        var contactEl = document.querySelector('.contact-section');
-        if (contactEl) {
-          new IntersectionObserver(function(entries, obs) {
-            if (entries[0].isIntersecting) { loadContactForm(); obs.disconnect(); }
-          }, { rootMargin: '200px' }).observe(contactEl);
-        }
-      } else { loadContactForm(); }
-    });
   </script>
 
   <!-- GFN Phone Sync -->
@@ -1701,29 +1640,24 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
     </div>
-    <div class="pkg-dropdown-wrap">
-      <div class="pkg-dropdown-label">Vehicle Size</div>
-      <button class="pkg-dropdown-btn" id="dropdownBtn" onclick="toggleDropdown()">
-        <span id="dropdownLabel">SEDAN &mdash; $199</span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
-      </button>
-      <div class="pkg-dropdown-list" id="dropdownList">
-        <button class="pkg-dropdown-option selected" data-pkg="sedan" onclick="selectPackage('sedan')">
-          SEDAN &mdash; $199
-          <svg class="dd-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-        </button>
-        <button class="pkg-dropdown-option" data-pkg="suv" onclick="selectPackage('suv')">
-          SUV &mdash; $229
-          <svg class="dd-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-        </button>
-        <button class="pkg-dropdown-option" data-pkg="truck" onclick="selectPackage('truck')">
-          LARGE SUV / TRUCK &mdash; $289
-          <svg class="dd-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-        </button>
-      </div>
-    </div>
     <div class="modal-form-container">
-      <iframe id="modalFormIframe" src="about:blank" style="width:100%;height:640px;border:none;border-radius:0.5rem"></iframe>
+      <iframe
+        id="modalFormIframe"
+        src="about:blank"
+        style="width:100%;border:none"
+        data-layout="{'id':'INLINE'}"
+        data-trigger-type="alwaysShow"
+        data-trigger-value=""
+        data-activation-type="alwaysActivated"
+        data-activation-value=""
+        data-deactivation-type="neverDeactivate"
+        data-deactivation-value=""
+        data-form-name="$199 Special Google Form"
+        data-height="695"
+        data-layout-iframe-id="modalFormIframe"
+        data-form-id="KqpIBeXsJiPmmNYJYQip"
+        title="$199 Special Google Form"
+      ></iframe>
     </div>
   </div>
 </div>
@@ -1743,21 +1677,13 @@
 </script>
 
 <script>
-  var pkgLabels = {
-    sedan: 'SEDAN \u2014 $199',
-    suv: 'SUV \u2014 $229',
-    truck: 'LARGE SUV / TRUCK \u2014 $289'
-  };
-  // Reusing M4's three existing GHL forms, one per vehicle size. Vehicle size is
-  // inferred from WHICH form fired - the forms themselves carry no size field.
-  var pkgFormUrls = {
-    sedan: 'https://api.leadconnectorhq.com/widget/form/j1S4oEHX3UL59GOQg1kJ',
-    suv: 'https://api.leadconnectorhq.com/widget/form/CqMslbHwsBnNs3httRz4',
-    truck: 'https://api.leadconnectorhq.com/widget/form/OhGyA1QOTjVDI5x0qSWR'
-  };
+  // One GHL form behind every entry point ($199 Special Google Form). Vehicle size
+  // is no longer captured by the page at all - it has to be a field inside the form.
+  var FORM_URL = 'https://api.leadconnectorhq.com/widget/form/KqpIBeXsJiPmmNYJYQip';
 
-  function openBookingModal(pkg) {
-    selectPackage(pkg);
+  function openBookingModal() {
+    var frame = document.getElementById('modalFormIframe');
+    if (frame.getAttribute('src') !== FORM_URL) { frame.src = FORM_URL; }
     document.getElementById('bookingModal').classList.add('active');
     document.body.style.overflow = 'hidden';
   }
@@ -1766,33 +1692,20 @@
     document.getElementById('bookingModal').classList.remove('active');
     document.body.style.overflow = '';
     document.getElementById('modalFormIframe').src = 'about:blank';
-    document.getElementById('dropdownBtn').classList.remove('open');
-    document.getElementById('dropdownList').classList.remove('open');
   }
 
   function handleOverlayClick(e) {
     if (e.target === e.currentTarget) { closeBookingModal(); }
   }
 
-  function toggleDropdown() {
-    document.getElementById('dropdownBtn').classList.toggle('open');
-    document.getElementById('dropdownList').classList.toggle('open');
-  }
-
-  function selectPackage(pkg) {
-    document.getElementById('dropdownLabel').textContent = pkgLabels[pkg];
-    document.querySelectorAll('.pkg-dropdown-option').forEach(function(opt) {
-      opt.classList.toggle('selected', opt.getAttribute('data-pkg') === pkg);
-    });
-    document.getElementById('modalFormIframe').src = pkgFormUrls[pkg] || pkgFormUrls.sedan;
-    document.getElementById('dropdownBtn').classList.remove('open');
-    document.getElementById('dropdownList').classList.remove('open');
-  }
-
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') { closeBookingModal(); }
   });
 </script>
+
+<!-- GHL form embed helper: loaded once, covers both the inline and the modal iframe.
+     It owns the iframe auto-resize and the post-submit top-window redirect. -->
+<script src="https://link.msgsndr.com/js/form_embed.js"></script>
 
 <script type="text/javascript" src="//cdn.callrail.com/companies/878192504/52d687a5e22c96e68dfe/12/swap.js"></script>
 </body>
