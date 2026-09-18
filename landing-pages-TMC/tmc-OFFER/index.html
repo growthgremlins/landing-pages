@@ -1992,7 +1992,10 @@
           if (k === 'addons') { (payload.addons = payload.addons || []).push(v); }
           else { payload[k] = v; }
         });
-        payload.addons = (payload.addons || []).join(', ');
+        // Never post an empty string here: GHL builds its mapping tokens from a
+        // captured sample, and an empty value is the awkward case to map. "None"
+        // also distinguishes "picked no add-ons" from a broken mapping.
+        payload.addons = (payload.addons || []).join(', ') || 'None';
         payload.phone = digits(payload.phone).replace(/^1?/, '+1');
 
         button.disabled = true;
