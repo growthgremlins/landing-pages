@@ -1886,10 +1886,9 @@
      redirect that fires the Ads conversion is ours rather than a GHL setting. -->
 <script>
   (function () {
-    // OPEN ITEM: create a GHL workflow with an "Inbound Webhook" trigger and paste its
-    // URL here. Until then the form validates and reports that booking is unavailable
-    // rather than silently dropping a lead.
-    var GHL_WEBHOOK_URL = 'REPLACE_WITH_TMC_GHL_INBOUND_WEBHOOK_URL';
+    // GHL workflow inbound-webhook trigger for the TMC sub-account. Write-only
+    // endpoint, not a credential - the honeypot below guards it against bots.
+    var GHL_WEBHOOK_URL = 'https://services.leadconnectorhq.com/hooks/of37lqYVOipUqwhcJayM/webhook-trigger/55d65c6e-18a2-4a46-af8e-d212df67ff08';
     var configured = GHL_WEBHOOK_URL.indexOf('REPLACE_WITH') !== 0;
 
     var template = document.querySelector('#contact-form .lead-form');
