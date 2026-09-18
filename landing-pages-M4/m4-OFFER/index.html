@@ -1262,7 +1262,7 @@
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <h1 class="hero-title">
-        Full Interior &amp; Exterior Detail in <span class="accent">Punta Gorda</span>
+        Full Interior &amp; Exterior Detail in <span class="accent" data-geo-city>Punta Gorda</span>
       </h1>
       <p class="hero-subtitle">One complete detail. One price, by vehicle size.</p>
 
@@ -1756,6 +1756,81 @@
 <!-- GHL form embed helper: loaded once, covers both the inline and the modal iframe.
      It owns the iframe auto-resize and the post-submit top-window redirect. -->
 <script src="https://link.msgsndr.com/js/form_embed.js"></script>
+
+<!-- Dynamic location in the H1 and title.
+     Google Ads appends ?loc={loc_physical_ms}, the numeric id of the searcher's
+     physical location; GEO_IDS maps the ids this account actually gets traffic
+     from (pulled from geographic_view) to a city name. Without that parameter -
+     organic, direct, Meta - fall back to an IP lookup, and failing that leave the
+     city already in the HTML. The displayed name always comes from the tables
+     below: a URL value is never written to the page, so it cannot be used to
+     inject markup or make the page read whatever a visitor likes. -->
+<script>
+  (function () {
+    // Google location id -> what to display. A handful of tiny CDPs are rolled up
+    // to the town people there would actually name (their marina, subdivision or
+    // census area), which is still somewhere M4 serves.
+    var GEO_IDS = {
+      '1015178': 'Port Charlotte',
+      '1015223': 'Venice',
+      '1015183': 'Punta Gorda',
+      '1015140': 'North Port',
+      '1015136': 'Nokomis',
+      '1015152': 'Osprey',
+      '1015019': 'Englewood',
+      '9052777': 'Rotonda West',
+      '9218008': 'Englewood',          // Grove City CDP
+      '9189270': 'Punta Gorda',        // Burnt Store Marina
+      '9052106': 'Punta Gorda',        // Harbour Heights
+      '9189867': 'Punta Gorda',        // Solana
+      '1015171': 'Englewood',          // Placida
+      '9194057': 'North Port'          // Warm Mineral Springs
+      // 9191000 "Plantation" is deliberately absent: it reads as Plantation in
+      // Broward County, 100 miles away. It falls back to the default.
+    };
+    // Accepted from the IP lookup only if the city is one of these.
+    var SERVICE_AREA = ['Punta Gorda', 'Port Charlotte', 'North Port', 'Venice',
+                        'Englewood', 'Rotonda West', 'Nokomis', 'Osprey'];
+    var CACHE_KEY = 'm4GeoCity';
+
+    var targets = document.querySelectorAll('[data-geo-city]');
+    if (!targets.length) return;
+    var fallback = targets[0].textContent.trim();
+
+    function apply(city) {
+      if (!city || city === fallback) return;
+      for (var i = 0; i < targets.length; i++) targets[i].textContent = city;
+      if (document.title.indexOf(fallback) !== -1) {
+        document.title = document.title.split(fallback).join(city);
+      }
+      window.__geoCity = city;
+    }
+    function cache(city) { try { sessionStorage.setItem(CACHE_KEY, city); } catch (e) {} }
+
+    // 1. the Ads parameter
+    var id = new URLSearchParams(location.search).get('loc');
+    if (id && GEO_IDS[id]) { apply(GEO_IDS[id]); cache(GEO_IDS[id]); return; }
+
+    // 2. whatever this session already worked out
+    var seen = null;
+    try { seen = sessionStorage.getItem(CACHE_KEY); } catch (e) {}
+    if (seen) { apply(seen); return; }
+
+    // 3. IP lookup, strictly best-effort: short timeout, silent on failure
+    if (!window.fetch || !window.AbortController) return;
+    var stop = new AbortController();
+    var timer = setTimeout(function () { stop.abort(); }, 1500);
+    fetch('https://ipwho.is/?fields=city,region_code,success', { signal: stop.signal })
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        clearTimeout(timer);
+        if (!d || d.success === false || d.region_code !== 'FL') return;
+        if (SERVICE_AREA.indexOf(d.city) === -1) return;   // never show a city we don't serve
+        apply(d.city); cache(d.city);
+      })
+      .catch(function () { clearTimeout(timer); });
+  })();
+</script>
 
 <!-- Evergreen offer countdown: 6d 12h + random minutes, per visitor, not tied to a
      real date. The deadline is remembered so a refresh doesn't reset it; when it

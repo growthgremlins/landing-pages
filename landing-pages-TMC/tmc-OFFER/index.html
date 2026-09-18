@@ -1372,7 +1372,7 @@
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <h1 class="hero-title">
-        Full Interior &amp; Exterior Detail in <span class="accent">Melbourne</span>
+        Full Interior &amp; Exterior Detail in <span class="accent" data-geo-city>Melbourne</span>
       </h1>
       <p class="hero-subtitle">One complete detail. One price, by vehicle size.</p>
 
@@ -1581,7 +1581,7 @@
   <!-- Testimonials -->
   <section class="section">
     <div class="section-eyebrow"><span>Reviews</span></div>
-    <h2 class="section-title">WHAT PUNTA GORDA<br>CUSTOMERS SAY:</h2>
+    <h2 class="section-title">WHAT MELBOURNE<br>CUSTOMERS SAY:</h2>
     <script async src='https://reputationhub.site/reputation/assets/review-widget.js'></script><iframe class='lc_reviews_widget' src='https://reputationhub.site/reputation/widgets/review_widget/of37lqYVOipUqwhcJayM?widgetId=69ff92332527d38300920178' frameborder='0' scrolling='no' style='min-width: 100%; width: 100%;' loading='lazy'></iframe>
   </section>
 
@@ -1757,6 +1757,9 @@
           <input type="hidden" name="utm_content" value="">
           <input type="hidden" name="page_url" value="">
           <input type="hidden" name="referrer" value="">
+          <!-- Which city the visitor was shown, and the raw Google location id. -->
+          <input type="hidden" name="geo_city" value="Melbourne">
+          <input type="hidden" name="loc" value="">
           <!-- Honeypot: the webhook is a public endpoint, so bots will find it. -->
           <div class="lf-hp" aria-hidden="true">
             <label>Company<input type="text" name="company" tabindex="-1" autocomplete="off"></label>
@@ -1913,13 +1916,19 @@
       utm_term: params.get('utm_term') || '',
       utm_content: params.get('utm_content') || '',
       page_url: location.href,
-      referrer: document.referrer || ''
+      referrer: document.referrer || '',
+      loc: params.get('loc') || ''
     };
     function stamp(form) {
       Object.keys(attribution).forEach(function (k) {
         var el = form.querySelector('[name="' + k + '"]');
         if (el) el.value = attribution[k];
       });
+      // The geo script may have resolved a city before this copy existed.
+      if (window.__geoCity) {
+        var city = form.querySelector('[name="geo_city"]');
+        if (city) city.value = window.__geoCity;
+      }
     }
 
     // --- clone for the modal, re-prefixing ids so the document stays valid ------
@@ -2023,6 +2032,90 @@
 
     wire(template);
     stamp(template);
+  })();
+</script>
+
+<!-- Dynamic location in the H1 and title.
+     Google Ads appends ?loc={loc_physical_ms}, the numeric id of the searcher's
+     physical location; GEO_IDS maps the ids this account actually gets traffic
+     from (pulled from geographic_view) to a city name. Without that parameter -
+     organic, direct, Meta - fall back to an IP lookup, and failing that leave the
+     city already in the HTML. The displayed name always comes from the tables
+     below: a URL value is never written to the page, so it cannot be used to
+     inject markup or make the page read whatever a visitor likes. -->
+<script>
+  (function () {
+    // Google location id -> what to display. Small CDPs are rolled up to the town
+    // people there would actually name, all still inside TMC's service area.
+    var GEO_IDS = {
+      '1015113': 'Melbourne',
+      '1015157': 'Palm Bay',
+      '9053118': 'West Melbourne',
+      '1015187': 'Rockledge',
+      '1015114': 'Merritt Island',
+      '1015225': 'Vero Beach',
+      '1014988': 'Cocoa',
+      '1015219': 'Titusville',
+      '1014989': 'Cocoa Beach',
+      '1015194': 'Sebastian',
+      '9052180': 'Indian Harbour Beach',
+      '9052417': 'Melbourne Beach',
+      '9073468': 'Palm Bay',           // Grant-Valkaria
+      '9052703': 'Cocoa',              // Port St. John
+      '9194942': 'Vero Beach',         // Vero Beach South
+      '9190503': 'Vero Beach',         // West Vero Corridor
+      '9189349': 'Cocoa',              // Cocoa West
+      '9193770': 'Sebastian',          // Micco
+      '1015165': 'Satellite Beach',    // Patrick Space Force Base
+      '9195437': 'Cape Canaveral'      // Port Canaveral
+    };
+    // Accepted from the IP lookup only if the city is one of these.
+    var SERVICE_AREA = ['Melbourne', 'Palm Bay', 'West Melbourne', 'Rockledge',
+                        'Merritt Island', 'Vero Beach', 'Cocoa', 'Titusville',
+                        'Cocoa Beach', 'Sebastian', 'Indian Harbour Beach',
+                        'Melbourne Beach', 'Satellite Beach', 'Cape Canaveral',
+                        'Viera', 'Suntree', 'Indialantic', 'Malabar'];
+    var CACHE_KEY = 'tmcGeoCity';
+
+    var targets = document.querySelectorAll('[data-geo-city]');
+    if (!targets.length) return;
+    var fallback = targets[0].textContent.trim();
+
+    function apply(city) {
+      if (!city || city === fallback) return;
+      for (var i = 0; i < targets.length; i++) targets[i].textContent = city;
+      if (document.title.indexOf(fallback) !== -1) {
+        document.title = document.title.split(fallback).join(city);
+      }
+      window.__geoCity = city;
+      // Stamp every copy of the form, including one the modal has already cloned.
+      var fields = document.querySelectorAll('.lead-form [name="geo_city"]');
+      for (var j = 0; j < fields.length; j++) fields[j].value = city;
+    }
+    function cache(city) { try { sessionStorage.setItem(CACHE_KEY, city); } catch (e) {} }
+
+    // 1. the Ads parameter
+    var id = new URLSearchParams(location.search).get('loc');
+    if (id && GEO_IDS[id]) { apply(GEO_IDS[id]); cache(GEO_IDS[id]); return; }
+
+    // 2. whatever this session already worked out
+    var seen = null;
+    try { seen = sessionStorage.getItem(CACHE_KEY); } catch (e) {}
+    if (seen) { apply(seen); return; }
+
+    // 3. IP lookup, strictly best-effort: short timeout, silent on failure
+    if (!window.fetch || !window.AbortController) return;
+    var stop = new AbortController();
+    var timer = setTimeout(function () { stop.abort(); }, 1500);
+    fetch('https://ipwho.is/?fields=city,region_code,success', { signal: stop.signal })
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        clearTimeout(timer);
+        if (!d || d.success === false || d.region_code !== 'FL') return;
+        if (SERVICE_AREA.indexOf(d.city) === -1) return;   // never show a city we don't serve
+        apply(d.city); cache(d.city);
+      })
+      .catch(function () { clearTimeout(timer); });
   })();
 </script>
 
