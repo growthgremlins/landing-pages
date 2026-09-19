@@ -560,7 +560,8 @@
     .pkg-learn-more { display: block; text-align: center; color: #dc2626; font-size: 0.8rem; font-weight: 700; text-decoration: underline; cursor: pointer; padding: 0.75rem 0 0.25rem 0; letter-spacing: 0.03em; transition: color 0.2s; }
     .pkg-learn-more:hover { color: #b91c1c; }
     .pkg-expanded { max-height: 0; overflow: hidden; transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
-    .pkg-expanded.active { max-height: 800px; }
+    /* No fixed cap here: togglePackageExpand sets max-height from the content's
+       own scrollHeight, so a long package cannot be clipped at narrow widths. */
     .pkg-expanded-inner { padding: 1rem 0 0.5rem 0; border-top: 1px solid #e5e7eb; margin-top: 0.75rem; }
     .pkg-expanded-inner .pkg-description { font-size: 0.8rem; color: #6b7280; font-style: italic; line-height: 1.7; text-align: center; margin-bottom: 1.25rem; }
     .pkg-includes-title { font-size: 0.75rem; font-weight: 800; color: #1f2937; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.5rem; }
@@ -1243,15 +1244,30 @@
       var isOpen = expanded.classList.contains('active');
       document.querySelectorAll('.pkg-expanded.active').forEach(function(el) {
         el.classList.remove('active');
+        el.style.maxHeight = '0';
         el.closest('.pkg-card').querySelector('.pkg-learn-more').style.display = '';
       });
       if (!isOpen) {
         expanded.classList.add('active');
+        // Size to the content, the same way toggleFaq does. A fixed cap clipped
+        // the longest package: it needs ~1220px on a 288px-wide card, and the old
+        // 800px ceiling cut off the last items and the booking button with it.
+        expanded.style.maxHeight = expanded.scrollHeight + 'px';
         learnMore.style.display = 'none';
       } else {
         learnMore.style.display = '';
       }
     }
+
+    // A pixel max-height goes stale when the text reflows - rotating a phone, or
+    // resizing - so recompute whatever is currently open.
+    window.addEventListener('resize', function () {
+      document.querySelectorAll('.pkg-expanded.active').forEach(function (el) {
+        el.style.maxHeight = 'none';
+        var h = el.scrollHeight;
+        el.style.maxHeight = h + 'px';
+      });
+    });
 
     document.querySelectorAll('.pkg-card').forEach(function(card) {
       card.style.cursor = 'pointer';
