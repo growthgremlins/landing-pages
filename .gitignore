@@ -12,6 +12,8 @@ Desktop.ini
 # --- Local Claude Code config (machine-specific) ---
 .claude/
 
+# --- Netlify CLI build cache (regenerable; can reach hundreds of MB) ---
+.netlify/
+
 # --- Non-live clients (excluded from deploy) ---
 landing-pages-PERCISION/
-landing-pages-ECHELON/
