@@ -326,7 +326,17 @@
       stroke-linejoin: round;
       filter: drop-shadow(0 0 4px rgba(58,182,200,0.4));
     }
-    @media (min-width: 1024px) { .hero-scroll { display: none; } }
+    /* Label above the chevron, so it reads as a scroll cue rather than a button. */
+    .hero-scroll { flex-direction: column; gap: 0.1rem; }
+    .hero-scroll-text {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+    }
+    /* Mobile-only cue - a wider screen already shows what follows. */
+    @media (min-width: 768px) { .hero-scroll { display: none; } }
 
     /* Section */
     .section {
@@ -1304,6 +1314,20 @@
        can't be reached from here - this trims what surrounds it. Tablet and up
        are untouched. */
     @media (max-width: 767px) {
+      /* Hero order on a phone: rating first as social proof before the headline,
+         then the usual flow, with the response-time tagline and the scroll cue
+         under the button. All of this is switched on only here, so the desktop
+         hero keeps its block layout and its markup completely untouched.
+         display:contents dissolves the .cta-buttons wrapper so the rating and
+         tagline become flex items of .hero-content - order only works between
+         siblings, and the H1 lives one level up. */
+      .hero-content { display: flex; flex-direction: column; }
+      .cta-buttons { display: contents; }
+      .hero-rating { order: -1; }
+      /* Inline-level children would stretch edge to edge as flex items and their
+         pill backgrounds would span the screen. */
+      .scope-pill, .hero-tagline, .hero-scroll { align-self: center; }
+
       .contact-section { min-height: 0; }
       .contact-content { padding: 1.25rem 1rem; }
       .contact-section .section-title { margin-bottom: 1rem; }
@@ -1420,7 +1444,7 @@
 
       <div class="scope-pill">Trunk + Main Cabin</div>
 
-      <button type="button" class="hero-book-btn" onclick="openBookingModal()">REQUEST BOOKING</button>
+      <button type="button" class="hero-book-btn" onclick="openBookingModal()">GET OFFER</button>
 
       <div class="cta-buttons">
         <div class="hero-rating">
@@ -1440,11 +1464,15 @@
           Avg. response time <strong>under 2 min</strong>
         </div>
       </div>
+      <a href="#offer-addons" class="hero-scroll" aria-label="See more">
+        <span class="hero-scroll-text">See more</span>
+        <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+      </a>
     </div>
   </section>
 
   <!-- Add-Ons -->
-  <section class="addon-section">
+  <section class="addon-section" id="offer-addons">
     <div class="section-eyebrow"><span>Optional Extras</span></div>
     <h2 class="section-title">ADD&#8211;<span class="accent">ONS</span></h2>
     <div class="addon-grid">
