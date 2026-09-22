@@ -1,0 +1,2915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!--favicon-->
+  <link rel="icon" type="image/webp" href="/m4-logo.webp">
+  <link rel="shortcut icon" type="image/webp" href="/m4-logo.webp">
+  <link rel="apple-touch-icon" href="/m4-logo.webp">
+  <!-- SANDBOX COPY - tracking deliberately removed.
+       Live page (../m4-OFFER/) loads Google Ads gtag AW-17844019112, Microsoft
+       Clarity w77vu7kpdz and CallRail company 878192504. All three are stripped
+       here so experimenting cannot pollute the real M4 accounts. Do not re-add. -->
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <title>[SANDBOX] M4 Detailing — Full Detail from $199 in Punta Gorda, FL</title>
+  <meta name="description" content="Limited-time detailing offer in Punta Gorda, FL. Full interior and exterior detail from $199 for sedans, $229 SUVs, $289 large SUVs and trucks. Request booking online.">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-weight: 400;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      background: #ffffff;
+      color: #374151;
+      line-height: 1.6;
+      padding-bottom: 80px;
+      overflow-x: hidden;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .accent {
+      color: #ffffff;
+      text-shadow: 0 0px 30px rgba(220, 38, 38, 0.9);
+    }
+
+    /* Top Banner */
+    .top-banner {
+      background: #f3f4f6;
+      border-bottom: 1px solid #e5e7eb;
+      padding: 0.375rem 1rem;
+      padding-top: calc(0.375rem + env(safe-area-inset-top, 0px));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+    }
+
+    .top-banner-item {
+      display: flex;
+      align-items: center;
+      gap: 0.375rem;
+      color: #374151;
+      font-size: 0.75rem;
+      font-weight: 400;
+      text-decoration: none;
+    }
+
+    .top-banner-item svg {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+    }
+
+    /* Header */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.4rem 0.75rem;
+      background: #0a0a0a;
+      border-bottom: 1px solid #1f1f1f;
+    }
+
+    .logo {
+      height: 28px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .call-btn {
+      background: transparent;
+      border: 1.5px solid #dc2626;
+      color: #dc2626;
+      padding: 0.3rem 0.6rem;
+      border-radius: 0.4rem;
+      font-weight: 700;
+      font-size: 0.625rem;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.3s;
+    }
+
+    .call-btn:hover {
+      background: rgba(220, 38, 38, 0.1);
+    }
+
+    /* Hero Section */
+    @keyframes badgeGlow {
+      0%, 100% { box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3), 0 0 10px rgba(220,38,38,0.3); }
+      50%      { box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3), 0 0 22px rgba(220,38,38,0.6); }
+    }
+    .hero {
+      position: relative;
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: auto;
+      /* Extra bottom padding is the landing strip for the overlapping inclusions
+         card below. Sized against the alt-link, which is the hero's last element -
+         at 4.5rem the card rode up over it. */
+      padding: 2.5rem 1rem 5rem;
+      overflow: hidden;
+      max-height: none;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      /* Hero 40% darker. Applied to the photo rather than the overlay: that
+         gradient already ends at rgba(10,10,10,0.9), so raising its alphas
+         would clamp to solid black and flatten it. */
+      filter: brightness(0.6);
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.55) 50%, rgba(10,10,10,0.9) 100%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      width: 100%;
+      max-width: 640px;
+      padding: 0 0.5rem;
+    }
+
+    .offer-badge {
+      background: rgba(220, 38, 38, 0.85);
+      border-radius: 2rem;
+      padding: 1rem 2rem;
+      margin-bottom: clamp(0.75rem, 2.5vh, 1.5rem);
+      display: inline-block;
+      animation: badgeGlow 2.8s ease-in-out infinite;
+    }
+
+    .offer-title {
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 1.125rem;
+      line-height: 1.2;
+    }
+
+    .offer-subtitle {
+      color: #ffffffca;
+      font-style: italic;
+      font-size: 0.875rem;
+      font-weight: 400;
+    }
+
+    .hero-title {
+      color: #fff;
+      font-size: 2.35rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      /* Caps set tighter than sentence case - the ascender gap disappears, so
+         1.2 leading opens a visible hole between the two lines. */
+      line-height: 1.06;
+      letter-spacing: -0.01em;
+      margin-bottom: clamp(0.5rem, 1.5vh, 0.75rem);
+      text-shadow: 0 0 7px rgba(0,0,0,0.85), 0 0 14px rgba(0,0,0,0.55);
+      text-wrap: balance;
+    }
+
+    .hero-subtitle {
+      color: rgba(255,255,255,0.9);
+      font-size: 0.9rem;
+      font-weight: 400;
+      margin-bottom: clamp(0.5rem, 1.5vh, 1.25rem);
+      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+    }
+
+    /* Hero trust badge + star rating (text, no images) */
+    .trust-badge {
+      background: transparent;
+      color: #fff;
+      text-shadow: 0 0 7px rgba(0,0,0,0.85), 0 0 14px rgba(0,0,0,0.55);
+      padding: 0.1rem .5rem;
+      border-top: 2px solid #fff;
+      border-bottom: 2px solid #fff;
+      margin-bottom: clamp(0.5rem, 1.5vh, 1.25rem);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      display: inline-block;
+      white-space: nowrap;
+    }
+
+    .hero-rating {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      margin: 0 auto clamp(0.75rem, 2vh, 2rem);
+    }
+    .hero-stars { display: flex; gap: 2px; }
+    .hero-star { color: #facc15; font-size: clamp(0.9rem, 1.8vh, 1.1rem); }
+    .hero-rating-text { color: #fff; font-size: clamp(0.75rem, 1.5vh, 0.875rem); font-weight: 700; text-shadow: 0 1px 3px rgba(0,0,0,0.5); }
+
+    .cta-buttons {
+      max-width: 28rem;
+      margin: 2rem 0rem;
+    }
+
+    .cta-primary {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      background: #dc2626;
+      color: white;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      font-weight: 700;
+      font-size: 1rem;
+      text-decoration: none;
+      margin-bottom: 0.75rem;
+      box-shadow: 0 4px 15px rgba(220, 38, 38, 0.3);
+      transition: all 0.3s;
+    }
+
+    .cta-primary:hover {
+      background: #b91c1c;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(220, 38, 38, 0.4);
+    }
+
+    .cta-secondary {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      background: rgba(0,0,0,0.5);
+      color: #ffffff;
+      border: 2px solid #ffffff;
+      padding: 1rem 2rem;
+      border-radius: 0.5rem;
+      font-weight: 700;
+      font-size: 1rem;
+      text-decoration: none;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+      transition: all 0.3s;
+    }
+
+    .cta-secondary:hover { background: rgba(0,0,0,0.65); border-color: #ffffff; }
+
+    /* Hero response-time tagline */
+
+    /* Hero scroll cue */
+    /* Section */
+    .section {
+      padding: 2rem 1rem 1rem 1rem;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 900;
+      text-align: center;
+      margin-bottom: 1.5rem;
+      color: #111827;
+    }
+    /* Section title accent stays brand red on light backgrounds (the hero .accent stays white) */
+    .section-title .accent { color: #dc2626; text-shadow: none; }
+
+    /* Section eyebrow pill */
+    .section-eyebrow {
+      display: block;
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+    .section-eyebrow span {
+      display: inline-block;
+      background: rgba(220,38,38,0.15);
+      color: #dc2626;
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.875rem;
+      border-radius: 99px;
+    }
+
+    /* Why Choose Us */
+    .wcus-headline {
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: #111827;
+      line-height: 1.25;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    .wcus-headline span { color: #dc2626; }
+    .wcus-headline-desktop { display: none; }
+    .wcus-photo {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 0.75rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    .wcus-para {
+      font-size: 0.875rem;
+      color: #4b5563;
+      line-height: 1.8;
+      text-align: center;
+      margin-bottom: 1.5rem;
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .wcus-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: center;
+      max-width: 300px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .wcus-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      background: rgba(220, 38, 38, 0.1);
+      color: #fca5a5;
+      font-size: 0.7rem;
+      font-weight: 800;
+      padding: 0.375rem 0.75rem;
+      border-radius: 99px;
+      letter-spacing: 0.03em;
+      border: 1.5px solid rgba(220, 38, 38, 0.25);
+    }
+    .bdot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #dc2626;
+      flex-shrink: 0;
+    }
+
+    /* Divider */
+    .divider { border-top: 1px solid #e5e7eb; margin: 1rem 0; }
+
+    /* Guarantee */
+    .guarantee {
+      background: linear-gradient(135deg, #991b1b 0%, #dc2626 100%);
+      color: white;
+      padding: 1rem 0.25rem;
+      text-align: center;
+    }
+    .guarantee-title { font-size: 1rem; font-weight: 700; }
+
+    /* Sticky CTA */
+    .sticky-cta {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #ffffff;
+      border-top: 1px solid #e5e7eb;
+      padding: .5rem;
+      padding-bottom: calc(.5rem + env(safe-area-inset-bottom, 0px));
+      box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.3);
+      z-index: 50;
+      transform: translateY(100%);
+      transition: transform 0.3s ease-in-out;
+    }
+    .sticky-cta.visible { transform: translateY(0); }
+    .sticky-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      background: #dc2626;
+      color: white;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      font-weight: 700;
+      font-size: 1.125rem;
+      text-decoration: none;
+      box-shadow: 0 4px 15px rgba(220, 38, 38, 0.3);
+      transition: all 0.3s;
+    }
+    .sticky-button:hover { background: #b91c1c; }
+
+    .icon { width: 20px; height: 20px; }
+
+    @media (max-width: 640px) { .hero-title { font-size: 29px; } }
+
+    /* Contact Section */
+    .contact-section {
+      position: relative;
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .contact-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .contact-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(10,10,10,0.85) 0%, rgba(10,10,10,0.8) 50%, rgba(10,10,10,0.9) 100%);
+    }
+    .contact-content {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      padding: 2rem 1.25rem;
+      width: 100%;
+    }
+    .contact-section .section-title { color: white; }
+    .contact-subtitle {
+      color: rgba(255,255,255,0.8);
+      font-size: 1rem;
+      font-weight: 400;
+      margin-bottom: 2rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .contact-form-container {
+      max-width: 600px;
+      margin: 0 auto 3rem auto;
+      overflow-x: hidden;
+    }
+    .contact-info-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .info-card {
+      background: #1a1a1a;
+      border: 1px solid #2a2a2a;
+      border-radius: 0.5rem;
+      padding: 1.5rem;
+      text-align: center;
+    }
+    .info-icon {
+      width: 32px;
+      height: 32px;
+      color: #dc2626;
+      margin: 0 auto 0.75rem auto;
+    }
+    .info-label {
+      font-size: 0.875rem;
+      color: #6b7280;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+    }
+    .info-text {
+      font-size: 1rem;
+      color: #ffffff;
+      font-weight: 700;
+      line-height: 1.5;
+    }
+
+    /* Tablet */
+    @media (min-width: 768px) {
+      .section, .hero-content {
+        max-width: 768px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .section { padding: 2.5rem 2rem 2rem 2rem; }
+      .section-title { font-size: 1.875rem; }
+      .hero-title { font-size: 2.75rem; }
+      .hero-subtitle { font-size: 1.2rem; }
+      .wcus-headline { font-size: 1.875rem; }
+      .wcus-photo { height: 260px; }
+      .wcus-section-inner { max-width: 640px; margin: 0 auto; }
+      .cta-buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; max-width: 36rem; margin-left: auto; margin-right: auto; }
+      .cta-primary, .cta-secondary { flex: 1; min-width: 10rem; margin-bottom: 0; }
+      .contact-content { max-width: 768px; margin-left: auto; margin-right: auto; }
+      .contact-subtitle { font-size: 1.2rem; }
+      .contact-info-cards { flex-direction: row; gap: 1.5rem; max-width: 768px; }
+      .info-card { flex: 1; }
+    }
+
+    /* Desktop */
+    @media (min-width: 1024px) {
+      .section { max-width: 1440px; margin: 0 auto; padding: 4rem 3rem 3rem 3rem; }
+      .hero-content { max-width: 860px; margin: 0 auto; }
+      .section-title { font-size: 2.25rem; }
+      .hero-title { font-size: 3.4rem; }
+      .hero-subtitle { font-size: 1.25rem; }
+      .hero { min-height: 700px; max-height: none; align-items: center; justify-content: center; }
+      .hero-content { padding: 3rem; }
+      .wcus-section-inner { display: flex; gap: 2.5rem; align-items: stretch; max-width: 1440px; margin-left: auto; margin-right: auto; padding-left: 3rem; padding-right: 3rem; }
+      .wcus-col-photo { flex: 1; position: relative; overflow: hidden; border-radius: 0.75rem; min-height: 300px; }
+      .wcus-col-text { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+      .wcus-photo { position: absolute; inset: 0; width: 100%; height: 100%; margin-bottom: 0; border-radius: 0; }
+      .wcus-headline-mobile { display: none; }
+      .wcus-headline-desktop { display: block; }
+      .wcus-headline, .wcus-para { text-align: left; }
+      .wcus-para { margin-left: 0; margin-right: 0; }
+      .wcus-badges { justify-content: space-between; flex-wrap: nowrap; gap: 0.75rem; align-items: center; width: 100%; margin-left: 0; margin-right: 0; }
+      .wcus-badge { flex: 1; text-align: center; justify-content: center; white-space: nowrap; font-size: 0.72rem; margin: 0; }
+      .lc_reviews_widget { min-height: 400px; }
+      .sticky-button { max-width: 400px; margin: 0 auto; }
+      body { padding-bottom: 0; }
+      .sticky-cta { display: none; }
+      .header { max-width: none; margin: 0; padding: 1rem max(3rem, calc((100% - 1200px) / 2)); }
+      .contact-section { min-height: 800px; max-width: 100%; }
+      .contact-content { max-width: 1200px; padding: 4rem 3rem; }
+      .contact-subtitle { font-size: 1.25rem; margin-bottom: 3rem; }
+      .contact-form-container { max-width: 800px; }
+      .contact-info-cards { max-width: 800px; gap: 2rem; }
+      .info-card { padding: 2rem; }
+      .info-icon { width: 40px; height: 40px; }
+      .free-quote-form-container { max-width: 760px; }
+      .contact-form-container { max-width: 960px; }
+      .contact-info-cards { max-width: 960px; gap: 2rem; }
+      .cta-buttons { max-width: 580px; margin-left: auto; margin-right: auto; }
+      .cta-primary, .cta-secondary { font-size: 1.0625rem; padding: 1.125rem 1.5rem; }
+    }
+
+    /* Free Quote Section */
+    .free-quote-section {
+      background: #f8f9fb;
+      padding: 2.5rem 1rem;
+      text-align: center;
+      scroll-margin-top: 1.5rem;
+    }
+    .free-quote-section .section-title {
+      font-size: 1.75rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+      color: #111827;
+    }
+    .free-quote-subtitle {
+      color: #4b5563;
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.5;
+    }
+    .free-quote-form-container {
+      max-width: 600px;
+      margin: 0 auto;
+      min-height: 580px;
+      height: fit-content;
+      overflow-x: hidden;
+    }
+    @media (min-width: 768px) {
+      .free-quote-section { padding: 3rem 2rem; }
+      .free-quote-section .section-title { font-size: 2rem; }
+      .free-quote-subtitle { font-size: 1.1rem; }
+    }
+    @media (min-width: 1024px) {
+      .free-quote-section { padding: 4rem 3rem; }
+      .free-quote-section .section-title { font-size: 2.25rem; }
+      .free-quote-subtitle { font-size: 1.15rem; margin-bottom: 2rem; }
+      .free-quote-form-container { max-width: 640px; }
+    }
+
+    /* Tabbed Services */
+    .svc-gradient-wrap {
+      background: linear-gradient(180deg, #ffffff 0%, #f8f9fb 50%, #ffffff 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .svc-gradient-wrap::before {
+      content: '';
+      position: absolute;
+      top: -50%; right: -30%;
+      width: 60%; height: 200%;
+      background: linear-gradient(135deg, transparent 40%, rgba(220, 38, 38, 0.03) 50%, transparent 60%);
+      transform: rotate(-15deg);
+      pointer-events: none;
+    }
+    .svc-tabs-wrap {
+      padding: 2.5rem 1rem 1.5rem 1rem;
+      position: relative;
+      z-index: 1;
+    }
+    .svc-tabs-wrap .section-title { margin-bottom: 0.5rem; }
+    .svc-subtitle {
+      text-align: center;
+      color: #6b7280;
+      font-size: 0.85rem;
+      margin-bottom: 1.5rem;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .tab-bar {
+      display: flex;
+      border: 2px solid #dc2626;
+      border-radius: 0.5rem;
+      overflow: hidden;
+      margin-bottom: 1.5rem;
+    }
+    .tab-btn {
+      flex: 1;
+      background: #f3f4f6;
+      color: #dc2626;
+      border: none;
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 0.75rem 0;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background 0.2s, color 0.2s;
+    }
+    .tab-btn.active { background: #dc2626; color: white; }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+    .svc-list { display: grid; grid-template-columns: 1fr; gap: 1.25rem; }
+    .svc-card {
+      background: #ffffff;
+      border: 1.5px solid #e5e7eb;
+      border-radius: 0.75rem;
+      padding: 0.75rem 0.75rem 1.25rem 0.75rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+    .svc-card:hover {
+      transform: translateY(-4px);
+      border-color: #dc2626;
+      box-shadow: 0 8px 24px rgba(220, 38, 38, 0.15);
+    }
+    .svc-card-img {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      display: block;
+      border-radius: 0.625rem;
+    }
+    .svc-card-body { padding: 1rem 0.5rem 0; text-align: center; }
+    .svc-card-title {
+      font-size: 0.95rem;
+      font-weight: 900;
+      color: #dc2626;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    .svc-card-desc { font-size: 0.8rem; color: #374151; line-height: 1.6; }
+
+    /* Services CTA */
+    .svc-cta-wrap {
+      padding: 0 1rem 2.5rem 1rem;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+    .svc-cta-note { font-size: 0.8rem; color: #6b7280; margin-bottom: 0.875rem; }
+
+    /* Detailing Packages */
+    .pkg-section {
+      padding: 1.5rem 1rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .pkg-section::before {
+      content: '';
+      position: absolute;
+      top: -30%; left: -20%;
+      width: 50%; height: 160%;
+      background: linear-gradient(135deg, transparent 40%, rgba(220, 38, 38, 0.025) 50%, transparent 60%);
+      transform: rotate(20deg);
+      pointer-events: none;
+    }
+    .pkg-section .section-title { margin-bottom: 1.25rem; }
+    .pkg-grid { display: flex; flex-direction: column; gap: 1rem; position: relative; z-index: 1; }
+    .pkg-card {
+      border: 1.5px solid #e5e7eb;
+      border-radius: 0.625rem;
+      overflow: hidden;
+      background: #ffffff;
+      scroll-margin-top: 1.5rem;
+    }
+    .pkg-card.featured {
+      border-color: #dc2626;
+      box-shadow: 0 0 0 2px #dc2626, 0 0 20px rgba(220, 38, 38, 0.1);
+    }
+    .pkg-top {
+      padding: 1rem 1.25rem 0.5rem 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .pkg-name { font-size: 1rem; font-weight: 900; color: #dc2626; letter-spacing: 0.04em; }
+    .pkg-badge {
+      background: #dc2626;
+      color: white;
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 0.2rem 0.5rem;
+      border-radius: 99px;
+    }
+    .pkg-duration { font-size: 0.75rem; color: #6b7280; width: 100%; }
+    .pkg-body { padding: 0.25rem 1.25rem 1.25rem 1.25rem; }
+    .pkg-includes { list-style: none; padding-left: 0; margin: 0; }
+    .pkg-include-item { font-size: 0.78rem; color: #374151; line-height: 1.8; }
+    .pkg-include-item::before { content: "\2713  "; color: #dc2626; font-weight: 700; }
+
+    /* Responsive Packages */
+    @media (min-width: 768px) {
+      .svc-tabs-wrap { max-width: 720px; margin-left: auto; margin-right: auto; }
+      .svc-cta-wrap, .pkg-section { max-width: 640px; margin-left: auto; margin-right: auto; }
+      .svc-tabs-wrap .section-title, .pkg-section .section-title { font-size: 1.875rem; }
+      .svc-list { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+    }
+    @media (min-width: 1024px) {
+      .svc-tabs-wrap { max-width: 1200px; margin-left: auto; margin-right: auto; }
+      .svc-cta-wrap, .pkg-section { max-width: 1200px; margin-left: auto; margin-right: auto; }
+      .svc-tabs-wrap .section-title, .pkg-section .section-title { font-size: 2.25rem; }
+      .tab-bar { max-width: 400px; margin-left: auto; margin-right: auto; margin-bottom: 1.5rem; }
+      .svc-list { grid-template-columns: repeat(2, 1fr); gap: 1.75rem; }
+      .svc-card-title { font-size: 1.05rem; }
+      .svc-card-desc { font-size: 0.875rem; }
+      .pkg-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    }
+
+    /* FAQ */
+    .faq-section { padding: 2rem 1rem; }
+    .faq-header { text-align: center; margin-bottom: 2rem; }
+    .faq-eyebrow {
+      display: inline-block;
+      background: rgba(220, 38, 38, 0.15);
+      color: #dc2626;
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.875rem;
+      border-radius: 99px;
+      margin-bottom: 0.75rem;
+    }
+    .faq-title { font-size: 1.75rem; font-weight: 900; color: #111827; line-height: 1.2; margin-bottom: 0.5rem; }
+    .faq-title span { color: #dc2626; }
+    .faq-subtitle { font-size: 0.875rem; color: #6b7280; }
+    .faq-list { display: flex; flex-direction: column; gap: 0.625rem; }
+    .faq-item {
+      background: #f8f9fb;
+      border-radius: 0.875rem;
+      overflow: hidden;
+      border: 1.5px solid #e5e7eb;
+      transition: border-color 0.25s, box-shadow 0.25s;
+    }
+    .faq-item.open { border-color: #dc2626; box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.08); }
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 1.1rem 1.125rem;
+      display: flex;
+      align-items: center;
+      gap: 0.875rem;
+      text-align: left;
+      font-family: inherit;
+    }
+    .faq-q-text { flex: 1; font-size: 0.875rem; font-weight: 700; color: #111827; line-height: 1.4; }
+    .faq-chevron { width: 20px; height: 20px; flex-shrink: 0; color: #6b7280; transition: transform 0.3s ease, color 0.25s; }
+    .faq-item.open .faq-chevron { transform: rotate(180deg); color: #dc2626; }
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
+    .faq-answer-inner { padding: 0 1.125rem 1.1rem 1.125rem; font-size: 0.82rem; color: #4b5563; line-height: 1.75; }
+    .highlight {
+      display: inline-block;
+      background: rgba(220, 38, 38, 0.15);
+      color: #fca5a5;
+      font-weight: 700;
+      font-size: 0.75rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      margin-top: 0.5rem;
+    }
+    .faq-bottom {
+      margin-top: 1.75rem;
+      background: linear-gradient(135deg, #991b1b 0%, #dc2626 100%);
+      border-radius: 1rem;
+      padding: 1.5rem 1.25rem;
+      text-align: center;
+      color: white;
+    }
+    .faq-bottom-title { font-size: 1rem; font-weight: 900; margin-bottom: 0.375rem; letter-spacing: 0.02em; }
+    .faq-bottom-sub { font-size: 0.78rem; opacity: 0.85; margin-bottom: 1.1rem; }
+    .faq-cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: white;
+      color: #991b1b;
+      font-weight: 800;
+      font-size: 0.875rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      font-family: inherit;
+    }
+    @media (min-width: 768px) { .faq-section { max-width: 640px; margin: 0 auto; } .faq-title { font-size: 1.875rem; } }
+    @media (min-width: 1024px) { .faq-section { max-width: 860px; margin: 0 auto; padding: 4rem 0; } .faq-q-text { font-size: 1rem; } .faq-answer-inner { font-size: 0.9rem; } .faq-title { font-size: 2.25rem; } }
+
+    /* Expandable Packages */
+    .pkg-learn-more {
+      display: block;
+      text-align: center;
+      color: #dc2626;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-decoration: underline;
+      cursor: pointer;
+      padding: 0.75rem 0 0.25rem 0;
+      letter-spacing: 0.03em;
+      transition: color 0.2s;
+    }
+    .pkg-learn-more:hover { color: #b91c1c; }
+    .pkg-expanded { max-height: 0; overflow: hidden; transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+    .pkg-expanded.active { max-height: 1200px; }
+    .pkg-expanded-inner {
+      padding: 1rem 0 0.5rem 0;
+      border-top: 1px solid #e5e7eb;
+      margin-top: 0.75rem;
+    }
+    .pkg-expanded-inner .pkg-description {
+      font-size: 0.8rem;
+      color: #6b7280;
+      font-style: italic;
+      line-height: 1.7;
+      text-align: center;
+      margin-bottom: 1.25rem;
+    }
+    .pkg-includes-title {
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: #000000;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.5rem;
+    }
+    .pkg-expanded-inner .pkg-includes {
+      border-left: 3px solid #dc2626;
+      padding-left: 1rem;
+      background: rgba(220, 38, 38, 0.05);
+      border-radius: 0 0.375rem 0.375rem 0;
+      padding-top: 0.625rem;
+      padding-bottom: 0.625rem;
+      margin-bottom: 1rem;
+    }
+    .pkg-include-item.teaser { list-style: none; font-style: italic; color: #6b7280; font-weight: 300; }
+    .pkg-include-item.teaser::before { content: "" !important; }
+    .pkg-book-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      background: #dc2626;
+      color: white;
+      padding: 0.875rem 1rem;
+      border-radius: 0.5rem;
+      font-weight: 700;
+      font-size: 0.9rem;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      width: 100%;
+      font-family: inherit;
+      letter-spacing: 0.04em;
+      box-shadow: 0 4px 15px rgba(220, 38, 38, 0.2);
+      transition: background 0.3s, transform 0.2s;
+      margin-bottom: 0.5rem;
+      margin-top: 0.5rem;
+    }
+    .pkg-book-btn:hover { background: #b91c1c; transform: translateY(-2px); }
+    .pkg-show-less {
+      display: block;
+      text-align: center;
+      color: #dc2626;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-decoration: underline;
+      cursor: pointer;
+      padding: 0.5rem 0 0.25rem 0;
+      letter-spacing: 0.03em;
+    }
+
+    /* Booking Modal */
+    .booking-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 1000;
+      display: none;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 1rem;
+      /* The form is taller than a phone screen, so the overlay is what scrolls -
+         one outer scrollbar, never a cramped scroll box around the form. */
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .booking-modal-overlay.active { display: flex; }
+    .booking-modal {
+      background: #ffffff;
+      border: none;
+      border-radius: 1rem;
+      width: 100%;
+      max-width: 600px;
+      margin: auto;
+      padding: 1.25rem;
+    }
+    .modal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem; }
+    .modal-title { font-size: 1.125rem; font-weight: 900; color: #111827; }
+    .modal-close { background: none; border: none; cursor: pointer; padding: 0.25rem; color: #6b7280; transition: color 0.2s; }
+    .modal-close:hover { color: #111827; }
+    .modal-close svg { width: 24px; height: 24px; }
+    .modal-form-container { width: 100%; }
+
+    /* ===== Native lead form ===== */
+    .lead-form {
+      background: #ffffff;
+      border-radius: 10px;
+      padding: 1.5rem 1.25rem;
+      text-align: left;
+    }
+    .modal-form-container .lead-form { padding: 0; border-radius: 0; }
+    .lf-row { margin-bottom: 1rem; }
+    .lf-label {
+      display: block;
+      font-size: 0.9375rem;
+      font-weight: 700;
+      color: #111827;
+      margin-bottom: 0.375rem;
+    }
+    .lf-label span { color: #dc2626; }
+    .lf-input {
+      display: block;
+      width: 100%;
+      font-family: inherit;
+      /* 16px minimum, or iOS zooms the page on focus */
+      font-size: 1rem;
+      color: #111827;
+      background: #ffffff;
+      border: 1.5px solid #dc2626;
+      border-radius: 0.5rem;
+      padding: 0.75rem 0.875rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .lf-input::placeholder { color: #9ca3af; }
+    .lf-input:focus-visible {
+      outline: none;
+      border-color: #b91c1c;
+      box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.25);
+    }
+    .lf-input[aria-invalid="true"] { border-color: #991b1b; }
+    .lf-textarea { resize: vertical; min-height: 96px; }
+    .lf-error { color: #991b1b; font-size: 0.8125rem; font-weight: 600; margin-top: 0.3rem; }
+    .lf-error:empty { display: none; }
+
+    .lf-submit {
+      display: block;
+      width: 100%;
+      background: #dc2626;
+      color: #ffffff;
+      border: none;
+      border-radius: 0.5rem;
+      padding: 1rem 1.5rem;
+      font-family: inherit;
+      font-size: 1.0625rem;
+      font-weight: 900;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(220, 38, 38, 0.5);
+      transition: background 0.2s, transform 0.2s;
+    }
+    .lf-submit:hover:not(:disabled) { background: #b91c1c; transform: translateY(-2px); }
+    .lf-submit:disabled { opacity: 0.65; cursor: default; transform: none; }
+    .lf-status { margin-top: 0.75rem; font-size: 0.875rem; font-weight: 600; text-align: center; }
+    .lf-status:empty { display: none; }
+    .lf-status-error { color: #991b1b; }
+    .lf-legal { margin-top: 0.625rem; font-size: 0.75rem; color: #6b7280; text-align: center; }
+    /* Honeypot: off-screen rather than display:none, which some bots skip */
+    .lf-hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+    /* ===== Offer page: expiry bar, vehicle pricing, includes, add-ons ===== */
+    .offer-banner {
+      /* Mobile: always stacked, label over timer. */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      row-gap: 0.15rem;
+      width: 100%;
+      /* Outline, not fill. Filled red is reserved for the one thing you press -
+         as a solid red block this read as a second button and mashed with the CTA. */
+      background: rgba(220, 38, 38, 0.2);
+      border: 1.5px solid #dc2626;
+      color: #ffffff;
+      text-align: center;
+      line-height: 1.2;
+      text-transform: uppercase;
+      padding: 0.55rem 1rem;
+      box-shadow: none;              /* a glow reads as raised, i.e. pressable */
+      /* Now sits inside the hero against the price cards rather than spanning the
+         page, so it needs its own width, radius and rhythm. */
+      max-width: 420px;
+      margin: 0 auto 0.6rem;
+      border-radius: 0.5rem;
+    }
+    @media (min-width: 768px) {
+      /* Room for one line: sit them side by side, still breaking only between
+         the two - never inside the timer. */
+      .offer-banner {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: baseline;   /* two sizes sharing one baseline */
+        column-gap: 0.75rem;
+      }
+    }
+    .offer-label {
+      white-space: nowrap;
+      font-size: 0.8125rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: rgba(255, 255, 255, 0.8);
+    }
+    .offer-timer {
+      white-space: nowrap;      /* the timer never splits mid-string */
+      font-size: 1.25rem;
+      font-weight: 900;
+      letter-spacing: 0.06em;
+      /* Equal-width digits, or the centred countdown jitters every second. */
+      font-variant-numeric: tabular-nums;
+    }
+
+    .veh-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.5rem;
+      width: 100%;
+      margin: clamp(0.75rem, 2vh, 1.25rem) 0;
+    }
+
+    .veh-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.15rem;
+      background: rgba(255, 255, 255, 0.96);
+      border: 2px solid transparent;
+      border-radius: 0.75rem;
+      padding: 0.75rem 0.25rem;
+      font-family: inherit;
+      cursor: pointer;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .veh-card:hover, .veh-card:focus-visible { border-color: #dc2626; transform: translateY(-2px); }
+
+    .veh-name { font-size: 0.625rem; font-weight: 800; letter-spacing: 0.01em; color: #4b5563; line-height: 1.2; white-space: nowrap; }
+    .veh-was { font-size: 0.8125rem; color: #6b7280; text-decoration: line-through; }
+    .veh-now { font-size: 1.5rem; font-weight: 900; color: #dc2626; line-height: 1; }
+
+    /* Not a second button - the hero already has one filled block and does not need
+       a competing one. Uppercase and tracking are what lift a link out of body copy. */
+    .veh-alt {
+      display: inline-flex;
+      align-items: center;
+      /* .hero-content is a flex column on mobile, so without this the link stretches
+         the full width and its text sits hard left instead of under the button. */
+      align-self: center;
+      gap: 0.3rem;
+      margin-top: 0.35rem;
+      font-size: 0.875rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #ffffff;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      text-decoration-thickness: 1.5px;
+      text-decoration-color: rgba(255, 255, 255, 0.5);
+    }
+    .veh-alt svg { width: 15px; height: 15px; flex-shrink: 0; }
+    .veh-alt:hover { text-decoration-color: #ffffff; }
+
+    /* Base inclusion rules. Authored for white text over the hero photograph; the
+       .incl-section block further down unsets the shadows and recolours them for
+       the light card they now live in. */
+    .incl-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem 1rem;
+      width: 100%;
+      text-align: left;
+      margin-bottom: 0.75rem;
+    }
+
+    .incl-title {
+      font-size: 0.75rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #ffffff;
+      border-bottom: 2px solid #dc2626;
+      padding-bottom: 0.2rem;
+      margin-bottom: 0.4rem;
+      text-shadow: 0 0 7px rgba(0,0,0,0.85);
+    }
+
+    .incl-list { list-style: none; margin: 0; padding: 0; }
+
+    .incl-item {
+      position: relative;
+      padding-left: 1.05rem;
+      margin-bottom: 0.2rem;
+      font-size: 0.8125rem;
+      line-height: 1.35;
+      color: #ffffff;
+      text-shadow: 0 0 6px rgba(0,0,0,0.9), 0 0 12px rgba(0,0,0,0.6);
+    }
+
+    .incl-item::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.38em;
+      width: 0.6rem;
+      height: 0.32rem;
+      border-left: 2px solid #dc2626;
+      border-bottom: 2px solid #dc2626;
+      transform: rotate(-45deg);
+    }
+
+    .scope-pill {
+      display: inline-block;
+      border: 2px solid #ffffff;
+      border-radius: 2rem;
+      padding: 0.3rem 1.1rem;
+      margin-bottom: clamp(0.5rem, 1.5vh, 1rem);
+      font-size: 0.8125rem;
+      font-weight: 800;
+      color: #ffffff;
+      text-shadow: 0 0 7px rgba(0,0,0,0.85);
+    }
+
+    .hero-book-btn {
+      position: relative;
+      overflow: hidden;                /* clips the sheen sweep */
+      display: block;
+      width: 100%;
+      background: #dc2626;
+      color: #ffffff;
+      border: none;
+      border-radius: 0.75rem;
+      padding: 1.15rem 1.5rem;
+      margin-bottom: 0.4rem;
+      font-family: inherit;
+      font-size: 1.1875rem;
+      font-weight: 900;
+      letter-spacing: 0.06em;
+      cursor: pointer;
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 0.4em;
+      box-shadow: 0 6px 20px rgba(220, 38, 38, 0.45);
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+    .hero-book-btn:hover { background: #b91c1c; transform: translateY(-2px); }
+
+    /* Two-tone lettering: the amber half ties the CTA to the offer language while
+       the button stays the only red, pressable block in the hero. */
+    .cta-word {
+      text-transform: uppercase;
+      letter-spacing: 0.11em;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+    }
+    .cta-word--alt {
+      color: #fcd34d;                /* lighter amber than #fbbf24 - keeps AA on red */
+      -webkit-text-stroke: 0.4px rgba(0, 0, 0, 0.12);
+    }
+
+
+    .hero-cta-note {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: rgba(255, 255, 255, 0.75);
+      margin-bottom: 0.6rem;
+    }
+
+    /* Says "promotion" before a single word is read. */
+    .offer-flag {
+      display: inline-block;
+      align-self: center;
+      background: #fbbf24;
+      color: #1f2937;
+      font-size: 0.68rem;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.75rem;
+      border-radius: 99px;
+      margin-bottom: 0.6rem;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+    }
+
+    /* The saving was always implicit in the was/now pair - state it so nobody has
+       to subtract. Figures are this page's own: 249-199, 299-229, 349-289. */
+    .veh-save {
+      display: block;
+      margin-top: 0.15rem;
+      font-size: 0.7rem;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      /* Was green. Dropping it to the red family takes a whole accent colour out
+         of the hero - with gold on the flag and the button, four colours was a lot. */
+      color: #b91c1c;
+      background: #fee2e2;
+      border-radius: 99px;
+      padding: 0.12rem 0.5rem;
+    }
+
+    /* One card flagged turns three equal options into a recommendation. */
+    .veh-card--flagged { position: relative; border-color: #fbbf24; }
+    .veh-flag {
+      position: absolute;
+      top: -0.6rem; left: 50%; transform: translateX(-50%);
+      background: #fbbf24;
+      color: #1f2937;
+      font-size: 0.58rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.15rem 0.5rem;
+      border-radius: 99px;
+      white-space: nowrap;
+    }
+
+    /* Inclusions.
+       These rules exist because .incl-* and .scope-pill were authored for white text
+       over the hero photograph - they carry heavy text-shadows and white borders that
+       turn to mud on a light background. Everything inherited from the hero has to be
+       unset here, not just recoloured. (Same trap the manifest flags for .accent.) */
+    .incl-section { padding: 0 1rem 2.25rem; background: #f9fafb; }
+
+    .incl-card {
+      position: relative;
+      z-index: 5;
+      margin: -2.75rem auto 0;        /* rides up over the hero's bottom edge */
+      max-width: 620px;
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      border-radius: 0.875rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.13);
+      padding: 1.25rem 1.1rem 1.1rem;
+    }
+
+    /* Flanked by two short rules that fade out, so the heading reads as a banner
+       rather than a line of bold text sitting on the card. */
+    .incl-card-title {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.7rem;
+      font-size: 1.15rem;
+      font-weight: 900;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #1f2937;
+      white-space: nowrap;
+      margin-bottom: 0.2rem;
+    }
+    .incl-card-title::before,
+    .incl-card-title::after {
+      content: '';
+      flex: 1 1 auto;
+      max-width: 3.25rem;
+      height: 2px;
+      border-radius: 2px;
+    }
+    .incl-card-title::before { background: linear-gradient(to right, rgba(220,38,38,0), #dc2626); }
+    .incl-card-title::after  { background: linear-gradient(to left,  rgba(220,38,38,0), #dc2626); }
+
+    /* .accent is #fff for the hero photo, so it has to be re-scoped anywhere it
+       lands on a light background - the same fix the manifest prescribes. */
+    .incl-card-title .accent { color: #dc2626; text-shadow: none; }
+
+    .incl-card-sub {
+      text-align: center;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+      color: #9ca3af;
+      margin-bottom: 1.1rem;
+    }
+
+    /* Two columns at every width - the items are short, and side by side is what
+       makes the interior/exterior split readable at a glance. */
+    .incl-section .incl-wrap {
+      grid-template-columns: 1fr 1fr;
+      gap: 0 1rem;
+      margin-bottom: 0;
+      align-items: start;
+    }
+
+    /* A real column header: red icon tile, bold label, rule underneath. Plain
+       small-caps text was not enough to carry the split. */
+    /* Without the icon the label carries the column on its own, so it gets a
+       little more size and tracking. */
+    .incl-section .incl-title {
+      display: block;
+      color: #1f2937;
+      text-shadow: none;
+      font-size: 0.82rem;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      border-bottom: 2px solid #dc2626;
+      padding-bottom: 0.45rem;
+      margin-bottom: 0.65rem;
+    }
+    .incl-section .incl-list { display: block; }
+
+    .incl-section .incl-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.4rem;
+      position: static;
+      background: none;
+      border-radius: 0;
+      padding: 0;
+      margin: 0 0 0.45rem;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: #374151;
+      text-shadow: none;
+      line-height: 1.35;
+    }
+    .incl-section .incl-item::before {
+      position: static;
+      flex-shrink: 0;
+      margin-top: 0.42em;
+      transform: rotate(-45deg);
+      width: 0.5rem;
+      height: 0.26rem;
+      border-left: 2px solid #dc2626;
+      border-bottom: 2px solid #dc2626;
+    }
+
+    /* Was white text inside a white border - invisible on this light card. */
+    .incl-section .scope-pill {
+      display: block;
+      width: -moz-fit-content;
+      width: fit-content;
+      margin: 1.1rem auto 0;
+      border: none;
+      background: #fee2e2;
+      color: #b91c1c;
+      text-shadow: none;
+      font-size: 0.75rem;
+      font-weight: 800;
+      padding: 0.3rem 0.85rem;
+    }
+
+    @media (min-width: 560px) {
+      .incl-section .incl-wrap { gap: 0 1.75rem; }
+      .incl-section .incl-col + .incl-col { border-left: 1px solid #eceef1; padding-left: 1.75rem; }
+      .incl-section .incl-item { font-size: 0.875rem; }
+      .incl-card { margin-top: -3.5rem; padding: 1.5rem 1.5rem 1.25rem; }
+    }
+
+    .wz-section { padding: 3rem 1rem; background: #ffffff; }
+
+    .wz-card {
+      max-width: 620px;
+      margin: 0 auto;
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      border-radius: 0.75rem;
+      padding: 1.5rem 1.25rem;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    }
+
+    .wz-progress-track { background: #e5e7eb; height: 4px; border-radius: 99px; overflow: hidden; margin-bottom: 0.5rem; }
+    .wz-progress-fill  { background: #dc2626; height: 100%; border-radius: 99px; width: 25%; transition: width 0.35s ease; }
+    .wz-step-label {
+      font-size: 0.72rem; color: #9ca3af; text-align: center; margin-bottom: 1.25rem;
+      font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase;
+    }
+
+    /* Only the active step is in flow. Everything else is display:none, which also
+       keeps hidden fields out of tab order without needing the inert attribute. */
+    .wz-step { display: none; }
+    .wz-step.active { display: block; }
+
+    .wz-q   { font-size: 1.1rem; font-weight: 900; color: #1f2937; text-align: center; margin-bottom: 0.375rem; line-height: 1.3; }
+    .wz-sub { font-size: 0.8rem; color: #6b7280; text-align: center; margin-bottom: 1.25rem; }
+
+    .wz-choices { display: grid; grid-template-columns: 1fr; gap: 0.625rem; }
+    .wz-choices--2 { grid-template-columns: repeat(2, 1fr); }
+
+    .wz-choice {
+      display: flex; align-items: center; gap: 0.625rem; width: 100%;
+      border: 1.5px solid #e5e7eb; border-radius: 0.5rem; padding: 0.875rem 1rem;
+      background: #ffffff; font-family: inherit; font-size: 0.9rem; font-weight: 600;
+      color: #1f2937; text-align: left; line-height: 1.3; cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .wz-choice:hover { border-color: #dc2626; background: #fff8f8; }
+    .wz-choice.selected { border-color: #dc2626; background: #fee2e2; color: #1a1a1a; }
+    .wz-choice-sub { display: block; font-size: 0.75rem; font-weight: 500; color: #6b7280; margin-top: 0.15rem; }
+    .wz-choice.selected .wz-choice-sub { color: #7f1d1d; }
+    .wz-choice-tick {
+      width: 17px; height: 17px; min-width: 17px; margin-left: auto; flex-shrink: 0;
+      border: 1.5px solid #d1d5db; border-radius: 4px;
+      display: flex; align-items: center; justify-content: center;
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .wz-choice.selected .wz-choice-tick { border-color: #dc2626; background: #dc2626; }
+    .wz-choice-tick svg { display: none; width: 11px; height: 11px; stroke: #ffffff; }
+    .wz-choice.selected .wz-choice-tick svg { display: block; }
+
+    .wz-group { margin-bottom: 1.1rem; }
+    .wz-group-label { font-size: 0.875rem; font-weight: 700; color: #1f2937; margin-bottom: 0.5rem; }
+    .wz-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .wz-chip {
+      display: inline-flex; align-items: center; padding: 0.5rem 1rem; border-radius: 99px;
+      border: 1.5px solid #e5e7eb; background: #ffffff; font-family: inherit;
+      font-size: 0.82rem; font-weight: 600; color: #4b5563; line-height: 1; cursor: pointer;
+      transition: border-color 0.15s, color 0.15s, background 0.15s;
+    }
+    .wz-chip:hover { border-color: #dc2626; color: #dc2626; }
+    .wz-chip.selected { border-color: #dc2626; color: #b91c1c; background: #fee2e2; }
+
+    .wz-err { font-size: 0.78rem; color: #dc2626; text-align: center; min-height: 1.2em; margin-top: 0.5rem; }
+    .wz-err:empty { min-height: 0; }
+
+    .wz-nav { display: flex; gap: 0.75rem; margin-top: 1.25rem; }
+    .wz-back {
+      flex: 0 0 auto; background: #ffffff; border: 1.5px solid #e5e7eb; color: #4b5563;
+      padding: 0.875rem 1.125rem; border-radius: 0.5rem; font-family: inherit;
+      font-size: 0.875rem; font-weight: 600; cursor: pointer; white-space: nowrap;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .wz-back:hover { border-color: #9ca3af; color: #1f2937; }
+    .wz-next {
+      flex: 1; background: #dc2626; color: #ffffff; border: none;
+      padding: 0.875rem 1rem; border-radius: 0.5rem; font-family: inherit;
+      font-size: 1rem; font-weight: 800; letter-spacing: 0.03em; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .wz-next:hover:not(:disabled) { background: #b91c1c; transform: translateY(-1px); }
+    .wz-next:disabled { background: #9ca3af; cursor: not-allowed; transform: none; }
+
+    /* The recap is the last thing seen before handing over a phone number, so it
+       is set as a labelled table rather than a run-on sentence - it has to be
+       scannable at a glance and obviously correct. */
+    .wz-recap {
+      border: 1px solid #e5e7eb; border-radius: 0.625rem; background: #f9fafb;
+      padding: 0.25rem 0 0.375rem; margin-bottom: 1rem; overflow: hidden;
+    }
+    .wz-recap-title {
+      font-size: 0.68rem; font-weight: 800; letter-spacing: 0.09em; text-transform: uppercase;
+      color: #6b7280; padding: 0.5rem 0.875rem 0.4rem;
+    }
+    .wz-recap-row {
+      display: grid; grid-template-columns: 6.5rem 1fr; gap: 0.75rem;
+      align-items: baseline; padding: 0.4rem 0.875rem;
+      border-top: 1px solid #eceef1;
+    }
+    .wz-recap-label {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
+      color: #9ca3af; line-height: 1.4;
+    }
+    .wz-recap-value { font-size: 0.9rem; font-weight: 700; color: #111827; line-height: 1.4; }
+
+    /* Conditions echo the chips they tapped, so the recap looks like their own answers. */
+    .wz-recap-tags { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+    .wz-recap-tag {
+      display: inline-flex; align-items: center; padding: 0.2rem 0.55rem; border-radius: 99px;
+      background: #fee2e2; color: #b91c1c; font-size: 0.75rem; font-weight: 700; line-height: 1.35;
+    }
+
+    /* The consent line belongs to the submit, so it only shows on the step that
+       has one. :has() rather than a JS toggle, matching .lf-check's old idiom. */
+    .wz-card .lf-legal { display: none; }
+    .wz-card:has(.wz-step[data-step="4"].active) .lf-legal { display: block; }
+
+    .wz-hp { position: absolute; left: -9999px; }
+
+    /* Step 4 carries the estimate, the summary and three fields, so it is the one
+       step that would otherwise run past a phone screen. Trim it to fit. */
+    @media (max-width: 767px) {
+      .wz-card { padding: 1.25rem 1rem; }
+      .wz-card .lf-row { margin-bottom: 0.75rem; }
+      .wz-card .lf-textarea { min-height: 62px; }
+      .wz-recap { margin-bottom: 0.75rem; }
+      .wz-recap-row { grid-template-columns: 5rem 1fr; gap: 0.5rem; padding: 0.3rem 0.7rem; }
+      .wz-recap-title { padding: 0.4rem 0.7rem 0.3rem; }
+      .wz-recap-label { font-size: 0.68rem; }
+      .wz-recap-value { font-size: 0.85rem; }
+      /* Ticking every condition is the tallest this step ever gets - keep the
+         pills compact so that case still reads without a long scroll. */
+      .wz-recap-tags { gap: 0.25rem; }
+      .wz-recap-tag { padding: 0.15rem 0.45rem; font-size: 0.7rem; }
+      .wz-step-label { margin-bottom: 1rem; }
+    }
+
+    @media (min-width: 768px) {
+      .veh-name { font-size: 0.8125rem; letter-spacing: 0.05em; }
+      .veh-now { font-size: 1.875rem; }
+      .incl-item { font-size: 0.875rem; }
+    }
+
+    /* CTAs converted from links to buttons: restore the anchor defaults a button
+       does not inherit. .call-btn keeps its own border, so it is excluded. */
+    .cta-primary, .sticky-button, .faq-cta-btn { border: none; }
+    .cta-primary, .sticky-button { width: 100%; }
+    .call-btn, .cta-primary, .sticky-button, .faq-cta-btn {
+      font-family: inherit;
+      cursor: pointer;
+    }
+
+    /* Mobile only: tighten the chrome around the quote form so it isn't marooned
+       in padding. The form's own height comes from GHL inside the iframe and
+       can't be reached from here - this trims what surrounds it. Tablet and up
+       are untouched. */
+    @media (max-width: 767px) {
+      /* Hero order on a phone: rating first as social proof before the headline,
+         then the usual flow, with the response-time tagline and the scroll cue
+         under the button. All of this is switched on only here, so the desktop
+         hero keeps its block layout and its markup completely untouched.
+         display:contents dissolves the .cta-buttons wrapper so the rating and
+         tagline become flex items of .hero-content - order only works between
+         siblings, and the H1 lives one level up. */
+      .hero-content { display: flex; flex-direction: column; }
+      .cta-buttons { display: contents; }
+      .hero-rating { order: -1; }
+      /* Inline-level children would stretch edge to edge as flex items and their
+         pill backgrounds would span the screen. */
+      .scope-pill { align-self: center; }
+
+      /* Bigger review line - it is the first thing above the headline now, so it
+         carries the social proof and was too small to do that job. The stars grow
+         most, since they read at a glance; nowrap keeps the label on one line,
+         because wrapping it to two was making the block taller, not stronger. */
+      .hero-star { font-size: 1.25rem; line-height: 1; }
+      .hero-rating-text { font-size: 0.875rem; font-weight: 800; white-space: nowrap; }
+      .hero-rating { gap: 0.375rem; margin-bottom: 1rem; }
+
+      /* Tighten the hero's vertical rhythm so the whole offer lands above the fold.
+         padding-bottom is the landing strip for the overlapping inclusions card:
+         it has to clear the alt-link, which is the hero's last element. */
+      .hero { padding-top: 1.5rem; padding-bottom: 4.25rem; }
+      .hero-title { margin-bottom: 0.5rem; }
+      .hero-subtitle { margin-bottom: 0.75rem; }
+      .veh-grid { margin-top: 0.75rem; margin-bottom: 0.75rem; }
+      .incl-wrap { margin-bottom: 0.5rem; }
+      .incl-item { margin-bottom: 0.125rem; }
+      .scope-pill { margin-bottom: 0.625rem; }
+      .hero-book-btn { margin-bottom: 0.5rem; }
+
+      .contact-section { min-height: 0; }
+      .contact-content { padding: 1.25rem 1rem; }
+      .contact-section .section-title { margin-bottom: 1rem; }
+      .contact-subtitle { margin-bottom: 1.25rem; }
+      .contact-form-container { margin-bottom: 1rem; }
+
+      .booking-modal-overlay { padding: 0.75rem; }
+      .booking-modal { padding: 1rem; }
+      .modal-header { margin-bottom: 0.875rem; }
+
+      /* The popup has to fit a phone screen whole, with the page visible around
+         it, so the modal copy of the form is tightened. Only the modal copy -
+         the inline form sits on a scrolling page and can breathe. */
+      .modal-form-container .lf-row { margin-bottom: 0.75rem; }
+      .modal-form-container .lf-label { font-size: 0.875rem; margin-bottom: 0.25rem; }
+      .modal-form-container .lf-input { padding: 0.625rem 0.75rem; }
+      .modal-form-container .lf-textarea { min-height: 72px; }
+      .modal-form-container .lf-submit { padding: 0.8125rem 1rem; font-size: 1rem; }
+      .modal-form-container .lf-legal { margin-top: 0.5rem; font-size: 0.6875rem; }
+    }
+
+    /* Small phones: the nowrap review line is wider than the hero at 320px and
+       would run edge to edge, so step it down just there. */
+    @media (max-width: 359px) {
+      .hero-star { font-size: 1.05rem; }
+      .hero-rating-text { font-size: 0.75rem; }
+      .hero-rating { gap: 0.4rem; }
+    }
+
+    /* Short phones (iPhone SE and below) are ~645px of usable height, which the
+       block above overshoots by a hair. Trim a little further so the popup still
+       fits whole rather than starting to scroll. */
+    @media (max-width: 767px) and (max-height: 720px) {
+      .modal-form-container .lf-row { margin-bottom: 0.5rem; }
+      .modal-form-container .lf-textarea { min-height: 56px; }
+      .modal-form-container .lf-legal { display: none; }
+    }
+
+  </style>
+
+<!-- SANDBOX: Microsoft Clarity loader removed. -->
+</head>
+<body>
+
+  <!-- SANDBOX banner. Delete this block (and the .sandbox-flag rule above it)
+       if this copy is ever promoted to a real page. -->
+  <style>
+    .sandbox-flag {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 99999;
+      background: repeating-linear-gradient(45deg, #111 0 12px, #f59e0b 12px 24px);
+      padding: 3px;
+    }
+    .sandbox-flag span {
+      display: block; background: #111; color: #f59e0b;
+      font: 700 0.7rem/1.5 'Helvetica Neue', Arial, sans-serif;
+      letter-spacing: 0.12em; text-align: center; text-transform: uppercase;
+      padding: 0.3rem 0.75rem;
+    }
+    body { padding-top: 34px; }
+    .sticky-cta { z-index: 99998; }
+  </style>
+  <div class="sandbox-flag" role="note">
+    <span>Sandbox copy — no tracking, no leads sent. Live page: m4-OFFER</span>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <img src="./m4-logo.webp" alt="M4 Detailing Logo" class="logo">
+    <button type="button" class="call-btn" onclick="openBookingModal()">
+      REQUEST BOOKING
+      <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><polyline points="9 16 11 18 15 14"/></svg>
+    </button>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <img src="./m4-hero.webp" alt="M4 Detailing professional car detailing in Punta Gorda FL" class="hero-bg" fetchpriority="high">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="offer-flag">Limited-Time Special</div>
+      <h1 class="hero-title">
+        Full Detail from $199 in <span class="accent" data-geo-city>Punta Gorda</span>
+      </h1>
+      <p class="hero-subtitle">Save $50&ndash;$70 this week. Mobile &mdash; we come to you.</p>
+
+      <!-- The countdown used to sit in its own bar above the hero, where it read as a
+           site-wide notice. It counts down to these prices, so it belongs against them. -->
+      <div class="offer-banner">
+        <span class="offer-label">Offer Expires In</span>
+        <span id="offerExpiry" class="offer-timer">6d 12h 00m 00s</span>
+      </div>
+
+      <div class="veh-grid">
+        <button type="button" class="veh-card" onclick="openBookingModal({size: 'Sedan'})">
+          <span class="veh-name">SEDAN</span>
+          <span class="veh-was">$249</span>
+          <span class="veh-now">$199</span>
+          <span class="veh-save">Save $50</span>
+        </button>
+        <button type="button" class="veh-card veh-card--flagged" onclick="openBookingModal({size: 'SUV'})">
+          <span class="veh-flag">Best Value</span>
+          <span class="veh-name">SUV</span>
+          <span class="veh-was">$299</span>
+          <span class="veh-now">$229</span>
+          <span class="veh-save">Save $70</span>
+        </button>
+        <button type="button" class="veh-card" onclick="openBookingModal({size: 'Large SUV / Truck'})">
+          <span class="veh-name">LG SUV/TRUCK</span>
+          <span class="veh-was">$349</span>
+          <span class="veh-now">$289</span>
+          <span class="veh-save">Save $60</span>
+        </button>
+      </div>
+      <button type="button" class="hero-book-btn" onclick="openBookingModal()">
+        <span class="cta-word">Claim</span><span class="cta-word cta-word--alt">Special</span>
+      </button>
+      <p class="hero-cta-note">Takes under a minute &middot; No obligation</p>
+
+      <div class="cta-buttons">
+        <div class="hero-rating">
+          <div class="hero-stars">
+            <span class="hero-star">&#9733;</span>
+            <span class="hero-star">&#9733;</span>
+            <span class="hero-star">&#9733;</span>
+            <span class="hero-star">&#9733;</span>
+            <span class="hero-star">&#9733;</span>
+          </div>
+          <span class="hero-rating-text">5.0 Stars &mdash; Google Reviews</span>
+        </div>
+        <!-- The release valve, sitting under the primary CTA rather than above it:
+             a third of visitors want interior-only work this package does not sell,
+             and they need somewhere to go besides away. -->
+        <a href="#offer-addons" class="veh-alt">See Our Services
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+             stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- What the offer includes. Lifted out of the hero, where it was competing with
+       the offer itself - ten elements were shouting at once. Kept directly beneath
+       so it still reads as part of the offer. -->
+  <!-- Pulled up to straddle the hero edge: it answers "what do I get for $199",
+       which is the question the price raises, so it should not be a scroll away.
+       The overlap is also the cue that there is more page - which is why the
+       "See more" chevron above it was removed. -->
+  <section class="incl-section">
+    <div class="incl-card">
+      <h2 class="incl-card-title">What&#8217;s <span class="accent">Included</span></h2>
+      <p class="incl-card-sub">In every full detail</p>
+      <div class="incl-wrap">
+        <div class="incl-col">
+          <div class="incl-title">Interior</div>
+          <ul class="incl-list">
+            <li class="incl-item">Compressed Air</li>
+            <li class="incl-item">Deep Vacuum</li>
+            <li class="incl-item">Steam Seats</li>
+            <li class="incl-item">Steam Carpets</li>
+            <li class="incl-item">Plastic Scrub</li>
+            <li class="incl-item">Leather Wipe</li>
+          </ul>
+        </div>
+        <div class="incl-col">
+          <div class="incl-title">Exterior</div>
+          <ul class="incl-list">
+            <li class="incl-item">Hand Wash</li>
+            <li class="incl-item">Wheel Deepclean</li>
+            <li class="incl-item">Bug &amp; Tar Removal</li>
+            <li class="incl-item">Iron Decon</li>
+            <li class="incl-item">3 Month Wax</li>
+          </ul>
+        </div>
+      </div>
+      <div class="scope-pill">Trunk + Main Cabin</div>
+    </div>
+  </section>
+
+  <!-- Guided quote wizard.
+       Replaces the old add-on grid. Sits directly under the offer because that is
+       where someone who does not want the package decides whether to bounce:
+       35% of real submissions ask for interior-only work the hero cannot sell.
+       The id #offer-addons is kept because the hero's alt-link points at it.
+       This instance is never cloned and never moved - the booking modal keeps
+       cloning the flat express form in #contact-form, untouched. -->
+  <section class="wz-section" id="offer-addons">
+    <div class="section-eyebrow"><span>Not the standard package?</span></div>
+    <h2 class="section-title">BUILD YOUR <span class="accent">QUOTE</span></h2>
+
+    <form class="wz-card" id="quote-wizard" novalidate>
+      <div class="wz-progress-track" role="progressbar" aria-label="Quote progress">
+        <div class="wz-progress-fill" id="wz-fill"></div>
+      </div>
+      <p class="wz-step-label" id="wz-label" aria-live="polite">Step 1 of 4</p>
+
+      <!-- Step 1: segment. "Not sure" is load-bearing - people over-select "both"
+           out of confusion, which is why the both-bucket looks larger than it is. -->
+      <div class="wz-step active" data-step="1">
+        <p class="wz-q">What does your vehicle need?</p>
+        <p class="wz-sub">Pick the one closest to what you want.</p>
+        <div class="wz-choices">
+          <button type="button" class="wz-choice" data-val="Interior only">
+            <span>Interior only<span class="wz-choice-sub">Seats, carpets, and everything inside</span></span>
+            <span class="wz-choice-tick"><svg viewBox="0 0 24 24" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+          </button>
+          <button type="button" class="wz-choice" data-val="Exterior only">
+            <span>Exterior only<span class="wz-choice-sub">Wash, decontamination, and paint</span></span>
+            <span class="wz-choice-tick"><svg viewBox="0 0 24 24" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+          </button>
+          <button type="button" class="wz-choice" data-val="Interior + exterior">
+            <span>Interior + exterior<span class="wz-choice-sub">The complete detail</span></span>
+            <span class="wz-choice-tick"><svg viewBox="0 0 24 24" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+          </button>
+          <button type="button" class="wz-choice" data-val="Paint correction / ceramic">
+            <span>Paint correction or ceramic<span class="wz-choice-sub">Swirls, scratches, long-term protection</span></span>
+            <span class="wz-choice-tick"><svg viewBox="0 0 24 24" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+          </button>
+          <button type="button" class="wz-choice" data-val="Not sure">
+            <span>Not sure &mdash; recommend for me<span class="wz-choice-sub">Tell us the problem and we will advise</span></span>
+            <span class="wz-choice-tick"><svg viewBox="0 0 24 24" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+          </button>
+        </div>
+        <p class="wz-err" data-err="1"></p>
+      </div>
+
+      <!-- Step 2: vehicle. One free-text field beats three dropdowns; the size
+           cards are what the price band is keyed on. -->
+      <div class="wz-step" data-step="2">
+        <p class="wz-q">What are you driving?</p>
+        <p class="wz-sub">So we can size the job properly.</p>
+        <div class="lf-row">
+          <label class="lf-label" for="wz-vehicle">Year | Make | Model</label>
+          <input class="lf-input" id="wz-vehicle" name="vehicle" type="text" placeholder="2013 Honda Accord">
+        </div>
+        <div class="wz-choices wz-choices--2" style="margin-top:0.75rem">
+          <button type="button" class="wz-choice" data-val="Sedan">
+            <span>Sedan<span class="wz-choice-sub">Coupe, sedan, small hatch</span></span>
+            <span class="wz-choice-tick"><svg viewBox="0 0 24 24" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+          </button>
+          <button type="button" class="wz-choice" data-val="SUV">
+            <span>SUV<span class="wz-choice-sub">Crossover, mid-size SUV</span></span>
+            <span class="wz-choice-tick"><svg viewBox="0 0 24 24" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+          </button>
+          <button type="button" class="wz-choice" data-val="Large SUV / Truck">
+            <span>Large SUV / Truck<span class="wz-choice-sub">3-row, pickup, van</span></span>
+            <span class="wz-choice-tick"><svg viewBox="0 0 24 24" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+          </button>
+        </div>
+        <p class="wz-err" data-err="2"></p>
+      </div>
+
+      <!-- Step 3: condition. Built at runtime from the step-1 answer, so an
+           exterior-only visitor is never asked about pet hair. -->
+      <div class="wz-step" data-step="3">
+        <p class="wz-q">Anything we should know?</p>
+        <p class="wz-sub">Tap anything that applies. It changes the price, so be honest.</p>
+        <div id="wz-conditions"></div>
+        <p class="wz-err" data-err="3"></p>
+      </div>
+
+      <!-- Step 4: the payoff, then contact. -->
+      <div class="wz-step" data-step="4">
+        <p class="wz-q">Where should we send your quote?</p>
+        <p class="wz-sub">One last step and we will price it for you.</p>
+
+        <div class="wz-recap" id="wz-recap"></div>
+
+        <div class="lf-row">
+          <label class="lf-label" for="wz-name">First Name <span aria-hidden="true">*</span></label>
+          <input class="lf-input" id="wz-name" name="first_name" type="text" autocomplete="given-name" required placeholder="First Name">
+        </div>
+        <div class="lf-row">
+          <label class="lf-label" for="wz-phone">Phone # <span aria-hidden="true">*</span></label>
+          <input class="lf-input" id="wz-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required placeholder="Phone">
+        </div>
+        <div class="lf-row">
+          <label class="lf-label" for="wz-message">Anything we should know about the condition?</label>
+          <textarea class="lf-input lf-textarea" id="wz-message" name="message" rows="3"
+                    placeholder="EX: spilled coffee on the passenger seat, smells now"></textarea>
+        </div>
+        <p class="wz-err" data-err="4"></p>
+      </div>
+
+      <div class="wz-nav" id="wz-nav" style="display:none">
+        <button type="button" class="wz-back" id="wz-back">&#8592; Back</button>
+        <button type="button" class="wz-next" id="wz-next">Next &#8594;</button>
+      </div>
+      <p class="lf-status" id="wz-status" role="status" aria-live="polite"></p>
+      <p class="lf-legal">By submitting you agree to be contacted about your booking.</p>
+
+      <!-- Same hidden set as the express form: every key must exist on both lanes
+           or GHL sees two different shapes. -->
+      <input type="hidden" name="service_type" value="">
+      <input type="hidden" name="vehicle_size" value="">
+      <input type="hidden" name="conditions" value="None">
+      <input type="hidden" name="water_power" value="Not asked">
+      <input type="hidden" name="entry_lane" value="guided">
+      <input type="hidden" name="addons" value="None">
+      <input type="hidden" name="gclid" value="">
+      <input type="hidden" name="utm_source" value="">
+      <input type="hidden" name="utm_medium" value="">
+      <input type="hidden" name="utm_campaign" value="">
+      <input type="hidden" name="utm_term" value="">
+      <input type="hidden" name="utm_content" value="">
+      <input type="hidden" name="page_url" value="">
+      <input type="hidden" name="referrer" value="">
+      <input type="hidden" name="geo_city" value="Punta Gorda">
+      <input type="hidden" name="loc" value="">
+      <div class="wz-hp" aria-hidden="true">
+        <label>Company<input type="text" name="company" tabindex="-1" autocomplete="off"></label>
+      </div>
+    </form>
+  </section>
+
+  <!-- Services + CTA Gradient Wrapper -->
+  <div class="svc-gradient-wrap">
+
+  <section class="svc-tabs-wrap">
+    <div class="section-eyebrow"><span>What We Offer</span></div>
+    <h2 class="section-title">OUR SERVICES</h2>
+    <p class="svc-subtitle">Professional car detailing, paint correction, ceramic coating, and interior cleaning in Punta Gorda, Port Charlotte &amp; North Port</p>
+    <div class="tab-bar">
+      <button class="tab-btn active" onclick="switchTab('exterior',this)">EXTERIOR</button>
+      <button class="tab-btn" onclick="switchTab('interior',this)">INTERIOR</button>
+    </div>
+
+    <div id="tab-exterior" class="tab-panel active">
+      <div class="svc-list">
+        <div class="svc-card">
+          <img class="svc-card-img" src="./Exterior Wash.webp" alt="Professional exterior car wash" loading="lazy">
+          <div class="svc-card-body">
+            <div class="svc-card-title">Exterior Wash &amp; Decontamination</div>
+            <p class="svc-card-desc">Multi-stage hand wash removes all dirt, grime, and bonded contaminants. Clay bar treatment ensures your paint is clean down to the surface &#8212; ready for protection or just looking its best.</p>
+          </div>
+        </div>
+        <div class="svc-card">
+          <img class="svc-card-img" src="./pAINT cORRECTION.webp" alt="Paint correction and polishing" loading="lazy">
+          <div class="svc-card-body">
+            <div class="svc-card-title">Paint Correction &amp; Polishing</div>
+            <p class="svc-card-desc">Machine polishing removes swirl marks, scratches, and oxidation to restore your paint's original gloss. Brings back depth and clarity that washing alone can't achieve.</p>
+          </div>
+        </div>
+        <div class="svc-card">
+          <img class="svc-card-img" src="./Ceramic coating.webp" alt="Ceramic coating and paint protection" loading="lazy">
+          <div class="svc-card-body">
+            <div class="svc-card-title">Ceramic Coating &amp; Protection</div>
+            <p class="svc-card-desc">Nano-ceramic coating shields your paint from water, dirt, and UV damage. Hydrophobic protection makes maintenance effortless and keeps your car looking freshly detailed for months.</p>
+          </div>
+        </div>
+        <div class="svc-card">
+          <img class="svc-card-img" src="./Headlight restore.webp" alt="Headlight restoration" loading="lazy">
+          <div class="svc-card-body">
+            <div class="svc-card-title">Headlight Restoration</div>
+            <p class="svc-card-desc">Restore cloudy, yellowed headlights to crystal clarity through sanding, polishing, and UV sealing. Safer night driving and a better-looking vehicle in one service.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="tab-interior" class="tab-panel">
+      <div class="svc-list">
+        <div class="svc-card">
+          <img class="svc-card-img" src="./Interior Cleaning.webp" alt="Deep interior car cleaning" loading="lazy">
+          <div class="svc-card-body">
+            <div class="svc-card-title">Deep Interior Cleaning</div>
+            <p class="svc-card-desc">Complete interior refresh with vacuum, steam cleaning, and every surface detailed. Dashboard, console, vents, windows, and door panels &#8212; all spotless.</p>
+          </div>
+        </div>
+        <div class="svc-card">
+          <img class="svc-card-img" src="./Leather Care.webp" alt="Leather care and conditioning" loading="lazy">
+          <div class="svc-card-body">
+            <div class="svc-card-title">Leather Care &amp; Conditioning</div>
+            <p class="svc-card-desc">Professional leather cleaning and conditioning restores moisture, prevents cracking, and enhances color. Keeps your seats supple and rich-looking year after year.</p>
+          </div>
+        </div>
+        <div class="svc-card">
+          <img class="svc-card-img" src="./Carpet Shampoo.webp" alt="Carpet and upholstery shampooing" loading="lazy">
+          <div class="svc-card-body">
+            <div class="svc-card-title">Carpet &amp; Seat Shampooing</div>
+            <p class="svc-card-desc">Hot water extraction lifts deep stains, odors, and allergens from carpets and seats. Pet stains, food spills, and ground-in dirt removed at the source.</p>
+          </div>
+        </div>
+        <div class="svc-card">
+          <img class="svc-card-img" src="./sanitization.webp" alt="Odor removal and sanitization" loading="lazy">
+          <div class="svc-card-body">
+            <div class="svc-card-title">Odor Removal &amp; Sanitization</div>
+            <p class="svc-card-desc">Eliminate smoke, pet, mildew, and food odors with professional sanitizers. Kills bacteria at the source and leaves your cabin smelling fresh.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="svc-cta-wrap">
+    <p class="svc-cta-note">Not sure what your car needs? Request a booking &#8212; we'll recommend the right service.</p>
+    <button type="button" class="cta-primary" onclick="openBookingModal()">
+      <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><polyline points="9 16 11 18 15 14"/></svg>
+      REQUEST BOOKING
+    </button>
+  </div>
+
+  </div><!-- /.svc-gradient-wrap -->
+
+  <script>
+    function switchTab(tab, btn) {
+      document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
+      document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+      document.getElementById('tab-' + tab).classList.add('active');
+      btn.classList.add('active');
+    }
+  </script>
+
+  <!-- Guarantee -->
+  <section class="guarantee">
+    <h2 class="guarantee-title">100% SATISFACTION GUARANTEED</h2>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="section">
+    <div class="section-eyebrow"><span>Reviews</span></div>
+    <h2 class="section-title">WHAT PUNTA GORDA<br>CUSTOMERS SAY:</h2>
+    <script async src='https://reputationhub.site/reputation/assets/review-widget.js'></script><iframe class='lc_reviews_widget' src='https://reputationhub.site/reputation/widgets/review_widget/XIPVjlJvF0sb0UDfhwVL?widgetId=69d02a28903c68c318c27df7' frameborder='0' scrolling='no' style='min-width: 100%; width: 100%;' loading='lazy'></iframe>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="faq-section">
+    <div class="faq-header">
+      <div class="faq-eyebrow">Got Questions?</div>
+      <h2 class="faq-title">Punta Gorda Car Detailing <span>FAQ</span></h2>
+      <p class="faq-subtitle">Everything you need to know before booking.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span class="faq-q-text">What exactly is professional car detailing and how does it work?</span>
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            Professional car detailing goes far beyond a standard car wash. It's a comprehensive, hands-on process that restores and protects every surface of your vehicle &#8212; inside and out. We hand-wash the exterior, deep-clean every interior surface, condition materials, and apply long-lasting sealants. <strong>The result is a showroom-quality finish that protects your car's value and looks incredible.</strong>
+            <div class="highlight">&#x1F4CD; Serving Punta Gorda, Port Charlotte &amp; North Port, FL</div>
+          </div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span class="faq-q-text">How long does car detailing take?</span>
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            It depends on the package and your vehicle's condition. Our <strong>Basic Detailing</strong> takes approximately 1 hour 50 minutes. The <strong>Full Detailing</strong> runs about 2 hours 55 minutes. The <strong>Premium Detailing</strong> takes around 3 hours 50 minutes for our most comprehensive treatment. We'll give you a time estimate when you book so you can plan your day.
+          </div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span class="faq-q-text">What types of vehicles do you detail in Punta Gorda?</span>
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            We detail <strong>all vehicle types</strong> &#8212; sedans, SUVs, trucks, minivans, coupes, convertibles, and luxury vehicles. Whether you drive a Tesla, BMW, Mercedes, Ford, or a daily-driver Honda or Toyota, our professional detailing service is tailored to your vehicle's specific paint type, interior materials, and finish.
+            <div class="highlight">&#x2713; All Makes &amp; Models &#183; Luxury &#183; Trucks &#183; SUVs</div>
+          </div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span class="faq-q-text">What's the difference between car detailing and a regular car wash?</span>
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            A car wash removes surface dirt with a quick rinse or automated brushes. Car detailing is a meticulous, multi-step process that cleans, corrects, and protects every part of your vehicle. We hand-wash every panel, deep-clean the interior, condition surfaces, shampoo seats, and apply protective sealants. <strong>A car wash lasts hours &#8212; a professional detail lasts weeks to months.</strong>
+          </div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span class="faq-q-text">What's included in your paint protection sealant?</span>
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            Our Full Detailing includes a <strong>spray wax or spray sealant with 3 months of protection</strong>. Premium Detailing steps it up with a <strong>spray sealant providing 6 months of protection</strong> against UV rays, water spots, and environmental contaminants &#8212; both create a hydrophobic barrier that keeps your car easier to maintain and looking freshly detailed longer.
+          </div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span class="faq-q-text">Do you offer a satisfaction guarantee?</span>
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            100%. If you're not satisfied with any part of your detail, tell us before we leave and we'll fix it on the spot &#8212; no questions asked. We don't consider a job done until you're happy with every panel. <strong>That's the M4 Detailing standard.</strong>
+          </div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span class="faq-q-text">What areas in Southwest Florida do you service?</span>
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            We primarily serve <strong>Punta Gorda, Port Charlotte, and North Port</strong>. Not sure if we reach you? Just call &#8212; we'll let you know right away and do our best to accommodate.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="faq-bottom">
+      <div class="faq-bottom-title">Still have a question?</div>
+      <div class="faq-bottom-sub">Send us your details and a real person gets back to you &#8212; usually in under 2 minutes.</div>
+      <button type="button" class="faq-cta-btn" onclick="openBookingModal()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><polyline points="9 16 11 18 15 14"/></svg>
+        REQUEST BOOKING
+      </button>
+    </div>
+  </section>
+
+  <script>
+    function toggleFaq(btn) {
+      var item = btn.closest('.faq-item');
+      var answer = item.querySelector('.faq-answer');
+      var isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(function(i) {
+        i.classList.remove('open');
+        i.querySelector('.faq-answer').style.maxHeight = '0';
+      });
+      if (!isOpen) {
+        item.classList.add('open');
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+      }
+    }
+  </script>
+
+  <!-- Contact Section -->
+  <section class="section contact-section">
+    <img src="./DSC09715.jpg" alt="M4 Detailing contact" class="contact-bg" loading="lazy">
+    <div class="contact-overlay"></div>
+    <div class="contact-content">
+      <div class="section-eyebrow"><span>Contact Us</span></div>
+      <h2 class="section-title">GET A QUOTE</h2>
+      <p class="contact-subtitle">Book your car detailing appointment today and experience the M4 Detailing difference</p>
+      <div id="contact-form" class="contact-form-container">
+        <!-- Native form, authored once here so it works without JS. The booking modal
+             clones this node and re-prefixes the ids, so there is no second copy to
+             keep in sync and no duplicate ids in the document. -->
+        <form class="lead-form" novalidate>
+          <div class="lf-row">
+            <label class="lf-label" for="lf-name">First Name <span aria-hidden="true">*</span></label>
+            <input class="lf-input" id="lf-name" name="first_name" type="text"
+                   autocomplete="given-name" required placeholder="First Name">
+            <p class="lf-error" data-for="lf-name"></p>
+          </div>
+          <div class="lf-row">
+            <label class="lf-label" for="lf-phone">Phone # <span aria-hidden="true">*</span></label>
+            <input class="lf-input" id="lf-phone" name="phone" type="tel"
+                   autocomplete="tel" inputmode="tel" required placeholder="Phone">
+            <p class="lf-error" data-for="lf-phone"></p>
+          </div>
+          <div class="lf-row">
+            <label class="lf-label" for="lf-vehicle">Year | Make | Model</label>
+            <input class="lf-input" id="lf-vehicle" name="vehicle" type="text"
+                   placeholder="2013 Honda Accord">
+          </div>
+          <div class="lf-row">
+            <label class="lf-label" for="lf-message">Message Us</label>
+            <textarea class="lf-input lf-textarea" id="lf-message" name="message" rows="4"
+                      placeholder="EX: Can you get rid of coffee stains?"></textarea>
+          </div>
+
+          <!-- Vehicle size, set by whichever hero price card opened the form. The GHL
+               iframe this replaced could not capture it at all. -->
+          <input type="hidden" name="vehicle_size" value="">
+          <!-- Present on both lanes. The add-on checkboxes are gone (they were a
+               toll booth shown before commitment, and their prices had to be hand-synced
+               with the page cards - see 9d0f231), but the key stays so GHL's existing
+               mapping keeps resolving. -->
+          <input type="hidden" name="addons" value="None">
+          <input type="hidden" name="service_type" value="Full Detail (offer)">
+          <input type="hidden" name="conditions" value="None">
+          <input type="hidden" name="water_power" value="Not asked">
+          <input type="hidden" name="entry_lane" value="offer">
+          <!-- Ads attribution, read from the URL on load. The GHL iframe used to carry
+               these through itself; a native form has to forward them or attribution dies. -->
+          <input type="hidden" name="gclid" value="">
+          <input type="hidden" name="utm_source" value="">
+          <input type="hidden" name="utm_medium" value="">
+          <input type="hidden" name="utm_campaign" value="">
+          <input type="hidden" name="utm_term" value="">
+          <input type="hidden" name="utm_content" value="">
+          <input type="hidden" name="page_url" value="">
+          <input type="hidden" name="referrer" value="">
+          <!-- Which city the visitor was shown, and the raw Google location id. -->
+          <input type="hidden" name="geo_city" value="Punta Gorda">
+          <input type="hidden" name="loc" value="">
+          <!-- Honeypot: the webhook is a public endpoint, so bots will find it. -->
+          <div class="lf-hp" aria-hidden="true">
+            <label>Company<input type="text" name="company" tabindex="-1" autocomplete="off"></label>
+          </div>
+
+          <button type="submit" class="lf-submit">REQUEST BOOKING</button>
+          <p class="lf-status" role="status" aria-live="polite"></p>
+          <p class="lf-legal">By submitting you agree to be contacted about your booking.</p>
+        </form>
+      </div>
+      <div class="contact-info-cards">
+        <div class="info-card">
+          <svg class="info-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+            <circle cx="12" cy="10" r="3"></circle>
+          </svg>
+          <p class="info-label">Service Area</p>
+          <p class="info-text">Punta Gorda, Port Charlotte &amp; North Port</p>
+        </div>
+        <div class="info-card">
+          <svg class="info-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+          <p class="info-label">Availability</p>
+          <p class="info-text">7 days a week</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sticky CTA -->
+  <div class="sticky-cta">
+    <button type="button" class="sticky-button" onclick="openBookingModal()">
+      <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><polyline points="9 16 11 18 15 14"/></svg>
+      REQUEST BOOKING
+    </button>
+  </div>
+
+  <script>
+    // The sticky bar opens the express modal. While the guided wizard is on screen
+    // it is both a competing CTA and a physical obstruction - it sits on top of the
+    // wizard's own Next/Get-my-quote buttons. Suppress it for as long as the wizard
+    // is in view.
+    var wizardOnScreen = false;
+    var wizardSection = document.getElementById('offer-addons');
+    if (wizardSection && 'IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        wizardOnScreen = entries[0].isIntersecting;
+        syncSticky();
+      }, { rootMargin: '-10% 0px -25% 0px' }).observe(wizardSection);
+    }
+
+    function syncSticky() {
+      var stickyButton = document.querySelector('.sticky-cta');
+      if (!stickyButton) return;
+      if (window.scrollY > 200 && !wizardOnScreen) { stickyButton.classList.add('visible'); }
+      else { stickyButton.classList.remove('visible'); }
+    }
+
+    window.addEventListener('scroll', syncSticky);
+
+  </script>
+
+  <!-- GFN Phone Sync -->
+  <script>
+    (function() {
+      function normalizePhone(text) {
+        var digits = text.replace(/\D/g, '');
+        if (digits.length === 10) return '+1' + digits;
+        if (digits.length === 11 && digits[0] === '1') return '+' + digits;
+        return '+' + digits;
+      }
+      function updatePhoneLinks() {
+        var phoneTextEl = document.querySelector('.phone-text');
+        if (!phoneTextEl) return;
+        var normalized = normalizePhone(phoneTextEl.textContent);
+        var links = document.querySelectorAll('a.phone-link');
+        for (var i = 0; i < links.length; i++) { links[i].href = 'tel:' + normalized; }
+      }
+      updatePhoneLinks();
+      var phoneTexts = document.querySelectorAll('.phone-text');
+      if (phoneTexts.length && typeof MutationObserver !== 'undefined') {
+        var observer = new MutationObserver(updatePhoneLinks);
+        for (var i = 0; i < phoneTexts.length; i++) {
+          observer.observe(phoneTexts[i], { characterData: true, childList: true, subtree: true });
+        }
+      }
+    })();
+  </script>
+
+<!-- Booking Modal -->
+<div class="booking-modal-overlay" id="bookingModal" onclick="handleOverlayClick(event)">
+  <div class="booking-modal">
+    <div class="modal-header">
+      <span class="modal-title">REQUEST BOOKING</span>
+      <button class="modal-close" onclick="closeBookingModal()" aria-label="Close modal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <!-- Filled by cloning the inline form on first open (see the lead-form script). -->
+    <div class="modal-form-container" id="modalFormMount"></div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var hashTargets = {
+      '#quote': { id: 'contact-form', block: 'start' }
+    };
+    var target = hashTargets[window.location.hash];
+    if (!target) return;
+    window.addEventListener('load', function () {
+      var el = document.getElementById(target.id);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: target.block });
+    });
+  })();
+</script>
+
+<script>
+  // Every CTA opens the same modal. Cards say what they were:
+  //   {size: 'SUV'}              - a hero price card, recorded on the lead
+  function openBookingModal(opts) {
+    opts = opts || {};
+    var mount = document.getElementById('modalFormMount');
+    if (mount && !mount.firstElementChild && window.cloneLeadForm) {
+      mount.appendChild(window.cloneLeadForm('modal'));
+    }
+    if (opts.size && window.setVehicleSize) { window.setVehicleSize(opts.size); }
+    document.getElementById('bookingModal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeBookingModal() {
+    document.getElementById('bookingModal').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  function handleOverlayClick(e) {
+    if (e.target === e.currentTarget) { closeBookingModal(); }
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') { closeBookingModal(); }
+  });
+</script>
+
+<!-- Native lead form: posts to a GHL inbound webhook, then redirects to the thank-you
+     page itself. No GHL iframe, so no form_embed.js, no height guessing, and the
+     redirect that fires the Ads conversion is ours rather than a GHL setting. -->
+<script>
+  (function () {
+    // SANDBOX: the real endpoint (GHL inbound webhook for the M4 sub-account)
+    // is removed. Nothing is posted anywhere - submit() logs the payload and
+    // walks the funnel instead. Restore the live URL from ../m4-OFFER/ if you
+    // ever promote this copy.
+    var GHL_WEBHOOK_URL = null;
+    var configured = true;   // keep the "not connected yet" branch unreachable
+
+    var template = document.querySelector('#contact-form .lead-form');
+    if (!template) return;
+
+    // --- attribution: read once, stamp into every copy of the form -------------
+    var params = new URLSearchParams(location.search);
+    var attribution = {
+      gclid: params.get('gclid') || '',
+      utm_source: params.get('utm_source') || '',
+      utm_medium: params.get('utm_medium') || '',
+      utm_campaign: params.get('utm_campaign') || '',
+      utm_term: params.get('utm_term') || '',
+      utm_content: params.get('utm_content') || '',
+      page_url: location.href,
+      referrer: document.referrer || '',
+      loc: params.get('loc') || ''
+    };
+    // Published for the guided wizard, which posts the same attribution keys.
+    window.__attribution = attribution;
+
+    function stamp(form) {
+      Object.keys(attribution).forEach(function (k) {
+        var el = form.querySelector('[name="' + k + '"]');
+        if (el) el.value = attribution[k];
+      });
+      // The geo script may have resolved a city before this copy existed.
+      if (window.__geoCity) {
+        var city = form.querySelector('[name="geo_city"]');
+        if (city) city.value = window.__geoCity;
+      }
+    }
+
+    // --- clone for the modal, re-prefixing ids so the document stays valid ------
+    window.cloneLeadForm = function (prefix) {
+      var copy = template.cloneNode(true);
+      copy.querySelectorAll('[id]').forEach(function (el) {
+        var old = el.id;
+        el.id = prefix + '-' + old;
+        copy.querySelectorAll('label[for="' + old + '"]').forEach(function (l) { l.htmlFor = el.id; });
+        copy.querySelectorAll('[data-for="' + old + '"]').forEach(function (p) { p.setAttribute('data-for', el.id); });
+      });
+      wire(copy);
+      stamp(copy);
+      return copy;
+    };
+
+    window.setVehicleSize = function (size) {
+      document.querySelectorAll('.lead-form [name="vehicle_size"]').forEach(function (el) { el.value = size; });
+    };
+
+
+    // --- validation -------------------------------------------------------------
+    function digits(s) { return (s || '').replace(/\D/g, ''); }
+    function validate(form) {
+      var ok = true;
+      form.querySelectorAll('.lf-error').forEach(function (p) { p.textContent = ''; });
+      form.querySelectorAll('.lf-input').forEach(function (i) { i.removeAttribute('aria-invalid'); });
+
+      var name = form.querySelector('[name="first_name"]');
+      var phone = form.querySelector('[name="phone"]');
+      function fail(field, msg) {
+        ok = false;
+        field.setAttribute('aria-invalid', 'true');
+        var p = form.querySelector('.lf-error[data-for="' + field.id + '"]');
+        if (p) p.textContent = msg;
+      }
+      if (!name.value.trim()) fail(name, 'Please enter your first name.');
+      var d = digits(phone.value);
+      if (!d) fail(phone, 'Please enter your phone number.');
+      else if (d.length < 10 || d.length > 11) fail(phone, 'Please enter a 10-digit phone number.');
+      if (!ok) { var bad = form.querySelector('[aria-invalid="true"]'); if (bad) bad.focus(); }
+      return ok;
+    }
+
+    // --- submit -----------------------------------------------------------------
+    function wire(form) {
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var status = form.querySelector('.lf-status');
+        var button = form.querySelector('.lf-submit');
+
+        // Honeypot: a bot filled a field no human can see. Look successful, send nothing.
+        if (form.querySelector('[name="company"]').value) { window.location.href = 'thank-you.html'; return; }
+        if (!validate(form)) return;
+        if (!configured) {
+          status.textContent = 'Online booking is not connected yet - please try again shortly.';
+          status.className = 'lf-status lf-status-error';
+          return;
+        }
+
+        var payload = {};
+        new FormData(form).forEach(function (v, k) {
+          if (k === 'company') return;
+          if (k === 'addons') { (payload.addons = payload.addons || []).push(v); }
+          else { payload[k] = v; }
+        });
+        // Never post an empty string here: GHL builds its mapping tokens from a
+        // captured sample, and an empty value is the awkward case to map. "None"
+        // also distinguishes "picked no add-ons" from a broken mapping.
+        payload.addons = (payload.addons || []).join(', ') || 'None';
+        payload.phone = digits(payload.phone).replace(/^1?/, '+1');
+
+        button.disabled = true;
+        var label = button.textContent;
+        button.textContent = 'SENDING...';
+        status.textContent = '';
+        status.className = 'lf-status';
+
+        // SANDBOX: no network call. Log exactly the body the live page would
+        // have POSTed, then walk the rest of the funnel so thank-you.html is
+        // still reachable. `label` is kept so the button restores on re-entry.
+        console.log('[SANDBOX] lead payload (not sent):', payload);
+        console.log('[SANDBOX] JSON body:', JSON.stringify(payload));
+        status.textContent = 'Sandbox: nothing was sent. See the console.';
+        status.className = 'lf-status';
+        setTimeout(function () {
+          button.disabled = false;
+          button.textContent = label;
+          window.location.href = 'thank-you.html';   // relative: works over file://
+        }, 600);
+      });
+    }
+
+    wire(template);
+    stamp(template);
+  })();
+</script>
+
+<!-- Dynamic location in the H1 and title.
+     Google Ads appends ?loc={loc_physical_ms}, the numeric id of the searcher's
+     physical location; GEO_IDS maps the ids this account actually gets traffic
+     from (pulled from geographic_view) to a city name. Without that parameter -
+     organic, direct, Meta - fall back to an IP lookup, and failing that leave the
+     city already in the HTML. The displayed name always comes from the tables
+     below: a URL value is never written to the page, so it cannot be used to
+     inject markup or make the page read whatever a visitor likes. -->
+<script>
+  (function () {
+    // Google location id -> what to display. A handful of tiny CDPs are rolled up
+    // to the town people there would actually name (their marina, subdivision or
+    // census area), which is still somewhere M4 serves.
+    var GEO_IDS = {
+      '1015178': 'Port Charlotte',
+      '1015223': 'Venice',
+      '1015183': 'Punta Gorda',
+      '1015140': 'North Port',
+      '1015136': 'Nokomis',
+      '1015152': 'Osprey',
+      '1015019': 'Englewood',
+      '9052777': 'Rotonda West',
+      '9218008': 'Englewood',          // Grove City CDP
+      '9189270': 'Punta Gorda',        // Burnt Store Marina
+      '9052106': 'Punta Gorda',        // Harbour Heights
+      '9189867': 'Punta Gorda',        // Solana
+      '1015171': 'Englewood',          // Placida
+      '9194057': 'North Port'          // Warm Mineral Springs
+      // 9191000 "Plantation" is deliberately absent: it reads as Plantation in
+      // Broward County, 100 miles away. It falls back to the default.
+    };
+    // Accepted from the IP lookup only if the city is one of these.
+    var SERVICE_AREA = ['Punta Gorda', 'Port Charlotte', 'North Port', 'Venice',
+                        'Englewood', 'Rotonda West', 'Nokomis', 'Osprey'];
+    var CACHE_KEY = 'm4GeoCity';
+
+    var targets = document.querySelectorAll('[data-geo-city]');
+    if (!targets.length) return;
+    var fallback = targets[0].textContent.trim();
+
+    function apply(city) {
+      if (!city || city === fallback) return;
+      for (var i = 0; i < targets.length; i++) targets[i].textContent = city;
+      if (document.title.indexOf(fallback) !== -1) {
+        document.title = document.title.split(fallback).join(city);
+      }
+      window.__geoCity = city;
+      // Stamp every copy of the form, including one the modal has already cloned.
+      var fields = document.querySelectorAll('.lead-form [name="geo_city"]');
+      for (var j = 0; j < fields.length; j++) fields[j].value = city;
+    }
+    function cache(city) { try { sessionStorage.setItem(CACHE_KEY, city); } catch (e) {} }
+
+    // 1. the Ads parameter
+    var id = new URLSearchParams(location.search).get('loc');
+    if (id && GEO_IDS[id]) { apply(GEO_IDS[id]); cache(GEO_IDS[id]); return; }
+
+    // 2. whatever this session already worked out
+    var seen = null;
+    try { seen = sessionStorage.getItem(CACHE_KEY); } catch (e) {}
+    if (seen) { apply(seen); return; }
+
+    // 3. IP lookup, strictly best-effort: short timeout, silent on failure
+    if (!window.fetch || !window.AbortController) return;
+    var stop = new AbortController();
+    var timer = setTimeout(function () { stop.abort(); }, 1500);
+    fetch('https://ipwho.is/?fields=city,region_code,success', { signal: stop.signal })
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        clearTimeout(timer);
+        if (!d || d.success === false || d.region_code !== 'FL') return;
+        if (SERVICE_AREA.indexOf(d.city) === -1) return;   // never show a city we don't serve
+        apply(d.city); cache(d.city);
+      })
+      .catch(function () { clearTimeout(timer); });
+  })();
+</script>
+
+<!-- Evergreen offer countdown: 6d 12h + random minutes, per visitor, not tied to a
+     real date. The deadline is remembered so a refresh doesn't reset it; when it
+     runs out a fresh cycle starts. -->
+<script>
+  (function () {
+    var KEY = 'm4OfferDeadline';
+    var SPAN = (6 * 24 + 12) * 60;               // 6d 12h, in minutes
+    var el = document.getElementById('offerExpiry');
+    if (!el) return;
+
+    function fresh() {                            // random minutes + seconds so visitors differ
+      return Date.now() + (SPAN + Math.floor(Math.random() * 60)) * 60000
+                        + Math.floor(Math.random() * 60) * 1000;
+    }
+    function stored() {
+      try {
+        var v = parseInt(localStorage.getItem(KEY), 10);
+        return v > Date.now() ? v : null;         // also rejects NaN and past values
+      } catch (e) { return null; }                // storage blocked (private browsing)
+    }
+    function save(v) { try { localStorage.setItem(KEY, String(v)); } catch (e) {} }
+
+    var deadline = stored();
+    if (!deadline) { deadline = fresh(); save(deadline); }
+
+    function two(n) { return n < 10 ? '0' + n : '' + n; }
+    function tick() {
+      var left = deadline - Date.now();
+      if (left <= 0) { deadline = fresh(); save(deadline); left = deadline - Date.now(); }
+      var s = Math.floor(left / 1000);
+      el.textContent = Math.floor(s / 86400) + 'd ' + two(Math.floor(s / 3600) % 24) + 'h '
+                     + two(Math.floor(s / 60) % 60) + 'm ' + two(s % 60) + 's';
+    }
+    tick();
+    setInterval(tick, 1000);
+  })();
+</script>
+
+<!-- Guided quote wizard.
+     Step machinery follows khrome-FORM FOCUS (display:none / .active), which is the
+     same shape as this page's own switchTab(). Transport is deliberately NOT that
+     page's Netlify relay - it keeps the offer page's direct POST, honeypot, hidden-field
+     attribution and +1 normalisation, so both lanes land in GHL identically. -->
+<script>
+  (function () {
+    var form = document.getElementById('quote-wizard');
+    if (!form) return;
+
+    // No pricing here by design: this is a quote request, not a calculator. The
+    // steps exist to segment and qualify, and the answers are read back on step 4
+    // so the visitor can see they were understood before handing over a number.
+    var QUESTIONS = {
+      interior: {
+        label: 'Inside the vehicle',
+        chips: ['Stains or spills', 'Pet hair', 'Odor or smoke', 'Sand or heavy dirt', 'Mold or water damage']
+      },
+      exterior: {
+        label: 'Outside the vehicle',
+        chips: ['Swirls or scratches', 'Water spots', 'Bug & tar', 'Faded or oxidised paint']
+      }
+    };
+
+    var state = { step: 1, service: '', size: '', conditions: [], water: '' };
+
+    // ---- step machinery ------------------------------------------------------
+    var steps  = form.querySelectorAll('.wz-step');
+    var fill   = document.getElementById('wz-fill');
+    var label  = document.getElementById('wz-label');
+    var nav    = document.getElementById('wz-nav');
+    var back   = document.getElementById('wz-back');
+    var next   = document.getElementById('wz-next');
+    var status = document.getElementById('wz-status');
+    var TOTAL  = 4;
+
+    function err(n, msg) {
+      var el = form.querySelector('[data-err="' + n + '"]');
+      if (el) el.textContent = msg || '';
+    }
+    function clearErrors() { form.querySelectorAll('.wz-err').forEach(function (e) { e.textContent = ''; }); }
+
+    function show(n) {
+      clearErrors();
+      steps.forEach(function (el) { el.classList.toggle('active', +el.getAttribute('data-step') === n); });
+      fill.style.width = Math.round((n / TOTAL) * 100) + '%';
+      label.textContent = 'Step ' + n + ' of ' + TOTAL;
+      nav.style.display = n === 1 ? 'none' : 'flex';
+      next.textContent = n === TOTAL ? 'GET MY QUOTE' : 'Next →';
+      state.step = n;
+      track(n);
+    }
+
+    function go(n) {
+      if (n === 4) { buildSummary(); }
+      if (n === 3) { buildConditions(); }
+      show(n);
+      // Keep the card's top in view; steps differ in height and a tall step
+      // otherwise leaves the question off-screen on a phone.
+      var top = form.getBoundingClientRect().top + window.pageYOffset - 72;
+      window.scrollTo({ top: top, behavior: 'smooth' });
+    }
+
+    // Step 3 has nothing to ask for paint/ceramic or "not sure", so it is skipped
+    // in whichever direction the visitor arrived from.
+    function hasConditions() {
+      return state.service === 'Interior only'
+          || state.service === 'Exterior only'
+          || state.service === 'Interior + exterior';
+    }
+
+    // ---- step 3: built from the step 1 answer --------------------------------
+    function buildConditions() {
+      var mount = document.getElementById('wz-conditions');
+      mount.textContent = '';
+      var groups = [];
+      if (state.service === 'Interior only' || state.service === 'Interior + exterior') groups.push(QUESTIONS.interior);
+      if (state.service === 'Exterior only' || state.service === 'Interior + exterior') groups.push(QUESTIONS.exterior);
+
+      groups.forEach(function (g) {
+        var wrap = document.createElement('div');
+        wrap.className = 'wz-group';
+        var lab = document.createElement('p');
+        lab.className = 'wz-group-label';
+        lab.textContent = g.label;
+        wrap.appendChild(lab);
+        var chips = document.createElement('div');
+        chips.className = 'wz-chips';
+        g.chips.forEach(function (c) {
+          var b = document.createElement('button');
+          b.type = 'button';
+          b.className = 'wz-chip' + (state.conditions.indexOf(c) > -1 ? ' selected' : '');
+          b.textContent = c;                       // textContent, not innerHTML - labels stay data
+          b.addEventListener('click', function () {
+            var i = state.conditions.indexOf(c);
+            if (i > -1) { state.conditions.splice(i, 1); b.classList.remove('selected'); }
+            else        { state.conditions.push(c);      b.classList.add('selected'); }
+          });
+          chips.appendChild(b);
+        });
+        wrap.appendChild(chips);
+        mount.appendChild(wrap);
+      });
+
+      // Mobile detailing runs off the customer's water and power. People already
+      // volunteer this unprompted; asking saves a wasted trip.
+      var wrap = document.createElement('div');
+      wrap.className = 'wz-group';
+      var lab = document.createElement('p');
+      lab.className = 'wz-group-label';
+      lab.textContent = 'Water and power where the car is parked?';
+      wrap.appendChild(lab);
+      var chips = document.createElement('div');
+      chips.className = 'wz-chips';
+      ['Both available', 'Water only', 'Neither', 'Not sure'].forEach(function (c) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'wz-chip' + (state.water === c ? ' selected' : '');
+        b.textContent = c;
+        b.addEventListener('click', function () {
+          state.water = c;
+          chips.querySelectorAll('.wz-chip').forEach(function (x) { x.classList.remove('selected'); });
+          b.classList.add('selected');
+        });
+        chips.appendChild(b);
+      });
+      wrap.appendChild(chips);
+      mount.appendChild(wrap);
+    }
+
+    // ---- step 4: read back what they told us ---------------------------------
+    // Built as DOM nodes with textContent rather than an innerHTML string: the
+    // values are user input, and this way nothing needs escaping in the first place.
+    function buildSummary() {
+      var mount = document.getElementById('wz-recap');
+      mount.textContent = '';
+
+      var title = document.createElement('p');
+      title.className = 'wz-recap-title';
+      title.textContent = 'Your request';
+      mount.appendChild(title);
+
+      function row(label, build) {
+        var r = document.createElement('div');
+        r.className = 'wz-recap-row';
+        var l = document.createElement('span');
+        l.className = 'wz-recap-label';
+        l.textContent = label;
+        r.appendChild(l);
+        r.appendChild(build());
+        mount.appendChild(r);
+      }
+      function text(v) {
+        var el = document.createElement('span');
+        el.className = 'wz-recap-value';
+        el.textContent = v;
+        return el;
+      }
+
+      row('Service', function () { return text(state.service); });
+
+      var veh = (form.querySelector('[name="vehicle"]').value || '').trim();
+      if (veh) row('Vehicle', function () { return text(veh); });
+      if (state.size) row('Size', function () { return text(state.size); });
+
+      // Only report what this path actually asked. Paint/ceramic and "Not sure"
+      // skip step 3, so they must not show condition or access rows at all.
+      if (hasConditions()) {
+        if (state.conditions.length) {
+          row('Noted', function () {
+            var wrap = document.createElement('div');
+            wrap.className = 'wz-recap-tags';
+            state.conditions.forEach(function (c) {
+              var t = document.createElement('span');
+              t.className = 'wz-recap-tag';
+              t.textContent = c;
+              wrap.appendChild(t);
+            });
+            return wrap;
+          });
+        }
+        if (state.water) row('On site', function () { return text(state.water); });
+      }
+    }
+
+    // ---- choices -------------------------------------------------------------
+    form.querySelectorAll('.wz-step[data-step="1"] .wz-choice').forEach(function (b) {
+      b.addEventListener('click', function () {
+        form.querySelectorAll('.wz-step[data-step="1"] .wz-choice').forEach(function (x) { x.classList.remove('selected'); });
+        b.classList.add('selected');
+        state.service = b.getAttribute('data-val');
+        state.conditions = [];                       // a changed segment invalidates them
+        form.querySelector('[name="service_type"]').value = state.service;
+        setTimeout(function () { go(2); }, 150);     // auto-advance: the click is the answer
+      });
+    });
+
+    form.querySelectorAll('.wz-step[data-step="2"] .wz-choice').forEach(function (b) {
+      b.addEventListener('click', function () {
+        form.querySelectorAll('.wz-step[data-step="2"] .wz-choice').forEach(function (x) { x.classList.remove('selected'); });
+        b.classList.add('selected');
+        state.size = b.getAttribute('data-val');
+        form.querySelector('[name="vehicle_size"]').value = state.size;
+        err(2, '');
+      });
+    });
+
+    // ---- nav -----------------------------------------------------------------
+    back.addEventListener('click', function () {
+      var n = state.step - 1;
+      if (n === 3 && !hasConditions()) n = 2;
+      go(Math.max(1, n));
+    });
+
+    next.addEventListener('click', function () {
+      if (state.step === 2) {
+        if (!state.size) { err(2, 'Pick a vehicle size so we can price it.'); return; }
+        go(hasConditions() ? 3 : 4);
+        return;
+      }
+      if (state.step === 3) { go(4); return; }
+      if (state.step === 4) { submit(); return; }
+      go(state.step + 1);
+    });
+
+    // ---- submit --------------------------------------------------------------
+    function digits(s) { return (s || '').replace(/\D/g, ''); }
+
+    function submit() {
+      var name  = form.querySelector('[name="first_name"]');
+      var phone = form.querySelector('[name="phone"]');
+      if (!name.value.trim()) { err(4, 'Please enter your first name.'); name.focus(); return; }
+      var d = digits(phone.value);
+      if (d.length < 10 || d.length > 11) { err(4, 'Please enter a 10-digit phone number.'); phone.focus(); return; }
+      err(4, '');
+
+      // Honeypot: look successful, send nothing.
+      if (form.querySelector('[name="company"]').value) { window.location.href = 'thank-you.html'; return; }
+
+      var asked = hasConditions();
+      form.querySelector('[name="conditions"]').value =
+        (asked && state.conditions.join(', ')) || (asked ? 'None' : 'Not asked');
+      form.querySelector('[name="water_power"]').value =
+        (asked && state.water) || 'Not asked';
+
+      var attribution = window.__attribution || {};
+      Object.keys(attribution).forEach(function (k) {
+        var el = form.querySelector('[name="' + k + '"]');
+        if (el) el.value = attribution[k];
+      });
+      if (window.__geoCity) {
+        var city = form.querySelector('[name="geo_city"]');
+        if (city) city.value = window.__geoCity;
+      }
+
+      var payload = {};
+      new FormData(form).forEach(function (v, k) {
+        if (k === 'company') return;
+        payload[k] = v;
+      });
+      // Same never-empty rule as the express form: GHL builds its mapping tokens
+      // from a captured sample, and an empty value is the awkward case to map.
+      payload.addons = payload.addons || 'None';
+      payload.conditions = payload.conditions || 'None';
+      // vehicle and message are pre-existing keys - the express form has always posted
+      // them raw (empty when blank), so leave them alone rather than inventing a
+      // placeholder only this lane would send.
+      payload.phone = digits(payload.phone).replace(/^1?/, '+1');
+
+      next.disabled = true;
+      var lbl = next.textContent;
+      next.textContent = 'SENDING...';
+      status.textContent = '';
+      status.className = 'lf-status';
+
+      // SANDBOX: no network call. Log the body the live page would have POSTed.
+      console.log('[SANDBOX] guided-lane payload (not sent):', payload);
+      console.log('[SANDBOX] JSON body:', JSON.stringify(payload));
+      status.textContent = 'Sandbox: nothing was sent. See the console.';
+      setTimeout(function () {
+        next.disabled = false;
+        next.textContent = lbl;
+        window.location.href = 'thank-you.html';
+      }, 600);
+    }
+
+    // ---- step tracking -------------------------------------------------------
+    // Stripped in this sandbox; on the live page this is what makes the funnel
+    // debuggable at all - without it there is no way to see which gate leaks.
+    function track(n) {
+      if (typeof window.gtag === 'function') {
+        window.gtag('event', 'form_step', { step: n, lane: 'guided' });
+      }
+      if (typeof window.clarity === 'function') {
+        window.clarity('set', 'form_step', 'guided-' + n);
+      }
+    }
+
+    show(1);
+  })();
+</script>
+
+<!-- SANDBOX: CallRail swap.js removed. The phone number below stays the
+     hard-coded line instead of being swapped to a tracking number. -->
+</body>
+</html>
