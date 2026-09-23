@@ -17,7 +17,7 @@
     });
   </script>
 
-  <!-- Event snippet for the multistep test conversion (label pending).
+  <!-- Event snippet for FORM SUBMIT(multi-step) conversion page.
        tid       - minted on the form page and carried in the URL, so a reload or a
                    back-forward re-fires the same id. The conversion action is set to
                    Count: Every, so without this every refresh counted again.
@@ -40,17 +40,42 @@
         sessionStorage.removeItem('lead_ud');
       } catch (e) {}
 
-      // TODO: conversion label for the multistep test is not issued yet. Paste it
-      // into send_to and uncomment this block - until then this page fires NO
-      // conversion (never invent a label; CLAUDE.md rule 1).
-      // var ev = {
-      //   'send_to': 'AW-16828382025/REPLACE_WITH_MULTISTEP_LABEL',
-      //   'value': 1.0,
-      //   'currency': 'USD'
-      // };
-      // var tid = p.get('tid');
-      // if (tid) ev.transaction_id = tid;
-      // gtag('event', 'conversion', ev);
+      var ev = {
+        'send_to': 'AW-16828382025/J8drCO2E9YIdEMn2stg-',
+        'value': 1.0,
+        'currency': 'USD'
+      };
+      var tid = p.get('tid');
+      if (tid) ev.transaction_id = tid;
+      gtag('event', 'conversion', ev);
+    })();
+  </script>
+
+  <!-- Funnel analytics: one thank_you_view row under the form page's session.
+       ANALYTICS_URL must match the one in index.html; empty = off. -->
+  <script>
+    (function () {
+      var ANALYTICS_URL = '';
+      if (!ANALYTICS_URL) return;
+      var p = new URLSearchParams(location.search), sid = '';
+      try { sid = sessionStorage.getItem('trk_sid') || ''; } catch (e) {}
+      var vw = window.innerWidth;
+      var body = JSON.stringify({
+        ctx: {
+          session_id: sid || 'no-session', device: vw < 768 ? 'mobile' : (vw < 1280 ? 'tablet' : 'desktop'),
+          viewport_w: vw, gclid: p.get('gclid') || '', utm_source: p.get('utm_source') || '',
+          utm_medium: p.get('utm_medium') || '', utm_campaign: p.get('utm_campaign') || '',
+          utm_term: p.get('utm_term') || '', utm_content: p.get('utm_content') || '',
+          loc: '', referrer: document.referrer || '', landing_url: location.href
+        },
+        events: [{ e: 'thank_you_view', ts: new Date().toISOString(), step: '', target: '',
+                   detail: '', entry: '', max_step: '', secs: 0, tid: p.get('tid') || '' }]
+      });
+      try {
+        if (!navigator.sendBeacon(ANALYTICS_URL, new Blob([body], { type: 'text/plain;charset=UTF-8' }))) throw 0;
+      } catch (e) {
+        try { fetch(ANALYTICS_URL, { method: 'POST', mode: 'no-cors', keepalive: true, body: body }); } catch (e2) {}
+      }
     })();
   </script>
 

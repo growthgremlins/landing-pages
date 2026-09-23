@@ -10,9 +10,219 @@
     gtag('config', 'AW-16828382025');
   </script>
 
-  <!-- CLARITY: TODO - TMC project ID pending. Do not reuse woobhn6bum (Attention)
-       or w77vu7kpdz (M4). -->
-  <!-- GA4 / GTM / Meta Pixel: none supplied for TMC. -->
+  <!-- GA4 / GTM / Meta Pixel / Clarity: none for this page. Funnel analytics go
+       to a Google Sheet via the trk() module below. -->
+  <!-- Funnel analytics -> Google Sheet, through an Apps Script web app (source:
+       docs/tmc-multistep-analytics.gs). Logs where people enter the form, what
+       they press and how far they get - NEVER what they type. Rows join to the
+       GHL lead through session_id / transaction_id. -->
+  <script>
+    (function () {
+      // The Apps Script web app's /exec URL. Empty = analytics off: every call
+      // below still works, it just sends nothing.
+      var ANALYTICS_URL = '';
+
+      var T0 = Date.now();
+      function rid() { return Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 8); }
+      function secs(t) { return Math.round((Date.now() - t) / 1000); }
+
+      // One id per tab session, kept in sessionStorage so the thank-you page
+      // logs under the same id.
+      var sid;
+      try {
+        sid = sessionStorage.getItem('trk_sid');
+        if (!sid) { sid = 's-' + rid(); sessionStorage.setItem('trk_sid', sid); }
+      } catch (e) { sid = 's-' + rid(); }
+
+      // Sent once per batch; the Sheet copies it onto every row.
+      var p = new URLSearchParams(location.search);
+      var vw = window.innerWidth;
+      var ctx = {
+        session_id: sid,
+        device: vw < 768 ? 'mobile' : (vw < 1280 ? 'tablet' : 'desktop'),
+        viewport_w: vw,
+        gclid: p.get('gclid') || '',
+        utm_source: p.get('utm_source') || '',
+        utm_medium: p.get('utm_medium') || '',
+        utm_campaign: p.get('utm_campaign') || '',
+        utm_term: p.get('utm_term') || '',
+        utm_content: p.get('utm_content') || '',
+        loc: p.get('loc') || '',
+        referrer: document.referrer || '',
+        landing_url: location.href
+      };
+
+      var queue = [];
+      var st = { maxStep: 0, lastEvent: '', lastField: '', submitted: false,
+                 started: false, formStart: 0, entry: '', dirty: false, formViewed: false };
+      var navEntry = '', inHeroOnLoad = false;
+
+      function ev(name, f) {
+        f = f || {};
+        if (name !== 'session_end') { st.lastEvent = name; st.dirty = true; }
+        if (name === 'step_view' && f.step > st.maxStep) st.maxStep = f.step;
+        if (!ANALYTICS_URL) return;
+        queue.push({
+          e: name,
+          ts: new Date().toISOString(),
+          step: f.step == null ? '' : f.step,
+          target: f.target || '',
+          detail: f.detail == null ? '' : String(f.detail),
+          entry: f.entry || '',
+          max_step: f.max_step == null ? '' : f.max_step,
+          secs: secs(T0),
+          tid: f.tid || ''
+        });
+      }
+
+      // sendBeacon: fire-and-forget, survives navigation and tab close, and a
+      // text/plain body needs no CORS preflight.
+      function flush() {
+        if (!ANALYTICS_URL || !queue.length) return;
+        var body = JSON.stringify({ ctx: ctx, events: queue.splice(0, 50) });
+        var ok = false;
+        try { ok = navigator.sendBeacon(ANALYTICS_URL, new Blob([body], { type: 'text/plain;charset=UTF-8' })); } catch (e) {}
+        if (!ok) {
+          try {
+            fetch(ANALYTICS_URL, { method: 'POST', mode: 'no-cors', keepalive: true,
+              headers: { 'Content-Type': 'text/plain;charset=UTF-8' }, body: body });
+          } catch (e) {}
+        }
+        if (queue.length) flush();
+      }
+      setInterval(flush, 5000);
+
+      // --- how they got into the form ------------------------------------------
+      function entry(label) { navEntry = label; }
+      function start(how) {
+        if (st.started) return;
+        st.started = true;
+        st.formStart = Date.now();
+        st.maxStep = Math.max(st.maxStep, 1);
+        st.entry = navEntry || (inHeroOnLoad ? 'in_hero_desktop' : 'scrolled');
+        ev('form_start', { step: 1, entry: st.entry, detail: how });
+      }
+
+      // --- drop-off summary ------------------------------------------------------
+      // Phones rarely fire pagehide, so the tab going to the background is the
+      // reliable last signal. Re-sent only if something happened since, so a
+      // session's LAST session_end row is its final state.
+      function end() {
+        if (!st.dirty) return;
+        st.dirty = false;
+        ev('session_end', {
+          step: st.maxStep || '',
+          max_step: st.maxStep,
+          target: st.lastField,
+          entry: st.entry,
+          detail: (st.submitted ? 'submitted' : 'not_submitted') + ' | last:' + st.lastEvent +
+                  ' | form_secs:' + (st.formStart ? secs(st.formStart) : 0)
+        });
+        flush();
+      }
+      document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'hidden') end(); });
+      window.addEventListener('pagehide', end);
+
+      // --- what they press ---------------------------------------------------------
+      function label(el) {
+        if (el.getAttribute('data-trk')) return el.getAttribute('data-trk');
+        var card = el.closest('.pkg-card');
+        if (card) {
+          var k = el.closest('.pkg-book-btn') ? 'request_booking' : el.closest('.pkg-learn-more') ? 'learn_more'
+                : el.closest('.pkg-show-less') ? 'show_less' : 'card';
+          return 'pkg:' + card.getAttribute('data-package') + ':' + k;
+        }
+        if (el.id === 'wz-next') return 'form:next';
+        if (el.id === 'wz-back') return 'form:back';
+        if (el.classList.contains('wz-choice')) return 'form:service';
+        if (el.classList.contains('wz-chip')) return 'form:condition';
+        var faq = el.closest('.faq-item');
+        if (faq) return 'faq:' + ([].indexOf.call(document.querySelectorAll('.faq-item'), faq) + 1);
+        var where = el.closest('.header') ? 'header' : el.closest('.hero') ? 'hero'
+                  : el.closest('.svc-cta-wrap') ? 'svc_cta' : el.closest('.svc-tabs-wrap') ? 'svc_tab'
+                  : el.closest('.faq-section') ? 'faq' : el.closest('.contact-section') ? 'contact'
+                  : el.closest('.sticky-cta') ? 'sticky' : el.closest('#quote-wizard') ? 'form'
+                  : el.closest('.site-legal') ? 'footer' : 'page';
+        var href = el.getAttribute('href') || '';
+        var what = /^tel:/.test(href) ? 'call'
+                 : el.classList.contains('hero-scroll') ? 'scroll_arrow'
+                 : href === '#quote-form' ? 'get_quote'
+                 : /privacy/.test(href) ? 'privacy' : /terms/.test(href) ? 'terms'
+                 : (el.textContent || '').trim().toLowerCase().replace(/\s+/g, '_').slice(0, 30);
+        return where + ':' + what;
+      }
+      // Capture phase: logged before the page's own handlers swap steps or
+      // navigate away.
+      document.addEventListener('click', function (e) {
+        var el = e.target.closest && e.target.closest('a, button, .pkg-card');
+        if (!el) return;
+        var l = label(el);
+        ev('click', { target: l });
+        if (/:(get_quote|scroll_arrow)$/.test(l)) entry(l.replace(':', '_'));
+        if (/:call$/.test(l)) flush();          // the dialer may background the page
+      }, true);
+
+      // --- the form: first touch, and which fields (never their values) ---------
+      function inForm(t) { return t && t.closest && t.closest('#quote-wizard'); }
+      document.addEventListener('pointerdown', function (e) { if (inForm(e.target)) start('tap'); }, true);
+      var FIELDS = { 'wz-year': 'year', 'wz-make': 'make', 'wz-model': 'model',
+                     'wz-name': 'first_name', 'wz-phone': 'phone', 'wz-message': 'message' };
+      function stepOf(t) { var s = t.closest('.wz-step'); return s ? +s.getAttribute('data-step') : ''; }
+      document.addEventListener('focusin', function (e) {
+        if (inForm(e.target)) start('focus');
+        var f = FIELDS[e.target.id];
+        if (!f) return;
+        st.lastField = f;
+        ev('field_focus', { target: f, step: stepOf(e.target) });
+      });
+      document.addEventListener('change', function (e) {
+        var f = FIELDS[e.target.id];
+        if (f && e.target.value.trim()) ev('field_filled', { target: f, step: stepOf(e.target) });
+      });
+
+      // --- page reach ------------------------------------------------------------
+      var seenDepth = {};
+      function checkFormView() {
+        if (st.formViewed) return;
+        var f = document.getElementById('quote-wizard');
+        if (!f) return;
+        var r = f.getBoundingClientRect();
+        var vis = Math.min(r.bottom, window.innerHeight) - Math.max(r.top, 0);
+        if (vis >= Math.min(r.height, window.innerHeight) * 0.5) {
+          st.formViewed = true;
+          ev('form_view', { detail: secs(T0) + 's' });
+        }
+      }
+      function onScroll() {
+        var h = document.documentElement.scrollHeight - window.innerHeight;
+        var pct = h > 0 ? window.scrollY / h * 100 : 100;
+        [25, 50, 75, 100].forEach(function (d) {
+          if (pct >= d - 0.5 && !seenDepth[d]) { seenDepth[d] = 1; ev('scroll_depth', { detail: d }); }
+        });
+        checkFormView();
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      document.addEventListener('DOMContentLoaded', function () {
+        ev('page_view');
+        var f = document.getElementById('quote-wizard');
+        if (f && window.innerWidth >= 1280) {
+          var r = f.getBoundingClientRect();
+          inHeroOnLoad = r.top < window.innerHeight && r.bottom > 0;
+        }
+        checkFormView();
+        flush();
+      });
+
+      window.trk = {
+        sid: sid,
+        ev: ev,
+        flush: flush,
+        entry: entry,
+        start: start,
+        submitted: function () { st.submitted = true; }
+      };
+    })();
+  </script>
 
   <link rel="icon" type="image/webp" sizes="128x128" href="./tmc-logo.webp">
   <link rel="shortcut icon" type="image/webp" href="./tmc-logo.webp">
@@ -1115,17 +1325,15 @@
         <p class="lf-status" id="wz-status" role="status" aria-live="polite"></p>
         <p class="lf-legal">By submitting you agree to be contacted about your booking. <a href="./privacy-policy.html">Privacy</a> &middot; <a href="./terms-of-service.html">Terms</a></p>
 
-        <!-- One fixed payload shape: every key is always sent, never empty, so the
-             GHL sample captures a token for each. vehicle_size / water_power /
-             addons are placeholders kept for parity with tmc-OFFER and M4. -->
+        <!-- One fixed payload shape: every key is always sent so the GHL sample
+             captures a token for each. -->
         <input type="hidden" name="service_type" value="">
         <!-- Composed from the three visible vehicle inputs; see composeVehicle(). -->
         <input type="hidden" name="vehicle" value="">
-        <input type="hidden" name="vehicle_size" value="Not asked">
         <input type="hidden" name="conditions" value="None">
-        <input type="hidden" name="water_power" value="Not asked">
         <input type="hidden" name="entry_lane" value="guided">
-        <input type="hidden" name="addons" value="None">
+        <!-- Joins this lead to its rows in the analytics Sheet; set at submit. -->
+        <input type="hidden" name="session_id" value="">
         <!-- standard / premium / elite when a package card's REQUEST BOOKING opened
              the wizard; see selectPackage(). -->
         <input type="hidden" name="package" value="None">
@@ -1640,11 +1848,10 @@
     var form = document.getElementById('quote-wizard');
     if (!form) return;
 
-    // Dedicated inbound-webhook trigger for this test, so re-capturing its sample
-    // cannot disturb tmc-OFFER's live mapping on trigger 55d65c6e.
-    // TODO: paste the new trigger's URL here. Until then submit() shows a
-    // "not connected" message, posts nothing and never reaches thank-you.html.
-    var GHL_WEBHOOK_URL = 'REPLACE_WITH_TMC_MULTISTEP_WEBHOOK_URL';
+    // Dedicated inbound-webhook trigger for this page in the TMC sub-account, so
+    // re-capturing its sample cannot disturb tmc-OFFER's mapping on 55d65c6e.
+    // Write-only endpoint, not a credential - the honeypot guards it from bots.
+    var GHL_WEBHOOK_URL = 'https://services.leadconnectorhq.com/hooks/of37lqYVOipUqwhcJayM/webhook-trigger/R7cXJBxr4Xqb6zGeoaY1';
     var configured = GHL_WEBHOOK_URL.indexOf('REPLACE_WITH') !== 0;
 
     // Conditions are the things that actually move the price. They post to GHL
@@ -1722,6 +1929,7 @@
     function err(n, msg) {
       var el = form.querySelector('[data-err="' + n + '"]');
       if (el) el.textContent = msg || '';
+      if (msg) trk.ev('validation_error', { step: n, detail: msg });   // our own copy, never user input
     }
     function clearErrors() { form.querySelectorAll('.wz-err').forEach(function (e) { e.textContent = ''; }); }
 
@@ -1770,7 +1978,7 @@
       next.textContent = nextLabelFor(n);
       state.step = n;
       if (dir) tweenHeight(from);
-      track(n);
+      track(n, dir);
     }
 
     // On a touch screen, focusing a text field opens the keyboard and the
@@ -1851,6 +2059,7 @@
             if (i > -1) { state.conditions.splice(i, 1); b.classList.remove('selected'); }
             else        { state.conditions.push(c);      b.classList.add('selected'); }
             b.setAttribute('aria-checked', state.conditions.indexOf(c) > -1 ? 'true' : 'false');
+            trk.ev('condition_toggle', { step: 3, detail: c + ':' + (i > -1 ? 'off' : 'on') });
             syncNextLabel();
           });
           chips.appendChild(b);
@@ -1872,6 +2081,7 @@
       var val = b.getAttribute('data-val');
       if (val !== state.service) state.conditions = [];   // a changed segment invalidates them
       state.service = val;
+      trk.ev('choice', { step: 1, detail: val });
       form.querySelector('[name="service_type"]').value = state.service;
     }
     choiceBtns.forEach(function (b) {
@@ -1887,6 +2097,8 @@
     var packageField = form.querySelector('[name="package"]');
     window.selectPackage = function (slug) {
       packageField.value = slug || 'None';
+      trk.entry('package:' + (slug || 'none'));
+      trk.start('package');
       choose(form.querySelector('.wz-choice[data-val="Interior + Exterior"]'));
       go(2, true);
     };
@@ -1982,6 +2194,7 @@
 
     // ---- nav -----------------------------------------------------------------
     back.addEventListener('click', function () {
+      trk.ev('back', { step: state.step });
       go(Math.max(1, state.step - 1));
     });
 
@@ -2044,6 +2257,7 @@
         status.textContent = 'Thanks - we will be in touch shortly.';
         status.className = 'lf-status';
         next.disabled = true;
+        trk.ev('bot_blocked', { step: 4 });
         return;
       }
 
@@ -2051,12 +2265,15 @@
       var d = digits(phoneField.value);
       if (d.length < 10 || d.length > 11) { err(4, 'Please enter a 10-digit phone number.'); phoneField.focus(); return; }
       err(4, '');
+      trk.ev('submit_attempt', { step: 4 });
 
       if (!configured) {
         status.textContent = 'Online booking is not connected yet - please call us instead.';
         status.className = 'lf-status lf-status-error';
+        trk.ev('submit_error', { step: 4, detail: 'not_configured' });
         return;
       }
+      form.querySelector('[name="session_id"]').value = trk.sid;
 
       form.querySelector('[name="conditions"]').value = state.conditions.join(', ') || 'None';
       Object.keys(attribution).forEach(function (k) {
@@ -2075,7 +2292,6 @@
       });
       // Never-empty rule: GHL builds its mapping tokens from a captured sample,
       // and an empty value is the awkward case to map.
-      payload.addons = payload.addons || 'None';
       payload.conditions = payload.conditions || 'None';
       payload.package = payload.package || 'None';
       payload.phone = digits(payload.phone).replace(/^1?/, '+1');
@@ -2103,12 +2319,15 @@
       // therefore the conversion - must not hang on being able to READ the
       // response.
       var done = false;
-      function proceed() {
+      function proceed(how) {
         if (done) return;
         done = true;
+        trk.ev('submit_success', { step: 4, tid: tid, detail: how });
+        trk.submitted(tid);
+        trk.flush();                          // sendBeacon survives the navigation
         window.location.href = thankYouUrl(tid);
       }
-      var bail = setTimeout(proceed, 4000);   // a hanging webhook must not strand anyone
+      var bail = setTimeout(function () { proceed('timeout'); }, 4000);   // a hanging webhook must not strand anyone
 
       fetch(GHL_WEBHOOK_URL, {
         method: 'POST',
@@ -2120,12 +2339,13 @@
       }).then(function (res) {
         clearTimeout(bail);
         if (!res.ok) throw new Error('HTTP ' + res.status);
-        proceed();
+        proceed('ok');
       }).catch(function (e) {
         clearTimeout(bail);
         // A TypeError is the browser refusing to let us read the response; on a
         // simple request the body was still delivered, so the lead is in GHL.
-        if (e instanceof TypeError) { proceed(); return; }
+        if (e instanceof TypeError) { proceed('unreadable_response'); return; }
+        trk.ev('submit_error', { step: 4, tid: tid, detail: e.message });
         next.disabled = false;
         next.textContent = lbl;
         status.textContent = 'Something went wrong sending that. Please try again.';
@@ -2134,14 +2354,15 @@
     }
 
     // ---- step tracking -------------------------------------------------------
-    // Shows which gate the funnel leaks at. The clarity call is a no-op until a
-    // TMC Clarity project is added.
-    function track(n) {
+    // Shows which gate the funnel leaks at: in Ads/GA via gtag, and row by row
+    // in the analytics Sheet via trk.
+    function track(n, dir) {
       if (typeof window.gtag === 'function') {
         window.gtag('event', 'form_step', { step: n, lane: 'guided' });
       }
-      if (typeof window.clarity === 'function') {
-        window.clarity('set', 'form_step', 'guided-' + n);
+      if (dir) {
+        trk.ev('step_view', { step: n, detail: dir });
+        trk.flush();
       }
     }
 
