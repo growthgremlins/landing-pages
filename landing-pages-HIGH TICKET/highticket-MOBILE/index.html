@@ -1,0 +1,1350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-11135635100"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-11135635100');
+  </script>
+
+  <!-- Still missing (client has not supplied these yet):
+         Google Analytics 4 ...... measurement id  G-XXXXXXXXXX
+         Meta Pixel .............. pixel id  <META_PIXEL_ID>   (optional)
+       The Google Ads *conversion* snippet still needs its label - see
+       thank-you.html. CallRail is live: swap.js at the end of <head>. -->
+
+
+  <link rel="icon" type="image/webp" href="./high-ticket-detailing-logo.webp">
+  <link rel="shortcut icon" type="image/webp" href="./high-ticket-detailing-logo.webp">
+  <link rel="apple-touch-icon" href="./high-ticket-detailing-logo.webp">
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
+  <title>High Ticket Detailing Services — Lakeland's Best Mobile Car Detailing</title>
+  <meta name="description" content="Professional mobile car detailing in Lakeland, FL. We come to you! 200+ five-star Google reviews and satisfaction guaranteed. Serving Lakeland, Winter Haven, Auburndale, Bartow & all of Polk County.">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-weight: 400;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      background: white;
+      color: #1f2937;
+      line-height: 1.6;
+      padding-bottom: 80px;
+    }
+    html { scroll-behavior: smooth; }
+    img { max-width: 100%; display: block; }
+
+    /* Top Banner */
+    .top-banner {
+      background: #1a1a1a;
+      padding: 0.375rem 1rem;
+      padding-top: calc(0.375rem + env(safe-area-inset-top, 0px));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+    }
+    .top-banner-item {
+      display: flex;
+      align-items: center;
+      gap: 0.375rem;
+      color: white;
+      font-size: 0.75rem;
+      font-weight: 400;
+      text-decoration: none;
+    }
+    .top-banner-item svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+    /* Header */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem;
+      background: #000000;
+      height: 10vh;
+    }
+    .logo { height: 48px; width: auto; object-fit: contain; }
+    .call-btn {
+      background: transparent;
+      border: 2px solid #a700f9;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      font-weight: 700;
+      font-size: 0.75rem;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.3s;
+    }
+    .call-btn:hover { background: rgba(167,0,249,0.15); }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      height: 90vh;
+      height: 90svh;
+      min-height: 520px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center right;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,.6) 0%, rgba(0,0,0,.8) 50%, rgba(0,0,0,0.5) 100%);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      width: 100%;
+      max-width: 640px;
+      padding: 0 0.5rem;
+    }
+    @keyframes badgeGlow {
+      0%, 100% { box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 0 10px rgba(167,0,249,0.3); }
+      50%       { box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 0 22px rgba(167,0,249,0.6); }
+    }
+    .offer-badge {
+      background: rgba(167,0,249,0.9);
+      border-radius: 2rem;
+      padding: 0.75rem 1.75rem;
+      margin-bottom: clamp(0.75rem, 2.5vh, 1.75rem);
+      display: inline-block;
+      animation: badgeGlow 2.8s ease-in-out infinite;
+    }
+    .offer-title { color: #ffffff; font-weight: 700; font-size: clamp(0.875rem, 2.2vh, 1.125rem); line-height: 1.2; }
+    .offer-subtitle { color: #ffffffca; font-style: italic; font-size: clamp(0.75rem, 1.8vh, 0.875rem); font-weight: 400; }
+    .hero-title {
+      color: #fff;
+      text-shadow: 0 0 7px rgba(0,0,0,0.85), 0 0 14px rgba(0,0,0,0.55);
+      font-size: 2.3rem;
+      font-weight: 900;
+      line-height: 1.2;
+      margin-bottom: clamp(0.5rem, 1.5vh, 1rem);
+      text-wrap: balance;
+    }
+    .hero-subtitle { color: white; font-size: clamp(0.75rem, 1.5vh, 0.9rem); font-weight: 400; margin-bottom: clamp(0.5rem, 1.5vh, 1.25rem); text-shadow: 0 1px 2px rgba(0,0,0,0.3); }
+    .trust-badge {
+      background: #1a1a1a00;
+      color: #fff;
+      text-shadow: 0 0 7px rgba(0,0,0,0.85), 0 0 14px rgba(0,0,0,0.55);
+      padding: 0.1rem .5rem;
+      border-top: 2px solid #fff;
+      border-bottom: 2px solid #fff;
+      border-left: 0;
+      border-right: 0;
+      margin-bottom: clamp(0.5rem, 1.5vh, 1.25rem);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      display: inline-block;
+      white-space: nowrap;
+    }
+
+    /* Hero Star Rating */
+    .hero-rating {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      margin: 0 auto clamp(0.75rem, 2vh, 2.25rem);
+    }
+    .hero-stars { display: flex; gap: 2px; }
+    .hero-star { color: #facc15; font-size: clamp(0.9rem, 1.8vh, 1.1rem); }
+    .hero-rating-text { color: #fff; font-size: clamp(0.75rem, 1.5vh, 0.875rem); font-weight: 700; text-shadow: 0 1px 3px rgba(0,0,0,0.5); }
+
+    .cta-buttons { max-width: 28rem; margin: clamp(0.75rem, 2vh, 2.25rem) 0; display: flex; flex-direction: column; }
+    .cta-primary {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      background: #a700f9;
+      color: white;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      font-weight: 700;
+      font-size: 1rem;
+      text-decoration: none;
+      margin-bottom: 0.75rem;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+      transition: all 0.3s;
+    }
+    .cta-primary:hover { background: #8500c7; transform: translateY(-2px); }
+    .cta-secondary {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      background: rgba(0,0,0,0.5);
+      color: white;
+      border: 2px solid #ffffff;
+      padding: 1rem 2rem;
+      border-radius: 0.5rem;
+      font-weight: 700;
+      font-size: 1rem;
+      text-decoration: none;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+      transition: all 0.3s;
+    }
+    .cta-secondary:hover { background: rgba(0,0,0,0.65); }
+
+    /* Section */
+    .section { padding: 2rem 1rem 1rem 1rem; }
+    .section-title { font-size: 1.5rem; font-weight: 900; text-align: center; margin-bottom: .5rem; color: #1f2937; }
+    .feature-img { width: 100%; height: 224px; object-fit: cover; border-radius: 0.5rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+
+    /* Why Choose Us */
+    .wcus-headline { font-size: 1.5rem; font-weight: 900; color: #1f2937; line-height: 1.25; text-align: center; margin-bottom: 1rem; }
+    .wcus-headline span { color: #a700f9; }
+    .wcus-headline-desktop { display: none; }
+    .wcus-photo { width: 100%; height: 220px; object-fit: cover; border-radius: 0.75rem; margin-bottom: 1.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+    .wcus-para { font-size: 0.875rem; color: #4b5563; line-height: 1.8; text-align: center; margin-bottom: 1.5rem; max-width: 520px; margin-left: auto; margin-right: auto; }
+    .wcus-badges { display: flex; flex-wrap: wrap; gap: 0.625rem; justify-content: center; }
+    .wcus-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.375rem;
+      background: #f3e0ff;
+      color: #1a1a1a;
+      font-size: 0.78rem;
+      font-weight: 800;
+      padding: 0.5rem 1rem;
+      border-radius: 99px;
+      letter-spacing: 0.03em;
+      border: 1.5px solid rgba(167,0,249,0.2);
+    }
+    .bdot { width: 6px; height: 6px; border-radius: 50%; background: #a700f9; flex-shrink: 0; }
+
+    /* Divider */
+    .divider { border-top: 2px solid #e5e7eb; margin: 1rem 0; }
+
+    /* Service Cards */
+    .service-card {
+      margin-bottom: 2rem;
+      box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+      border-radius: 0.5rem;
+      overflow: hidden;
+      transition: all 0.3s;
+      height: min-content;
+    }
+    .service-card:hover { transform: translateY(-4px); box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); }
+    .service-header { background: #a700f9; color: white; text-align: center; padding: 0.75rem; font-weight: 700; font-size: 1rem; }
+    .service-img { width: 100%; height: 208px; object-fit: cover; border: 2px; }
+    .service-body {
+      background: white;
+      border: 2px solid #a700f9;
+      border-radius: 0rem 0rem 0.5rem 0.5rem;
+      border-top: 0;
+      padding: 1.5rem;
+    }
+    .service-description { color: #4b5563; font-size: 0.875rem; text-align: center; margin-bottom: 1rem; font-style: italic; font-weight: 400; }
+    .service-pricing { text-align: center; margin-bottom: 1.5rem; }
+    .pricing-text { color: #1a1a1a; font-size: 1.125rem; font-weight: 700; }
+    .duration-badge {
+      display: inline-block;
+      background: #f3f4f6;
+      color: #6b7280;
+      font-size: 0.875rem;
+      font-weight: 400;
+      padding: 0.375rem 0.875rem;
+      border-radius: 9999px;
+      margin-top: 0.5rem;
+    }
+    .includes-title { font-weight: 700; font-size: 0.875rem; color: #1f2937; margin-bottom: 0.75rem; }
+    .includes-list { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.5rem; }
+    .include-item { display: flex; align-items: flex-start; gap: 0.5rem; }
+    .include-text { font-size: 0.875rem; color: #4b5563; font-weight: 400; }
+
+    /* Guarantee */
+    .guarantee { background: #a700f9; color: white; padding: 1rem 0.25rem; text-align: center; }
+    .guarantee-title { font-size: 1rem; font-weight: 700; }
+
+    /* Testimonials */
+    .testimonials { display: flex; flex-direction: column; gap: 0rem; }
+    .testimonial { background: #f9fafb; border-radius: 0.5rem; padding: 1.25rem; box-shadow: 0 1px 2px 0 rgba(0,0,0,0.05); }
+    .testimonial-stars { display: flex; gap: 0.25rem; margin-bottom: 0.75rem; }
+    .testimonial-name { font-weight: 700; font-size: 0.875rem; margin-bottom: 0.25rem; color: #1f2937; }
+    .testimonial-location { font-size: 0.75rem; color: #6b7280; font-weight: 400; margin-bottom: 0.75rem; }
+    .testimonial-text { font-size: 0.875rem; color: #4b5563; font-weight: 400; line-height: 1.6; }
+
+    /* Sticky CTA */
+    .sticky-cta {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      background: white;
+      border-top: 2px solid #e5e7eb;
+      padding: .5rem;
+      padding-bottom: calc(.5rem + env(safe-area-inset-bottom, 0px));
+      box-shadow: 0 -4px 6px -1px rgba(0,0,0,0.1);
+      z-index: 50;
+      transform: translateY(100%);
+      transition: transform 0.3s ease-in-out;
+    }
+    .sticky-cta.visible { transform: translateY(0); }
+    .sticky-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      background: #a700f9;
+      color: white;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      font-weight: 700;
+      font-size: 1.125rem;
+      text-decoration: none;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+      transition: all 0.3s;
+    }
+    .sticky-button:hover { background: #8500c7; }
+    .icon { width: 20px; height: 20px; }
+
+    @media (max-width: 640px) { .hero-title { font-size: 2.1rem; } }
+    @media (max-width: 390px) { .hero-title { font-size: 1.75rem; } .trust-badge { font-size: 0.65rem; } }
+    @media (max-width: 320px) { .hero-title { font-size: 1.5rem; }  .trust-badge { font-size: 0.55rem; } }
+
+    /* Contact Section */
+    .contact-section {
+      position: relative;
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .contact-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .contact-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.7) 100%);
+    }
+    .contact-content { position: relative; z-index: 10; text-align: center; padding: 2rem 1.25rem; width: 100%; }
+    .contact-section .section-title { color: white; }
+    .contact-subtitle { color: white; font-size: 1rem; font-weight: 400; margin-bottom: 2rem; text-shadow: 0 1px 2px rgba(0,0,0,0.3); max-width: 600px; margin-left: auto; margin-right: auto; }
+    .contact-form-container { max-width: 600px; margin: 0 auto 3rem auto; min-height: 580px; }
+    .contact-info-cards { display: flex; flex-direction: column; gap: 1rem; max-width: 600px; margin: 0 auto; }
+    .info-card { background: white; border-radius: 0.5rem; padding: 1.5rem; text-align: center; box-shadow: 0 1px 3px 0 rgba(0,0,0,0.1); }
+    .info-icon { width: 32px; height: 32px; color: #a700f9; margin: 0 auto 0.75rem auto; }
+    .info-label { font-size: 0.875rem; color: #6b7280; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; font-weight: 700; }
+    .info-text { font-size: 1rem; color: #1f2937; font-weight: 700; line-height: 1.5; }
+
+    /* Tablet */
+    @media (min-width: 768px) {
+      .hero-bg { object-position: center center; }
+      .section { max-width: 768px; margin-left: auto; margin-right: auto; }
+      .hero-content { max-width: 700px; margin-left: auto; margin-right: auto; }
+      .header, .wcus-dark { max-width: 100%; }
+      .section { padding: 2.5rem 2rem 2rem 2rem; }
+      .section-title { font-size: 1.875rem; }
+      .hero-title { font-size: 2.75rem; }
+      .hero-subtitle { font-size: 1.2rem; }
+      .wcus-headline { font-size: 1.875rem; }
+      .wcus-photo { height: 260px; }
+      .wcus-section-inner { max-width: 640px; margin: 0 auto; }
+      .service-description, .include-text { font-size: 1.05rem; }
+      .cta-buttons { display: flex; flex-wrap: wrap; gap: 1rem; max-width: 36rem; margin-left: auto; margin-right: auto; }
+      .cta-primary, .cta-secondary { flex: 1; margin-bottom: 0; }
+      .contact-content { max-width: 768px; margin-left: auto; margin-right: auto; }
+      .contact-subtitle { font-size: 1.2rem; }
+      .contact-info-cards { flex-direction: row; gap: 1.5rem; max-width: 768px; }
+      .info-card { flex: 1; }
+    }
+
+    /* Desktop */
+    @media (min-width: 1024px) {
+      .section { max-width: 1440px; margin: 0 auto; padding: 4rem 3rem 3rem 3rem; }
+      .wcus-dark { max-width: 100%; padding-left: 0; padding-right: 0; padding-top: 4rem; padding-bottom: 3rem; }
+      .hero-content { max-width: 860px; margin: 0 auto; }
+      .section-title { font-size: 2.25rem; }
+      .hero-title { font-size: 3.5rem; }
+      .hero-subtitle { font-size: 1.25rem; }
+      body, .why-text, .include-text, .service-description { font-size: 1rem; }
+      .hero { min-height: 700px; align-items: center; justify-content: center; }
+      .hero-content { padding: 3rem; }
+      .wcus-section-inner { display: flex; gap: 2.5rem; align-items: stretch; max-width: 1440px; margin-left: auto; margin-right: auto; padding-left: 3rem; padding-right: 3rem; }
+      .wcus-col-photo { flex: 1; position: relative; overflow: hidden; border-radius: 0.75rem; min-height: 300px; }
+      .wcus-col-text { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+      .wcus-photo { position: absolute; inset: 0; width: 100%; height: 100%; margin-bottom: 0; border-radius: 0; }
+      .wcus-headline-mobile { display: none; }
+      .wcus-headline-desktop { display: block; }
+      .wcus-headline, .wcus-para { text-align: left; }
+      .wcus-para { margin-left: 0; margin-right: 0; }
+      .wcus-badges { justify-content: space-between; flex-wrap: nowrap; gap: 0.75rem; align-items: center; width: 100%; margin-left: 0; margin-right: 0; }
+      .wcus-badge { flex: 1; text-align: center; justify-content: center; white-space: nowrap; font-size: 0.72rem; margin: 0; }
+      #services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+      .service-card { margin-bottom: 0; }
+      .service-img { height: 250px; }
+      .lc_reviews_widget { min-height: 400px; }
+      .testimonials { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+      .sticky-button { max-width: 400px; margin: 0 auto; }
+      body { padding-bottom: 0; }
+      .sticky-cta { display: none; }
+      .header { max-width: 100%; margin: 0 auto; padding: 1rem 3rem; }
+      .contact-section { min-height: 800px; max-width: 100%; }
+      .contact-content { max-width: 1200px; padding: 4rem 3rem; }
+      .contact-subtitle { font-size: 1.25rem; margin-bottom: 3rem; }
+      .contact-form-container { max-width: 960px; }
+      .contact-info-cards { max-width: 960px; gap: 2rem; }
+      .cta-buttons { max-width: 580px; margin-left: auto; margin-right: auto; }
+      .cta-primary, .cta-secondary { font-size: 1.0625rem; padding: 1.125rem 1.5rem; }
+    }
+
+    /* Why Choose Us Dark */
+    .wcus-dark { background: #111111; padding: 2.5rem 1rem 2rem 1rem; }
+    .wcus-dark .wcus-headline { color: #f5f5f5; }
+    .wcus-dark .wcus-headline span { color: #a700f9; }
+    .wcus-dark .wcus-para { color: #a3a3a3; }
+    .wcus-dark .wcus-badge { background: rgba(167,0,249,0.1); color: #e5e5e5; border-color: rgba(167,0,249,0.3); }
+
+    /* Quote Form Section */
+    .quote-section { background: white; padding: 2.5rem 1rem; text-align: center; }
+    .quote-section .section-title { color: #111111; }
+    .quote-subtitle { font-size: 0.9rem; color: #4b5563; margin-bottom: 1rem; max-width: 500px; margin-left: auto; margin-right: auto; }
+    .quote-form-container { max-width: 600px; margin: 0 auto; min-height: 580px; }
+
+    /* Tabbed Services Section */
+    .svc-gradient-wrap { background: linear-gradient(180deg, white 0%, #f3e0ff 15%, #e6bdff 50%, #f3e0ff 85%, white 100%); }
+    .svc-tabs-wrap { padding: 2.5rem 1rem 1.5rem 1rem; }
+    .svc-tabs-wrap .section-title { margin-bottom: 1.25rem; color: #111111; }
+    .tab-bar { display: flex; border: 2px solid #a700f9; border-radius: 0.5rem; overflow: hidden; margin-bottom: 1.5rem; }
+    .tab-btn { flex: 1; background: white; color: #a700f9; border: none; font-weight: 700; font-size: 0.9rem; padding: 0.75rem 0; cursor: pointer; font-family: inherit; transition: background 0.2s, color 0.2s; }
+    .tab-btn.active { background: #a700f9; color: white; }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+    .svc-list { display: flex; flex-direction: column; gap: 1rem; }
+    .svc-card {
+      background: white;
+      border: 1.5px solid #e5e7eb;
+      border-radius: 0.75rem;
+      padding: 0.75rem;
+      padding-bottom: 1.25rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+    .svc-card:hover { transform: translateY(-4px); border-color: #a700f9; box-shadow: 0 8px 24px rgba(167,0,249,0.15); }
+    .svc-card-img { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; border-radius: 0.625rem; }
+    .svc-card-body { padding: 1rem 0.5rem 0; text-align: center; }
+    .svc-card-title { font-size: 0.95rem; font-weight: 900; color: #a700f9; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 0.5rem; }
+    .svc-card-desc { font-size: 0.8rem; color: #4b5563; line-height: 1.6; }
+
+    /* Services CTA */
+    .svc-cta-wrap { padding: 0 1rem 2.5rem 1rem; text-align: center; }
+    .svc-cta-note { font-size: 0.8rem; color: #4b5563; margin-bottom: 0.875rem; }
+
+    /* Detailing Packages */
+    .pkg-section { padding: 1.5rem 1rem; }
+    .pkg-section .section-title { margin-bottom: 1.25rem; }
+    .pkg-grid { display: flex; flex-direction: column; gap: 1rem; }
+    .pkg-card { border: 1.5px solid #e5e7eb; background: white; border-radius: 0.625rem; overflow: hidden; }
+    .pkg-card.featured { border-color: #a700f9; box-shadow: 0 0 0 2px #a700f9; }
+    .pkg-top { padding: 1rem 1.25rem 0.5rem 1.25rem; display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+    .pkg-name { font-size: 1rem; font-weight: 900; color: #1f2937; letter-spacing: 0.04em; }
+    .pkg-badge { background: #a700f9; color: white; font-size: 0.65rem; font-weight: 700; padding: 0.2rem 0.5rem; border-radius: 99px; }
+    .pkg-duration { font-size: 0.75rem; color: #9ca3af; width: 100%; }
+    .pkg-body { padding: 0.25rem 1.25rem 1.25rem 1.25rem; }
+    .pkg-includes { list-style: none; padding-left: 0; margin: 0; }
+    .pkg-include-item { font-size: 0.78rem; color: #4b5563; line-height: 1.8; }
+    .pkg-include-item::before { content: "\2713  "; color: #a700f9; font-weight: 700; }
+
+    /* Responsive: Tablet 768px+ */
+    @media (min-width: 768px) {
+      .svc-tabs-wrap, .svc-cta-wrap, .pkg-section { max-width: 720px; margin-left: auto; margin-right: auto; }
+      .svc-tabs-wrap .section-title, .pkg-section .section-title { font-size: 1.875rem; }
+      .svc-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
+      .quote-form-container { max-width: 640px; }
+      .quote-subtitle { font-size: 1rem; }
+    }
+    /* Responsive: Desktop 1024px+ */
+    @media (min-width: 1024px) {
+      .svc-tabs-wrap, .svc-cta-wrap, .pkg-section { max-width: 1200px; margin-left: auto; margin-right: auto; }
+      .svc-tabs-wrap .section-title, .pkg-section .section-title { font-size: 2.25rem; }
+      .tab-bar { max-width: 400px; margin-left: auto; margin-right: auto; margin-bottom: 1.5rem; }
+      .svc-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+      .pkg-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    }
+
+    /* FAQ Section */
+    .faq-section { padding: 2rem 1rem; }
+    .faq-header { text-align: center; margin-bottom: 2rem; }
+    .faq-eyebrow { display: inline-block; background: #f3e0ff; color: #a700f9; font-size: 0.7rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.35rem 0.875rem; border-radius: 99px; margin-bottom: 0.75rem; }
+    .faq-title { font-size: 1.75rem; font-weight: 900; color: #1f2937; line-height: 1.2; margin-bottom: 0.5rem; }
+    .faq-title span { color: #a700f9; }
+    .faq-subtitle { font-size: 0.875rem; color: #6b7280; }
+    .faq-list { display: flex; flex-direction: column; gap: 0.625rem; }
+    .faq-item { background: white; border-radius: 0.875rem; overflow: hidden; border: 1.5px solid #e5e7eb; transition: border-color 0.25s, box-shadow 0.25s; }
+    .faq-item.open { border-color: #a700f9; box-shadow: 0 0 0 3px rgba(167,0,249,0.08); }
+    .faq-question { width: 100%; background: none; border: none; cursor: pointer; padding: 1.1rem 1.125rem; display: flex; align-items: center; gap: 0.875rem; text-align: left; font-family: inherit; }
+    .faq-q-text { flex: 1; font-size: 0.875rem; font-weight: 700; color: #1f2937; line-height: 1.4; }
+    .faq-chevron { width: 20px; height: 20px; flex-shrink: 0; color: #9ca3af; transition: transform 0.3s ease, color 0.25s; }
+    .faq-item.open .faq-chevron { transform: rotate(180deg); color: #a700f9; }
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
+    .faq-answer-inner { padding: 0 1.125rem 1.1rem 1.125rem; font-size: 0.82rem; color: #4b5563; line-height: 1.75; }
+    .highlight { display: inline-block; background: #f3e0ff; color: #1a1a1a; font-weight: 700; font-size: 0.75rem; padding: 0.15rem 0.5rem; border-radius: 4px; margin-top: 0.5rem; }
+    .faq-bottom { margin-top: 1.75rem; background: linear-gradient(135deg, #111111 0%, #a700f9 100%); border-radius: 1rem; padding: 1.5rem 1.25rem; text-align: center; color: white; }
+    .faq-bottom-title { font-size: 1rem; font-weight: 900; margin-bottom: 0.375rem; letter-spacing: 0.02em; }
+    .faq-bottom-sub { font-size: 0.78rem; opacity: 0.85; margin-bottom: 1.1rem; }
+    .faq-cta-btn { display: inline-flex; align-items: center; gap: 0.5rem; background: white; color: #1a1a1a; font-weight: 800; font-size: 0.875rem; padding: 0.75rem 1.5rem; border-radius: 0.5rem; text-decoration: none; letter-spacing: 0.04em; box-shadow: 0 4px 12px rgba(0,0,0,0.15); font-family: inherit; }
+    @media (min-width: 768px) { .faq-section { max-width: 640px; margin: 0 auto; } .faq-title { font-size: 1.875rem; } }
+    @media (min-width: 1024px) { .faq-section { max-width: 860px; margin: 0 auto; padding: 4rem 0; } .faq-q-text { font-size: 1rem; } .faq-answer-inner { font-size: 0.9rem; } .faq-title { font-size: 2.25rem; } }
+
+    /* Expandable Package System */
+    .pkg-learn-more { display: block; text-align: center; color: #a700f9; font-size: 0.8rem; font-weight: 700; text-decoration: underline; cursor: pointer; padding: 0.75rem 0 0.25rem 0; letter-spacing: 0.03em; transition: color 0.2s; }
+    .pkg-learn-more:hover { color: #8500c7; }
+    .pkg-expanded { max-height: 0; overflow: hidden; transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+    .pkg-expanded.active { max-height: 800px; }
+    .pkg-expanded-inner { padding: 1rem 0 0.5rem 0; border-top: 1px solid #e5e7eb; margin-top: 0.75rem; }
+    .pkg-expanded-inner .pkg-description { font-size: 0.8rem; color: #6b7280; font-style: italic; line-height: 1.7; text-align: center; margin-bottom: 1.25rem; }
+    .pkg-includes-title { font-size: 0.75rem; font-weight: 800; color: #1f2937; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.5rem; }
+    .pkg-expanded-inner .pkg-includes { border-left: 3px solid #a700f9; padding-left: 1rem; background: #faf3ff; border-radius: 0 0.375rem 0.375rem 0; padding-top: 0.625rem; padding-bottom: 0.625rem; margin-bottom: 1.25rem; }
+    .pkg-starting-price { font-size: 0.875rem; font-weight: 700; color: #a700f9; width: 100%; }
+    .pkg-include-item.teaser { list-style: none; font-style: italic; color: #9ca3af; font-weight: 600; }
+    .pkg-include-item.teaser::before { content: "" !important; }
+    .pkg-book-btn {
+      display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+      background: #a700f9; color: white; padding: 0.875rem 1rem; border-radius: 0.5rem;
+      font-weight: 700; font-size: 0.9rem; text-decoration: none; cursor: pointer; border: none;
+      width: 100%; font-family: inherit; letter-spacing: 0.04em;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); transition: background 0.3s, transform 0.2s;
+      margin-bottom: 0.5rem;
+    }
+    .pkg-book-btn:hover { background: #8500c7; transform: translateY(-2px); }
+    .pkg-show-less { display: block; text-align: center; color: #a700f9; font-size: 0.8rem; font-weight: 700; text-decoration: underline; cursor: pointer; padding: 0.5rem 0 0.25rem 0; letter-spacing: 0.03em; }
+
+    /* Booking Modal */
+    .booking-modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 1000; display: none; align-items: center; justify-content: center; padding: 1rem; }
+    .booking-modal-overlay.active { display: flex; }
+    .booking-modal { background: white; border-radius: 1rem; width: 100%; max-width: 600px; max-height: calc(100vh - 2rem); max-height: calc(100dvh - 2rem); overflow-y: auto; padding: 1.5rem 1.25rem 2rem 1.25rem; }
+    .modal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem; }
+    .modal-title { font-size: 1.125rem; font-weight: 900; color: #1f2937; }
+    .modal-close { background: none; border: none; cursor: pointer; padding: 0.25rem; color: #6b7280; transition: color 0.2s; }
+    .modal-close:hover { color: #1f2937; }
+    .modal-close svg { width: 24px; height: 24px; }
+
+    /* Package sub-section headers inside expanded */
+    .pkg-sub-heading { font-size: 0.7rem; font-weight: 800; color: #a700f9; text-transform: uppercase; letter-spacing: 0.1em; margin-top: 0.75rem; margin-bottom: 0.25rem; }
+
+    /* Response time tagline */
+    .hero-tagline {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 99px;
+      padding: 0.4rem 0.9rem;
+      color: rgba(255,255,255,0.8);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      margin-top: 0.375rem;
+      align-self: center;
+      text-shadow: none;
+    }
+    .hero-tagline svg { width: 12px; height: 12px; flex-shrink: 0; stroke: #a700f9; }
+    .hero-tagline strong { color: #fff; font-weight: 800; }
+
+    /* Scroll arrow */
+    @keyframes scrollBounce {
+      0%, 100% { transform: translateY(0);   opacity: 0.5; }
+      50%       { transform: translateY(7px); opacity: 1;   }
+    }
+    .hero-scroll {
+      display: flex;
+      align-items: center;
+      align-self: center;
+      margin-top: 0.375rem;
+      text-decoration: none;
+      animation: scrollBounce 2.2s ease-in-out infinite;
+    }
+    .hero-scroll svg {
+      width: 26px;
+      height: 26px;
+      stroke: rgba(255,255,255,0.7);
+      stroke-width: 2;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      filter: drop-shadow(0 0 4px rgba(167,0,249,0.4));
+    }
+    @media (min-width: 1024px) { .hero-scroll { display: none; } }
+
+    /* Section eyebrow pill */
+    .section-eyebrow { display: block; text-align: center; background: transparent; color: #a700f9; font-size: 0.7rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.5rem; }
+    .section-eyebrow span { background: #f3e0ff; padding: 0.35rem 0.875rem; border-radius: 99px; }
+
+    /* Services subheadline */
+    .svc-subtitle { text-align: center; font-size: 0.9rem; color: #4b5563; margin-top: -0.75rem; margin-bottom: 1.25rem; }
+
+    /* Static Reviews Carousel */
+    .reviews-section { text-align: center; }
+    .rv-summary { display: flex; align-items: center; justify-content: center; gap: 0.9rem; flex-wrap: wrap; margin: 1rem 0 0.5rem; }
+    .rv-summary-num { font-size: 2.6rem; font-weight: 900; line-height: 1; color: #1f2937; }
+    .rv-summary-meta { display: flex; flex-direction: column; align-items: flex-start; gap: 0.2rem; }
+    .rv-stars { color: #f59e0b; font-size: 1.15rem; letter-spacing: 0.14em; line-height: 1; }
+    .rv-summary-count { font-size: 0.85rem; color: #6b7280; font-weight: 600; display: inline-flex; align-items: center; gap: 0.4rem; }
+    .rv-summary-count svg { width: 16px; height: 16px; }
+    .rv-carousel { position: relative; margin-top: 1.5rem; }
+    .rv-track { display: flex; gap: 1rem; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; padding: 0.5rem 0.25rem 1.25rem; scrollbar-width: none; }
+    .rv-track::-webkit-scrollbar { display: none; }
+    .rv-card { flex: 0 0 100%; scroll-snap-align: start; background: #fff; border: 1px solid #e5e7eb; border-radius: 1rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06); padding: 1.5rem 1.4rem; text-align: left; display: flex; flex-direction: column; min-height: 240px; }
+    .rv-card-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.85rem; }
+    .rv-card-stars { color: #f59e0b; font-size: 1rem; letter-spacing: 0.1em; line-height: 1; }
+    .rv-card-date { font-size: 0.78rem; color: #6b7280; }
+    .rv-card-text { font-size: 0.9rem; color: #4b5563; line-height: 1.6; flex-grow: 1; }
+    .rv-card-foot { display: flex; align-items: center; justify-content: space-between; margin-top: 1.25rem; }
+    .rv-card-who { display: flex; align-items: center; gap: 0.6rem; min-width: 0; }
+    .rv-avatar { width: 38px; height: 38px; border-radius: 50%; background: #f3e0ff; color: #a700f9; display: flex; align-items: center; justify-content: center; font-size: 0.78rem; font-weight: 800; flex-shrink: 0; }
+    .rv-name { font-size: 0.86rem; font-weight: 700; color: #1f2937; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .rv-google { width: 20px; height: 20px; flex-shrink: 0; }
+    .rv-nav { display: flex; align-items: center; justify-content: center; gap: 1rem; margin-top: 0.25rem; }
+    .rv-arrow { width: 40px; height: 40px; border-radius: 50%; border: 1px solid #e5e7eb; background: #fff; color: #a700f9; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.2s, border-color 0.2s, opacity 0.2s; }
+    .rv-arrow:hover { background: #f3e0ff; border-color: #a700f9; }
+    .rv-arrow:disabled { opacity: 0.3; cursor: default; }
+    .rv-arrow:disabled:hover { background: #fff; border-color: #e5e7eb; }
+    .rv-arrow svg { width: 20px; height: 20px; }
+    .rv-dots { display: flex; align-items: center; gap: 0.4rem; flex-wrap: wrap; justify-content: center; max-width: 220px; }
+    .rv-dot { width: 8px; height: 8px; border-radius: 99px; background: #e5e7eb; border: none; padding: 0; cursor: pointer; transition: background 0.2s, width 0.2s; }
+    .rv-dot.active { background: #a700f9; width: 22px; }
+    .rv-write { display: inline-flex; align-items: center; gap: 0.45rem; margin-top: 1.25rem; background: transparent; color: #6b7280; font-weight: 600; font-size: 0.8rem; letter-spacing: 0.02em; padding: 0.5rem 1rem; border: 1px solid #e5e7eb; border-radius: 0.5rem; text-decoration: none; transition: color 0.2s, border-color 0.2s; }
+    .rv-write:hover { color: #a700f9; border-color: #a700f9; }
+    .rv-write svg { width: 16px; height: 16px; }
+    @media (min-width: 768px) { .rv-card { flex-basis: calc(50% - 0.5rem); } }
+    @media (min-width: 1024px) { .rv-card { flex-basis: calc(33.333% - 0.667rem); } }
+
+    /* Reviews: full-width band + shorter on desktop */
+    @media (min-width: 1024px) {
+      .reviews-section { max-width: none; margin-left: 0; margin-right: 0; padding: 2.25rem 2rem 2.5rem; }
+      .reviews-section .rv-carousel { margin-top: 1.25rem; }
+    }
+  </style>
+  <script type="text/javascript" src="//cdn.callrail.com/companies/158679432/7673c5c84afba1eb5f86/12/swap.js"></script>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <img src="./high-ticket-detailing-logo.webp" alt="High Ticket Detailing Services Logo" class="logo" width="60" height="48">
+    <a href="tel:+18632507117" class="call-btn phone-link">
+      (863) 250-7117
+      <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+    </a>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <img src="./Ceramic%20coating%2CExterior%20Wash%2CHeadlight%20restore/538310218_17876589576394093_1722118768668568475_n.webp" alt="High Ticket Detailing Services mobile car detailing in Lakeland FL" class="hero-bg" fetchpriority="high">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="offer-badge">
+        <div class="offer-title">DETAIL PACKAGES STARTING AT $125</div>
+        <div class="offer-subtitle">Mobile Detailing — We Come To You</div>
+      </div>
+      <h1 class="hero-title">
+        Best Mobile Car Detailing in Lakeland, FL — We Come To You
+      </h1>
+      <p class="hero-subtitle">
+        Showroom Results, Delivered To Your Driveway
+      </p>
+      <div class="trust-badge">
+        INSURED &middot; 200+ 5-STAR REVIEWS &middot; SATISFACTION GUARANTEED
+      </div>
+      <div class="hero-rating">
+        <div class="hero-stars">
+          <span class="hero-star">&#9733;</span>
+          <span class="hero-star">&#9733;</span>
+          <span class="hero-star">&#9733;</span>
+          <span class="hero-star">&#9733;</span>
+          <span class="hero-star">&#9733;</span>
+        </div>
+        <span class="hero-rating-text">5.0 Stars &mdash; Google Reviews</span>
+      </div>
+      <div class="cta-buttons">
+        <a href="tel:+18632507117" class="cta-primary phone-link">
+          <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+          CALL <span class="phone-text">(863) 250-7117</span>
+        </a>
+        <a href="#quote-form" class="cta-secondary">
+          GET A FAST QUOTE
+        </a>
+        <div class="hero-tagline">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+          </svg>
+          Avg. response time<strong>under 2 min</strong>
+        </div>
+        <a href="#quote-form" class="hero-scroll" aria-label="Scroll down to quote form">
+          <svg viewBox="0 0 24 24">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quote Form Section -->
+  <section id="quote-form" class="quote-section">
+    <h2 class="section-title">GET A FREE QUOTE TODAY</h2>
+    <p class="quote-subtitle">Fill out the form below and we'll get back to you with a personalized estimate — no obligation, no hassle.</p>
+    <div class="quote-form-container" style="min-height:700px;">
+      <iframe
+        src="https://api.leadconnectorhq.com/widget/form/oePYq2uFDf2wxn2NiK4O"
+        style="width:100%;height:100%;border:none;border-radius:8px"
+        id="inline-oePYq2uFDf2wxn2NiK4O"
+        data-layout="{'id':'INLINE'}"
+        data-trigger-type="alwaysShow"
+        data-trigger-value=""
+        data-activation-type="alwaysActivated"
+        data-activation-value=""
+        data-deactivation-type="neverDeactivate"
+        data-deactivation-value=""
+        data-form-name="(DETAILING) google ads landing page form"
+        data-height="784"
+        data-layout-iframe-id="inline-oePYq2uFDf2wxn2NiK4O"
+        data-form-id="oePYq2uFDf2wxn2NiK4O"
+        title="(DETAILING) google ads landing page form"
+      ></iframe>
+      <script defer src="https://link.msgsndr.com/js/form_embed.js"></script>
+    </div>
+  </section>
+
+  <!-- Services + CTA Gradient Wrapper -->
+  <div class="svc-gradient-wrap">
+
+  <!-- Tabbed Services Section -->
+  <section class="svc-tabs-wrap">
+    <div class="section-eyebrow"><span>WHAT WE OFFER</span></div>
+    <h2 class="section-title">OUR SERVICES</h2>
+    <p class="svc-subtitle">Everything your vehicle needs — done at your door.<br>Proudly serving Lakeland &amp; all of Polk County, FL.</p>
+    <div class="tab-bar">
+      <button class="tab-btn active" onclick="switchTab('exterior',this)">EXTERIOR</button>
+      <button class="tab-btn" onclick="switchTab('interior',this)">INTERIOR</button>
+    </div>
+
+    <!-- EXTERIOR TAB -->
+    <div id="tab-exterior" class="tab-panel active">
+      <div class="svc-list">
+        <div class="svc-card">
+          <img class="svc-card-img" src="./Exterior Wash.webp" alt="Professional exterior car wash and decontamination" loading="lazy">
+          <div class="svc-card-body">
+            <div class="svc-card-title">Exterior Wash &amp; Decontamination</div>
+            <p class="svc-card-desc">Multi-stage hand wash lifts road film, brake dust and bug residue, then clay bar and iron remover pull out the bonded contamination a wash leaves behind. Wheels, tires and door jambs included &#8212; paint that is genuinely clean, not just rinsed.</p>
+          </div>
+        </div>
+        <div class="svc-card">
+          <img class="svc-card-img" src="./pAINT cORRECTION.webp" alt="Paint correction and polishing service" loading="lazy">
+          <div class="svc-card-body">
+            <div class="svc-card-title">Paint Correction &amp; Polishing</div>
+            <p class="svc-card-desc">Machine polishing cuts away swirl marks, wash scratches and oxidation to bring the gloss back. It is the step that restores depth and reflection to tired paint &#8212; the difference you can see from across the driveway.</p>
+          </div>
+        </div>
+        <div class="svc-card">
+          <img class="svc-card-img" src="./Ceramic coating.webp" alt="Ceramic coating and paint protection" loading="lazy">
+          <div class="svc-card-body">
+            <div class="svc-card-title">Ceramic Coating &amp; Protection</div>
+            <p class="svc-card-desc">Long-term ceramic protection applied over decontaminated, polished paint &#8212; up to a 5-year coating. Water beads and rolls off, dirt struggles to stick, and every wash after gets dramatically easier. Ceramic sealant is also built into our Luxury Detail.</p>
+          </div>
+        </div>
+        <div class="svc-card">
+          <img class="svc-card-img" src="./Headlight restore.webp" alt="Headlight restoration service" loading="lazy">
+          <div class="svc-card-body">
+            <div class="svc-card-title">Headlight Restoration</div>
+            <p class="svc-card-desc">Cloudy, yellowed lenses are wet-sanded, polished and UV-sealed back to clarity. Brighter output for Florida night driving and an instantly newer-looking front end.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- INTERIOR TAB -->
+    <div id="tab-interior" class="tab-panel">
+      <div class="svc-list">
+        <div class="svc-card">
+          <img class="svc-card-img" src="./Interior Cleaning.webp" alt="Deep interior car cleaning and detailing" loading="lazy">
+          <div class="svc-card-body">
+            <div class="svc-card-title">Deep Interior Cleaning &amp; Detailing</div>
+            <p class="svc-card-desc">A full interior reset: deep vacuum, steam cleaning, and an air-compressor blowout that drives dust and grit out of vents, seat rails and every crack and crevice. Dash, console, cup holders, door panels and glass all finished by hand.</p>
+          </div>
+        </div>
+        <div class="svc-card">
+          <img class="svc-card-img" src="./Leather Care.webp" alt="Leather care and conditioning service" loading="lazy">
+          <div class="svc-card-body">
+            <div class="svc-card-title">Leather Care &amp; Conditioning</div>
+            <p class="svc-card-desc">Leather is cleaned, then conditioned to put moisture back into the hide so it stays soft and stops cracking. Added UV protection keeps your seats from fading and hardening in the Florida sun.</p>
+          </div>
+        </div>
+        <div class="svc-card">
+          <img class="svc-card-img" src="./Carpet Shampoo.webp" alt="Carpet and upholstery shampooing" loading="lazy">
+          <div class="svc-card-body">
+            <div class="svc-card-title">Carpet &amp; Upholstery Shampooing</div>
+            <p class="svc-card-desc">Carpet and seat shampoo with hot-water extraction pulls stains, spills and ground-in dirt up and out instead of pushing them around. Pet hair, kid messes and years of daily driving &#8212; handled.</p>
+          </div>
+        </div>
+        <div class="svc-card">
+          <img class="svc-card-img" src="./sanitization.webp" alt="Odor removal and sanitization service" loading="lazy">
+          <div class="svc-card-body">
+            <div class="svc-card-title">Odor Removal &amp; Sanitization</div>
+            <p class="svc-card-desc">Smoke, pet, mildew and food odors are treated at the source with steam and professional sanitizers rather than masked with fragrance. Your cabin comes back neutral, fresh and genuinely clean.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services CTA -->
+  <div class="svc-cta-wrap">
+    <p class="svc-cta-note">Not sure what your car needs? Call us &#8212; we'll recommend the right package.</p>
+    <a href="tel:+18632507117" class="cta-primary phone-link">
+      <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+      CALL FOR A FREE QUOTE
+    </a>
+  </div>
+
+  </div><!-- /.svc-gradient-wrap -->
+
+  <!-- Detailing Packages -->
+  <section class="pkg-section">
+    <div class="section-eyebrow"><span>CHOOSE YOUR DETAIL</span></div>
+    <h2 class="section-title">DETAILING PACKAGES</h2>
+    <div class="pkg-grid">
+
+      <!-- Standard Detail -->
+      <div class="pkg-card" data-package="standard">
+        <div class="pkg-top">
+          <span class="pkg-name">STANDARD DETAIL</span>
+          <span class="pkg-duration">Est. 1 hr 20 min</span>
+          <span class="pkg-starting-price" style="display:none">Starting at $125</span>
+        </div>
+        <div class="pkg-body">
+          <ul class="pkg-includes">
+            <li class="pkg-include-item">Best for Light Cleaning &amp; Regular Maintenance</li>
+            <li class="pkg-include-item">Interior Vacuum + Full Wipe-Down</li>
+            <li class="pkg-include-item">Hand Wash, Wheels &amp; Tires + Spray Wax</li>
+            <li class="pkg-include-item teaser">and more...</li>
+          </ul>
+          <a class="pkg-learn-more" onclick="togglePackageExpand(this)">Learn More</a>
+          <div class="pkg-expanded">
+            <div class="pkg-expanded-inner">
+              <p class="pkg-description">Our maintenance detail &#8212; best for light cleaning and keeping an already-decent vehicle looking sharp. A professional refresh inside and out, done in your driveway or at your office.</p>
+              <div class="pkg-sub-heading">Interior</div>
+              <ul class="pkg-includes">
+                <li class="pkg-include-item">Interior vacuum &#8212; seats, carpets &amp; trunk</li>
+                <li class="pkg-include-item">Full interior wipe-down (dashboard, console &amp; panels)</li>
+                <li class="pkg-include-item">Interior windows cleaned</li>
+                <li class="pkg-include-item">Door jambs cleaned</li>
+              </ul>
+              <div class="pkg-sub-heading">Exterior</div>
+              <ul class="pkg-includes">
+                <li class="pkg-include-item">Safe hand wash</li>
+                <li class="pkg-include-item">Wheels &amp; tires cleaned</li>
+                <li class="pkg-include-item">Exterior windows cleaned</li>
+                <li class="pkg-include-item">Spray wax protection</li>
+              </ul>
+              <button class="pkg-book-btn" onclick="openBookingModal('standard')">REQUEST BOOKING</button>
+              <a class="pkg-show-less" onclick="togglePackageExpand(this)">Show Less</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Full Detail (Featured) -->
+      <div class="pkg-card featured" data-package="full">
+        <div class="pkg-top">
+          <span class="pkg-name">FULL DETAIL</span>
+          <span class="pkg-badge">MOST BOOKED</span>
+          <span class="pkg-duration">Est. 3 hrs</span>
+          <span class="pkg-starting-price" style="display:none">Starting at $250</span>
+        </div>
+        <div class="pkg-body">
+          <ul class="pkg-includes">
+            <li class="pkg-include-item">Interior Deep Clean + Steam Cleaning</li>
+            <li class="pkg-include-item">Light Stain Removal &amp; Leather Care</li>
+            <li class="pkg-include-item">Paint Decontamination + Premium Sealant</li>
+            <li class="pkg-include-item teaser">and more...</li>
+          </ul>
+          <a class="pkg-learn-more" onclick="togglePackageExpand(this)">Learn More</a>
+          <div class="pkg-expanded">
+            <div class="pkg-expanded-inner">
+              <p class="pkg-description">Our most booked package. Built for vehicles with moderate dirt and buildup and interiors that need a genuinely deeper clean &#8212; steam, extraction and decontamination, not just a wipe and a wash.</p>
+              <div class="pkg-sub-heading">Interior (Deep Clean)</div>
+              <ul class="pkg-includes">
+                <li class="pkg-include-item">Interior deep clean on all surfaces</li>
+                <li class="pkg-include-item">Air compressor blowout of cracks &amp; crevices</li>
+                <li class="pkg-include-item">Steam cleaning (sanitization &amp; decontamination)</li>
+                <li class="pkg-include-item">Light stain removal</li>
+                <li class="pkg-include-item">Leather cleaning &amp; conditioning</li>
+                <li class="pkg-include-item">Interior windows &amp; door jambs cleaned</li>
+              </ul>
+              <div class="pkg-sub-heading">Exterior</div>
+              <ul class="pkg-includes">
+                <li class="pkg-include-item">Safe hand wash</li>
+                <li class="pkg-include-item">Wheels &amp; tires deep cleaned</li>
+                <li class="pkg-include-item">Paint decontamination</li>
+                <li class="pkg-include-item">Exterior windows cleaned</li>
+                <li class="pkg-include-item">Premium sealant protection</li>
+              </ul>
+              <button class="pkg-book-btn" onclick="openBookingModal('full')">REQUEST BOOKING</button>
+              <a class="pkg-show-less" onclick="togglePackageExpand(this)">Show Less</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Luxury Detail -->
+      <div class="pkg-card" data-package="luxury">
+        <div class="pkg-top">
+          <span class="pkg-name">LUXURY DETAIL</span>
+          <span class="pkg-duration">Est. 4 hrs</span>
+          <span class="pkg-starting-price" style="display:none">Starting at $450</span>
+        </div>
+        <div class="pkg-body">
+          <ul class="pkg-includes">
+            <li class="pkg-include-item">Carpet &amp; Seat Shampoo + Odor Treatment</li>
+            <li class="pkg-include-item">Clay Bar, Iron Removal &amp; Machine Polish</li>
+            <li class="pkg-include-item">Ceramic Sealant + Engine Bay Detail</li>
+            <li class="pkg-include-item teaser">and more...</li>
+          </ul>
+          <a class="pkg-learn-more" onclick="togglePackageExpand(this)">Learn More</a>
+          <div class="pkg-expanded">
+            <div class="pkg-expanded-inner">
+              <p class="pkg-description">Our most complete package &#8212; a full interior and exterior transformation for vehicles that need everything. Excessive dirt, pet hair, heavy stains, sand or odors may require additional time.</p>
+              <div class="pkg-sub-heading">Interior (Full Restoration)</div>
+              <ul class="pkg-includes">
+                <li class="pkg-include-item">Carpet &amp; seat shampoo with hot water extraction</li>
+                <li class="pkg-include-item">Deep stain treatment</li>
+                <li class="pkg-include-item">Odor treatment</li>
+                <li class="pkg-include-item">Steam cleaning + air compressor blowout</li>
+                <li class="pkg-include-item">Leather cleaning &amp; conditioning</li>
+                <li class="pkg-include-item">Interior windows &amp; door jambs cleaned</li>
+              </ul>
+              <div class="pkg-sub-heading">Exterior (Decontamination + Protection)</div>
+              <ul class="pkg-includes">
+                <li class="pkg-include-item">Safe hand wash + wheels &amp; tires deep cleaned</li>
+                <li class="pkg-include-item">Clay bar &amp; iron removal</li>
+                <li class="pkg-include-item">Machine polish</li>
+                <li class="pkg-include-item">Ceramic sealant</li>
+                <li class="pkg-include-item">Engine bay detail</li>
+              </ul>
+              <button class="pkg-book-btn" onclick="openBookingModal('luxury')">REQUEST BOOKING</button>
+              <a class="pkg-show-less" onclick="togglePackageExpand(this)">Show Less</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <script>
+    function switchTab(tab, btn) {
+      document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
+      document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+      document.getElementById('tab-' + tab).classList.add('active');
+      btn.classList.add('active');
+    }
+  </script>
+
+  <!-- Guarantee -->
+  <section class="guarantee">
+    <h2 class="guarantee-title">100% SATISFACTION GUARANTEED</h2>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="section reviews-section">
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="rvg" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.27-4.74 3.27-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84A11 11 0 0 0 12 23z"/><path fill="#FBBC05" d="M5.84 14.1a6.6 6.6 0 0 1 0-4.2V7.06H2.18a11 11 0 0 0 0 9.88l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84C6.71 7.31 9.14 5.38 12 5.38z"/></symbol></svg>
+    <div class="section-eyebrow"><span>REVIEWS</span></div>
+    <h2 class="section-title">WHAT LAKELAND<br>CAR OWNERS SAY:</h2>
+    <div class="rv-summary">
+      <span class="rv-summary-num">5.0</span>
+      <div class="rv-summary-meta">
+        <span class="rv-stars" aria-label="Rated 5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <span class="rv-summary-count"><svg class="rv-google" role="img" aria-label="Google"><use href="#rvg"/></svg>200+ Google reviews</span>
+      </div>
+    </div>
+    <div class="rv-carousel">
+      <div class="rv-track">
+        <article class="rv-card">
+          <div class="rv-card-top"><span class="rv-card-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span class="rv-card-date">Aug 2026</span></div>
+          <p class="rv-card-text">Best person in Lakeland if you need any type of car detailing done. He truly cares and will go above and beyond!</p>
+          <div class="rv-card-foot"><div class="rv-card-who"><span class="rv-avatar">C</span><span class="rv-name">Chris</span></div><svg class="rv-google" role="img" aria-label="Google review"><use href="#rvg"/></svg></div>
+        </article>
+        <article class="rv-card">
+          <div class="rv-card-top"><span class="rv-card-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span class="rv-card-date">Aug 2026</span></div>
+          <p class="rv-card-text">Bernie did an excellent detail on my car. Was not easy with a very dirty / dog hair car but he did a wonderful job.</p>
+          <div class="rv-card-foot"><div class="rv-card-who"><span class="rv-avatar">LS</span><span class="rv-name">L. S.</span></div><svg class="rv-google" role="img" aria-label="Google review"><use href="#rvg"/></svg></div>
+        </article>
+        <article class="rv-card">
+          <div class="rv-card-top"><span class="rv-card-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span class="rv-card-date">Jul 2026</span></div>
+          <p class="rv-card-text">Very courteous. Did a great job detailing the interior of my camper van. Great price &#8212; I got several quotes. I appreciated the mobile coming to my unit.</p>
+          <div class="rv-card-foot"><div class="rv-card-who"><span class="rv-avatar">MA</span><span class="rv-name">Maureen A.</span></div><svg class="rv-google" role="img" aria-label="Google review"><use href="#rvg"/></svg></div>
+        </article>
+        <article class="rv-card">
+          <div class="rv-card-top"><span class="rv-card-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span class="rv-card-date">Jun 2026</span></div>
+          <p class="rv-card-text">Daelyn was awesome! Respectful, efficient and thorough! Listened to my concerns and gave me recommendations. Helped so much by cleaning my food infested kid car. Definitely knew what he was doing, thank you!</p>
+          <div class="rv-card-foot"><div class="rv-card-who"><span class="rv-avatar">IV</span><span class="rv-name">Isabelle V.</span></div><svg class="rv-google" role="img" aria-label="Google review"><use href="#rvg"/></svg></div>
+        </article>
+        <article class="rv-card">
+          <div class="rv-card-top"><span class="rv-card-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span class="rv-card-date">Apr 2026</span></div>
+          <p class="rv-card-text">I highly recommend. Great communication, on time arrival and the truck looks great. Very reasonable pricing. We were able to book last minute and I am so happy we found High Ticket!</p>
+          <div class="rv-card-foot"><div class="rv-card-who"><span class="rv-avatar">CE</span><span class="rv-name">CBG Erectors</span></div><svg class="rv-google" role="img" aria-label="Google review"><use href="#rvg"/></svg></div>
+        </article>
+        <article class="rv-card">
+          <div class="rv-card-top"><span class="rv-card-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span class="rv-card-date">Apr 2026</span></div>
+          <p class="rv-card-text">High Ticket Detailing is a small and professional detailing company. I would recommend them to everyone &#8212; get your car or SUV clean by these guys. Very happy with the service, will definitely be using them again.</p>
+          <div class="rv-card-foot"><div class="rv-card-who"><span class="rv-avatar">TG</span><span class="rv-name">Tony G.</span></div><svg class="rv-google" role="img" aria-label="Google review"><use href="#rvg"/></svg></div>
+        </article>
+        <article class="rv-card">
+          <div class="rv-card-top"><span class="rv-card-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span class="rv-card-date">Dec 2025</span></div>
+          <p class="rv-card-text">Absolutely amazing work! Never using a different detailer ever again. So many bad experiences with other detailers. These guys just get it. Thank you guys!</p>
+          <div class="rv-card-foot"><div class="rv-card-who"><span class="rv-avatar">PW</span><span class="rv-name">Phillip W.</span></div><svg class="rv-google" role="img" aria-label="Google review"><use href="#rvg"/></svg></div>
+        </article>
+        <article class="rv-card">
+          <div class="rv-card-top"><span class="rv-card-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span class="rv-card-date">Nov 2025</span></div>
+          <p class="rv-card-text">They did an awesome job! My jeep is lifted and I know it has some hard spots to clean &#8212; my jeep looks brand new again!</p>
+          <div class="rv-card-foot"><div class="rv-card-who"><span class="rv-avatar">MM</span><span class="rv-name">Merlin M.</span></div><svg class="rv-google" role="img" aria-label="Google review"><use href="#rvg"/></svg></div>
+        </article>
+        <article class="rv-card">
+          <div class="rv-card-top"><span class="rv-card-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span class="rv-card-date">Jun 2025</span></div>
+          <p class="rv-card-text">Very skilled and professional. Definitely earned my business. Received my 5 year ceramic coating and couldn't be more satisfied.</p>
+          <div class="rv-card-foot"><div class="rv-card-who"><span class="rv-avatar">D</span><span class="rv-name">Diesel</span></div><svg class="rv-google" role="img" aria-label="Google review"><use href="#rvg"/></svg></div>
+        </article>
+      </div>
+      <div class="rv-nav">
+        <button class="rv-arrow prev" type="button" aria-label="Previous reviews"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+        <div class="rv-dots"></div>
+        <button class="rv-arrow next" type="button" aria-label="Next reviews"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
+      </div>
+    </div>
+    <a class="rv-write" href="https://www.google.com/search?q=High+Ticket+Detailing+Services+Lakeland+FL+reviews" target="_blank" rel="noopener"><svg class="rv-google" role="img" aria-label="Google"><use href="#rvg"/></svg>Write a Review</a>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="faq-section">
+    <div class="faq-header">
+      <div class="faq-eyebrow">Got Questions?</div>
+      <h2 class="faq-title">Lakeland Mobile Detailing <span>FAQ</span></h2>
+      <p class="faq-subtitle">Everything you need to know before booking.</p>
+    </div>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span class="faq-q-text">What exactly is mobile car detailing and how does it work?</span>
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            Mobile detailing means we bring everything to you &#8212; water, power, equipment, and products. You don't drive anywhere or sit in a waiting room. We show up at your home, apartment, or workplace in Lakeland, FL and detail your car right in your driveway or parking spot. <strong>The result is the same showroom-quality finish as a shop, without any of the inconvenience.</strong>
+            <div class="highlight">&#x1F4CD; We serve Lakeland &amp; all of Polk County, FL</div>
+          </div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span class="faq-q-text">How long does a mobile detail take?</span>
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            It depends on the package and your vehicle's condition. Our <strong>Standard Detail</strong> typically takes about 1 hour 20 minutes. The <strong>Full Detail</strong> runs around 3 hours for a thorough inside-and-out deep clean. The <strong>Luxury Detail</strong> takes about 4 hours for our most comprehensive treatment. We'll give you a time estimate when you call so you can plan your day.
+          </div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span class="faq-q-text">What products do you use on my vehicle?</span>
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            We use only premium, professional-grade products and equipment, all safe for every surface &#8212; pH-balanced shampoos, paint-safe clay bars and iron removers, steam, hot-water extraction, UV-protective leather conditioners, and ceramic sealants. <strong>Every product is chosen to protect your vehicle's finish while delivering showroom-quality results.</strong>
+          </div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span class="faq-q-text">What's the difference between mobile detailing and a regular car wash?</span>
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            A car wash cleans the surface. Mobile detailing restores and protects the entire vehicle. We hand-wash every panel, decontaminate the paint, clean inside every vent and crevice, condition leather, shampoo carpet, protect surfaces with sealants, and more. <strong>Think of it as a deep spa treatment for your car versus a quick rinse.</strong> The results last weeks to months, not hours.
+          </div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span class="faq-q-text">Do you offer a satisfaction guarantee?</span>
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            100%. If you're not satisfied with any part of your detail, tell us before we leave and we'll fix it on the spot &#8212; no questions asked. We don't consider a job done until you're happy with every panel. <strong>That's the High Ticket Detailing standard.</strong>
+          </div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span class="faq-q-text">What areas around Lakeland do you service?</span>
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            We cover Lakeland and the surrounding Polk County area including <strong>Lakeland, Winter Haven, Auburndale, Bartow, Plant City, Haines City, Eagle Lake, and Lake Wales</strong>. We're available 7 days a week. Not sure if we reach you? Just call &#8212; we'll let you know right away.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-bottom">
+      <div class="faq-bottom-title">Still have a question?</div>
+      <div class="faq-bottom-sub">We answer every call. No bots, no forms &#8212; just a real answer in seconds.</div>
+      <a href="tel:+18632507117" class="faq-cta-btn phone-link">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        CALL <span class="phone-text">(863) 250-7117</span>
+      </a>
+    </div>
+  </section>
+
+  <script>
+    function toggleFaq(btn) {
+      var item = btn.closest('.faq-item');
+      var answer = item.querySelector('.faq-answer');
+      var isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(function(i) {
+        i.classList.remove('open');
+        i.querySelector('.faq-answer').style.maxHeight = '0';
+      });
+      if (!isOpen) {
+        item.classList.add('open');
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+      }
+    }
+  </script>
+
+  <!-- Contact Section -->
+  <section class="section contact-section">
+    <img src="./Ceramic%20coating%2CExterior%20Wash%2CHeadlight%20restore/538310218_17876589576394093_1722118768668568475_n.webp" alt="High Ticket Detailing Services Lakeland FL" class="contact-bg" loading="lazy">
+    <div class="contact-overlay"></div>
+    <div class="contact-content">
+      <h2 class="section-title">GET A QUOTE</h2>
+      <p class="contact-subtitle">Book your mobile detailing appointment today and experience the High Ticket Detailing difference</p>
+      <div id="contact-form" style="margin-bottom:2rem;min-height:700px;">
+        <iframe
+          src="https://api.leadconnectorhq.com/widget/form/oePYq2uFDf2wxn2NiK4O"
+          style="width:100%;height:100%;border:none;border-radius:8px"
+          id="inline-oePYq2uFDf2wxn2NiK4O-contact"
+          data-layout="{'id':'INLINE'}"
+          data-trigger-type="alwaysShow"
+          data-trigger-value=""
+          data-activation-type="alwaysActivated"
+          data-activation-value=""
+          data-deactivation-type="neverDeactivate"
+          data-deactivation-value=""
+          data-form-name="(DETAILING) google ads landing page form"
+          data-height="784"
+          data-layout-iframe-id="inline-oePYq2uFDf2wxn2NiK4O-contact"
+          data-form-id="oePYq2uFDf2wxn2NiK4O"
+          title="(DETAILING) google ads landing page form"
+        ></iframe>
+      </div>
+      <div class="contact-info-cards">
+        <div class="info-card">
+          <svg class="info-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+            <circle cx="12" cy="10" r="3"></circle>
+          </svg>
+          <p class="info-label">Service Area</p>
+          <p class="info-text">Lakeland &amp; Polk County, FL</p>
+        </div>
+        <div class="info-card">
+          <svg class="info-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+          </svg>
+          <p class="info-label">Phone</p>
+          <p class="info-text"><a href="tel:+18632507117" style="color:inherit;text-decoration:none;">(863) 250-7117</a></p>
+        </div>
+        <div class="info-card">
+          <svg class="info-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+            <polyline points="22,6 12,13 2,6"></polyline>
+          </svg>
+          <p class="info-label">Email</p>
+          <p class="info-text"><a href="mailto:ctoney@htdetailingservices.com" style="color:inherit;text-decoration:none;">ctoney@htdetailingservices.com</a></p>
+        </div>
+        <div class="info-card">
+          <svg class="info-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+          <p class="info-label">Availability</p>
+          <p class="info-text">7 days a week</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sticky CTA -->
+  <div class="sticky-cta">
+    <a href="tel:+18632507117" class="sticky-button phone-link">
+      <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+      CALL <span class="phone-text">(863) 250-7117</span>
+    </a>
+  </div>
+
+  <script>
+    window.addEventListener('scroll', function() {
+      var stickyButton = document.querySelector('.sticky-cta');
+      if (window.scrollY > 200) { stickyButton.classList.add('visible'); }
+      else { stickyButton.classList.remove('visible'); }
+    });
+    document.addEventListener('DOMContentLoaded', function() {
+      var quoteButton = document.querySelector('a[href="#quote-form"]');
+      if (quoteButton) {
+        quoteButton.addEventListener('click', function(e) {
+          e.preventDefault();
+          var quoteForm = document.getElementById('quote-form');
+          if (quoteForm) { quoteForm.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+        });
+      }
+    });
+  </script>
+
+  <!-- Booking Modal -->
+  <div class="booking-modal-overlay" id="bookingModal" onclick="handleOverlayClick(event)">
+    <div class="booking-modal">
+      <div class="modal-header">
+        <span class="modal-title">BOOK YOUR DETAIL</span>
+        <button class="modal-close" onclick="closeBookingModal()" aria-label="Close modal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="modal-form-container" style="padding:0.5rem 0;">
+        <iframe id="modalFormIframe" src="about:blank" style="width:100%;height:500px;border:none;border-radius:10px;" title="Package booking form"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function togglePackageExpand(btn) {
+      var card = btn.closest('.pkg-card');
+      var expanded = card.querySelector('.pkg-expanded');
+      var learnMore = card.querySelector('.pkg-learn-more');
+      var isOpen = expanded.classList.contains('active');
+      document.querySelectorAll('.pkg-expanded.active').forEach(function(el) {
+        el.classList.remove('active');
+        el.closest('.pkg-card').querySelector('.pkg-learn-more').style.display = '';
+      });
+      if (!isOpen) {
+        expanded.classList.add('active');
+        learnMore.style.display = 'none';
+      } else {
+        learnMore.style.display = '';
+      }
+    }
+
+    document.querySelectorAll('.pkg-card').forEach(function(card) {
+      card.style.cursor = 'pointer';
+      card.addEventListener('click', function(e) {
+        if (e.target.closest('.pkg-book-btn') || e.target.closest('.pkg-show-less') || e.target.closest('.pkg-learn-more')) return;
+        if (e.target.closest('.pkg-expanded') && card.querySelector('.pkg-expanded').classList.contains('active')) return;
+        togglePackageExpand(card.querySelector('.pkg-learn-more') || card);
+      });
+    });
+
+    var pkgFormUrls = {
+      standard: 'https://api.leadconnectorhq.com/widget/form/tswDyaRvKv1LhRnlRHPD',
+      full:     'https://api.leadconnectorhq.com/widget/form/DhLI0kAZSZ2LUlgHWYtS',
+      luxury:   'https://api.leadconnectorhq.com/widget/form/JZdy2m1RNiazXJitjpok'
+    };
+
+    function openBookingModal(pkg) {
+      var modal = document.getElementById('bookingModal');
+      document.getElementById('modalFormIframe').src = pkgFormUrls[pkg] || pkgFormUrls.standard;
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeBookingModal() {
+      var modal = document.getElementById('bookingModal');
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+      document.getElementById('modalFormIframe').src = 'about:blank';
+    }
+
+    function handleOverlayClick(e) {
+      if (e.target === e.currentTarget) { closeBookingModal(); }
+    }
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') { closeBookingModal(); }
+    });
+  </script>
+
+
+
+  <!-- Reviews carousel -->
+  <script>
+    (function() {
+      var carousel = document.querySelector('.rv-carousel');
+      if (!carousel) return;
+      var track = carousel.querySelector('.rv-track');
+      var cards = track ? track.querySelectorAll('.rv-card') : [];
+      var prev = carousel.querySelector('.rv-arrow.prev');
+      var next = carousel.querySelector('.rv-arrow.next');
+      var dotsWrap = carousel.querySelector('.rv-dots');
+      if (!track || !cards.length) return;
+      var dots = [];
+      for (var i = 0; i < cards.length; i++) {
+        (function(idx) {
+          var b = document.createElement('button');
+          b.type = 'button';
+          b.className = 'rv-dot' + (idx === 0 ? ' active' : '');
+          b.setAttribute('aria-label', 'Go to review ' + (idx + 1));
+          b.addEventListener('click', function() { track.scrollTo({ left: idx * step(), behavior: 'smooth' }); });
+          dotsWrap && dotsWrap.appendChild(b);
+          dots.push(b);
+        })(i);
+      }
+      function step() {
+        if (cards.length < 2) return cards[0].offsetWidth;
+        return cards[1].getBoundingClientRect().left - cards[0].getBoundingClientRect().left;
+      }
+      function update() {
+        var idx = Math.round(track.scrollLeft / step());
+        if (idx < 0) idx = 0;
+        if (idx > cards.length - 1) idx = cards.length - 1;
+        for (var i = 0; i < dots.length; i++) dots[i].classList.toggle('active', i === idx);
+        if (prev) prev.disabled = track.scrollLeft <= 2;
+        if (next) next.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 2;
+      }
+      prev && prev.addEventListener('click', function() { track.scrollBy({ left: -step(), behavior: 'smooth' }); });
+      next && next.addEventListener('click', function() { track.scrollBy({ left: step(), behavior: 'smooth' }); });
+      var t;
+      track.addEventListener('scroll', function() { clearTimeout(t); t = setTimeout(update, 60); });
+      window.addEventListener('resize', function() { clearTimeout(t); t = setTimeout(update, 120); });
+      update();
+    })();
+  </script>
+
+</body>
+</html>
