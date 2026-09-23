@@ -200,6 +200,14 @@ package accordion (`.pkg-expanded` / Learn More), and a **static hand-coded revi
 
 ## 5. SOP — onboarding a NEW client
 
+> **The BUILD is below. The rest of the job is in
+> [NEW-CLIENT-SOP.md](NEW-CLIENT-SOP.md)** — creating the GoHighLevel forms and
+> their top-window redirect, the Google Ads conversion action and label, the
+> CallRail company, the Netlify site and its domain, and the live-submit test
+> that proves the conversion chain end to end. Those steps happen outside this
+> repo, nothing here can fix a mistake made in them, and they are the reason 13
+> page folders currently record zero conversions.
+
 This is the sequence actually followed for Oak City, M4, and High Ticket.
 
 ### Step 0 — Intake (what the user supplies, and what to ask for if missing)

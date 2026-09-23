@@ -1,6 +1,9 @@
 # CLAUDE.md
 
 **Read [LANDING-PAGE-ENGINE.md](LANDING-PAGE-ENGINE.md) before doing substantive work in this repo.**
+For onboarding a client — accounts, GHL/Ads/CallRail/Netlify setup, verification,
+handoff — read [NEW-CLIENT-SOP.md](NEW-CLIENT-SOP.md). Clients built outside this
+repo carry their own SOP beside their code; NEW-CLIENT-SOP.md §9 lists them.
 It is the operating manifest: infrastructure, template lineages, the conversion chain, the new-client
 SOP, and the standing gotchas.
 
