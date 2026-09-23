@@ -1097,7 +1097,7 @@
     .lf-status-error { color: #991b1b; }
     .lf-legal { margin-top: 0.625rem; font-size: 0.75rem; color: #6b7280; text-align: center; }
     /* Honeypot: off-screen rather than display:none, which some bots skip */
-    .lf-hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+    .lf-hp { position: absolute; left: -9999px; top: 0; width: 1px; height: 1px; overflow: hidden; opacity: 0; pointer-events: none; }
     /* ===== Offer page: expiry bar, vehicle pricing, includes, add-ons ===== */
     .offer-banner {
       /* Mobile: always stacked, label over timer. */
@@ -1762,7 +1762,7 @@
         <!-- Native form, authored once here so it works without JS. The booking modal
              clones this node and re-prefixes the ids, so there is no second copy to
              keep in sync and no duplicate ids in the document. -->
-        <form class="lead-form" novalidate>
+        <form class="lead-form" novalidate onsubmit="return false;">
           <div class="lf-row">
             <label class="lf-label" for="lf-name">First Name <span aria-hidden="true">*</span></label>
             <input class="lf-input" id="lf-name" name="first_name" type="text"
@@ -1801,6 +1801,8 @@
           <!-- Ads attribution, read from the URL on load. The GHL iframe used to carry
                these through itself; a native form has to forward them or attribution dies. -->
           <input type="hidden" name="gclid" value="">
+          <input type="hidden" name="gbraid" value="">
+          <input type="hidden" name="wbraid" value="">
           <input type="hidden" name="utm_source" value="">
           <input type="hidden" name="utm_medium" value="">
           <input type="hidden" name="utm_campaign" value="">
@@ -1811,9 +1813,12 @@
           <!-- Which city the visitor was shown, and the raw Google location id. -->
           <input type="hidden" name="geo_city" value="Punta Gorda">
           <input type="hidden" name="loc" value="">
-          <!-- Honeypot: the webhook is a public endpoint, so bots will find it. -->
+          <!-- Honeypot: the webhook is a public endpoint, so bots will find it.
+               The name is deliberately nonsense - "company" is a token Chrome autofill
+               recognises and fills, which used to push real customers down the bot path. -->
           <div class="lf-hp" aria-hidden="true">
-            <label>Company<input type="text" name="company" tabindex="-1" autocomplete="off"></label>
+            <label for="lf-hp-x7">Leave this field empty</label>
+            <input id="lf-hp-x7" name="lf_hp_x7" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
           </div>
 
           <button type="submit" class="lf-submit">REQUEST BOOKING</button>
@@ -1921,7 +1926,14 @@
   function openBookingModal(opts) {
     opts = opts || {};
     var mount = document.getElementById('modalFormMount');
-    if (mount && !mount.firstElementChild && window.cloneLeadForm) {
+    if (mount && !mount.firstElementChild) {
+      if (!window.cloneLeadForm) {
+        // The form script never initialised. Scroll to the inline form rather
+        // than open an empty modal - that failure used to be silent.
+        var inline = document.getElementById('contact-form');
+        if (inline) inline.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        return;
+      }
       mount.appendChild(window.cloneLeadForm('modal'));
     }
     if (opts.size && window.setVehicleSize) { window.setVehicleSize(opts.size); }
@@ -1961,6 +1973,8 @@
     var params = new URLSearchParams(location.search);
     var attribution = {
       gclid: params.get('gclid') || '',
+      gbraid: params.get('gbraid') || '',
+      wbraid: params.get('wbraid') || '',
       utm_source: params.get('utm_source') || '',
       utm_medium: params.get('utm_medium') || '',
       utm_campaign: params.get('utm_campaign') || '',
@@ -2030,6 +2044,29 @@
       return ok;
     }
 
+    // --- conversion handoff -----------------------------------------------------
+    // Minted here and carried in the URL, so a reload or a back-forward of
+    // thank-you.html re-fires the SAME id and Google counts one conversion, not
+    // two. The conversion action is set to Count: Every, so nothing else dedupes.
+    function newTransactionId() {
+      return 'm4o-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 8);
+    }
+
+    // Attribution has to ride the URL as well as the _gcl_aw cookie. The cookie is
+    // lost to ITP, a cleared jar or a tag that never ran; when it is, the
+    // conversion still fires but attaches to no campaign.
+    function thankYouUrl(tid) {
+      var keep = ['gclid', 'gbraid', 'wbraid', 'utm_source', 'utm_medium',
+                  'utm_campaign', 'utm_term', 'utm_content'];
+      var q = ['tid=' + encodeURIComponent(tid)];
+      for (var i = 0; i < keep.length; i++) {
+        var v = attribution[keep[i]];
+        if (v) q.push(encodeURIComponent(keep[i]) + '=' + encodeURIComponent(v));
+      }
+      // Relative, not root-absolute: survives being served from a subpath.
+      return './thank-you.html?' + q.join('&');
+    }
+
     // --- submit -----------------------------------------------------------------
     function wire(form) {
       form.addEventListener('submit', function (e) {
@@ -2037,8 +2074,17 @@
         var status = form.querySelector('.lf-status');
         var button = form.querySelector('.lf-submit');
 
-        // Honeypot: a bot filled a field no human can see. Look successful, send nothing.
-        if (form.querySelector('[name="company"]').value) { window.location.href = '/thank-you.html'; return; }
+        // Honeypot: a bot filled a field no human can see. Look successful, send
+        // nothing - and do NOT navigate to thank-you.html, because that page is
+        // what fires the Ads conversion. This used to redirect, so an autofilled
+        // human produced a conversion with no lead anywhere behind it.
+        var hp = form.querySelector('[name="lf_hp_x7"]');
+        if (hp && hp.value) {
+          status.textContent = 'Thanks - we will be in touch shortly.';
+          status.className = 'lf-status';
+          button.disabled = true;
+          return;
+        }
         if (!validate(form)) return;
         if (!configured) {
           status.textContent = 'Online booking is not connected yet - please try again shortly.';
@@ -2048,7 +2094,7 @@
 
         var payload = {};
         new FormData(form).forEach(function (v, k) {
-          if (k === 'company') return;
+          if (k === 'lf_hp_x7') return;
           if (k === 'addons') { (payload.addons = payload.addons || []).push(v); }
           else { payload[k] = v; }
         });
@@ -2058,21 +2104,57 @@
         payload.addons = (payload.addons || []).join(', ') || 'None';
         payload.phone = digits(payload.phone).replace(/^1?/, '+1');
 
+        var tid = newTransactionId();
+        payload.transaction_id = tid;   // lets a booked job be matched back to its Ads conversion
+
+        // Enhanced conversions: hand the thank-you page the identifiers to give
+        // gtag, which hashes them itself. Same origin, never leaves the browser.
+        // Ads reports 0% enhanced-conversion coverage today because Automatic mode
+        // scrapes the page for these, and thank-you.html has no fields to scrape.
+        try {
+          sessionStorage.setItem('lead_ud', JSON.stringify({
+            first_name: payload.first_name || '',
+            phone_number: payload.phone || '',
+            email: payload.email || ''
+          }));
+        } catch (err) {}
+
         button.disabled = true;
         var label = button.textContent;
         button.textContent = 'SENDING...';
         status.textContent = '';
         status.className = 'lf-status';
 
+        // Once the POST is on the wire GHL has the lead, so the redirect - and
+        // therefore the conversion - must not hang on being able to READ the
+        // response. This used to throw on a CORS failure or on a 5xx GHL had
+        // already accepted: the lead landed, the conversion did not, and the
+        // customer submitted again.
+        var done = false;
+        function proceed() {
+          if (done) return;
+          done = true;
+          window.location.href = thankYouUrl(tid);
+        }
+        var bail = setTimeout(proceed, 4000);   // a hanging webhook must not strand anyone
+
         fetch(GHL_WEBHOOK_URL, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
+          // text/plain is CORS-safelisted, so there is no preflight OPTIONS that
+          // can fail. GHL parses the JSON body regardless of the declared type.
+          headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
+          body: JSON.stringify(payload),
+          keepalive: true                        // survives the navigation below
         }).then(function (res) {
+          clearTimeout(bail);
           if (!res.ok) throw new Error('HTTP ' + res.status);
-          window.location.href = '/thank-you.html';   // our redirect fires the conversion
-        }).catch(function () {
-          // Never lose what they typed - re-enable and let them retry.
+          proceed();
+        }).catch(function (err) {
+          clearTimeout(bail);
+          // A TypeError is the browser refusing to let us read the response; on a
+          // simple request the body was still delivered, so the lead is in GHL.
+          // Go to thank-you rather than lose it. A real HTTP status still retries.
+          if (err instanceof TypeError) { proceed(); return; }
           button.disabled = false;
           button.textContent = label;
           status.textContent = 'Something went wrong sending that. Please try again.';

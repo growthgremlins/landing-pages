@@ -11,16 +11,44 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'AW-17844019112');
+    gtag('config', 'AW-17844019112', {
+      'conversion_linker': true,
+      'allow_enhanced_conversions': true
+    });
   </script>
 
-  <!-- Event snippet for Page view(offer campaign) conversion page -->
+  <!-- Event snippet for Page view(offer campaign) conversion page.
+       tid       - minted on the form page and carried in the URL, so a reload or a
+                   back-forward re-fires the same id. The conversion action is set to
+                   Count: Every, so without this every refresh counted again.
+       user_data - stashed by the form page; gtag hashes it with SHA-256 before it
+                   leaves the browser. Ads reports 0% enhanced-conversion coverage
+                   today because Automatic mode finds no fields to scrape here. -->
   <script>
-    gtag('event', 'conversion', {
+    (function () {
+      var p = new URLSearchParams(location.search);
+
+      // user_data has to be set BEFORE the conversion event.
+      try {
+        var ud = JSON.parse(sessionStorage.getItem('lead_ud') || 'null');
+        if (ud && (ud.phone_number || ud.email)) {
+          var clean = {};
+          if (ud.phone_number) clean.phone_number = ud.phone_number;
+          if (ud.email) clean.email = ud.email;
+          gtag('set', 'user_data', clean);
+        }
+        sessionStorage.removeItem('lead_ud');
+      } catch (e) {}
+
+      var ev = {
         'send_to': 'AW-17844019112/O-oYCPG_tvocEKi_2LxC',
         'value': 1.0,
         'currency': 'USD'
-    });
+      };
+      var tid = p.get('tid');
+      if (tid) ev.transaction_id = tid;
+      gtag('event', 'conversion', ev);
+    })();
   </script>
 
   <meta charset="UTF-8">
