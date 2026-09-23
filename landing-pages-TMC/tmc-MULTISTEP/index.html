@@ -2315,9 +2315,11 @@
       status.textContent = '';
       status.className = 'lf-status';
 
-      // Once the POST is on the wire GHL has the lead, so the redirect - and
-      // therefore the conversion - must not hang on being able to READ the
-      // response.
+      // Real JSON, not text/plain: this trigger answers a text/plain body with
+      // HTTP 200 and "Request has invalid data: Body payload" - the lead is
+      // silently dropped. application/json costs a CORS preflight, which GHL
+      // answers (Access-Control-Allow-Origin: *), so the response is readable
+      // and a failure can be told apart from a success.
       var done = false;
       function proceed(how) {
         if (done) return;
@@ -2327,28 +2329,32 @@
         trk.flush();                          // sendBeacon survives the navigation
         window.location.href = thankYouUrl(tid);
       }
-      var bail = setTimeout(function () { proceed('timeout'); }, 4000);   // a hanging webhook must not strand anyone
+      // A webhook that hangs this long must not strand anyone. GHL normally
+      // answers in well under a second.
+      var bail = setTimeout(function () { proceed('timeout'); }, 8000);
 
       fetch(GHL_WEBHOOK_URL, {
         method: 'POST',
-        // text/plain is CORS-safelisted, so there is no preflight OPTIONS that
-        // can fail. GHL parses the JSON body regardless of the declared type.
-        headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
-        body: JSON.stringify(payload),
-        keepalive: true                        // survives the navigation below
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
       }).then(function (res) {
-        clearTimeout(bail);
         if (!res.ok) throw new Error('HTTP ' + res.status);
+        return res.text();
+      }).then(function (text) {
+        clearTimeout(bail);
+        // GHL reports a rejected body inside a 200, e.g. {"status":"Error: ..."}.
+        if (/"status"\s*:\s*"Error/i.test(text || '')) throw new Error('GHL rejected: ' + text.slice(0, 120));
         proceed('ok');
       }).catch(function (e) {
         clearTimeout(bail);
-        // A TypeError is the browser refusing to let us read the response; on a
-        // simple request the body was still delivered, so the lead is in GHL.
-        if (e instanceof TypeError) { proceed('unreadable_response'); return; }
-        trk.ev('submit_error', { step: 4, tid: tid, detail: e.message });
+        if (done) return;
+        // With a readable response, a TypeError is a real network failure - the
+        // lead may not have arrived, so never go to thank-you (the conversion)
+        // on it. Let them retry or call.
+        trk.ev('submit_error', { step: 4, tid: tid, detail: e instanceof TypeError ? 'network' : e.message });
         next.disabled = false;
         next.textContent = lbl;
-        status.textContent = 'Something went wrong sending that. Please try again.';
+        status.textContent = 'Something went wrong sending that. Please try again, or call (321) 485-7443.';
         status.className = 'lf-status lf-status-error';
       });
     }
