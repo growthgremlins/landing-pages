@@ -144,14 +144,16 @@ function buildSessions(ss) {
     'secs_in_form', 'validation_errors', 'backs', 'gclid'
   ]]).setFontWeight('bold');
   sh.setFrozenRows(1);
-  var key = 'Events!C2:C&"|"&Events!D2:D';
+  // FILTER, not XLOOKUP over a concatenated key: inside BYROW/LAMBDA the
+  // concatenated range is not evaluated as an array and every row gave #N/A.
   sh.getRange('A2').setFormula('=IFERROR(UNIQUE(FILTER(Events!C2:C, Events!D2:D="form_start")),)');
-  sh.getRange('B2').setFormula('=BYROW(A2:A, LAMBDA(s, IF(s="",, XLOOKUP(s&"|form_start", ' + key + ', Events!H2:H, ""))))');
+  sh.getRange('B2').setFormula('=BYROW(A2:A, LAMBDA(s, IF(s="",, IFERROR(INDEX(FILTER(Events!H2:H, Events!C2:C=s, Events!D2:D="form_start"), 1), ""))))');
   sh.getRange('C2').setFormula('=BYROW(A2:A, LAMBDA(s, IF(s="",, MAX(1, MAXIFS(Events!E2:E, Events!C2:C, s, Events!D2:D, "step_view")))))');
   sh.getRange('D2').setFormula('=BYROW(A2:A, LAMBDA(s, IF(s="",, IF(COUNTIFS(Events!C2:C, s, Events!D2:D, "submit_success")>0, 1, 0))))');
-  sh.getRange('E2').setFormula('=BYROW(A2:A, LAMBDA(s, IF(s="",, XLOOKUP(s&"|field_focus", ' + key + ', Events!F2:F, "(none)", 0, -1))))');
+  // Last field touched = the latest field_focus or field_filled row.
+  sh.getRange('E2').setFormula('=BYROW(A2:A, LAMBDA(s, IF(s="",, IFERROR(CHOOSEROWS(FILTER(Events!F2:F, Events!C2:C=s, (Events!D2:D="field_focus")+(Events!D2:D="field_filled")), -1), "(none)"))))');
   sh.getRange('F2').setFormula('=BYROW(A2:A, LAMBDA(s, IF(s="",, XLOOKUP(s, Events!C2:C, Events!K2:K, ""))))');
-  sh.getRange('G2').setFormula('=BYROW(A2:A, LAMBDA(s, IF(s="",, MAXIFS(Events!J2:J, Events!C2:C, s) - XLOOKUP(s&"|form_start", ' + key + ', Events!J2:J, 0))))');
+  sh.getRange('G2').setFormula('=BYROW(A2:A, LAMBDA(s, IF(s="",, MAXIFS(Events!J2:J, Events!C2:C, s) - IFERROR(INDEX(FILTER(Events!J2:J, Events!C2:C=s, Events!D2:D="form_start"), 1), 0))))');
   sh.getRange('H2').setFormula('=BYROW(A2:A, LAMBDA(s, IF(s="",, COUNTIFS(Events!C2:C, s, Events!D2:D, "validation_error"))))');
   sh.getRange('I2').setFormula('=BYROW(A2:A, LAMBDA(s, IF(s="",, COUNTIFS(Events!C2:C, s, Events!D2:D, "back"))))');
   sh.getRange('J2').setFormula('=BYROW(A2:A, LAMBDA(s, IF(s="",, XLOOKUP(s, Events!C2:C, Events!M2:M, ""))))');
