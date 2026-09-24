@@ -132,16 +132,18 @@
                 : el.closest('.pkg-show-less') ? 'show_less' : 'card';
           return 'pkg:' + card.getAttribute('data-package') + ':' + k;
         }
-        if (el.id === 'wz-next') return 'form:next';
-        if (el.id === 'wz-back') return 'form:back';
-        if (el.classList.contains('wz-choice')) return 'form:service';
-        if (el.classList.contains('wz-chip')) return 'form:condition';
+        var wz = el.getAttribute('data-wz');
+        var fpos = el.closest('#quote-wizard-2') ? 'form_bottom' : 'form';
+        if (wz === 'next') return fpos + ':next';
+        if (wz === 'back') return fpos + ':back';
+        if (el.classList.contains('wz-choice')) return fpos + ':service';
+        if (el.classList.contains('wz-chip')) return fpos + ':condition';
         var faq = el.closest('.faq-item');
         if (faq) return 'faq:' + ([].indexOf.call(document.querySelectorAll('.faq-item'), faq) + 1);
         var where = el.closest('.header') ? 'header' : el.closest('.hero') ? 'hero'
                   : el.closest('.svc-cta-wrap') ? 'svc_cta' : el.closest('.svc-tabs-wrap') ? 'svc_tab'
                   : el.closest('.faq-section') ? 'faq' : el.closest('.contact-section') ? 'contact'
-                  : el.closest('.sticky-cta') ? 'sticky' : el.closest('#quote-wizard') ? 'form'
+                  : el.closest('#quote-wizard-2') ? 'form_bottom' : el.closest('#quote-wizard') ? 'form'
                   : el.closest('.site-legal') ? 'footer' : 'page';
         var href = el.getAttribute('href') || '';
         var what = /^tel:/.test(href) ? 'call'
@@ -163,20 +165,26 @@
       }, true);
 
       // --- the form: first touch, and which fields (never their values) ---------
-      function inForm(t) { return t && t.closest && t.closest('#quote-wizard'); }
-      document.addEventListener('pointerdown', function (e) { if (inForm(e.target)) start('tap'); }, true);
-      var FIELDS = { 'wz-year': 'year', 'wz-make': 'make', 'wz-model': 'model',
-                     'wz-name': 'first_name', 'wz-phone': 'phone', 'wz-message': 'message' };
+      function inForm(t) { return t && t.closest && t.closest('.wz-card'); }
+      // Starting in the contact-section form with no click that led there
+      // means they read the whole page first.
+      function startFrom(t, how) {
+        if (!navEntry && t.closest('#quote-wizard-2')) navEntry = 'contact_form';
+        start(how);
+      }
+      document.addEventListener('pointerdown', function (e) { if (inForm(e.target)) startFrom(e.target, 'tap'); }, true);
+      var FIELDS = { year: 'year', make: 'make', model: 'model',
+                     name: 'first_name', phone: 'phone', message: 'message' };
       function stepOf(t) { var s = t.closest('.wz-step'); return s ? +s.getAttribute('data-step') : ''; }
       document.addEventListener('focusin', function (e) {
-        if (inForm(e.target)) start('focus');
-        var f = FIELDS[e.target.id];
+        if (inForm(e.target)) startFrom(e.target, 'focus');
+        var f = FIELDS[e.target.getAttribute && e.target.getAttribute('data-wz')];
         if (!f) return;
         st.lastField = f;
         ev('field_focus', { target: f, step: stepOf(e.target) });
       });
       document.addEventListener('change', function (e) {
-        var f = FIELDS[e.target.id];
+        var f = FIELDS[e.target.getAttribute && e.target.getAttribute('data-wz')];
         if (f && e.target.value.trim()) ev('field_filled', { target: f, step: stepOf(e.target) });
       });
 
@@ -243,7 +251,6 @@
       background: white;
       color: #1f2937;
       line-height: 1.6;
-      padding-bottom: 80px;
     }
     html { scroll-behavior: smooth; }
     img { max-width: 100%; display: block; }
@@ -379,6 +386,9 @@
     }
     .hero-stars { display: flex; gap: 2px; }
     .hero-star { color: #facc15; font-size: clamp(0.9rem, 1.8vh, 1.1rem); }
+    a.hero-rating { text-decoration: none; cursor: pointer; }
+    a.hero-rating:hover .hero-rating-text { text-decoration: underline; }
+    .reviews-section { scroll-margin-top: 12px; }
     .hero-rating-text { color: #fff; font-size: clamp(0.75rem, 1.5vh, 0.875rem); font-weight: 700; text-shadow: 0 1px 3px rgba(0,0,0,0.5); }
 
     .cta-buttons { max-width: 28rem; margin: clamp(0.75rem, 2vh, 2.25rem) 0; display: flex; flex-direction: column; }
@@ -496,36 +506,6 @@
     .testimonial-location { font-size: 0.75rem; color: #6b7280; font-weight: 400; margin-bottom: 0.75rem; }
     .testimonial-text { font-size: 0.875rem; color: #4b5563; font-weight: 400; line-height: 1.6; }
 
-    /* Sticky CTA */
-    .sticky-cta {
-      position: fixed;
-      bottom: 0; left: 0; right: 0;
-      background: white;
-      border-top: 2px solid #e5e7eb;
-      padding: .5rem;
-      padding-bottom: calc(.5rem + env(safe-area-inset-bottom, 0px));
-      box-shadow: 0 -4px 6px -1px rgba(0,0,0,0.1);
-      z-index: 50;
-      transform: translateY(100%);
-      transition: transform 0.3s ease-in-out;
-    }
-    .sticky-cta.visible { transform: translateY(0); }
-    .sticky-button {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      background: #3ab6c8;
-      color: white;
-      padding: 1rem;
-      border-radius: 0.5rem;
-      font-weight: 700;
-      font-size: 1.125rem;
-      text-decoration: none;
-      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
-      transition: all 0.3s;
-    }
-    .sticky-button:hover { background: #2a9db0; }
     .icon { width: 20px; height: 20px; }
 
     @media (max-width: 640px) { .hero-title { font-size: 2.1rem; } }
@@ -602,9 +582,6 @@
       .service-card { margin-bottom: 0; }
       .service-img { height: 250px; }
       .testimonials { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
-      .sticky-button { max-width: 400px; margin: 0 auto; }
-      body { padding-bottom: 0; }
-      .sticky-cta { display: none; }
       .header { max-width: 100%; margin: 0 auto; padding: 1rem 3rem; }
       .contact-section { min-height: 800px; max-width: 100%; }
       .contact-content { max-width: 1200px; padding: 4rem 3rem; }
@@ -1107,7 +1084,6 @@
     .pkg-section { padding: 5rem 1rem 1.5rem 1rem; }
     .pkg-subtitle { text-align: center; font-size: 0.9rem; color: #4b5563; margin-top: -0.5rem; margin-bottom: 1.75rem; max-width: 580px; margin-left: auto; margin-right: auto; }
     .pkg-card { position: relative; }
-    .pkg-img { width: 100%; height: auto; aspect-ratio: 16/9; object-fit: cover; display: block; }
     .pkg-top { flex-direction: column; align-items: flex-start; gap: 0.3rem; }
     .pkg-name { font-size: 1.15rem; letter-spacing: 0.03em; }
     .pkg-badge { position: absolute; top: 0.75rem; right: 0.75rem; z-index: 2; font-weight: 800; letter-spacing: 0.05em; padding: 0.3rem 0.6rem; box-shadow: 0 2px 6px rgba(0,0,0,0.25); }
@@ -1136,6 +1112,79 @@
     @media (min-width: 1024px) {
       .reviews-section { max-width: none; margin-left: 0; margin-right: 0; padding: 2.25rem 2rem 2.5rem; }
     }
+
+
+    /* ===== Package comparison cards (look of the M4 sandbox's What's Included card) ===== */
+    .pk-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+    .pk-card {
+      position: relative; background: #fff; border: 1px solid #e5e7eb; border-radius: 0.875rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08); padding: 1.25rem 1.1rem 1.1rem;
+      display: flex; flex-direction: column;
+    }
+    .pk-card.featured { border-color: #3ab6c8; box-shadow: 0 0 0 2px #3ab6c8, 0 10px 30px rgba(0,0,0,0.08); }
+    .pk-badge {
+      position: absolute; top: -0.7rem; left: 50%; transform: translateX(-50%);
+      background: #3ab6c8; color: #fff; font-size: 0.65rem; font-weight: 800; letter-spacing: 0.08em;
+      padding: 0.3rem 0.75rem; border-radius: 99px; white-space: nowrap;
+    }
+    .pk-head { text-align: center; margin-bottom: 0.5rem; }
+    .pk-name { font-size: 1.1rem; font-weight: 900; letter-spacing: 0.05em; color: #1f2937; }
+    .pk-price { display: flex; align-items: baseline; justify-content: center; gap: 0.35rem; margin-top: 0.25rem; }
+    .pk-from { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #6b7280; }
+    .pk-amt { font-size: 1.75rem; font-weight: 900; color: #297f8c; line-height: 1; }
+    .pk-time { font-size: 0.75rem; font-weight: 600; color: #9ca3af; margin-top: 0.2rem; }
+    .pk-best { text-align: center; font-size: 0.85rem; color: #4b5563; line-height: 1.45; margin: 0 0 1rem; }
+    .pk-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 0 1rem; text-align: left; flex: 1; }
+    .pk-col-title {
+      font-size: 0.78rem; font-weight: 900; letter-spacing: 0.1em; text-transform: uppercase; color: #1f2937;
+      border-bottom: 2px solid #3ab6c8; padding-bottom: 0.4rem; margin-bottom: 0.6rem;
+    }
+    .pk-list { list-style: none; margin: 0; padding: 0; }
+    .pk-item {
+      position: relative; padding-left: 1.05rem; margin: 0 0 0.45rem;
+      font-size: 0.8125rem; font-weight: 600; color: #374151; line-height: 1.35;
+    }
+    /* Check: the sandbox's rotated L. Missing: a grey cross, text struck through. */
+    .pk-item::before {
+      content: ''; position: absolute; left: 0.05rem; top: 0.33em;
+      width: 0.5rem; height: 0.26rem; transform: rotate(-45deg);
+      border-left: 2px solid #297f8c; border-bottom: 2px solid #297f8c;
+    }
+    .pk-txt { white-space: nowrap; }
+    .pk-item.pk-no { color: #b6bcc6; font-weight: 500; }
+    .pk-item.pk-no .pk-txt { text-decoration: line-through; text-decoration-color: #d1d5db; }
+    .pk-item.pk-no::before {
+      content: '\2715'; border: 0; transform: none; width: auto; height: auto;
+      top: 0; left: 0.05rem; font-size: 0.7rem; color: #c3c8d0; font-weight: 700;
+    }
+    /* Value line: collapsed to zero height, eased open with the card. */
+    .pk-why { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.3s ease; }
+    .pk-why > span { overflow: hidden; display: block; font-size: 0.75rem; font-weight: 400; color: #6b7280; line-height: 1.4; }
+    .pk-card.open .pk-why { grid-template-rows: 1fr; }
+    .pk-card.open .pk-why > span { padding-top: 0.15rem; }
+    .pk-more {
+      display: block; margin: 0.6rem auto 0.75rem; background: none; border: 0; cursor: pointer; font-family: inherit;
+      color: #297f8c; font-size: 0.8rem; font-weight: 700; text-decoration: underline; letter-spacing: 0.03em;
+    }
+    .pk-book {
+      display: block; width: 100%; background: #3ab6c8; color: #fff; border: 0; border-radius: 0.5rem;
+      padding: 0.875rem 1rem; font-family: inherit; font-size: 0.9rem; font-weight: 800; letter-spacing: 0.04em; cursor: pointer;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); transition: background 0.2s, transform 0.2s;
+    }
+    .pk-book:hover { background: #2a9db0; transform: translateY(-2px); }
+    @media (min-width: 560px) {
+      .pk-cols { gap: 0 1.5rem; }
+      .pk-col + .pk-col { border-left: 1px solid #eceef1; padding-left: 1.5rem; }
+    }
+    @media (min-width: 1024px) {
+      .pk-grid { grid-template-columns: repeat(3, 1fr); gap: 1.25rem; align-items: stretch; }
+      .pk-cols { gap: 0 1rem; }
+      .pk-col + .pk-col { padding-left: 1rem; }
+    }
+    /* Labels never wrap; nudge them down where the columns are narrowest. */
+    @media (max-width: 359px) { .pk-item { font-size: 0.75rem; } .pk-cols { gap: 0 0.75rem; } }
+    @media (min-width: 1024px) and (max-width: 1279px) { .pk-item { font-size: 0.78rem; } }
+    @media (prefers-reduced-motion: reduce) { .pk-why { transition: none; } }
 
     /* Review screenshot carousel: native swipe with scroll-snap, arrows for
        mouse users, tap a slide to read it full size. */
@@ -1174,8 +1223,8 @@
     }
 
     /* Contact: a button to the wizard replaces the second GHL iframe */
-    .contact-quote-cta { max-width: 28rem; margin: 0 auto 3rem auto; }
-    .contact-quote-cta .cta-primary { margin-bottom: 0; }
+    /* The second wizard, on the contact section's photo background. */
+    .contact-form-wrap { margin: 0 auto 3rem auto; text-align: left; }
     .site-legal { background: #000000; color: #9ca3af; text-align: center; font-size: 0.75rem; padding: 1.25rem 1rem; }
     .site-legal a { color: #d1d5db; }
     .lf-legal a { color: inherit; }
@@ -1213,7 +1262,7 @@
       <div class="trust-badge">
         CERTIFIED &middot; LICENSED &middot; SATISFACTION GUARANTEED
       </div>
-      <div class="hero-rating">
+      <a href="#reviews" class="hero-rating" data-trk="hero:rating" aria-label="5.0 stars on Google. See the reviews">
         <div class="hero-stars">
           <span class="hero-star">&#9733;</span>
           <span class="hero-star">&#9733;</span>
@@ -1222,7 +1271,7 @@
           <span class="hero-star">&#9733;</span>
         </div>
         <span class="hero-rating-text">5.0 Stars &mdash; Google Reviews</span>
-      </div>
+      </a>
       <div class="cta-buttons">
         <a href="tel:+13214857443" class="cta-primary phone-link">
           <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
@@ -1252,13 +1301,13 @@
       <form class="wz-card" id="quote-wizard" novalidate>
         <!-- aria-hidden: #wz-label below already announces "Step N of 4" politely,
              and narrating the breadcrumb as well would say it twice. -->
-        <div class="wz-steps" id="wz-steps" aria-hidden="true">
+        <div class="wz-steps" id="wz-steps" data-wz="steps" aria-hidden="true">
           <span class="wz-stepchip is-current"><svg aria-hidden="true"><path/></svg>Service</span>
           <span class="wz-stepchip"><svg aria-hidden="true"><path/></svg>Vehicle</span>
           <span class="wz-stepchip"><svg aria-hidden="true"><path/></svg>Details</span>
           <span class="wz-stepchip"><svg aria-hidden="true"><path/></svg>Contact</span>
         </div>
-        <p class="wz-step-label" id="wz-label" aria-live="polite">Step 1 of 4</p>
+        <p class="wz-step-label" id="wz-label" data-wz="label" aria-live="polite">Step 1 of 4</p>
 
         <!-- Step 1: segment. Three services only - paint correction and ceramic are
              quoted by conversation, not by form, and the "not sure" escape hatch was
@@ -1298,13 +1347,13 @@
             <p class="wz-sub">Please provide details of your vehicle</p>
           </div>
           <div class="wz-vehicle">
-            <input class="lf-input" id="wz-year" type="text" inputmode="numeric" maxlength="4"
+            <input class="lf-input" id="wz-year" data-wz="year" type="text" inputmode="numeric" maxlength="4"
                    autocomplete="off" enterkeyhint="next" placeholder="Year" aria-label="Year">
-            <input class="lf-input" id="wz-make" type="text" list="wz-makes"
+            <input class="lf-input" id="wz-make" data-wz="make" type="text" list="wz-makes"
                    autocomplete="off" enterkeyhint="next" placeholder="Make" aria-label="Make">
           </div>
           <div class="lf-row">
-            <input class="lf-input" id="wz-model" type="text"
+            <input class="lf-input" id="wz-model" data-wz="model" type="text"
                    autocomplete="off" enterkeyhint="next" placeholder="Model" aria-label="Model">
           </div>
           <datalist id="wz-makes">
@@ -1325,7 +1374,7 @@
         <!-- Step 3: condition. Built at runtime from the step-1 answer, so an
              exterior-only visitor is never asked about pet hair. -->
         <div class="wz-step" data-step="3">
-          <div id="wz-conditions"></div>
+          <div id="wz-conditions" data-wz="conditions"></div>
           <p class="wz-err" data-err="3"></p>
         </div>
 
@@ -1339,25 +1388,25 @@
 
           <div class="lf-row">
             <label class="lf-label" for="wz-name">First Name<span aria-hidden="true">*</span></label>
-            <input class="lf-input" id="wz-name" name="first_name" type="text" autocomplete="given-name" required placeholder="First Name">
+            <input class="lf-input" id="wz-name" data-wz="name" name="first_name" type="text" autocomplete="given-name" required placeholder="First Name">
           </div>
           <div class="lf-row">
             <label class="lf-label" for="wz-phone">Phone #<span aria-hidden="true">*</span></label>
-            <input class="lf-input" id="wz-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required placeholder="(321) 555-0123">
+            <input class="lf-input" id="wz-phone" data-wz="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required placeholder="(321) 555-0123">
           </div>
           <div class="lf-row">
             <label class="lf-label" for="wz-message">Message to the team:</label>
-            <textarea class="lf-input lf-textarea" id="wz-message" name="message" rows="3"
+            <textarea class="lf-input lf-textarea" id="wz-message" data-wz="message" name="message" rows="3"
                       placeholder="EX: spilled coffee on the passenger seat, smells now"></textarea>
           </div>
           <p class="wz-err" data-err="4"></p>
         </div>
 
-        <div class="wz-nav" id="wz-nav" style="display:none">
-          <button type="button" class="wz-back" id="wz-back">&#8592; Back</button>
-          <button type="button" class="wz-next" id="wz-next">Next &#8594;</button>
+        <div class="wz-nav" id="wz-nav" data-wz="nav" style="display:none">
+          <button type="button" class="wz-back" id="wz-back" data-wz="back">&#8592; Back</button>
+          <button type="button" class="wz-next" id="wz-next" data-wz="next">Next &#8594;</button>
         </div>
-        <p class="lf-status" id="wz-status" role="status" aria-live="polite"></p>
+        <p class="lf-status" id="wz-status" data-wz="status" role="status" aria-live="polite"></p>
         <p class="lf-legal">By submitting you agree to be contacted about your booking. <a href="./privacy-policy.html">Privacy</a> &middot; <a href="./terms-of-service.html">Terms</a></p>
 
         <!-- One fixed payload shape: every key is always sent so the GHL sample
@@ -1367,6 +1416,8 @@
         <input type="hidden" name="vehicle" value="">
         <input type="hidden" name="conditions" value="None">
         <input type="hidden" name="entry_lane" value="guided">
+        <!-- top = the form under the hero, bottom = the one in the contact section -->
+        <input type="hidden" name="form_position" value="top">
         <!-- Joins this lead to its rows in the analytics Sheet; set at submit. -->
         <input type="hidden" name="session_id" value="">
         <!-- standard / premium / elite when a package card's REQUEST BOOKING opened
@@ -1395,6 +1446,42 @@
   </section>
 
   </div><!-- /.hero-form-wrap -->
+
+  <!-- Reviews: screenshots of TMC's Google reviews (tap to enlarge) -->
+  <section class="section reviews-section" id="reviews">
+    <h2 class="section-title">CUSTOMER REVIEWS</h2>
+    <p class="rv-note">Real Google reviews. Tap any review to read it full size.</p>
+    <div class="rv-wrap">
+      <div class="rv-track" id="rv-track">
+        <button type="button" class="rv-slide" data-trk="reviews:open" aria-label="Enlarge review 1 of 20"><img src="./reviews/review-01.webp" alt="Google review screenshot" width="1920" height="1080" loading="eager" decoding="async"></button>
+        <button type="button" class="rv-slide" data-trk="reviews:open" aria-label="Enlarge review 2 of 20"><img src="./reviews/review-02.webp" alt="Google review screenshot" width="1920" height="1080" loading="eager" decoding="async"></button>
+        <button type="button" class="rv-slide" data-trk="reviews:open" aria-label="Enlarge review 3 of 20"><img src="./reviews/review-03.webp" alt="Google review screenshot" width="1920" height="1080" loading="eager" decoding="async"></button>
+        <button type="button" class="rv-slide" data-trk="reviews:open" aria-label="Enlarge review 4 of 20"><img src="./reviews/review-04.webp" alt="Google review screenshot" width="1920" height="1080" loading="lazy" decoding="async"></button>
+        <button type="button" class="rv-slide" data-trk="reviews:open" aria-label="Enlarge review 5 of 20"><img src="./reviews/review-05.webp" alt="Google review screenshot" width="1920" height="1080" loading="lazy" decoding="async"></button>
+        <button type="button" class="rv-slide" data-trk="reviews:open" aria-label="Enlarge review 6 of 20"><img src="./reviews/review-06.webp" alt="Google review screenshot" width="1920" height="1080" loading="lazy" decoding="async"></button>
+        <button type="button" class="rv-slide" data-trk="reviews:open" aria-label="Enlarge review 7 of 20"><img src="./reviews/review-07.webp" alt="Google review screenshot" width="1920" height="1080" loading="lazy" decoding="async"></button>
+        <button type="button" class="rv-slide" data-trk="reviews:open" aria-label="Enlarge review 8 of 20"><img src="./reviews/review-08.webp" alt="Google review screenshot" width="1920" height="1080" loading="lazy" decoding="async"></button>
+        <button type="button" class="rv-slide" data-trk="reviews:open" aria-label="Enlarge review 9 of 20"><img src="./reviews/review-09.webp" alt="Google review screenshot" width="1920" height="1080" loading="lazy" decoding="async"></button>
+        <button type="button" class="rv-slide" data-trk="reviews:open" aria-label="Enlarge review 10 of 20"><img src="./reviews/review-10.webp" alt="Google review screenshot" width="1920" height="1080" loading="lazy" decoding="async"></button>
+        <button type="button" class="rv-slide" data-trk="reviews:open" aria-label="Enlarge review 11 of 20"><img src="./reviews/review-11.webp" alt="Google review screenshot" width="1920" height="1080" loading="lazy" decoding="async"></button>
+        <button type="button" class="rv-slide" data-trk="reviews:open" aria-label="Enlarge review 12 of 20"><img src="./reviews/review-12.webp" alt="Google review screenshot" width="1920" height="1080" loading="lazy" decoding="async"></button>
+        <button type="button" class="rv-slide" data-trk="reviews:open" aria-label="Enlarge review 13 of 20"><img src="./reviews/review-13.webp" alt="Google review screenshot" width="1920" height="1080" loading="lazy" decoding="async"></button>
+        <button type="button" class="rv-slide" data-trk="reviews:open" aria-label="Enlarge review 14 of 20"><img src="./reviews/review-14.webp" alt="Google review screenshot" width="1920" height="1080" loading="lazy" decoding="async"></button>
+        <button type="button" class="rv-slide" data-trk="reviews:open" aria-label="Enlarge review 15 of 20"><img src="./reviews/review-15.webp" alt="Google review screenshot" width="1920" height="1080" loading="lazy" decoding="async"></button>
+        <button type="button" class="rv-slide" data-trk="reviews:open" aria-label="Enlarge review 16 of 20"><img src="./reviews/review-16.webp" alt="Google review screenshot" width="1920" height="1080" loading="lazy" decoding="async"></button>
+        <button type="button" class="rv-slide" data-trk="reviews:open" aria-label="Enlarge review 17 of 20"><img src="./reviews/review-17.webp" alt="Google review screenshot" width="1920" height="1080" loading="lazy" decoding="async"></button>
+        <button type="button" class="rv-slide" data-trk="reviews:open" aria-label="Enlarge review 18 of 20"><img src="./reviews/review-18.webp" alt="Google review screenshot" width="1920" height="1080" loading="lazy" decoding="async"></button>
+        <button type="button" class="rv-slide" data-trk="reviews:open" aria-label="Enlarge review 19 of 20"><img src="./reviews/review-19.webp" alt="Google review screenshot" width="1920" height="1080" loading="lazy" decoding="async"></button>
+        <button type="button" class="rv-slide" data-trk="reviews:open" aria-label="Enlarge review 20 of 20"><img src="./reviews/review-20.webp" alt="Google review screenshot" width="1920" height="1080" loading="lazy" decoding="async"></button>
+      </div>
+      <div class="rv-dots" id="rv-dots" role="tablist" aria-label="Choose review"></div>
+    </div>
+  </section>
+
+  <div class="rv-box" id="rv-box" hidden>
+    <button type="button" class="rv-close" aria-label="Close">&times;</button>
+    <img id="rv-box-img" alt="Google review screenshot, enlarged">
+  </div>
 
   <!-- Services + CTA Gradient Wrapper -->
   <div class="svc-gradient-wrap">
@@ -1489,150 +1576,128 @@
 
   </div><!-- /.svc-gradient-wrap -->
 
-  <!-- Detailing Packages: attention-MOBILE's photo + price cards, TMC's packages.
-       REQUEST BOOKING feeds the wizard (selectPackage) instead of a GHL modal. -->
+  <!-- Detailing Packages: the same rows on every card, so a lower package shows
+       what it leaves out (greyed, struck through). Learn more reveals one value
+       line under each included item. REQUEST BOOKING feeds the wizard. -->
   <section class="pkg-section">
     <div class="section-eyebrow"><span>CHOOSE YOUR DETAIL</span></div>
     <h2 class="section-title">DETAILING PACKAGES</h2>
-    <p class="pkg-subtitle">From regular maintenance to a full showroom-quality restoration &#8212; pick the package that fits your vehicle, done right at your door.</p>
-    <div class="pkg-grid">
-
-      <!-- Standard Detail -->
-      <div class="pkg-card" data-package="standard">
-        <img class="pkg-img" src="./pkg-standard.webp" alt="Standard Detail package" loading="lazy" width="960" height="540">
-        <div class="pkg-top">
-          <span class="pkg-name">STANDARD DETAIL</span>
-          <div class="pkg-price"><span class="pkg-price-label">Starting at</span><span class="pkg-price-value">$219</span></div>
-          <span class="pkg-duration">Est. 2 hrs</span>
+    <p class="pkg-subtitle">Every package side by side. Tap Learn more for the details.</p>
+    <div class="pk-grid">
+      <div class="pk-card" data-package="standard">
+        <div class="pk-head">
+          <div class="pk-name">STANDARD DETAIL</div>
+          <div class="pk-price"><span class="pk-from">Starting at</span><span class="pk-amt">$219</span></div>
+          <div class="pk-time">Est. 2 hrs</div>
         </div>
-        <div class="pkg-body">
-          <ul class="pkg-includes">
-            <li class="pkg-include-item">Perfect for Regular Maintenance</li>
-            <li class="pkg-include-item">Full Interior Wipe Down + Deep Vacuum</li>
-            <li class="pkg-include-item">Hand Wash + Spray Wax (2-Month Protection)</li>
-            <li class="pkg-include-item teaser">and more...</li>
-          </ul>
-          <a class="pkg-learn-more" onclick="togglePackageExpand(this)">Learn More</a>
-          <div class="pkg-expanded">
-            <div class="pkg-expanded-inner">
-              <p class="pkg-description">Designed to keep your vehicle clean, fresh, and protected. Perfect for regular maintenance, giving your car a professional refresh inside and out without needing a deep restoration.</p>
-              <div class="pkg-sub-heading">Interior</div>
-              <ul class="pkg-includes">
-                <li class="pkg-include-item">Full interior wipe down (dashboard, panels &amp; doors)</li>
-                <li class="pkg-include-item">Deep vacuum — seats, carpets &amp; trunk</li>
-                <li class="pkg-include-item">Air vents + door jambs cleaned</li>
-                <li class="pkg-include-item">Leather seat cleaning &amp; protection</li>
-                <li class="pkg-include-item">Interior windows &amp; floor mats cleaned</li>
-                <li class="pkg-include-item">Light air freshener</li>
-              </ul>
-              <div class="pkg-sub-heading">Exterior</div>
-              <ul class="pkg-includes">
-                <li class="pkg-include-item">Foam pre-rinse + safe hand wash</li>
-                <li class="pkg-include-item">Wheels &amp; tires deep cleaned + shine</li>
-                <li class="pkg-include-item">Exterior windows cleaned</li>
-                <li class="pkg-include-item">Spray wax protection (up to 2 months)</li>
-              </ul>
-              <button class="pkg-book-btn" onclick="selectPackage('standard')">REQUEST BOOKING</button>
-              <a class="pkg-show-less" onclick="togglePackageExpand(this)">Show Less</a>
-            </div>
+        <p class="pk-best">Best for cars that are kept up and just need a proper refresh.</p>
+        <div class="pk-cols">
+          <div class="pk-col">
+            <div class="pk-col-title">Interior</div>
+            <ul class="pk-list">
+            <li class="pk-item"><span class="pk-txt">Deep vacuum</span><span class="pk-why"><span>Seats, carpets and trunk, with crevice tools under the seats.</span></span></li>
+            <li class="pk-item"><span class="pk-txt">Dash &amp; panels</span><span class="pk-why"><span>Dash, panels, vents and door jambs wiped and detailed.</span></span></li>
+            <li class="pk-item"><span class="pk-txt">Glass &amp; mats</span><span class="pk-why"><span>Streak-free interior glass; mats cleaned and put back fresh.</span></span></li>
+            <li class="pk-item"><span class="pk-txt">Leather care</span><span class="pk-why"><span>Cleaned and conditioned so it stays soft and doesn&#8217;t crack.</span></span></li>
+            <li class="pk-item pk-no"><span class="pk-txt">Steam sanitize</span></li>
+            <li class="pk-item pk-no"><span class="pk-txt">Shampoo</span></li>
+            <li class="pk-item pk-no"><span class="pk-txt">Stain removal</span></li>
+            <li class="pk-item pk-no"><span class="pk-txt">Odor removal</span></li>
+            </ul>
+          </div>
+          <div class="pk-col">
+            <div class="pk-col-title">Exterior</div>
+            <ul class="pk-list">
+            <li class="pk-item"><span class="pk-txt">Hand wash</span><span class="pk-why"><span>Foam pre-rinse loosens grit so the wash doesn&#8217;t scratch; windows included.</span></span></li>
+            <li class="pk-item"><span class="pk-txt">Wheels &amp; tires</span><span class="pk-why"><span>Faces, barrels and tires cleaned, then shined.</span></span></li>
+            <li class="pk-item"><span class="pk-txt">Wax: 2 mo</span><span class="pk-why"><span>Adds gloss and helps water run off.</span></span></li>
+            <li class="pk-item pk-no"><span class="pk-txt">Clay bar</span></li>
+            <li class="pk-item pk-no"><span class="pk-txt">Iron decon</span></li>
+            <li class="pk-item pk-no"><span class="pk-txt">Paint polish</span></li>
+            <li class="pk-item pk-no"><span class="pk-txt">Engine bay</span></li>
+            </ul>
           </div>
         </div>
+        <button type="button" class="pk-more" aria-expanded="false" data-trk="pkg:standard:learn_more">Learn more</button>
+        <button type="button" class="pk-book" data-trk="pkg:standard:request_booking" onclick="selectPackage('standard')">REQUEST BOOKING</button>
       </div>
 
-      <!-- Premium Detail (Featured) -->
-      <div class="pkg-card featured" data-package="premium">
-        <span class="pkg-badge">MOST POPULAR</span>
-        <img class="pkg-img" src="./pkg-premium.webp" alt="Premium Detail package" loading="lazy" width="960" height="540">
-        <div class="pkg-top">
-          <span class="pkg-name">PREMIUM DETAIL</span>
-          <div class="pkg-price"><span class="pkg-price-label">Starting at</span><span class="pkg-price-value">$290</span></div>
-          <span class="pkg-duration">Est. 3 hrs</span>
+      <div class="pk-card featured" data-package="premium">
+        <span class="pk-badge">MOST POPULAR</span>
+        <div class="pk-head">
+          <div class="pk-name">PREMIUM DETAIL</div>
+          <div class="pk-price"><span class="pk-from">Starting at</span><span class="pk-amt">$290</span></div>
+          <div class="pk-time">Est. 3 hrs</div>
         </div>
-        <div class="pkg-body">
-          <ul class="pkg-includes">
-            <li class="pkg-include-item">Deep Clean + Steam Extraction</li>
-            <li class="pkg-include-item">Shampoo Seats, Carpets &amp; Mats</li>
-            <li class="pkg-include-item">Clay Bar + 6-Month Sealant Protection</li>
-            <li class="pkg-include-item teaser">and more...</li>
-          </ul>
-          <a class="pkg-learn-more" onclick="togglePackageExpand(this)">Learn More</a>
-          <div class="pkg-expanded">
-            <div class="pkg-expanded-inner">
-              <p class="pkg-description">A deep cleaning service designed to restore your vehicle to like-new condition. Goes beyond a basic detail by targeting embedded dirt, stains, and buildup using professional tools like steam cleaning and extraction.</p>
-              <div class="pkg-sub-heading">Interior (Deep Clean)</div>
-              <ul class="pkg-includes">
-                <li class="pkg-include-item">Full interior deep cleaning on all surfaces</li>
-                <li class="pkg-include-item">Deep vacuum — seats, carpets &amp; trunk</li>
-                <li class="pkg-include-item">Steam cleaning (sanitization &amp; decontamination)</li>
-                <li class="pkg-include-item">Seat &amp; carpet shampoo with hot water extraction</li>
-                <li class="pkg-include-item">Stain removal treatment</li>
-                <li class="pkg-include-item">Leather cleaning &amp; protection</li>
-                <li class="pkg-include-item">Crevice detailing + door jambs cleaned</li>
-                <li class="pkg-include-item">Interior windows &amp; trunk cleaned</li>
-                <li class="pkg-include-item">Premium air freshener</li>
-              </ul>
-              <div class="pkg-sub-heading">Exterior</div>
-              <ul class="pkg-includes">
-                <li class="pkg-include-item">Foam pre-rinse + safe hand wash</li>
-                <li class="pkg-include-item">Wheels &amp; tires deep cleaned + shine</li>
-                <li class="pkg-include-item">Clay bar + bug &amp; contamination removal</li>
-                <li class="pkg-include-item">Exterior windows cleaned</li>
-                <li class="pkg-include-item">Sealant protection (up to 6 months)</li>
-              </ul>
-              <button class="pkg-book-btn" onclick="selectPackage('premium')">REQUEST BOOKING</button>
-              <a class="pkg-show-less" onclick="togglePackageExpand(this)">Show Less</a>
-            </div>
+        <p class="pk-best">Best for daily drivers with kids, pets, stains or built-up grime.</p>
+        <div class="pk-cols">
+          <div class="pk-col">
+            <div class="pk-col-title">Interior</div>
+            <ul class="pk-list">
+            <li class="pk-item"><span class="pk-txt">Deep vacuum</span><span class="pk-why"><span>Seats, carpets and trunk, with crevice tools under the seats.</span></span></li>
+            <li class="pk-item"><span class="pk-txt">Dash &amp; panels</span><span class="pk-why"><span>Dash, panels, vents and door jambs wiped and detailed.</span></span></li>
+            <li class="pk-item"><span class="pk-txt">Glass &amp; mats</span><span class="pk-why"><span>Streak-free interior glass; mats cleaned and put back fresh.</span></span></li>
+            <li class="pk-item"><span class="pk-txt">Leather care</span><span class="pk-why"><span>Cleaned and conditioned so it stays soft and doesn&#8217;t crack.</span></span></li>
+            <li class="pk-item"><span class="pk-txt">Steam sanitize</span><span class="pk-why"><span>High-heat steam kills bacteria on touch points and vents.</span></span></li>
+            <li class="pk-item"><span class="pk-txt">Shampoo</span><span class="pk-why"><span>Seats and carpets. Hot-water extraction pulls dirt out of the fabric, not just off the top.</span></span></li>
+            <li class="pk-item"><span class="pk-txt">Stain removal</span><span class="pk-why"><span>Targeted treatment for spills and set-in spots.</span></span></li>
+            <li class="pk-item pk-no"><span class="pk-txt">Odor removal</span></li>
+            </ul>
+          </div>
+          <div class="pk-col">
+            <div class="pk-col-title">Exterior</div>
+            <ul class="pk-list">
+            <li class="pk-item"><span class="pk-txt">Hand wash</span><span class="pk-why"><span>Foam pre-rinse loosens grit so the wash doesn&#8217;t scratch; windows included.</span></span></li>
+            <li class="pk-item"><span class="pk-txt">Wheels &amp; tires</span><span class="pk-why"><span>Faces, barrels and tires cleaned, then shined.</span></span></li>
+            <li class="pk-item"><span class="pk-txt">Sealant: 6 mo</span><span class="pk-why"><span>Longer-lasting shine and protection than wax.</span></span></li>
+            <li class="pk-item"><span class="pk-txt">Clay bar</span><span class="pk-why"><span>Removes bugs and bonded grit a wash leaves behind, so the paint feels smooth.</span></span></li>
+            <li class="pk-item pk-no"><span class="pk-txt">Iron decon</span></li>
+            <li class="pk-item pk-no"><span class="pk-txt">Paint polish</span></li>
+            <li class="pk-item pk-no"><span class="pk-txt">Engine bay</span></li>
+            </ul>
           </div>
         </div>
+        <button type="button" class="pk-more" aria-expanded="false" data-trk="pkg:premium:learn_more">Learn more</button>
+        <button type="button" class="pk-book" data-trk="pkg:premium:request_booking" onclick="selectPackage('premium')">REQUEST BOOKING</button>
       </div>
 
-      <!-- Elite Detail -->
-      <div class="pkg-card" data-package="elite">
-        <img class="pkg-img" src="./pkg-elite.webp" alt="Elite Detail package" loading="lazy" width="960" height="540">
-        <div class="pkg-top">
-          <span class="pkg-name">ELITE DETAIL</span>
-          <div class="pkg-price"><span class="pkg-price-label">Starting at</span><span class="pkg-price-value">$399</span></div>
-          <span class="pkg-duration">Est. 4&#8211;5 hrs</span>
+      <div class="pk-card" data-package="elite">
+        <div class="pk-head">
+          <div class="pk-name">ELITE DETAIL</div>
+          <div class="pk-price"><span class="pk-from">Starting at</span><span class="pk-amt">$399</span></div>
+          <div class="pk-time">Est. 4&#8211;5 hrs</div>
         </div>
-        <div class="pkg-body">
-          <ul class="pkg-includes">
-            <li class="pkg-include-item">Full Interior Restoration + Odor Removal</li>
-            <li class="pkg-include-item">Iron Remover + Paint Enhancement Finish</li>
-            <li class="pkg-include-item">Engine Bay + 12-Month Paint Sealant</li>
-            <li class="pkg-include-item teaser">and more...</li>
-          </ul>
-          <a class="pkg-learn-more" onclick="togglePackageExpand(this)">Learn More</a>
-          <div class="pkg-expanded">
-            <div class="pkg-expanded-inner">
-              <p class="pkg-description">Our most complete and advanced detailing package, designed to fully restore, protect, and elevate your vehicle to a near showroom condition. Combines deep interior restoration with full exterior decontamination and long-lasting paint protection.</p>
-              <div class="pkg-sub-heading">Interior (Full Restoration)</div>
-              <ul class="pkg-includes">
-                <li class="pkg-include-item">Full interior deep cleaning on all surfaces</li>
-                <li class="pkg-include-item">Deep vacuum — seats, carpets &amp; trunk</li>
-                <li class="pkg-include-item">Steam cleaning (sanitization &amp; decontamination)</li>
-                <li class="pkg-include-item">Seat &amp; carpet shampoo with hot water extraction</li>
-                <li class="pkg-include-item">Advanced stain removal + odor elimination</li>
-                <li class="pkg-include-item">Leather cleaning &amp; protection</li>
-                <li class="pkg-include-item">Crevice detailing + door jambs cleaned</li>
-                <li class="pkg-include-item">Interior windows &amp; trunk fully cleaned</li>
-                <li class="pkg-include-item">Premium air freshener</li>
-              </ul>
-              <div class="pkg-sub-heading">Exterior (Full Decontamination + Protection)</div>
-              <ul class="pkg-includes">
-                <li class="pkg-include-item">Foam pre-rinse + safe hand wash</li>
-                <li class="pkg-include-item">Wheels &amp; tires deep cleaned + shine</li>
-                <li class="pkg-include-item">Clay bar, iron remover &amp; full decontamination</li>
-                <li class="pkg-include-item">Exterior windows cleaned</li>
-                <li class="pkg-include-item">Paint enhancement + 12-month sealant protection</li>
-                <li class="pkg-include-item">Engine bay cleaning</li>
-              </ul>
-              <button class="pkg-book-btn" onclick="selectPackage('elite')">REQUEST BOOKING</button>
-              <a class="pkg-show-less" onclick="togglePackageExpand(this)">Show Less</a>
-            </div>
+        <p class="pk-best">Best for neglected cars, getting a car ready to sell, or the closest to new it can get.</p>
+        <div class="pk-cols">
+          <div class="pk-col">
+            <div class="pk-col-title">Interior</div>
+            <ul class="pk-list">
+            <li class="pk-item"><span class="pk-txt">Deep vacuum</span><span class="pk-why"><span>Seats, carpets and trunk, with crevice tools under the seats.</span></span></li>
+            <li class="pk-item"><span class="pk-txt">Dash &amp; panels</span><span class="pk-why"><span>Dash, panels, vents and door jambs wiped and detailed.</span></span></li>
+            <li class="pk-item"><span class="pk-txt">Glass &amp; mats</span><span class="pk-why"><span>Streak-free interior glass; mats cleaned and put back fresh.</span></span></li>
+            <li class="pk-item"><span class="pk-txt">Leather care</span><span class="pk-why"><span>Cleaned and conditioned so it stays soft and doesn&#8217;t crack.</span></span></li>
+            <li class="pk-item"><span class="pk-txt">Steam sanitize</span><span class="pk-why"><span>High-heat steam kills bacteria on touch points and vents.</span></span></li>
+            <li class="pk-item"><span class="pk-txt">Shampoo</span><span class="pk-why"><span>Seats and carpets. Hot-water extraction pulls dirt out of the fabric, not just off the top.</span></span></li>
+            <li class="pk-item"><span class="pk-txt">Stain removal</span><span class="pk-why"><span>Advanced treatment for the stubborn, set-in ones.</span></span></li>
+            <li class="pk-item"><span class="pk-txt">Odor removal</span><span class="pk-why"><span>Treats smoke, pet and food smells at the source.</span></span></li>
+            </ul>
+          </div>
+          <div class="pk-col">
+            <div class="pk-col-title">Exterior</div>
+            <ul class="pk-list">
+            <li class="pk-item"><span class="pk-txt">Hand wash</span><span class="pk-why"><span>Foam pre-rinse loosens grit so the wash doesn&#8217;t scratch; windows included.</span></span></li>
+            <li class="pk-item"><span class="pk-txt">Wheels &amp; tires</span><span class="pk-why"><span>Faces, barrels and tires cleaned, then shined.</span></span></li>
+            <li class="pk-item"><span class="pk-txt">Sealant: 12 mo</span><span class="pk-why"><span>A year of UV and water protection; water beads right off.</span></span></li>
+            <li class="pk-item"><span class="pk-txt">Clay bar</span><span class="pk-why"><span>Removes bugs and bonded grit a wash leaves behind, so the paint feels smooth.</span></span></li>
+            <li class="pk-item"><span class="pk-txt">Iron decon</span><span class="pk-why"><span>Dissolves brake dust and metal specks stuck in the paint.</span></span></li>
+            <li class="pk-item"><span class="pk-txt">Paint polish</span><span class="pk-why"><span>Machine polish that brings back gloss and depth.</span></span></li>
+            <li class="pk-item"><span class="pk-txt">Engine bay</span><span class="pk-why"><span>Degreased and dressed so it looks as good as the outside.</span></span></li>
+            </ul>
           </div>
         </div>
+        <button type="button" class="pk-more" aria-expanded="false" data-trk="pkg:elite:learn_more">Learn more</button>
+        <button type="button" class="pk-book" data-trk="pkg:elite:request_booking" onclick="selectPackage('elite')">REQUEST BOOKING</button>
       </div>
-
     </div>
   </section>
 
@@ -1650,41 +1715,7 @@
     <h2 class="guarantee-title">100% SATISFACTION GUARANTEED</h2>
   </section>
 
-  <!-- Reviews: screenshots of TMC's Google reviews (tap to enlarge) -->
-  <section class="section reviews-section">
-    <h2 class="section-title">CUSTOMER REVIEWS</h2>
-    <p class="rv-note">Real Google reviews. Tap any review to read it full size.</p>
-    <div class="rv-wrap">
-      <div class="rv-track" id="rv-track">
-        <button type="button" class="rv-slide" data-trk="reviews:open" aria-label="Enlarge review 1 of 20"><img src="./reviews/review-01.webp" alt="Google review screenshot" width="1920" height="1080" loading="eager" decoding="async"></button>
-        <button type="button" class="rv-slide" data-trk="reviews:open" aria-label="Enlarge review 2 of 20"><img src="./reviews/review-02.webp" alt="Google review screenshot" width="1920" height="1080" loading="eager" decoding="async"></button>
-        <button type="button" class="rv-slide" data-trk="reviews:open" aria-label="Enlarge review 3 of 20"><img src="./reviews/review-03.webp" alt="Google review screenshot" width="1920" height="1080" loading="eager" decoding="async"></button>
-        <button type="button" class="rv-slide" data-trk="reviews:open" aria-label="Enlarge review 4 of 20"><img src="./reviews/review-04.webp" alt="Google review screenshot" width="1920" height="1080" loading="lazy" decoding="async"></button>
-        <button type="button" class="rv-slide" data-trk="reviews:open" aria-label="Enlarge review 5 of 20"><img src="./reviews/review-05.webp" alt="Google review screenshot" width="1920" height="1080" loading="lazy" decoding="async"></button>
-        <button type="button" class="rv-slide" data-trk="reviews:open" aria-label="Enlarge review 6 of 20"><img src="./reviews/review-06.webp" alt="Google review screenshot" width="1920" height="1080" loading="lazy" decoding="async"></button>
-        <button type="button" class="rv-slide" data-trk="reviews:open" aria-label="Enlarge review 7 of 20"><img src="./reviews/review-07.webp" alt="Google review screenshot" width="1920" height="1080" loading="lazy" decoding="async"></button>
-        <button type="button" class="rv-slide" data-trk="reviews:open" aria-label="Enlarge review 8 of 20"><img src="./reviews/review-08.webp" alt="Google review screenshot" width="1920" height="1080" loading="lazy" decoding="async"></button>
-        <button type="button" class="rv-slide" data-trk="reviews:open" aria-label="Enlarge review 9 of 20"><img src="./reviews/review-09.webp" alt="Google review screenshot" width="1920" height="1080" loading="lazy" decoding="async"></button>
-        <button type="button" class="rv-slide" data-trk="reviews:open" aria-label="Enlarge review 10 of 20"><img src="./reviews/review-10.webp" alt="Google review screenshot" width="1920" height="1080" loading="lazy" decoding="async"></button>
-        <button type="button" class="rv-slide" data-trk="reviews:open" aria-label="Enlarge review 11 of 20"><img src="./reviews/review-11.webp" alt="Google review screenshot" width="1920" height="1080" loading="lazy" decoding="async"></button>
-        <button type="button" class="rv-slide" data-trk="reviews:open" aria-label="Enlarge review 12 of 20"><img src="./reviews/review-12.webp" alt="Google review screenshot" width="1920" height="1080" loading="lazy" decoding="async"></button>
-        <button type="button" class="rv-slide" data-trk="reviews:open" aria-label="Enlarge review 13 of 20"><img src="./reviews/review-13.webp" alt="Google review screenshot" width="1920" height="1080" loading="lazy" decoding="async"></button>
-        <button type="button" class="rv-slide" data-trk="reviews:open" aria-label="Enlarge review 14 of 20"><img src="./reviews/review-14.webp" alt="Google review screenshot" width="1920" height="1080" loading="lazy" decoding="async"></button>
-        <button type="button" class="rv-slide" data-trk="reviews:open" aria-label="Enlarge review 15 of 20"><img src="./reviews/review-15.webp" alt="Google review screenshot" width="1920" height="1080" loading="lazy" decoding="async"></button>
-        <button type="button" class="rv-slide" data-trk="reviews:open" aria-label="Enlarge review 16 of 20"><img src="./reviews/review-16.webp" alt="Google review screenshot" width="1920" height="1080" loading="lazy" decoding="async"></button>
-        <button type="button" class="rv-slide" data-trk="reviews:open" aria-label="Enlarge review 17 of 20"><img src="./reviews/review-17.webp" alt="Google review screenshot" width="1920" height="1080" loading="lazy" decoding="async"></button>
-        <button type="button" class="rv-slide" data-trk="reviews:open" aria-label="Enlarge review 18 of 20"><img src="./reviews/review-18.webp" alt="Google review screenshot" width="1920" height="1080" loading="lazy" decoding="async"></button>
-        <button type="button" class="rv-slide" data-trk="reviews:open" aria-label="Enlarge review 19 of 20"><img src="./reviews/review-19.webp" alt="Google review screenshot" width="1920" height="1080" loading="lazy" decoding="async"></button>
-        <button type="button" class="rv-slide" data-trk="reviews:open" aria-label="Enlarge review 20 of 20"><img src="./reviews/review-20.webp" alt="Google review screenshot" width="1920" height="1080" loading="lazy" decoding="async"></button>
-      </div>
-      <div class="rv-dots" id="rv-dots" role="tablist" aria-label="Choose review"></div>
-    </div>
-  </section>
 
-  <div class="rv-box" id="rv-box" hidden>
-    <button type="button" class="rv-close" aria-label="Close">&times;</button>
-    <img id="rv-box-img" alt="Google review screenshot, enlarged">
-  </div>
 
   <!-- FAQ Section -->
   <section class="faq-section">
@@ -1854,8 +1885,151 @@
     <div class="contact-content">
       <h2 class="section-title">GET A QUOTE</h2>
       <p class="contact-subtitle">Book your mobile detailing appointment today and experience the TMCleansedrive difference</p>
-      <div class="contact-quote-cta">
-        <a href="#quote-form" class="cta-primary">GET MY QUOTE</a>
+      <div class="quote-form-container contact-form-wrap">
+        <form class="wz-card" id="quote-wizard-2" novalidate>
+          <!-- aria-hidden: #wz-label below already announces "Step N of 4" politely,
+               and narrating the breadcrumb as well would say it twice. -->
+          <div class="wz-steps" id="wz-steps-2" data-wz="steps" aria-hidden="true">
+            <span class="wz-stepchip is-current"><svg aria-hidden="true"><path/></svg>Service</span>
+            <span class="wz-stepchip"><svg aria-hidden="true"><path/></svg>Vehicle</span>
+            <span class="wz-stepchip"><svg aria-hidden="true"><path/></svg>Details</span>
+            <span class="wz-stepchip"><svg aria-hidden="true"><path/></svg>Contact</span>
+          </div>
+          <p class="wz-step-label" id="wz-label-2" data-wz="label" aria-live="polite">Step 1 of 4</p>
+
+          <!-- Step 1: segment. Three services only - paint correction and ceramic are
+               quoted by conversation, not by form, and the "not sure" escape hatch was
+               dropped deliberately. Interior + Exterior sits in the middle and carries
+               the flag: it is the package this page sells. -->
+          <div class="wz-step active" data-step="1">
+            <div class="wz-group-label">What does your vehicle need?
+              <p class="wz-sub">Pick a service below that best fits your needs</p>
+            </div>
+            <div class="wz-choices" role="radiogroup" aria-label="What does your vehicle need?">
+              <button type="button" class="wz-choice" role="radio" aria-checked="false" data-val="Interior only">
+                <span>Interior only<span class="wz-choice-sub">Seats, carpets, and everything inside</span></span>
+                <span class="wz-choice-tick"></span>
+              </button>
+              <button type="button" class="wz-choice wz-choice--flagged" role="radio" aria-checked="false" data-val="Interior + Exterior">
+                <span class="wz-flag">Most Popular</span>
+                <span>Interior + Exterior<span class="wz-choice-sub">The complete detail</span></span>
+                <span class="wz-choice-tick"></span>
+              </button>
+              <button type="button" class="wz-choice" role="radio" aria-checked="false" data-val="Exterior only">
+                <span>Exterior only<span class="wz-choice-sub">Handwash, Decontamination, &amp; Wax</span></span>
+                <span class="wz-choice-tick"></span>
+              </button>
+            </div>
+            <p class="wz-err" data-err="1"></p>
+          </div>
+
+          <!-- Step 2: vehicle, split into three. The visible inputs carry ids ONLY -
+               naming them would add three keys tmc-OFFER never sends and drop
+               `vehicle` altogether, and the hidden block below says every key has to
+               exist on both lanes. A hidden `vehicle` is composed from these instead. -->
+          <div class="wz-step" data-step="2">
+            <!-- A div, not a p: the caption lives INSIDE the label so it inherits the
+                 uppercase and the centring. A <p> nested in a <p> gets auto-closed by
+                 the parser, which would leave them as siblings and lose both. -->
+            <div class="wz-group-label">Vehicle details
+              <p class="wz-sub">Please provide details of your vehicle</p>
+            </div>
+            <div class="wz-vehicle">
+              <input class="lf-input" id="wz-year-2" data-wz="year" type="text" inputmode="numeric" maxlength="4"
+                     autocomplete="off" enterkeyhint="next" placeholder="Year" aria-label="Year">
+              <input class="lf-input" id="wz-make-2" data-wz="make" type="text" list="wz-makes-2"
+                     autocomplete="off" enterkeyhint="next" placeholder="Make" aria-label="Make">
+            </div>
+            <div class="lf-row">
+              <input class="lf-input" id="wz-model-2" data-wz="model" type="text"
+                     autocomplete="off" enterkeyhint="next" placeholder="Model" aria-label="Model">
+            </div>
+            <datalist id="wz-makes-2">
+              <option value="Acura"></option><option value="Audi"></option><option value="BMW"></option>
+              <option value="Buick"></option><option value="Cadillac"></option><option value="Chevrolet"></option>
+              <option value="Chrysler"></option><option value="Dodge"></option><option value="Ford"></option>
+              <option value="GMC"></option><option value="Honda"></option><option value="Hyundai"></option>
+              <option value="Infiniti"></option><option value="Jeep"></option><option value="Kia"></option>
+              <option value="Land Rover"></option><option value="Lexus"></option><option value="Lincoln"></option>
+              <option value="Mazda"></option><option value="Mercedes-Benz"></option><option value="Mini"></option>
+              <option value="Mitsubishi"></option><option value="Nissan"></option><option value="Porsche"></option>
+              <option value="Ram"></option><option value="Subaru"></option><option value="Tesla"></option>
+              <option value="Toyota"></option><option value="Volkswagen"></option><option value="Volvo"></option>
+            </datalist>
+            <p class="wz-err" data-err="2"></p>
+          </div>
+
+          <!-- Step 3: condition. Built at runtime from the step-1 answer, so an
+               exterior-only visitor is never asked about pet hair. -->
+          <div class="wz-step" data-step="3">
+            <div id="wz-conditions-2" data-wz="conditions"></div>
+            <p class="wz-err" data-err="3"></p>
+          </div>
+
+          <!-- Step 4: the payoff, then contact. -->
+          <div class="wz-step" data-step="4">
+            <!-- Same label-with-caption block as steps 2 and 3. A div, not a p, so the
+                 caption stays nested and keeps the inherited uppercase. -->
+            <div class="wz-group-label">Personal details
+              <p class="wz-sub">Where should we send your quote?</p>
+            </div>
+
+            <div class="lf-row">
+              <label class="lf-label" for="wz-name-2">First Name<span aria-hidden="true">*</span></label>
+              <input class="lf-input" id="wz-name-2" data-wz="name" name="first_name" type="text" autocomplete="given-name" required placeholder="First Name">
+            </div>
+            <div class="lf-row">
+              <label class="lf-label" for="wz-phone-2">Phone #<span aria-hidden="true">*</span></label>
+              <input class="lf-input" id="wz-phone-2" data-wz="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required placeholder="(321) 555-0123">
+            </div>
+            <div class="lf-row">
+              <label class="lf-label" for="wz-message-2">Message to the team:</label>
+              <textarea class="lf-input lf-textarea" id="wz-message-2" data-wz="message" name="message" rows="3"
+                        placeholder="EX: spilled coffee on the passenger seat, smells now"></textarea>
+            </div>
+            <p class="wz-err" data-err="4"></p>
+          </div>
+
+          <div class="wz-nav" id="wz-nav-2" data-wz="nav" style="display:none">
+            <button type="button" class="wz-back" id="wz-back-2" data-wz="back">&#8592; Back</button>
+            <button type="button" class="wz-next" id="wz-next-2" data-wz="next">Next &#8594;</button>
+          </div>
+          <p class="lf-status" id="wz-status-2" data-wz="status" role="status" aria-live="polite"></p>
+          <p class="lf-legal">By submitting you agree to be contacted about your booking. <a href="./privacy-policy.html">Privacy</a> &middot; <a href="./terms-of-service.html">Terms</a></p>
+
+          <!-- One fixed payload shape: every key is always sent so the GHL sample
+               captures a token for each. -->
+          <input type="hidden" name="service_type" value="">
+          <!-- Composed from the three visible vehicle inputs; see composeVehicle(). -->
+          <input type="hidden" name="vehicle" value="">
+          <input type="hidden" name="conditions" value="None">
+          <input type="hidden" name="entry_lane" value="guided">
+          <!-- top = the form under the hero, bottom = the one in the contact section -->
+          <input type="hidden" name="form_position" value="bottom">
+          <!-- Joins this lead to its rows in the analytics Sheet; set at submit. -->
+          <input type="hidden" name="session_id" value="">
+          <!-- standard / premium / elite when a package card's REQUEST BOOKING opened
+               the wizard; see selectPackage(). -->
+          <input type="hidden" name="package" value="None">
+          <input type="hidden" name="gclid" value="">
+          <input type="hidden" name="gbraid" value="">
+          <input type="hidden" name="wbraid" value="">
+          <input type="hidden" name="utm_source" value="">
+          <input type="hidden" name="utm_medium" value="">
+          <input type="hidden" name="utm_campaign" value="">
+          <input type="hidden" name="utm_term" value="">
+          <input type="hidden" name="utm_content" value="">
+          <input type="hidden" name="page_url" value="">
+          <input type="hidden" name="referrer" value="">
+          <input type="hidden" name="geo_city" value="Melbourne">
+          <input type="hidden" name="loc" value="">
+          <!-- Honeypot: same name as tmc-OFFER's. Filled means a bot - nothing is
+               sent and thank-you.html (the conversion) is never reached. -->
+          <div class="lf-hp" aria-hidden="true">
+            <label for="lf-hp-x7-2">Leave this field empty</label>
+            <input id="lf-hp-x7-2" name="lf_hp_x7" type="text" tabindex="-1" autocomplete="off">
+          </div>
+        </form>
       </div>
       <div class="contact-info-cards">
         <div class="info-card">
@@ -1884,27 +2058,7 @@
     <a href="./terms-of-service.html">Terms of Service</a>
   </div>
 
-  <!-- Sticky CTA -->
-  <div class="sticky-cta">
-    <a href="tel:+13214857443" class="sticky-button phone-link">
-      <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-      CALL <span class="phone-text">(321) 485-7443</span>
-    </a>
-  </div>
-
   <script>
-    // The sticky call bar stays out of the way while the quote form is on
-    // screen: sliding in over the form it covered the Next button and moved
-    // under the thumb mid-entry.
-    var stickyButton = document.querySelector('.sticky-cta');
-    var wizardCard = document.getElementById('quote-wizard');
-    function syncSticky() {
-      var r = wizardCard.getBoundingClientRect();
-      var formOnScreen = r.bottom > 0 && r.top < window.innerHeight;
-      stickyButton.classList.toggle('visible', window.scrollY > 200 && !formOnScreen);
-    }
-    window.addEventListener('scroll', syncSticky, { passive: true });
-    window.addEventListener('resize', syncSticky);
     document.addEventListener('DOMContentLoaded', function() {
       var quoteButton = document.querySelector('a[href="#quote-form"]');
       if (quoteButton) {
@@ -1918,43 +2072,14 @@
   </script>
 
   <script>
-    function togglePackageExpand(btn) {
-      var card = btn.closest('.pkg-card');
-      var expanded = card.querySelector('.pkg-expanded');
-      var learnMore = card.querySelector('.pkg-learn-more');
-      var isOpen = expanded.classList.contains('active');
-      document.querySelectorAll('.pkg-expanded.active').forEach(function(el) {
-        el.classList.remove('active');
-        el.style.maxHeight = '0';
-        el.closest('.pkg-card').querySelector('.pkg-learn-more').style.display = '';
-      });
-      if (!isOpen) {
-        expanded.classList.add('active');
-        // Size to the content, the same way toggleFaq does - a fixed cap clips
-        // the longest package on a narrow card.
-        expanded.style.maxHeight = expanded.scrollHeight + 'px';
-        learnMore.style.display = 'none';
-      } else {
-        learnMore.style.display = '';
-      }
-    }
-
-    // A pixel max-height goes stale when the text reflows - rotating a phone, or
-    // resizing - so recompute whatever is currently open.
-    window.addEventListener('resize', function () {
-      document.querySelectorAll('.pkg-expanded.active').forEach(function (el) {
-        el.style.maxHeight = 'none';
-        var h = el.scrollHeight;
-        el.style.maxHeight = h + 'px';
-      });
-    });
-
-    document.querySelectorAll('.pkg-card').forEach(function(card) {
-      card.style.cursor = 'pointer';
-      card.addEventListener('click', function(e) {
-        if (e.target.closest('.pkg-book-btn') || e.target.closest('.pkg-show-less') || e.target.closest('.pkg-learn-more')) return;
-        if (e.target.closest('.pkg-expanded') && card.querySelector('.pkg-expanded').classList.contains('active')) return;
-        togglePackageExpand(card.querySelector('.pkg-learn-more') || card);
+    // Learn more: opens the value lines on this card only.
+    document.querySelectorAll('.pk-more').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var card = btn.closest('.pk-card');
+        var open = !card.classList.contains('open');
+        card.classList.toggle('open', open);
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        btn.textContent = open ? 'Show less' : 'Learn more';
       });
     });
   </script>
@@ -1965,9 +2090,10 @@
      with no preflight, keepalive, a 4s never-strand timeout, redirect on TypeError,
      the lf_hp_x7 honeypot, and transaction_id + click ids carried to thank-you. -->
 <script>
-  (function () {
-    var form = document.getElementById('quote-wizard');
+  // Runs once per copy of the wizard; every lookup is scoped to its own form.
+  function initWizard(form, position) {
     if (!form) return;
+    function q(name) { return form.querySelector('[data-wz="' + name + '"]'); }
 
     // Dedicated inbound-webhook trigger for this page in the TMC sub-account, so
     // re-capturing its sample cannot disturb tmc-OFFER's mapping on 55d65c6e.
@@ -2017,7 +2143,7 @@
 
     // ---- step machinery ------------------------------------------------------
     var steps  = form.querySelectorAll('.wz-step');
-    var chips  = [].slice.call(document.querySelectorAll('#wz-steps .wz-stepchip'));
+    var chips  = [].slice.call(q('steps').querySelectorAll('.wz-stepchip'));
 
     // Draw each chevron at the chip's actual pixel size, so the dashes are real
     // dashes and nothing is stretched. Every chip is a complete closed chevron,
@@ -2039,11 +2165,11 @@
     drawSteps();
     window.addEventListener('resize', drawSteps);
     window.addEventListener('load', drawSteps);     // font swap can shift layout after parse
-    var label  = document.getElementById('wz-label');
-    var nav    = document.getElementById('wz-nav');
-    var back   = document.getElementById('wz-back');
-    var next   = document.getElementById('wz-next');
-    var status = document.getElementById('wz-status');
+    var label  = q('label');
+    var nav    = q('nav');
+    var back   = q('back');
+    var next   = q('next');
+    var status = q('status');
     var TOTAL  = 4;
     var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -2137,7 +2263,7 @@
 
     // ---- step 3: built from the step 1 answer --------------------------------
     function buildConditions() {
-      var mount = document.getElementById('wz-conditions');
+      var mount = q('conditions');
       mount.textContent = '';
       var groups = [];
       if (state.service === 'Interior only' || state.service === 'Interior + Exterior') groups.push(QUESTIONS.interior);
@@ -2216,7 +2342,8 @@
     // interior + exterior detail, so step 1 is answered for them and they start
     // at the vehicle. The package rides the payload as its own key.
     var packageField = form.querySelector('[name="package"]');
-    window.selectPackage = function (slug) {
+    // Package cards feed the top form only.
+    if (position === 'top') window.selectPackage = function (slug) {
       packageField.value = slug || 'None';
       trk.entry('package:' + (slug || 'none'));
       trk.start('package');
@@ -2226,9 +2353,9 @@
 
     // Three visible inputs, one hidden `vehicle` built from them, so the payload
     // keeps one fixed shape.
-    var vYear  = document.getElementById('wz-year');
-    var vMake  = document.getElementById('wz-make');
-    var vModel = document.getElementById('wz-model');
+    var vYear  = q('year');
+    var vMake  = q('make');
+    var vModel = q('model');
     var vehicleField = form.querySelector('input[type="hidden"][name="vehicle"]');
 
     function composeVehicle() {
@@ -2259,7 +2386,7 @@
 
     // Make: the signal is an exact match against the suggestion list. A space is
     // deliberately NOT a trigger: it would split Land Rover across two fields.
-    var MAKES = [].slice.call(document.querySelectorAll('#wz-makes option'))
+    var MAKES = [].slice.call(form.querySelectorAll('datalist option'))
       .map(function (o) { return o.value.toLowerCase(); });
     function makeOk(v) { return MAKES.indexOf(v.trim().toLowerCase()) > -1; }
     // insertReplacementText is Chrome picking from the datalist: always a
@@ -2281,13 +2408,14 @@
     // Textareas keep Enter for new lines; buttons already click on Enter.
     var nameField = form.querySelector('[name="first_name"]');
     var phoneField = form.querySelector('[name="phone"]');
-    var ENTER_TO = { 'wz-year': vMake, 'wz-make': vModel, 'wz-name': phoneField };
+    var ENTER_TO = { year: vMake, make: vModel, name: phoneField };
     form.addEventListener('keydown', function (e) {
       if (e.key !== 'Enter' || e.isComposing) return;
       var t = e.target;
       if (t.tagName !== 'INPUT') return;
       e.preventDefault();
-      if (ENTER_TO[t.id]) { ENTER_TO[t.id].focus(); return; }
+      var to = ENTER_TO[t.getAttribute('data-wz')];
+      if (to) { to.focus(); return; }
       next.click();
     });
     // Belt and braces: a native submit would be a GET that reloads the page and
@@ -2488,13 +2616,15 @@
         window.gtag('event', 'form_step', { step: n, lane: 'guided' });
       }
       if (dir) {
-        trk.ev('step_view', { step: n, detail: dir });
+        trk.ev('step_view', { step: n, detail: dir, target: position });
         trk.flush();
       }
     }
 
     show(1);
-  })();
+  }
+  initWizard(document.getElementById('quote-wizard'), 'top');
+  initWizard(document.getElementById('quote-wizard-2'), 'bottom');
 </script>
 
 <!-- Dynamic location in the H1, title and geo_city (from tmc-OFFER).
