@@ -1153,26 +1153,21 @@
       box-shadow: 0 4px 14px rgba(0,0,0,0.12);
     }
     .rv-slide img { width: 100%; height: auto; aspect-ratio: 16/9; object-fit: cover; display: block; }
-    .rv-arrow {
-      position: absolute; top: 50%; transform: translateY(-50%); z-index: 2;
-      width: 40px; height: 40px; border-radius: 50%; border: 0; cursor: pointer;
-      background: rgba(255,255,255,0.95); color: #111; font-size: 1.6rem; line-height: 1;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.25); font-family: inherit;
+    /* One dot per snap position; the active one widens into a pill. */
+    .rv-dots { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin-top: 1rem; }
+    .rv-dot {
+      width: 8px; height: 8px; padding: 0; border: 0; border-radius: 99px; cursor: pointer;
+      background: #d1d5db; transition: width 0.25s ease, background 0.25s ease;
     }
-    .rv-prev { left: 6px; }
-    .rv-next { right: 6px; }
-    .rv-arrow[disabled] { opacity: 0; pointer-events: none; }
-    @media (min-width: 768px) { .rv-slide { flex-basis: calc((100% - 12px) / 2); } .rv-prev { left: -8px; } .rv-next { right: -8px; } }
+    .rv-dot.active { width: 22px; background: #3ab6c8; }
+    @media (min-width: 768px) { .rv-slide { flex-basis: calc((100% - 12px) / 2); } }
     @media (min-width: 1280px) { .rv-slide { flex-basis: calc((100% - 24px) / 3); } }
-    @media (prefers-reduced-motion: reduce) { .rv-track { scroll-behavior: auto; } }
+    @media (prefers-reduced-motion: reduce) { .rv-track { scroll-behavior: auto; } .rv-dot { transition: none; } }
 
-    /* Enlarged view. On a phone the screenshot is shown wider than the screen
-       (pinch-zoom is off site-wide), so the review text is readable and the
-       reader pans sideways. */
-    .rv-box { position: fixed; inset: 0; z-index: 1000; background: rgba(0,0,0,0.97); overflow: auto; display: flex; align-items: center; }
+    /* Enlarged view: the whole screenshot, scaled to fit the screen. */
+    .rv-box { position: fixed; inset: 0; z-index: 1000; background: rgba(0,0,0,0.97); display: flex; align-items: center; justify-content: center; padding: 60px 8px; }
     .rv-box[hidden] { display: none; }
-    .rv-box img { display: block; flex-shrink: 0; width: 100%; max-width: 1400px; height: auto; margin: auto; }
-    @media (max-width: 767px) { .rv-box img { width: 1000px; max-width: none; margin: auto 0; } }
+    .rv-box img { display: block; max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; border-radius: 0.5rem; }
     .rv-close {
       position: fixed; top: 12px; right: 12px; z-index: 1; width: 44px; height: 44px;
       border-radius: 50%; border: 0; background: #fff; color: #111; font-size: 1.75rem; line-height: 1; cursor: pointer;
@@ -1660,7 +1655,6 @@
     <h2 class="section-title">CUSTOMER REVIEWS</h2>
     <p class="rv-note">Real Google reviews. Tap any review to read it full size.</p>
     <div class="rv-wrap">
-      <button type="button" class="rv-arrow rv-prev" data-trk="reviews:prev" aria-label="Previous review">&#8249;</button>
       <div class="rv-track" id="rv-track">
         <button type="button" class="rv-slide" data-trk="reviews:open" aria-label="Enlarge review 1 of 20"><img src="./reviews/review-01.webp" alt="Google review screenshot" width="1920" height="1080" loading="eager" decoding="async"></button>
         <button type="button" class="rv-slide" data-trk="reviews:open" aria-label="Enlarge review 2 of 20"><img src="./reviews/review-02.webp" alt="Google review screenshot" width="1920" height="1080" loading="eager" decoding="async"></button>
@@ -1683,7 +1677,7 @@
         <button type="button" class="rv-slide" data-trk="reviews:open" aria-label="Enlarge review 19 of 20"><img src="./reviews/review-19.webp" alt="Google review screenshot" width="1920" height="1080" loading="lazy" decoding="async"></button>
         <button type="button" class="rv-slide" data-trk="reviews:open" aria-label="Enlarge review 20 of 20"><img src="./reviews/review-20.webp" alt="Google review screenshot" width="1920" height="1080" loading="lazy" decoding="async"></button>
       </div>
-      <button type="button" class="rv-arrow rv-next" data-trk="reviews:next" aria-label="Next review">&#8250;</button>
+      <div class="rv-dots" id="rv-dots" role="tablist" aria-label="Choose review"></div>
     </div>
   </section>
 
@@ -1781,23 +1775,50 @@
   </section>
 
   <script>
-    // Review carousel: arrows step one slide, hide at either end; a tap opens
-    // the enlarged view, closed by tap, the x or Esc.
+    // Review carousel: swipe to move, dots show and jump to the position; a tap
+    // opens the enlarged view, closed by tap, the x or Esc.
     (function () {
       var track = document.getElementById('rv-track');
       if (!track) return;
-      var prev = document.querySelector('.rv-prev'), next = document.querySelector('.rv-next');
+      var dotsWrap = document.getElementById('rv-dots');
+      var slides = track.querySelectorAll('.rv-slide');
       var box = document.getElementById('rv-box'), boxImg = document.getElementById('rv-box-img');
-      function step() { var s = track.querySelector('.rv-slide'); return s ? s.offsetWidth + 12 : track.clientWidth; }
-      function sync() {
-        prev.disabled = track.scrollLeft < 4;
-        next.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 4;
+      var dots = [];
+
+      function step() { return slides[0].offsetWidth + 12; }
+      // One dot per place the track can snap to: fewer than slides when two or
+      // three are visible at once.
+      function buildDots() {
+        var perView = Math.max(1, Math.floor((track.clientWidth + 12) / step() + 0.05));
+        var count = slides.length - perView + 1;
+        if (dots.length === count) return;
+        dotsWrap.textContent = '';
+        dots = [];
+        for (var i = 0; i < count; i++) {
+          var d = document.createElement('button');
+          d.type = 'button';
+          d.className = 'rv-dot';
+          d.setAttribute('role', 'tab');
+          d.setAttribute('aria-label', 'Review ' + (i + 1));
+          d.setAttribute('data-trk', 'reviews:dot');
+          (function (n) {
+            d.addEventListener('click', function () { track.scrollTo({ left: n * step(), behavior: 'smooth' }); });
+          })(i);
+          dotsWrap.appendChild(d);
+          dots.push(d);
+        }
       }
-      prev.addEventListener('click', function () { track.scrollBy({ left: -step(), behavior: 'smooth' }); });
-      next.addEventListener('click', function () { track.scrollBy({ left: step(), behavior: 'smooth' }); });
-      track.addEventListener('scroll', sync, { passive: true });
-      window.addEventListener('resize', sync);
+      function sync() {
+        var at = Math.min(dots.length - 1, Math.round(track.scrollLeft / step()));
+        for (var i = 0; i < dots.length; i++) {
+          dots[i].classList.toggle('active', i === at);
+          dots[i].setAttribute('aria-selected', i === at ? 'true' : 'false');
+        }
+      }
+      buildDots();
       sync();
+      track.addEventListener('scroll', sync, { passive: true });
+      window.addEventListener('resize', function () { buildDots(); sync(); });
 
       function close() { box.hidden = true; boxImg.removeAttribute('src'); document.body.style.overflow = ''; }
       track.addEventListener('click', function (e) {
@@ -1805,7 +1826,6 @@
         if (!slide) return;
         boxImg.src = slide.querySelector('img').src;
         box.hidden = false;
-        box.scrollTop = 0; box.scrollLeft = 0;
         document.body.style.overflow = 'hidden';
       });
       box.addEventListener('click', close);
