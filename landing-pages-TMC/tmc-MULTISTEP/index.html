@@ -601,7 +601,6 @@
       #services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
       .service-card { margin-bottom: 0; }
       .service-img { height: 250px; }
-      .lc_reviews_widget { min-height: 400px; }
       .testimonials { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
       .sticky-button { max-width: 400px; margin: 0 auto; }
       body { padding-bottom: 0; }
@@ -1138,6 +1137,47 @@
       .reviews-section { max-width: none; margin-left: 0; margin-right: 0; padding: 2.25rem 2rem 2.5rem; }
     }
 
+    /* Review screenshot carousel: native swipe with scroll-snap, arrows for
+       mouse users, tap a slide to read it full size. */
+    .rv-note { text-align: center; font-size: 0.85rem; color: #6b7280; margin: -0.25rem 0 1.25rem; }
+    .rv-wrap { position: relative; max-width: 1400px; margin: 0 auto; }
+    .rv-track {
+      display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory;
+      scroll-behavior: smooth; -webkit-overflow-scrolling: touch;
+      scrollbar-width: none; padding: 2px 0 6px;
+    }
+    .rv-track::-webkit-scrollbar { display: none; }
+    .rv-slide {
+      flex: 0 0 88%; scroll-snap-align: start; padding: 0; border: 0; cursor: zoom-in;
+      background: #1f2023; border-radius: 0.75rem; overflow: hidden;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+    }
+    .rv-slide img { width: 100%; height: auto; aspect-ratio: 16/9; object-fit: cover; display: block; }
+    .rv-arrow {
+      position: absolute; top: 50%; transform: translateY(-50%); z-index: 2;
+      width: 40px; height: 40px; border-radius: 50%; border: 0; cursor: pointer;
+      background: rgba(255,255,255,0.95); color: #111; font-size: 1.6rem; line-height: 1;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.25); font-family: inherit;
+    }
+    .rv-prev { left: 6px; }
+    .rv-next { right: 6px; }
+    .rv-arrow[disabled] { opacity: 0; pointer-events: none; }
+    @media (min-width: 768px) { .rv-slide { flex-basis: calc((100% - 12px) / 2); } .rv-prev { left: -8px; } .rv-next { right: -8px; } }
+    @media (min-width: 1280px) { .rv-slide { flex-basis: calc((100% - 24px) / 3); } }
+    @media (prefers-reduced-motion: reduce) { .rv-track { scroll-behavior: auto; } }
+
+    /* Enlarged view. On a phone the screenshot is shown wider than the screen
+       (pinch-zoom is off site-wide), so the review text is readable and the
+       reader pans sideways. */
+    .rv-box { position: fixed; inset: 0; z-index: 1000; background: rgba(0,0,0,0.97); overflow: auto; display: flex; align-items: center; }
+    .rv-box[hidden] { display: none; }
+    .rv-box img { display: block; flex-shrink: 0; width: 100%; max-width: 1400px; height: auto; margin: auto; }
+    @media (max-width: 767px) { .rv-box img { width: 1000px; max-width: none; margin: auto 0; } }
+    .rv-close {
+      position: fixed; top: 12px; right: 12px; z-index: 1; width: 44px; height: 44px;
+      border-radius: 50%; border: 0; background: #fff; color: #111; font-size: 1.75rem; line-height: 1; cursor: pointer;
+    }
+
     /* Contact: a button to the wizard replaces the second GHL iframe */
     .contact-quote-cta { max-width: 28rem; margin: 0 auto 3rem auto; }
     .contact-quote-cta .cta-primary { margin-bottom: 0; }
@@ -1615,12 +1655,42 @@
     <h2 class="guarantee-title">100% SATISFACTION GUARANTEED</h2>
   </section>
 
-  <!-- Testimonials -->
+  <!-- Reviews: screenshots of TMC's Google reviews (tap to enlarge) -->
   <section class="section reviews-section">
-    <h2 class="section-title">WHAT MELBOURNE<br>CAR OWNERS SAY:</h2>
-    <script async src='https://reputationhub.site/reputation/assets/review-widget.js'></script>
-    <iframe class='lc_reviews_widget' src='https://reputationhub.site/reputation/widgets/review_widget/of37lqYVOipUqwhcJayM?widgetId=69ff92332527d38300920178' frameborder='0' scrolling='no' style='min-width: 100%; width: 100%;' loading='lazy'></iframe>
+    <h2 class="section-title">CUSTOMER REVIEWS</h2>
+    <p class="rv-note">Real Google reviews. Tap any review to read it full size.</p>
+    <div class="rv-wrap">
+      <button type="button" class="rv-arrow rv-prev" data-trk="reviews:prev" aria-label="Previous review">&#8249;</button>
+      <div class="rv-track" id="rv-track">
+        <button type="button" class="rv-slide" data-trk="reviews:open" aria-label="Enlarge review 1 of 20"><img src="./reviews/review-01.webp" alt="Google review screenshot" width="1920" height="1080" loading="eager" decoding="async"></button>
+        <button type="button" class="rv-slide" data-trk="reviews:open" aria-label="Enlarge review 2 of 20"><img src="./reviews/review-02.webp" alt="Google review screenshot" width="1920" height="1080" loading="eager" decoding="async"></button>
+        <button type="button" class="rv-slide" data-trk="reviews:open" aria-label="Enlarge review 3 of 20"><img src="./reviews/review-03.webp" alt="Google review screenshot" width="1920" height="1080" loading="eager" decoding="async"></button>
+        <button type="button" class="rv-slide" data-trk="reviews:open" aria-label="Enlarge review 4 of 20"><img src="./reviews/review-04.webp" alt="Google review screenshot" width="1920" height="1080" loading="lazy" decoding="async"></button>
+        <button type="button" class="rv-slide" data-trk="reviews:open" aria-label="Enlarge review 5 of 20"><img src="./reviews/review-05.webp" alt="Google review screenshot" width="1920" height="1080" loading="lazy" decoding="async"></button>
+        <button type="button" class="rv-slide" data-trk="reviews:open" aria-label="Enlarge review 6 of 20"><img src="./reviews/review-06.webp" alt="Google review screenshot" width="1920" height="1080" loading="lazy" decoding="async"></button>
+        <button type="button" class="rv-slide" data-trk="reviews:open" aria-label="Enlarge review 7 of 20"><img src="./reviews/review-07.webp" alt="Google review screenshot" width="1920" height="1080" loading="lazy" decoding="async"></button>
+        <button type="button" class="rv-slide" data-trk="reviews:open" aria-label="Enlarge review 8 of 20"><img src="./reviews/review-08.webp" alt="Google review screenshot" width="1920" height="1080" loading="lazy" decoding="async"></button>
+        <button type="button" class="rv-slide" data-trk="reviews:open" aria-label="Enlarge review 9 of 20"><img src="./reviews/review-09.webp" alt="Google review screenshot" width="1920" height="1080" loading="lazy" decoding="async"></button>
+        <button type="button" class="rv-slide" data-trk="reviews:open" aria-label="Enlarge review 10 of 20"><img src="./reviews/review-10.webp" alt="Google review screenshot" width="1920" height="1080" loading="lazy" decoding="async"></button>
+        <button type="button" class="rv-slide" data-trk="reviews:open" aria-label="Enlarge review 11 of 20"><img src="./reviews/review-11.webp" alt="Google review screenshot" width="1920" height="1080" loading="lazy" decoding="async"></button>
+        <button type="button" class="rv-slide" data-trk="reviews:open" aria-label="Enlarge review 12 of 20"><img src="./reviews/review-12.webp" alt="Google review screenshot" width="1920" height="1080" loading="lazy" decoding="async"></button>
+        <button type="button" class="rv-slide" data-trk="reviews:open" aria-label="Enlarge review 13 of 20"><img src="./reviews/review-13.webp" alt="Google review screenshot" width="1920" height="1080" loading="lazy" decoding="async"></button>
+        <button type="button" class="rv-slide" data-trk="reviews:open" aria-label="Enlarge review 14 of 20"><img src="./reviews/review-14.webp" alt="Google review screenshot" width="1920" height="1080" loading="lazy" decoding="async"></button>
+        <button type="button" class="rv-slide" data-trk="reviews:open" aria-label="Enlarge review 15 of 20"><img src="./reviews/review-15.webp" alt="Google review screenshot" width="1920" height="1080" loading="lazy" decoding="async"></button>
+        <button type="button" class="rv-slide" data-trk="reviews:open" aria-label="Enlarge review 16 of 20"><img src="./reviews/review-16.webp" alt="Google review screenshot" width="1920" height="1080" loading="lazy" decoding="async"></button>
+        <button type="button" class="rv-slide" data-trk="reviews:open" aria-label="Enlarge review 17 of 20"><img src="./reviews/review-17.webp" alt="Google review screenshot" width="1920" height="1080" loading="lazy" decoding="async"></button>
+        <button type="button" class="rv-slide" data-trk="reviews:open" aria-label="Enlarge review 18 of 20"><img src="./reviews/review-18.webp" alt="Google review screenshot" width="1920" height="1080" loading="lazy" decoding="async"></button>
+        <button type="button" class="rv-slide" data-trk="reviews:open" aria-label="Enlarge review 19 of 20"><img src="./reviews/review-19.webp" alt="Google review screenshot" width="1920" height="1080" loading="lazy" decoding="async"></button>
+        <button type="button" class="rv-slide" data-trk="reviews:open" aria-label="Enlarge review 20 of 20"><img src="./reviews/review-20.webp" alt="Google review screenshot" width="1920" height="1080" loading="lazy" decoding="async"></button>
+      </div>
+      <button type="button" class="rv-arrow rv-next" data-trk="reviews:next" aria-label="Next review">&#8250;</button>
+    </div>
   </section>
+
+  <div class="rv-box" id="rv-box" hidden>
+    <button type="button" class="rv-close" aria-label="Close">&times;</button>
+    <img id="rv-box-img" alt="Google review screenshot, enlarged">
+  </div>
 
   <!-- FAQ Section -->
   <section class="faq-section">
@@ -1711,6 +1781,37 @@
   </section>
 
   <script>
+    // Review carousel: arrows step one slide, hide at either end; a tap opens
+    // the enlarged view, closed by tap, the x or Esc.
+    (function () {
+      var track = document.getElementById('rv-track');
+      if (!track) return;
+      var prev = document.querySelector('.rv-prev'), next = document.querySelector('.rv-next');
+      var box = document.getElementById('rv-box'), boxImg = document.getElementById('rv-box-img');
+      function step() { var s = track.querySelector('.rv-slide'); return s ? s.offsetWidth + 12 : track.clientWidth; }
+      function sync() {
+        prev.disabled = track.scrollLeft < 4;
+        next.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 4;
+      }
+      prev.addEventListener('click', function () { track.scrollBy({ left: -step(), behavior: 'smooth' }); });
+      next.addEventListener('click', function () { track.scrollBy({ left: step(), behavior: 'smooth' }); });
+      track.addEventListener('scroll', sync, { passive: true });
+      window.addEventListener('resize', sync);
+      sync();
+
+      function close() { box.hidden = true; boxImg.removeAttribute('src'); document.body.style.overflow = ''; }
+      track.addEventListener('click', function (e) {
+        var slide = e.target.closest('.rv-slide');
+        if (!slide) return;
+        boxImg.src = slide.querySelector('img').src;
+        box.hidden = false;
+        box.scrollTop = 0; box.scrollLeft = 0;
+        document.body.style.overflow = 'hidden';
+      });
+      box.addEventListener('click', close);
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !box.hidden) close(); });
+    })();
+
     function toggleFaq(btn) {
       var item = btn.closest('.faq-item');
       var answer = item.querySelector('.faq-answer');
