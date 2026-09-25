@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16828382025"></script>
   <script>
@@ -22,6 +24,28 @@
       // below still works, it just sends nothing.
       var ANALYTICS_URL = 'https://script.google.com/macros/s/AKfycbz1XUZXD8ygv0SjbYUe__bos_HJKnqzbVozfV3IE1YJam9zLcrU_z83ScctyqihW6is/exec';
 
+      // Our own devices: visit once with ?notrack=1 and this browser never
+      // records anything again (no Sheet rows, no Ads conversion on
+      // thank-you). ?notrack=0 turns it back on.
+      var OPT_OUT = false;
+      try {
+        var nt = new URLSearchParams(location.search).get('notrack');
+        if (nt === '1') localStorage.setItem('trk_off', '1');
+        if (nt === '0') localStorage.removeItem('trk_off');
+        OPT_OUT = localStorage.getItem('trk_off') === '1';
+      } catch (e) {}
+      window.__trkOff = OPT_OUT;
+      if (OPT_OUT) {
+        ANALYTICS_URL = '';
+        document.addEventListener('DOMContentLoaded', function () {
+          var tag = document.createElement('div');
+          tag.textContent = 'Tracking off on this device';
+          tag.style.cssText = 'position:fixed;left:8px;bottom:8px;z-index:9999;background:rgba(17,24,39,0.75);' +
+            'color:#fff;font:600 11px/1 Helvetica,Arial,sans-serif;padding:6px 9px;border-radius:99px;pointer-events:none';
+          document.body.appendChild(tag);
+        });
+      }
+
       var T0 = Date.now();
       function rid() { return Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 8); }
       function secs(t) { return Math.round((Date.now() - t) / 1000); }
@@ -36,11 +60,21 @@
 
       // Sent once per batch; the Sheet copies it onto every row.
       var p = new URLSearchParams(location.search);
-      var vw = window.innerWidth;
+      // Device is measured when a batch is sent, not here: this early in <head>
+      // phones can still report the 980px default layout width.
+      function device() {
+        var w = document.documentElement.clientWidth || window.innerWidth;
+        var touch = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
+        var shortSide = Math.min(screen.width, screen.height);
+        if (touch && shortSide < 600) return 'mobile';
+        if (touch) return 'tablet';
+        return w < 768 ? 'mobile' : (w < 1280 ? 'tablet' : 'desktop');
+      }
       var ctx = {
         session_id: sid,
-        device: vw < 768 ? 'mobile' : (vw < 1280 ? 'tablet' : 'desktop'),
-        viewport_w: vw,
+        device: '',
+        viewport_w: 0,
+        city: '',
         gclid: p.get('gclid') || '',
         utm_source: p.get('utm_source') || '',
         utm_medium: p.get('utm_medium') || '',
@@ -71,7 +105,8 @@
           entry: f.entry || '',
           max_step: f.max_step == null ? '' : f.max_step,
           secs: secs(T0),
-          tid: f.tid || ''
+          tid: f.tid || '',
+          who: f.who || ''                     // only ever set on submit_success
         });
       }
 
@@ -79,6 +114,9 @@
       // text/plain body needs no CORS preflight.
       function flush() {
         if (!ANALYTICS_URL || !queue.length) return;
+        ctx.device = device();
+        ctx.viewport_w = document.documentElement.clientWidth || window.innerWidth;
+        ctx.city = window.__geoCity || '';
         var body = JSON.stringify({ ctx: ctx, events: queue.splice(0, 50) });
         var ok = false;
         try { ok = navigator.sendBeacon(ANALYTICS_URL, new Blob([body], { type: 'text/plain;charset=UTF-8' })); } catch (e) {}
@@ -236,8 +274,6 @@
   <link rel="shortcut icon" type="image/webp" href="./tmc-logo.webp">
   <link rel="apple-touch-icon" href="./tmc-logo.webp">
 
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
   <title>TMCleansedrive — Melbourne's Best Mobile Car Detailing</title>
   <meta name="description" content="Professional mobile car detailing in Melbourne, FL. We come to you! 5-star rated and satisfaction guaranteed. Serving Melbourne, Brevard County & surrounding areas.">
 
@@ -2547,6 +2583,12 @@
 
       var tid = newTransactionId();
       payload.transaction_id = tid;   // lets a booked job be matched back to its Ads conversion
+      // A submit from one of our own opted-out devices still reaches GHL (to test
+      // the workflow) but says so.
+      payload.tester = window.__trkOff ? 'yes' : 'no';
+      // How this person appears in the analytics Sheet: first name + last 4 of
+      // the phone. Only people who submit are ever named there.
+      var who = (payload.first_name || '').trim().slice(0, 30) + ' · ' + digits(payload.phone).slice(-4);
 
       // Enhanced conversions: hand the thank-you page the identifiers to give
       // gtag, which hashes them itself. Same origin, never leaves the browser.
@@ -2573,7 +2615,7 @@
       function proceed(how) {
         if (done) return;
         done = true;
-        trk.ev('submit_success', { step: 4, tid: tid, detail: how });
+        trk.ev('submit_success', { step: 4, tid: tid, detail: how, who: who });
         trk.submitted(tid);
         trk.flush();                          // sendBeacon survives the navigation
         window.location.href = thankYouUrl(tid);

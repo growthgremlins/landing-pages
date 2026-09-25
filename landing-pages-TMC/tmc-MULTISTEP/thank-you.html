@@ -28,6 +28,12 @@
     (function () {
       var p = new URLSearchParams(location.search);
 
+      // Our own devices (opted out with ?notrack=1 on the landing page) never
+      // count as a conversion.
+      var off = false;
+      try { off = localStorage.getItem('trk_off') === '1'; } catch (e) {}
+      if (off) { try { sessionStorage.removeItem('lead_ud'); } catch (e) {} return; }
+
       // user_data has to be set BEFORE the conversion event.
       try {
         var ud = JSON.parse(sessionStorage.getItem('lead_ud') || 'null');
@@ -56,14 +62,17 @@
   <script>
     (function () {
       var ANALYTICS_URL = 'https://script.google.com/macros/s/AKfycbz1XUZXD8ygv0SjbYUe__bos_HJKnqzbVozfV3IE1YJam9zLcrU_z83ScctyqihW6is/exec';
-      if (!ANALYTICS_URL) return;
+      var off = false;
+      try { off = localStorage.getItem('trk_off') === '1'; } catch (e) {}
+      if (!ANALYTICS_URL || off) return;
       var p = new URLSearchParams(location.search), sid = '';
       try { sid = sessionStorage.getItem('trk_sid') || ''; } catch (e) {}
-      var vw = window.innerWidth;
+      // Device stays blank here: the landing page already recorded it properly,
+      // and this early in <head> a phone can report the 980px default width.
       var body = JSON.stringify({
         ctx: {
-          session_id: sid || 'no-session', device: vw < 768 ? 'mobile' : (vw < 1280 ? 'tablet' : 'desktop'),
-          viewport_w: vw, gclid: p.get('gclid') || '', utm_source: p.get('utm_source') || '',
+          session_id: sid || 'no-session', device: '',
+          viewport_w: '', gclid: p.get('gclid') || '', utm_source: p.get('utm_source') || '',
           utm_medium: p.get('utm_medium') || '', utm_campaign: p.get('utm_campaign') || '',
           utm_term: p.get('utm_term') || '', utm_content: p.get('utm_content') || '',
           loc: '', referrer: document.referrer || '', landing_url: location.href
